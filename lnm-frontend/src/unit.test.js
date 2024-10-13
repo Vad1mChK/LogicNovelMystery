@@ -30,7 +30,7 @@ describe('SignUpForm', () => {
     });
 
     test('should navigate to sign-up page', () => {
-        SignUpForm();
+        SignInForm();
         expect(window.location.assign).toHaveBeenCalledWith(
             "http://localhost:50796/LogicNovelMystery-main/LogicNovelMystery-main/lnm-frontend/src/signUpForm.html"
         );
@@ -45,7 +45,7 @@ describe('SignInForm', () => {
     });
 
     test('should navigate to sign-in page', () => {
-        SignInForm();
+        SignUpForm();
         expect(window.location.assign).toHaveBeenCalledWith(
             "http://localhost:50796/LogicNovelMystery-main/LogicNovelMystery-main/lnm-frontend/index.html"
         );
