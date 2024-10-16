@@ -12,9 +12,9 @@
 //public class JunitTest {
 //    @Test
 //    public void testConnectionSuccess() {
-//        String url = "jdbc:postgresql://localhost:5432/labWeb3";
-//        String user = "postgres";
-//        String password = "1234";
+//        String url = "jdbc:postgresql://localhost:5432/labW";
+//        String user = "postg";
+//        String password = "12345";
 //        Connection conn = null;
 //        try {
 //            conn = ConnectionDB.connect(url, user, password);
