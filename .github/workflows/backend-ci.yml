@@ -4,12 +4,13 @@ on:
   pull_request:
     branches:
       - main
-      - backend
-    paths-ignore:
-      - 'lnm-frontend/**' # Ignore frontend-specific paths
+    paths:
+      - 'lnm-backend/**'
   push:
     branches:
       - backend
+    paths:
+      - 'lnm-backend/**'
 
 jobs:
   backend-test:
