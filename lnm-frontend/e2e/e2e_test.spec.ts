@@ -6,15 +6,15 @@ test.describe('Example e2e Test Suite', () => {
 		await expect(page).toHaveTitle('Vite + React + TS'); // Проверка заголовка страницы
 	});
 
-	test('User can log in', async ({ page }) => {
-		await page.goto('http://localhost:5173');
-		await page.click('input[type="checkbox"]');
-		await page.fill('input[name="login"]', 'test_user');
-		await page.fill('input[name="password"]', 'password123');
-		await page.click('button[type="submit"]');
-		await expect(page).toHaveURL('http://localhost:5173/menu'); // Проверка перехода на menu
-	});
-
+    test.only('User can log in', async ({ page }) => {
+        await page.goto('http://localhost:5173');
+        await page.click('input[type="checkbox"]')
+        await page.fill('input[name="login"]', 'test_user');
+        await page.fill('input[name="password"]', 'password123');
+        await page.click('button[type="submit"]');
+        await expect(page).toHaveURL('http://localhost:5173/menu');  // Проверка перехода на menu
+    });
+  
 	test("User can't log in", async ({ page }) => {
 		await page.goto('http://localhost:5173');
 		await page.fill('input[name="login"]', 'test_user2');
