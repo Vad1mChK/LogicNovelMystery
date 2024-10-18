@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function SignUpForm() {
 	window.location.assign(
-		'http://localhost:50796/LogicNovelMystery-main/LogicNovelMystery-main/lnm-frontend/src/signUpForm.html'
+		'http://localhost:50796/LogicNovelMystery-main/LogicNovelMystery-main/lnm-frontend/index.html'
 	);
 }
 
