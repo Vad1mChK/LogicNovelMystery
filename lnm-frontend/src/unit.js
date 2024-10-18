@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			const nameInput = document.getElementById('login');
 			const nameValue = nameInput.value.trim();
 
+			// This is just a random comment
 			if (nameValue === '') {
 				showError('You need to input your name');
 				return;
