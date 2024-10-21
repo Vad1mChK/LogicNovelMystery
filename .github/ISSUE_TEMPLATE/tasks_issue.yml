@@ -1,0 +1,45 @@
+name: Задачи
+description: Назначить задачи себе или другому участнику.
+title: "[Tasks]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: tasks-description
+    attributes:
+      label: Описание задач
+      description: Кратко опишите задачи, которые нужно выполнить. Что их объединяет? Чего позволяет добиться их успешное выполнение?
+  - type: markdown
+    attributes:
+      value: |
+         Введите список задач в формате Markdown (каждая из задач начинается с новой строки и символов `- [ ]`). У каждой задачи -- один или несколько пунктов
+         **Definition of Done** (критерии оценки выполнения задачи). Они оформляются как подпункты маркированного списка (начинаются с отступа и символов `- `).
+         Пример:
+         ```
+         - [ ] Задача 1
+           - Definition of Done для задачи 1
+           - Ещё Definition of Done для задачи 1
+         - [ ] Задача 2
+           - Definition of Done для задачи 2
+           - Ещё Definition of Done для задачи 2
+         ```
+  - type: textarea
+    id: tasks-list
+    attributes:
+      label: Список задач
+      description: Введите список задач в формате Markdown.
+      placeholder: |
+        - [ ] Задача 1
+          - Definition of Done для задачи 1
+          - Ещё Definition of Done для задачи 1
+        - [ ] Задача 2
+          - Definition of Done для задачи 2
+          - Ещё Definition of Done для задачи 2
+      value: |
+        - [ ] Задача 1
+          - Definition of Done для задачи 1
+          - Ещё Definition of Done для задачи 1
+        - [ ] Задача 2
+          - Definition of Done для задачи 2
+          - Ещё Definition of Done для задачи 2
+    validations:
+      required: true
