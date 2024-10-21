@@ -1,0 +1,38 @@
+name: Багрепорт
+description: Сообщить об ошибке/баге в приложении.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо, что заполнили этот багрепорт!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Что произошло?
+      description: И что должно было произойти в норме?
+      placeholder: Скажите, что вы видели!
+      value: "Произошёл баг!"
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: В каких браузерах заметна проблема?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Вывод в консоль / записи в логах
+      description: Пожалуйста, скопируйте и вставьте вывод в консоль (например, stack trace) или сообщения из логов, которые могут быть связаны с ошибкой.
+      render: shell
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Дополнительная информация
