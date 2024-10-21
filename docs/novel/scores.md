@@ -30,7 +30,7 @@ $$Score_i = MaxPoints * \frac{i^k}{S} * (1 - PenaltyPercent * errors_i)$$
 Итого мы имеем:
 - MaxPoints = 10000
 - k = 1 (на данный момент)
-- $S = \sum_{1}^{n} i^1 = 55
+- $S = \sum_{1}^{n} i^1 = 55$
 - PenaltyPercent = 5% = 0.05
 
 Тогда формула будет выглядеть следующим образом:
@@ -67,12 +67,12 @@ $$Score_i = \frac{MaxPoints}{2} * \frac{i^k}{S} * (1 - PenaltyPercent * errors_i
  на совместную игру, тогда можем использовать ту же формулу, что и для
  одиночной игры, если задания будут разной сложности:
 
-$$Score_{joint,i} = 5000 * \frac{i^k}{S} * (1 - PenaltyPercent_{joint} * errors_{joint,i})
+$$Score_{joint,i} = 5000 * \frac{i^k}{S} * (1 - PenaltyPercent_{joint} * errors_{joint,i})$$
 - PenaltyPercent = 10% = 0.1
 
 ### Общее количество очков на команду:
 
-$$TotalScore = \sum_{i,j=1}^{10} Score_{i,j} + \sum_{i=1}^{2} Score_{joint,i}
+$$TotalScore = \sum_{i,j=1}^{10} Score_{i,j} + \sum_{i=1}^{2} Score_{joint,i}$$
 
 max(TotalScore) = 15000
 
