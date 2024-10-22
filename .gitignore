@@ -23,3 +23,8 @@
 hs_err_pid*
 replay_pid*
 out
+
+# sprite originals
+docs/novel/images/sprite_origs
+
+lnm-frontend/package-lock.json

@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss",
+    "stylelint-prettier"
+  ],
+  "rules": {
+    "color-hex-length": "long",
+    "color-named": "never",
+    "value-keyword-case": null,
+    "declaration-no-important": true
+  }
+}

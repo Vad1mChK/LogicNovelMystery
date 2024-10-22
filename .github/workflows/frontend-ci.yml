@@ -1,0 +1,90 @@
+name: Frontend CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+      - frontend
+    paths:
+      - 'lnm-frontend/**'
+  push:
+    branches:
+      - frontend
+    paths:
+      - 'lnm-frontend/**'
+
+jobs:
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: ./lnm-frontend
+        run: npm install
+
+      - name: Lint JS/TS
+        working-directory: ./lnm-frontend
+        run: npm run lint:js
+
+      - name: Lint styles
+        working-directory: ./lnm-frontend
+        run: npm run lint:styles
+        
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: ./lnm-frontend
+        run: npm install
+
+      - name: Install playwright dependencies
+        working-directory: ./lnm-frontend
+        run: npx playwright install
+
+      - name: Start server
+        working-directory: ./lnm-frontend
+        run: |
+          npm run dev &
+          sleep 5
+
+      - name: Run unit tests
+        working-directory: ./lnm-frontend
+        run: npm test
+
+      - name: Run e2e tests
+        working-directory: ./lnm-frontend/e2e
+        run: npx playwright test
+
+      - name: Run tests with coverage
+        working-directory: ./lnm-frontend
+        run: npm run test -- --coverage
+
+      - name: Stop server
+        if: always()
+        run: |
+          PID=$(lsof -t -i:5173)
+          if [ -n "$PID" ]; then
+            kill $PID
+          fi
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage
