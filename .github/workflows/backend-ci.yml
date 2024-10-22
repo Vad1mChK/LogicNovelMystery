@@ -44,7 +44,7 @@ jobs:
           POSTGRES_PASSWORD: secret
           POSTGRES_DB: mydatabase
           ports:
-            - 5432:5432
+            - "5432:5432"
           options: >-
             --health-cmd "pg_isready -U test_user"
             --health-interval 10s
