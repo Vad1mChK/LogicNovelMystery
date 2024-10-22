@@ -32,7 +32,7 @@ public class User {
     @Column(nullable = false, updatable = false)
     private String  email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Token> tokens;
     @Column(nullable = false, updatable = false)
@@ -57,13 +57,4 @@ public class User {
         updatedAt = now;
         onlineTime = now;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

@@ -36,6 +36,21 @@ jobs:
           echo "has_changes=false" >> $GITHUB_OUTPUT
         fi
   backend-test:
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: mydatabase
+          ports:
+            - 5432:5432
+          options: >-
+            --health-cmd "pg_isready -U test_user"
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+
     runs-on: ubuntu-latest
     needs: check-changes-backend
     if: needs.check-changes-backend.outputs.has_changes == 'true'
@@ -71,16 +86,22 @@ jobs:
         working-directory: ./lnm-backend
         run: ./gradlew test
         env:
-          username: ${{ secrets.username }}
-          password: ${{ secrets.password }}
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/mydatabase
+          SPRING_DATASOURCE_USERNAME: myuser
+          SPRING_DATASOURCE_PASSWORD: secret
+#          username: ${{ secrets.username }}
+#          password: ${{ secrets.password }}
 
       # Шаг 6: Запуск тестов и проверка покрытия
       - name: Run tests and check coverage
         working-directory: ./lnm-backend
         run: ./gradlew check jacocoTestReport
         env:
-          username: ${{ secrets.username }}
-          password: ${{ secrets.password }}
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/mydatabase
+          SPRING_DATASOURCE_USERNAME: myuser
+          SPRING_DATASOURCE_PASSWORD: secret
+#          username: ${{ secrets.username }}
+#          password: ${{ secrets.password }}
   
       # Шаг 7: Публикация отчетов о тестах
       - name: Upload test results
