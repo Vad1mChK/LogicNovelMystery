@@ -1,0 +1,158 @@
+/* Убираем отступы и поля по умолчанию */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Устанавливаем высоту на 100% для body и html */
+html, body {
+    height: 100%;
+}
+
+/* Контейнер для фоновой картинки */
+.background-container {
+    background-image: url('../assets/location_house.png'); /* Путь к вашему изображению */
+    background-size: cover; /* Масштабирование изображения на весь экран */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Отключаем повтор */
+    height: 100vh; /* Высота контейнера - 100% высоты экрана */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Контент располагается внизу */
+    position: relative;
+}
+
+/* Вспомогательный блок с изображением */
+.top-image {
+    position: absolute;
+    top: 200px; /* Изменено, чтобы изображение находилось вверху */
+    left: 0;
+    right: 40%;
+    height: 70%; /* Уменьшаем высоту изображения до 40% */
+    background-image: url('../assets/professor.png'); /* Замените на свой путь к верхнему изображению */
+    background-size: contain; /* Изменено с cover на contain, чтобы изображение не обрезалось */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Отключаем повтор */
+    z-index: 1; /* Устанавливаем слой ниже содержимого */
+}
+
+/* Контейнер для текста с градиентным фоном */
+.content {
+    position: relative; /* Для позиционирования дочернего элемента */
+    background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.4), /* Левый край тусклый */
+            rgba(255, 255, 255, 0.5), /* Центр ярче */
+            rgba(255, 255, 255, 0.4)  /* Правый край тусклый */
+    );
+    padding: 40px; /* Увеличен padding для большего пространства */
+    border-radius: 15px; /* Увеличен радиус скругления */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 900px; /* Увеличена максимальная ширина */
+    height: 180px; /* Установлена фиксированная высота */
+    font-size: 1.5rem; /* Увеличен размер шрифта */
+}
+
+/* Контейнер для фоновой картинки */
+.background-container {
+    background-image: url('../assets/location_house.png'); /* Путь к вашему изображению */
+    background-size: cover; /* Масштабирование изображения на весь экран */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Отключаем повтор */
+    height: 100vh; /* Высота контейнера - 100% высоты экрана */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Контент располагается внизу */
+    position: relative;
+}
+
+/* Контейнер для текста с градиентным фоном */
+.content {
+    position: relative; /* Для позиционирования дочернего элемента */
+    background: #101010c0;
+    backdrop-filter: blur(3px);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    z-index: 2; /* Устанавливаем слой выше фона */
+    position: relative; /* Для правильного позиционирования */
+}
+
+/* Основной блок с текстом */
+.text-block {
+    flex-grow: 1;
+    color: white; /* Яркий цвет текста */
+    font-family: 'JetBrains Mono', monospace; /* Применение шрифта JetBrains Mono */
+}
+
+/* Наложенный блок, который частично выходит за пределы основного */
+.overlay-text {
+    position: absolute;
+    top: -20px;  /* Позиция сверху */
+    left: 5%; /* Отрицательное значение, чтобы половина блока выходила за пределы */
+    background-color: rgb(27, 55, 112); /* Полупрозрачный фон */
+    color: white; /* Цвет текста */
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10; /* Чтобы наложенный блок был поверх */
+    width: 30%; /* Ширина блока — половина ширины родительского */
+    text-align: center;
+}
+
+/* Вспомогательный блок с изображением */
+.top-image {
+    width: 100%; /* Ширина 100% */
+    height: 55%; /* Высота изображения */
+    background-image: url('../assets/professor.png'); /* Замените на свой путь к верхнему изображению */
+    z-index: 1; /* Чтобы было ниже текста */
+    top: 325px;
+    position: absolute;
+    left: -20%;
+}
+/* Контейнер для изображения стража */
+.image-guard {
+    z-index: 1; /* Чтобы изображение было ниже текста */
+}
+
+/* Изображение внутри контейнера */
+.image-guard img {
+    width: 230px; /* Устанавливаем ширину изображения */
+    height: auto;
+    z-index: 1; /* Чтобы было ниже текста */
+    top: 305px;
+    position: absolute;
+    right: 25%;
+}
+
+/* Стиль кнопки */
+.toggle-button {
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: rgb(27, 55, 112); /* Полупрозрачный фон */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative; /* Изменено на relative для использования псевдоэлемента */
+}
+
+/* Стиль при наведении */
+.toggle-button:hover {
+    background-color: #0056b3;
+}
+
+/* Добавляем стрелку вправо с помощью псевдоэлемента */
+.toggle-button::after {
+    content: '→'; /* Используем стрелку */
+    font-size: 16px;
+    position: relative;
+    top: 1px; /* Немного поднимаем стрелку для выравнивания */
+}
