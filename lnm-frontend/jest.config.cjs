@@ -21,7 +21,7 @@ module.exports = {
     // Минимальные значения покрытия
     coverageThreshold: {
         global: {
-            branches: 0,
+            branches: 80,
             functions: 80,
             lines: 0,
             statements: 0,
