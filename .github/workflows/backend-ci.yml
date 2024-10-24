@@ -10,9 +10,35 @@ on:
       - backend
 
 jobs:
+  check-changes-backend:
+    runs-on: ubuntu-latest
+    outputs:
+      backend_dir: ${{ steps.filter.outputs.backend_dir }}
+      has_changes: ${{ steps.check_changes.outputs.has_changes }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          backend_dir:
+            - 'lnm-backend/**'
+    - name: Were backend files changed?
+      id: check_changes
+      run: |
+        echo ${{ steps.filter.outputs.backend_dir }}
+
+        if ${{ steps.filter.outputs.backend_dir }} == 'true'; then
+          echo 'There were changes in lnm-backend/**, proceeding...'
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo 'There were no changes in lnm-backend/**, skipping other jobs...'
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+        fi
   backend-test:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.head.repo.name, 'lnm-backend/**')
+    needs: check-changes-backend
+    if: needs.check-changes-backend.outputs.has_changes == 'true'
     steps:
       # Шаг 1: Клонирование репозитория
       - name: Checkout code
