@@ -5,17 +5,50 @@ on:
     branches:
       - main
       - frontend
-    paths:
-      - 'lnm-frontend/**'
   push:
     branches:
       - frontend
-    paths:
-      - 'lnm-frontend/**'
 
 jobs:
+  check-changes-frontend:
+    runs-on: ubuntu-latest
+    outputs:
+      frontend_dir: ${{ steps.filter.outputs.frontend_dir }}
+      has_changes: ${{ steps.check_changes.outputs.has_changes }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          frontend_dir:
+            - 'lnm-frontend/**'
+    - name: Were frontend files changed?
+      id: check_changes
+      run: |
+        echo ${{ steps.filter.outputs.frontend_dir }}
+
+        if ${{ steps.filter.outputs.frontend_dir }} == 'true'; then
+          echo 'There were changes in lnm-frontend/**, proceeding...'
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo 'There were no changes in lnm-frontend/**, skipping other jobs...'
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+        fi
+
+  # some-debug-job:
+  #   runs-on: ubuntu-latest
+  #   needs: check-changes-frontend
+  #   steps:
+  #     - name: TODO
+  #       run: |
+  #         echo ${{ needs.check-changes-frontend.outputs.has_changes }}
+
+            
   lint-frontend:
     runs-on: ubuntu-latest
+    needs: check-changes-frontend
+    if: needs.check-changes-frontend.outputs.has_changes == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -39,6 +72,7 @@ jobs:
         
   test-frontend:
     runs-on: ubuntu-latest
+    needs: lint-frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
