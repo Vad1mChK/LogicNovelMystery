@@ -38,7 +38,7 @@ jobs:
   backend-test:
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:15
         env:
           POSTGRES_USER: myuser
           POSTGRES_PASSWORD: secret
