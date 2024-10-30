@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.sentry:sentry-spring-boot-starter-jakarta:7.14.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.sentry/sentry-spring-boot-starter-jakarta/7.14.0/91ed93daf5dffaf7fa7f4d6a70eb7442eb8039d9/sentry-spring-boot-starter-jakarta-7.14.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.sentry/sentry-spring-boot-starter-jakarta/7.14.0/9fd30d237824436c905739c3358f670c9a5a74ed/sentry-spring-boot-starter-jakarta-7.14.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
