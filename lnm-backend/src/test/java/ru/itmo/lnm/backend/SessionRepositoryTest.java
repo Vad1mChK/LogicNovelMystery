@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import ru.itmo.lnm.backend.model.Session;
 import ru.itmo.lnm.backend.model.User;
 import ru.itmo.lnm.backend.repository.SessionRepository;
@@ -15,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class SessionRepositoryTest {
     @Autowired
     private SessionRepository sessionRepository;
