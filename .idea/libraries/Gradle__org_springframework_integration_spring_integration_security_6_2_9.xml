@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.integration:spring-integration-security:6.2.9">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.integration/spring-integration-security/6.2.9/230bfe5fbab0d253ba210d1c0363534532cfd5f/spring-integration-security-6.2.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.integration/spring-integration-security/6.2.9/6b7a2b1bb2ed412362c5d4717010c77e3228384d/spring-integration-security-6.2.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

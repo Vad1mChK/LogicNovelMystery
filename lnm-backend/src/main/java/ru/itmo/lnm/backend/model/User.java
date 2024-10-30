@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@SuperBuilder
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,6 +48,10 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private Instant onlineTime;
+
+    public User() {
+
+    }
 
     @PrePersist
     protected void onCreate() {

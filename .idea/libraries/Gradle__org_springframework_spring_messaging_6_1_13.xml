@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework:spring-messaging:6.1.13">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-messaging/6.1.13/97691b76bf2bbacd07e8e2af31cd3d5aee56ce22/spring-messaging-6.1.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-messaging/6.1.13/73e7070f906684ddc9ee44aff380e21ebbafca2e/spring-messaging-6.1.13-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

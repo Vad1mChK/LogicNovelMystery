@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,11 +30,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
 
     @Override
+    @SneakyThrows
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain)
-            throws ServletException, IOException {
+            {
 
         final String authHeader = request.getHeader("Authorization");
 

@@ -44,6 +44,7 @@ dependencies {
     implementation 'org.springframework.integration:spring-integration-jpa'
     implementation 'org.springframework.integration:spring-integration-mail'
     implementation 'org.springframework.integration:spring-integration-security'
+    testImplementation 'org.projectlombok:lombok:1.18.22'
     compileOnly 'org.projectlombok:lombok'
 //  developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
     runtimeOnly 'org.postgresql:postgresql'
