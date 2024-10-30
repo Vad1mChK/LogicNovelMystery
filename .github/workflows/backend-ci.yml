@@ -40,16 +40,17 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_USER: myuser
-          POSTGRES_PASSWORD: secret
-          POSTGRES_DB: mydatabase
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_db
         ports:
-          - "5432:5432"
+          - "5433:5432"
         options: >-
           --health-cmd "pg_isready -U test_user"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+          
 
     runs-on: ubuntu-latest
     needs: check-changes-backend
@@ -86,9 +87,9 @@ jobs:
         working-directory: ./lnm-backend
         run: ./gradlew test
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/mydatabase
-          SPRING_DATASOURCE_USERNAME: myuser
-          SPRING_DATASOURCE_PASSWORD: secret
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5433/test_db
+          SPRING_DATASOURCE_USERNAME: user
+          SPRING_DATASOURCE_PASSWORD: password
 #          username: ${{ secrets.username }}
 #          password: ${{ secrets.password }}
 
@@ -97,9 +98,9 @@ jobs:
         working-directory: ./lnm-backend
         run: ./gradlew check jacocoTestReport
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/mydatabase
-          SPRING_DATASOURCE_USERNAME: myuser
-          SPRING_DATASOURCE_PASSWORD: secret
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5433/test_db
+          SPRING_DATASOURCE_USERNAME: user
+          SPRING_DATASOURCE_PASSWORD: password
 #          username: ${{ secrets.username }}
 #          password: ${{ secrets.password }}
   
