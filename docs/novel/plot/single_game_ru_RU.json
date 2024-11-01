@@ -7,10 +7,42 @@
         "version": "1.0",
         "locale": "ru_RU"
     },
-    "characters": {},
+    "characters": {
+        "steve": {
+            "id": "steve",
+            "name": "Стив",
+            "defaultPose": "idle",
+            "sprites": {
+                "idle": "/src/resources/img/characters/steve/idle.webp",
+                "think": "/src/resources/img/characters/steve/think.webp",
+                "holdGlasses": "/src/resources/img/characters/steve/hold_glasses.webp",
+                "holdNotebook": "/src/resources/img/characters/steve/hold_notebook.webp"
+            }
+        },
+        "director": {
+            "id": "director",
+            "name": "Директор",
+            "defaultPose": "idle",
+            "sprites": {
+                "idle": "/src/resources/img/characters/director/idle.webp",
+                "phone": "/src/resources/img/characters/director/phone.webp"
+            }
+        },
+        "robot": {
+            "id": "robot",
+            "name": "Робот",
+            "defaultPose": "idle",
+            "sprites": {
+                "idle": "/src/resources/img/characters/robot/idle.webp",
+                "think": "/src/resources/img/characters/robot/think.webp",
+                "angry": "/src/resources/img/characters/robot/angry.webp"
+            }
+        }
+    },
     "locations": {},
     "music": {},
     "startChapter": "inception_1",
+    "chapters": {},
     "frames": {
         "main": {},
         "endings": {}
