@@ -1,0 +1,20 @@
+{
+    "metadata": {
+        "name": "single_game",
+        "gamemode": "single",
+        "protagonist": "steve",
+        "author": "Vad1mChK",
+        "version": "1.0",
+        "locale": "ru_RU"
+    },
+    "characters": {},
+    "locations": {},
+    "music": {},
+    "startChapter": "inception_1",
+    "frames": {
+        "main": {},
+        "endings": {}
+    },
+    "tasks": {},
+    "knowledge": {}
+}
