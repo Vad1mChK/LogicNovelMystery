@@ -1,7 +1,7 @@
 import './App.css';
 
 function App() {
-	return <></>;
+	return <p></p>;
 }
 
 export default App;
