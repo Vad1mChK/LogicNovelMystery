@@ -95,8 +95,6 @@ function convertAndCreatePlot(plotObject: any): LnmPlot {
 	const tasks = objectToMap<LnmTask>(plotObject.tasks);
 	const knowledge = objectToMap<LnmKnowledge>(plotObject.knowledge);
 
-	// TODO See if the values don't require additional work
-
 	return {
 		metadata,
 		characters,
