@@ -10,7 +10,8 @@
     "jsx": "react-jsx",
     "allowImportingTsExtensions": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
     // другие опции
   }
 }
