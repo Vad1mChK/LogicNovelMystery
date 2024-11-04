@@ -1,6 +1,30 @@
 // PlotLoader.tsx
 import React, { useEffect } from 'react';
-import { LnmPlot } from './types'; // Import your types
+import {
+	LNM_FRAME_CHARACTER_DATA_DEFAULTS,
+	LNM_MUSIC_DEFAULTS,
+	LnmChapter,
+	LnmCharacter,
+	LnmEffectArgsMap,
+	LnmEnding,
+	LnmFrame,
+	LnmFrameCharacterData,
+	LnmFrameChoice,
+	LnmFrameCondition,
+	LnmFrameEffect,
+	LnmFrameEffectType,
+	LnmKnowledge,
+	LnmLocation,
+	LnmMetadata,
+	LnmMusic,
+	LnmPlot,
+	LnmTask,
+} from './types';
+import {
+	assignIfValidType,
+	objectToMap,
+	toEnumValue,
+} from '../util/typeUtils.ts';
 
 interface PlotLoaderProps {
 	plotUrl: string;
@@ -15,8 +39,8 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 					throw new Error('Network response was not ok');
 				return response.json();
 			})
-			.then((data) => {
-				const plot = data as LnmPlot;
+			.then((plotObject) => {
+				const plot = convertAndCreatePlot(plotObject);
 				onLoad(plot);
 			})
 			.catch((error) => console.error('Failed to load plot:', error));
@@ -25,4 +49,172 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 	return <div>Loading plot...</div>;
 };
 
+// @ts-ignore
+function convertAndCreatePlot(plotObject: any): LnmPlot {
+	const metadata: LnmMetadata = plotObject.metadata as LnmMetadata;
+	const characters = new Map<string, LnmCharacter>(
+		Object.entries(plotObject.characters).map(
+			([characterId, characterData]) => [
+				characterId,
+				{
+					// @ts-ignore:ts-2698
+					...characterData,
+					// @ts-ignore
+					sprites: objectToMap<string>(characterData.sprites), // Convert poses to Map<string, string>
+				} as LnmCharacter,
+			]
+		)
+	);
+	const locations = objectToMap<LnmLocation>(plotObject.locations);
+	const music = new Map<string, LnmMusic>(
+		Object.entries(plotObject.music).map(([musicId, musicData]) => [
+			musicId,
+			{
+				...LNM_MUSIC_DEFAULTS,
+				// @ts-ignore
+				...musicData,
+			},
+		])
+	);
+	const chapters = objectToMap<LnmChapter>(plotObject.chapters);
+	const framesMain = new Map(
+		Object.entries(plotObject.frames.main).map(
+			([chapterId, chapterData]) => [
+				chapterId,
+				new Map<string, LnmFrame>(
+					// @ts-ignore
+					Object.entries(chapterData).map(([frameId, frameData]) => [
+						frameId,
+						convertAndCreateFrame(frameData),
+					])
+				),
+			]
+		)
+	);
+	const framesEndings = objectToMap<LnmEnding>(plotObject.frames.endings);
+	const tasks = objectToMap<LnmTask>(plotObject.tasks);
+	const knowledge = objectToMap<LnmKnowledge>(plotObject.knowledge);
+
+	// TODO See if the values don't require additional work
+
+	return {
+		metadata,
+		characters,
+		locations,
+		music,
+		chapters,
+		startChapter: plotObject.startChapter,
+		frames: {
+			main: framesMain,
+			endings: framesEndings,
+		},
+		tasks,
+		knowledge,
+	};
+}
+
+function convertAndCreateFrame(frameObject: any): LnmFrame {
+	const characters: LnmFrameCharacterData[] | undefined =
+		frameObject.characters
+			? frameObject.characters.map(
+					(elem: Partial<LnmFrameCharacterData>) => ({
+						...LNM_FRAME_CHARACTER_DATA_DEFAULTS,
+						...elem,
+					})
+				)
+			: undefined;
+	const speaker: string | undefined =
+		frameObject.speaker ??
+		(characters?.length == 1 ? characters[0].id : undefined);
+	const choices: LnmFrameChoice[] | undefined = frameObject.choices
+		? frameObject.choices.map(
+				(elem: LnmFrameChoice) => elem as LnmFrameChoice
+			)
+		: undefined;
+	const effects: LnmFrameEffect[] | undefined = frameObject.effects
+		? frameObject.effects.map((elem: any) => convertAndCreateEffect(elem))
+		: undefined;
+	return {
+		id: frameObject.id,
+		location: frameObject.location,
+		characters,
+		dialogue: frameObject.dialogue ?? '',
+		speaker,
+		choices,
+		nextFrame: frameObject.nextFrame,
+		effects,
+	};
+}
+
+function convertAndCreateEffect(effectObject: any): LnmFrameEffect | null {
+	// Convert the `type` field to an enum value and check if it's valid
+	const effectType = toEnumValue(LnmFrameEffectType, effectObject.type);
+	if (!effectType) {
+		console.warn(`Invalid effect type: ${effectObject.type}`);
+		return null;
+	}
+
+	// Use the `effectType` to infer the correct type for `args`
+	const args = effectObject.args as LnmEffectArgsMap[typeof effectType];
+
+	const _if = effectObject.if
+		? convertAndCreateCondition(effectObject.if)
+		: undefined;
+
+	const result: LnmFrameEffect<typeof effectType> = {
+		type: effectType,
+		if: _if,
+		args,
+	};
+
+	return result;
+}
+
+function convertAndCreateCondition(conditionObject: any): LnmFrameCondition {
+	const {
+		hasKnowledge,
+		partnerDeadOnChapter,
+		partnerCurrentlyOnChapter,
+		partnerPassedChapter,
+		healthLess,
+		healthEquals,
+		healthMore,
+		or,
+		and,
+		not,
+	} = conditionObject;
+	return {
+		hasKnowledge: assignIfValidType<string>(hasKnowledge, 'string'),
+		partnerDeadOnChapter: assignIfValidType<string>(
+			partnerDeadOnChapter,
+			'string'
+		),
+		partnerCurrentlyOnChapter: assignIfValidType<string>(
+			partnerCurrentlyOnChapter,
+			'string'
+		),
+		partnerPassedChapter: assignIfValidType<string>(
+			partnerPassedChapter,
+			'string'
+		),
+		healthLess: assignIfValidType<number>(healthLess, 'number'),
+		healthEquals: assignIfValidType<number>(healthEquals, 'number'),
+		healthMore: assignIfValidType<number>(healthMore, 'number'),
+		or: Array.isArray(or) ? or.map(convertAndCreateCondition) : undefined,
+		and: Array.isArray(and)
+			? and.map(convertAndCreateCondition)
+			: undefined,
+		not:
+			not && typeof not === 'object'
+				? convertAndCreateCondition(not)
+				: undefined,
+	} as LnmFrameCondition;
+}
+
 export default PlotLoader;
+export {
+	convertAndCreateCondition as _convertAndCreateCondition,
+	convertAndCreateEffect as _convertAndCreateEffect,
+	convertAndCreateFrame as _convertAndCreateFrame,
+	convertAndCreatePlot as _convertAndCreatePlot,
+};
