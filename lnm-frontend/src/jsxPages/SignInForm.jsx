@@ -12,7 +12,7 @@ const SignInForm = () => {
 			<header>
 				<div className="header__inner">
 					<img
-						src="../assets/logo.png"
+						src="../assets/img/logo.png"
 						width="90"
 						height="70"
 						alt="Лого"
