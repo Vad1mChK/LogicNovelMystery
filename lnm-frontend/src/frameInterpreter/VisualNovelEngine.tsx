@@ -13,16 +13,15 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	startChapterId,
 }) => {
 	// Initialize currentChapterId with startChapterId or the plot’s default start chapter
-	const [currentChapterId, setCurrentChapterId] = useState<string>(
-		startChapterId && plot.chapters.has(startChapterId)
-			? startChapterId
-			: plot.startChapter
-	);
+	const initialChapterId = plot.chapters.has(startChapterId || '')
+		? startChapterId!
+		: plot.startChapter;
 
-	// Retrieve the starting frame for the initial chapter
+	// Set up state for current chapter and frame IDs
+	const [currentChapterId, setCurrentChapterId] =
+		useState<string>(initialChapterId);
 	const initialFrameId =
 		plot.chapters.get(currentChapterId)?.startFrame || '';
-
 	const [currentFrameId, setCurrentFrameId] =
 		useState<string>(initialFrameId);
 

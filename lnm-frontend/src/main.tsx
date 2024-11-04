@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { LnmPlot } from './frameInterpreter/types.ts';
 import VisualNovelEngine from './frameInterpreter/VisualNovelEngine.tsx';
@@ -34,7 +34,7 @@ const App: React.FC = () => {
 	// return null;
 	const [plot, setPlot] = useState<LnmPlot | null>(null);
 
-	const plotUrl = './assets/plot/single_game_ru_RU.json';
+	const plotUrl = 'src/assets/plot/single_game_ru_RU.json';
 	const startChapterId = 'inception1';
 
 	return (
@@ -52,9 +52,8 @@ const App: React.FC = () => {
 };
 
 // Используем BrowserRouter, чтобы задать контекст для useNavigate
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<BrowserRouter>
 		<App />
-	</BrowserRouter>,
-	document.getElementById('root')
+	</BrowserRouter>
 );
