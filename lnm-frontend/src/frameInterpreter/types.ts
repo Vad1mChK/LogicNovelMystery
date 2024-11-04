@@ -52,7 +52,7 @@ export interface LnmChapter {
 	title: string;
 	startFrame: string;
 	nextChapter: string;
-	waitForPartner: boolean; // Default: false
+	waitForPartner?: boolean; // Default: false
 	knowledge: string[];
 }
 
