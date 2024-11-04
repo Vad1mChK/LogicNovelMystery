@@ -12,6 +12,5 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
-    // другие опции
   }
 }
