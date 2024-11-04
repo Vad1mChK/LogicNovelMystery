@@ -6,7 +6,7 @@ module.exports = {
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
     },
-    testMatch: ['**/?(*.)+(test).js'],
+    testMatch: ['**/?(*.)+(test).(js|ts)'],
 
     // Собираем покрытие тестами
     collectCoverage: false,
