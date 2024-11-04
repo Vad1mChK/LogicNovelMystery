@@ -11,3 +11,10 @@ export function toEnumValue<T extends object>(
 	);
 	return isValidEnumValue ? (value as T[keyof T]) : null;
 }
+
+export function assignIfValidType<T>(
+	value: unknown,
+	typeName: string
+): T | undefined {
+	return typeof value === typeName ? (value as T) : undefined;
+}
