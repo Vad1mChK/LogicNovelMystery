@@ -4,6 +4,7 @@ export interface LnmPlot {
 	locations: Map<string, LnmLocation>;
 	music: Map<string, LnmMusic>;
 	startChapter: string;
+	chapters: Map<string, LnmChapter>;
 	frames: {
 		main: Map<string, Map<string, LnmFrame>>;
 		endings: Map<string, LnmEnding>;
@@ -44,6 +45,19 @@ export interface LnmMusic {
 
 export const LNM_MUSIC_DEFAULTS: Pick<LnmMusic, 'loop'> = {
 	loop: false,
+};
+
+export interface LnmChapter {
+	id: string;
+	title: string;
+	startFrame: string;
+	nextChapter: string;
+	waitForPartner: boolean; // Default: false
+	knowledge: string[];
+}
+
+export const LNM_CHAPTER_DEFAULTS: Pick<LnmChapter, 'waitForPartner'> = {
+	waitForPartner: false,
 };
 
 export interface LnmFrame {
