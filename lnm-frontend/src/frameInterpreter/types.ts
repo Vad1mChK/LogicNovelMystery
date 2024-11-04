@@ -255,7 +255,7 @@ export enum LnmKnowledgeType {
 	RULE = 'rule',
 }
 
-interface LnmKnowledge {
+export interface LnmKnowledge {
 	id: string;
 	type: LnmKnowledgeType;
 	content: string;
