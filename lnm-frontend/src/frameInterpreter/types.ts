@@ -62,7 +62,7 @@ export const LNM_CHAPTER_DEFAULTS: Pick<LnmChapter, 'waitForPartner'> = {
 
 export interface LnmFrame {
 	id: string;
-	location: string;
+	location?: string;
 	characters?: LnmFrameCharacterData[]; // If not specified, use currently stored characters
 	dialogue: string;
 	speaker?: string; // If omitted: 1. if only one character on scene, pick this one character; 2. else, choose the previous speaker
@@ -124,7 +124,7 @@ export enum LnmFrameEffectType {
 }
 
 // Individual type of effect args
-type EffectArgsMap = {
+export type LnmEffectArgsMap = {
 	[LnmFrameEffectType.JUMP]: {
 		frameId: string;
 	};
@@ -179,7 +179,7 @@ export interface LnmFrameEffect<
 > {
 	type: T;
 	if?: LnmFrameCondition;
-	args: T extends keyof EffectArgsMap ? EffectArgsMap[T] : never;
+	args: T extends keyof LnmEffectArgsMap ? LnmEffectArgsMap[T] : never;
 }
 
 export interface LnmEnding {
@@ -199,7 +199,7 @@ export enum LnmTaskType {
 // types.ts
 
 // Common Task Fields
-interface BaseTask {
+interface LnmBaseTask {
 	id: string;
 	type: LnmTaskType;
 	questionText: string;
@@ -213,7 +213,7 @@ interface BaseTask {
 // Task-Specific Interfaces
 
 // WRITE_KNOWLEDGE Task
-interface LnmWriteKnowledgeTask extends BaseTask {
+interface LnmWriteKnowledgeTask extends LnmBaseTask {
 	type: LnmTaskType.WRITE_KNOWLEDGE;
 	testCases: {
 		input: string;
@@ -223,21 +223,21 @@ interface LnmWriteKnowledgeTask extends BaseTask {
 }
 
 // COMPLETE_QUERY Task
-interface LnmCompleteQueryTask extends BaseTask {
+interface LnmCompleteQueryTask extends LnmBaseTask {
 	type: LnmTaskType.COMPLETE_QUERY;
 	expectedResult: string[];
 	default?: string;
 }
 
 // SELECT_ONE Task
-interface LnmSelectOneTask extends BaseTask {
+interface LnmSelectOneTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_ONE;
 	options: string[];
 	correctAnswerIndices: number; // Single index for the correct answer
 }
 
 // SELECT_MANY Task
-interface LnmSelectManyTask extends BaseTask {
+interface LnmSelectManyTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_MANY;
 	options: string[];
 	correctAnswerIndices: number[]; // Array of indices for multiple correct answers
