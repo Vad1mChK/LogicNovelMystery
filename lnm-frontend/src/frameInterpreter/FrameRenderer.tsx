@@ -1,6 +1,6 @@
 // FrameRenderer.tsx
-import React from 'react';
-import { LnmFrame, LnmPlot } from './types';
+import React, { useState } from 'react';
+import { LnmFrame, LnmFrameCharacterData, LnmLocation, LnmPlot } from './types';
 import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
@@ -16,7 +16,23 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 	plot,
 	onNextFrame,
 }) => {
-	const location = plot.locations.get(frame.location);
+	const [currentCharacters, setCurrentCharacters] = useState<
+		LnmFrameCharacterData[] | null
+	>(null);
+	const [currentLocation, setCurrentLocation] = useState<LnmLocation | null>(
+		null
+	);
+
+	if (!currentCharacters && frame.characters) {
+		setCurrentCharacters(frame.characters);
+	}
+
+	if (!currentLocation && frame.location) {
+		const newLocation = plot.locations.get(frame.location);
+		if (newLocation) setCurrentLocation(newLocation);
+	}
+
+	console.log(currentLocation);
 
 	const handleChoiceSelect = (nextFrameId: string) => {
 		onNextFrame(nextFrameId);
@@ -24,8 +40,10 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 
 	return (
 		<div>
-			{location && <LocationBackground location={location} />}
-			{frame.characters?.map((charData) => {
+			{currentLocation && (
+				<LocationBackground location={currentLocation} />
+			)}
+			{currentCharacters?.map((charData) => {
 				const character = plot.characters.get(charData.id);
 				return character ? (
 					<CharacterSprite
@@ -51,6 +69,7 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 			{!frame.choices && frame.nextFrame && (
 				<button
 					onClick={() => {
+						console.log(frame.nextFrame);
 						if (frame.nextFrame) onNextFrame(frame.nextFrame);
 					}}
 				>

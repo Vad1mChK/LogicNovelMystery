@@ -11,15 +11,13 @@ const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 	character,
 	characterData,
 }) => {
-	if (characterData.hidden) return null;
-
 	const spriteUrl = character.sprites.get(
 		characterData.pose || character.defaultPose || ''
 	);
 
 	const positionStyles = {
 		left: { left: '10%' },
-		center: { left: '45%' },
+		center: { left: '50%' },
 		right: { left: '80%' },
 	};
 
@@ -30,6 +28,10 @@ const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 			style={{
 				position: 'absolute',
 				bottom: '0',
+				height: '100vh',
+				zIndex: '-1',
+				transform: 'translateX(-50%)',
+				opacity: characterData.hidden ? 0 : 1,
 				...positionStyles[characterData.position || 'center'],
 			}}
 		/>

@@ -13,10 +13,10 @@
 			"name": "Стив",
 			"defaultPose": "idle",
 			"sprites": {
-				"idle": "/src/resources/img/characters/steve/idle.webp",
-				"think": "/src/resources/img/characters/steve/think.webp",
-				"holdGlasses": "/src/resources/img/characters/steve/hold_glasses.webp",
-				"holdNotebook": "/src/resources/img/characters/steve/hold_notebook.webp"
+				"idle": "/src/assets/img/characters/steve/idle.webp",
+				"think": "/src/assets/img/characters/steve/think.webp",
+				"holdGlasses": "/src/assets/img/characters/steve/hold_glasses.webp",
+				"holdNotebook": "/src/assets/img/characters/steve/hold_notebook.webp"
 			}
 		},
 		"director": {
@@ -24,8 +24,8 @@
 			"name": "Директор",
 			"defaultPose": "idle",
 			"sprites": {
-				"idle": "/src/resources/img/characters/director/idle.webp",
-				"phone": "/src/resources/img/characters/director/phone.webp"
+				"idle": "/src/assets/img/characters/director/idle.webp",
+				"phone": "/src/assets/img/characters/director/phone.webp"
 			}
 		},
 		"robot": {
@@ -33,9 +33,9 @@
 			"name": "Робот",
 			"defaultPose": "idle",
 			"sprites": {
-				"idle": "/src/resources/img/characters/robot/idle.webp",
-				"think": "/src/resources/img/characters/robot/think.webp",
-				"angry": "/src/resources/img/characters/robot/angry.webp"
+				"idle": "/src/assets/img/characters/robot/idle.webp",
+				"think": "/src/assets/img/characters/robot/think.webp",
+				"angry": "/src/assets/img/characters/robot/angry.webp"
 			}
 		},
 		"anonymous": {
@@ -49,17 +49,17 @@
 		"agentOffice": {
 			"id": "agentOffice",
 			"name": "Офис агента",
-			"background": "/src/resources/img/locations/AgentOffice.png"
+			"background": "/src/assets/img/locations/AgentOffice.png"
 		},
 		"directorOffice": {
 			"id": "directorOffice",
 			"name": "Офис директора",
-			"background": "/src/resources/img/locations/DirectorOffice.png"
+			"background": "/src/assets/img/locations/DirectorOffice.png"
 		},
 		"mansionEntrance": {
 			"id": "mansionEntrance",
 			"name": "Вход в особняк",
-			"background": "/src/resources/img/locations/MansionEntrance.png"
+			"background": "/src/assets/img/locations/MansionEntrance.png"
 		}
 	},
 	"music": {},
