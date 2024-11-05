@@ -24,5 +24,3 @@ dist-ssr
 *.sw?
 coverage
 test-results/
-src/assets/img/
-src/assets/audio/
