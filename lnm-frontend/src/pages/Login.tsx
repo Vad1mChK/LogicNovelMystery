@@ -55,7 +55,7 @@ const Login: React.FC = () => {
             />
             <button onClick={handleLogin}>Login</button>
             <p>
-                No account? <Link to="/register">Register here</Link>
+                No account? <Link to="/auth/register">Register here</Link>
             </p>
         </div>
     );
