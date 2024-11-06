@@ -1,14 +1,40 @@
 import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 
 const Register: React.FC = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
+    const navigate = useNavigate();
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
+        setError(null); // Сброс ошибки перед попыткой регистрации
+        setSuccess(null);
 
-        // Логика для обработки регистрации
-        console.log('Registration attempt:', { username, password });
+        try {
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: username, email, password }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Registration failed');
+            }
+
+            setSuccess('Registration successful! You can now log in.');
+
+            // Перенаправление на страницу входа после успешной регистрации
+            setTimeout(() => navigate('/login'), 1000);
+        } catch (error) {
+            console.error('Registration error:', error);
+            setError('Registration failed. Please check your details and try again.');
+        }
+
     };
 
     return (
