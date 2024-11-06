@@ -1,13 +1,39 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
-    const handleLogin = () => {
-        // Логика для обработки входа
-        console.log('Login attempt:', { username, password });
+    const handleLogin = async () => {
+        setError(null); // Сброс ошибки перед попыткой входа
+
+        try {
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+
+            const data = await response.json();
+            // Сохраняем токен в localStorage
+            localStorage.setItem('AuthToken', data.token);
+
+            // Перенаправляем пользователя на защищённую страницу (например, /dashboard)
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Login error:', error);
+            setError('Login failed. Please check your username and password.');
+        }
+
     };
 
     return (
