@@ -4,6 +4,7 @@ import plotData from '../assets/plot/test_plot_for_plot_loader_en-US.json';
 import {
 	_convertAndCreateCondition,
 	_convertAndCreateEffect,
+	_convertAndCreateEnding,
 	_convertAndCreateFrame,
 	_convertAndCreatePlot,
 } from './PlotLoader.tsx';
@@ -191,5 +192,34 @@ describe('Test plot loading', () => {
 		expect(plot.knowledge.get('village_mystery')?.content).toBe(
 			'holds(village, secrets).'
 		);
+	});
+	test('ending should be created correctly', () => {
+		const endingObject = {
+			id: 'sampleEnding',
+			title: 'Sample Ending',
+			condition: {
+				healthMore: 50,
+			},
+			startFrame: 'sampleEnding_start',
+			frames: {
+				sampleEnding_start: {
+					id: 'sampleEnding_start',
+					dialogue: "You're too slow",
+					nextFrame: 'sampleEnding_1',
+				},
+				sampleEnding_1: {
+					id: 'sampleEnding_1',
+					dialogue: 'Want to try again?',
+					nextFrame: null,
+				},
+			},
+		};
+		const ending = _convertAndCreateEnding(endingObject);
+		expect(ending.id).toBe('sampleEnding');
+		expect(ending.title).toBe('Sample Ending');
+		expect(ending.condition).toBeDefined();
+		expect(ending.startFrame).toBe('sampleEnding_start');
+		expect(ending.frames.keys()).toContain(ending.startFrame);
+		expect(ending.frames.size).toBe(2);
 	});
 });

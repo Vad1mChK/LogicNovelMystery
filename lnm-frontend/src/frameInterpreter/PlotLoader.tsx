@@ -1,4 +1,6 @@
 // PlotLoader.tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useEffect } from 'react';
 import {
 	LNM_FRAME_CHARACTER_DATA_DEFAULTS,
@@ -49,7 +51,6 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 	return <div>Loading plot...</div>;
 };
 
-// @ts-ignore
 function convertAndCreatePlot(plotObject: any): LnmPlot {
 	const metadata: LnmMetadata = plotObject.metadata as LnmMetadata;
 	const characters = new Map<string, LnmCharacter>(
@@ -57,9 +58,9 @@ function convertAndCreatePlot(plotObject: any): LnmPlot {
 			([characterId, characterData]) => [
 				characterId,
 				{
-					// @ts-ignore:ts-2698
+					// @ts-expect-error character data is object
 					...characterData,
-					// @ts-ignore
+					// @ts-expect-error sprites is object
 					sprites: objectToMap<string>(characterData.sprites), // Convert poses to Map<string, string>
 				} as LnmCharacter,
 			]
@@ -71,7 +72,7 @@ function convertAndCreatePlot(plotObject: any): LnmPlot {
 			musicId,
 			{
 				...LNM_MUSIC_DEFAULTS,
-				// @ts-ignore
+				// @ts-expect-error music data is any
 				...musicData,
 			},
 		])
@@ -82,16 +83,25 @@ function convertAndCreatePlot(plotObject: any): LnmPlot {
 			([chapterId, chapterData]) => [
 				chapterId,
 				new Map<string, LnmFrame>(
-					// @ts-ignore
-					Object.entries(chapterData).map(([frameId, frameData]) => [
-						frameId,
-						convertAndCreateFrame(frameData),
-					])
+					Object.entries(chapterData as Record<string, any>).map(
+						([frameId, frameData]) => [
+							frameId,
+							convertAndCreateFrame(frameData),
+						]
+					)
 				),
 			]
 		)
 	);
-	const framesEndings = objectToMap<LnmEnding>(plotObject.frames.endings);
+	const framesEndings = // objectToMap<LnmEnding>(plotObject.frames.endings);
+		new Map(
+			Object.entries(plotObject.frames.endings).map(
+				([endingId, endingData]) => [
+					endingId,
+					convertAndCreateEnding(endingData),
+				]
+			)
+		);
 	const tasks = objectToMap<LnmTask>(plotObject.tasks);
 	const knowledge = objectToMap<LnmKnowledge>(plotObject.knowledge);
 
@@ -209,10 +219,27 @@ function convertAndCreateCondition(conditionObject: any): LnmFrameCondition {
 	} as LnmFrameCondition;
 }
 
+function convertAndCreateEnding(endingObject: any): LnmEnding {
+	const { id, title, condition, startFrame, frames } = endingObject;
+	return {
+		id,
+		title,
+		condition: condition ? convertAndCreateCondition(condition) : undefined,
+		startFrame,
+		frames: new Map(
+			Object.entries(frames).map(([frameId, frameData]) => [
+				frameId,
+				convertAndCreateFrame(frameData),
+			])
+		),
+	} as LnmEnding;
+}
+
 export default PlotLoader;
 export {
 	convertAndCreateCondition as _convertAndCreateCondition,
 	convertAndCreateEffect as _convertAndCreateEffect,
 	convertAndCreateFrame as _convertAndCreateFrame,
 	convertAndCreatePlot as _convertAndCreatePlot,
+	convertAndCreateEnding as _convertAndCreateEnding,
 };
