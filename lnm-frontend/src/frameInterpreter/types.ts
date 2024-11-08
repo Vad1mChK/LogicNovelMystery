@@ -186,7 +186,8 @@ export interface LnmEnding {
 	id: string;
 	title: string;
 	condition?: LnmFrameCondition;
-	frames: LnmFrame[];
+	startFrame: string;
+	frames: Map<string, LnmFrame>;
 }
 
 export enum LnmTaskType {
