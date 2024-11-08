@@ -49,7 +49,7 @@ export default [
 				{
 					detectObjects: true,
 					enforceConst: true,
-					ignore: [0, 1, 10, 100],
+					ignore: [-1, 0, 1, 10, 100],
 					ignoreDefaultValues: true,
 				},
 			],
