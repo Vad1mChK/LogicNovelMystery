@@ -4,39 +4,36 @@ import { LnmFrame, LnmFrameCharacterData, LnmLocation, LnmPlot } from './types';
 import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
+import '../assets/styles/FrameInterpreter.scss';
+import KnowledgeWindow from './KnowledgeWindow.tsx';
 
 interface FrameRendererProps {
 	frame: LnmFrame;
 	plot: LnmPlot;
+	currentCharacters: LnmFrameCharacterData[] | null;
+	currentSpeaker: string | null;
+	currentLocation: LnmLocation | null;
+	knowledge: string[];
 	onNextFrame: (nextFrameId: string) => void;
 }
 
 const FrameRenderer: React.FC<FrameRendererProps> = ({
 	frame,
 	plot,
+	currentCharacters,
+	currentSpeaker,
+	currentLocation,
+	knowledge,
 	onNextFrame,
 }) => {
-	const [currentCharacters, setCurrentCharacters] = useState<
-		LnmFrameCharacterData[] | null
-	>(null);
-	const [currentLocation, setCurrentLocation] = useState<LnmLocation | null>(
-		null
-	);
-
-	if (!currentCharacters && frame.characters) {
-		setCurrentCharacters(frame.characters);
-	}
-
-	if (!currentLocation && frame.location) {
-		const newLocation = plot.locations.get(frame.location);
-		if (newLocation) setCurrentLocation(newLocation);
-	}
-
-	console.log(currentLocation);
-
 	const handleChoiceSelect = (nextFrameId: string) => {
 		onNextFrame(nextFrameId);
 	};
+	const [isKnowledgeOpen, setKnowledgeOpen] = useState(false);
+
+	const knowledgeDetails = knowledge
+		.map((id) => plot.knowledge.get(id))
+		.filter((knw) => !!knw);
 
 	return (
 		<div>
@@ -49,11 +46,19 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 					<CharacterSprite
 						key={charData.id}
 						character={character}
+						isSpeaker={character.id == currentSpeaker}
 						characterData={charData}
 					/>
 				) : null;
 			})}
-			<DialogueBox speaker={frame.speaker} text={frame.dialogue} />
+			<DialogueBox
+				speakerName={
+					plot.characters.get(currentSpeaker ?? '')?.name ??
+					currentSpeaker ??
+					undefined
+				}
+				text={frame.dialogue}
+			/>
 			{frame.choices && (
 				<div className="choices">
 					{frame.choices.map((choice, index) => (
@@ -68,13 +73,23 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 			)}
 			{!frame.choices && frame.nextFrame && (
 				<button
-					onClick={() => {
-						console.log(frame.nextFrame);
-						if (frame.nextFrame) onNextFrame(frame.nextFrame);
-					}}
+					className="next-frame-button game-button"
+					onClick={() => onNextFrame(frame.nextFrame!)}
 				>
-					Next
+					-&gt;
 				</button>
+			)}
+			<button
+				className="view-knowledge-button game-button"
+				onClick={() => setKnowledgeOpen(true)}
+			>
+				Знания
+			</button>
+			{isKnowledgeOpen && (
+				<KnowledgeWindow
+					knowledge={knowledgeDetails}
+					onClose={() => setKnowledgeOpen(false)}
+				/>
 			)}
 		</div>
 	);

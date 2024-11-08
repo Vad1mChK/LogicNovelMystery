@@ -18,6 +18,7 @@ interface GameState {
 	clearErrorSum: () => void;
 	incrementErrorCount: (error: number) => void;
 	clearErrorCount: () => void;
+	loadChapterKnowledge: (initialKnowledge: string[]) => void;
 }
 
 // Create the Context
@@ -36,11 +37,17 @@ export const GameStateProvider: React.FC<{ children: ReactNode }> = ({
 
 	// Define functions to modify the state
 	const addKnowledge = (newKnowledge: string) => {
-		setKnowledge((prev) => [...prev, newKnowledge]);
+		setKnowledge((prev) => {
+			if (prev.includes(newKnowledge)) return prev;
+			return [...prev, newKnowledge];
+		});
+		console.log(`added knowledge id: ${newKnowledge}`);
+		console.log(knowledge);
 	};
-
 	const clearKnowledge = () => {
 		setKnowledge([]);
+		console.log('cleared knowledge');
+		console.log(knowledge);
 	};
 
 	const incrementErrorSum = (error: number) => {
@@ -57,6 +64,12 @@ export const GameStateProvider: React.FC<{ children: ReactNode }> = ({
 
 	const clearErrorCount = () => {
 		setErrorCount(0);
+	};
+
+	const loadChapterKnowledge = (initialKnowledge: string[]) => {
+		setKnowledge(initialKnowledge);
+		console.log(`loaded initial knowledge: ${initialKnowledge}`);
+		console.log(knowledge);
 	};
 
 	return (
@@ -77,6 +90,7 @@ export const GameStateProvider: React.FC<{ children: ReactNode }> = ({
 				clearErrorSum,
 				incrementErrorCount,
 				clearErrorCount,
+				loadChapterKnowledge,
 			}}
 		>
 			{children}

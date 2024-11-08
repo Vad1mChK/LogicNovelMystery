@@ -2,13 +2,13 @@
 import React from 'react';
 
 interface DialogueBoxProps {
-	speaker?: string;
+	speakerName?: string;
 	text: string;
 }
 
-const DialogueBox: React.FC<DialogueBoxProps> = ({ speaker, text }) => (
-	<div className="dialogue-box">
-		{speaker && <div className="speaker-name">{speaker}</div>}
+const DialogueBox: React.FC<DialogueBoxProps> = ({ speakerName, text }) => (
+	<div className="game-dialogue-box">
+		{speakerName && <div className="speaker-name">{speakerName}</div>}
 		<div className="dialogue-text">{text}</div>
 	</div>
 );

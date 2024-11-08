@@ -4,11 +4,13 @@ import { LnmCharacter, LnmFrameCharacterData } from './types';
 
 interface CharacterSpriteProps {
 	character: LnmCharacter;
+	isSpeaker: boolean;
 	characterData: LnmFrameCharacterData;
 }
 
 const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 	character,
+	isSpeaker,
 	characterData,
 }) => {
 	const spriteUrl = character.sprites.get(
@@ -16,22 +18,22 @@ const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 	);
 
 	const positionStyles = {
-		left: { left: '10%' },
+		left: { left: '25%' },
 		center: { left: '50%' },
-		right: { left: '80%' },
+		right: { left: '75%' },
 	};
 
 	return (
 		<img
+			className={
+				'game-character' +
+				(characterData.hidden ? ' _hidden' : '') +
+				(isSpeaker ? ' speaker' : '')
+			}
 			src={spriteUrl}
 			alt={character.name}
+			title={character.name}
 			style={{
-				position: 'absolute',
-				bottom: '0',
-				height: '100vh',
-				zIndex: '-1',
-				transform: 'translateX(-50%)',
-				opacity: characterData.hidden ? 0 : 1,
 				...positionStyles[characterData.position || 'center'],
 			}}
 		/>

@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { LnmPlot } from './frameInterpreter/types.ts';
 import VisualNovelEngine from './frameInterpreter/VisualNovelEngine.tsx';
 import PlotLoader from './frameInterpreter/PlotLoader.tsx';
+import { GameStateProvider } from './frameInterpreter/GameStateContext.tsx';
 
 const App: React.FC = () => {
 	// const navigate = useNavigate();
@@ -38,16 +39,18 @@ const App: React.FC = () => {
 	const startChapterId = 'inception1';
 
 	return (
-		<div className="app">
-			{plot ? (
-				<VisualNovelEngine
-					plot={plot}
-					startChapterId={startChapterId}
-				/>
-			) : (
-				<PlotLoader plotUrl={plotUrl} onLoad={setPlot} />
-			)}
-		</div>
+		<GameStateProvider>
+			<div className="app">
+				{plot ? (
+					<VisualNovelEngine
+						plot={plot}
+						startChapterId={startChapterId}
+					/>
+				) : (
+					<PlotLoader plotUrl={plotUrl} onLoad={setPlot} />
+				)}
+			</div>
+		</GameStateProvider>
 	);
 };
 

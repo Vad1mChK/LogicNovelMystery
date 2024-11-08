@@ -9,18 +9,13 @@ interface LocationBackgroundProps {
 const LocationBackground: React.FC<LocationBackgroundProps> = ({
 	location,
 }) => (
-	<div
-		style={{
-			backgroundImage: `url(${location.background})`,
-			position: 'absolute',
-			height: '100%',
-			top: '0',
-			left: '50%',
-			zIndex: '-100',
-			backgroundSize: 'cover',
-			overflow: 'hidden',
-		}}
-	/>
+	<div className="game-background">
+		<img
+			src={`${location.background}`}
+			alt={location.name}
+			title={location.name}
+		/>
+	</div>
 );
 
 export default LocationBackground;
