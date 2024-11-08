@@ -674,38 +674,43 @@
             }
         },
         "endings": {
-            "id": "demoEnding",
-            "title": "Конец ознакомительного фрагмента",
-            "frames": [
-                {
-                    "id": "demoEnding_1",
-                    "location": "mansionEntrance",
-                    "characters": [
-                        {
-                            "id": "steve",
-                            "pose": "holdNotebook",
-                            "position": "left",
-                            "hidden": true
-                        },
-                        {
-                            "id": "robot",
-                            "pose": "angry",
-                            "position": "center"
-                        }
-                    ],
-                    "speaker": "robot",
-                    "dialogue": "Конец ознакомительного фрагмента."
-                },
-                {
-                    "id": "demoEnding_2",
-                    "dialogue": "Чтобы поиграть в полную версию, купите её за $42,069."
-                },
-                {
-                    "id": "demoEnding_3",
-                    "speaker": "steve",
-                    "dialogue": "Что?"
+            "demoEnding": {
+                "id": "demoEnding",
+                "title": "Конец ознакомительного фрагмента",
+                "frames": {
+                    "demoEnding_1": {
+                        "id": "demoEnding_1",
+                        "location": "mansionEntrance",
+                        "characters": [
+                            {
+                                "id": "steve",
+                                "pose": "holdNotebook",
+                                "position": "left",
+                                "hidden": true
+                            },
+                            {
+                                "id": "robot",
+                                "pose": "angry",
+                                "position": "center"
+                            }
+                        ],
+                        "speaker": "robot",
+                        "dialogue": "Конец ознакомительного фрагмента.",
+                        "nextFrame": "demoEnding_2"
+                    },
+                    "demoEnding_2": {
+                        "id": "demoEnding_2",
+                        "dialogue": "Чтобы поиграть в полную версию, купите её за $42,069.",
+                        "nextFrame": "demoEnding_3"
+                    },
+                    "demoEnding_3": {
+                        "id": "demoEnding_3",
+                        "speaker": "steve",
+                        "dialogue": "Что?",
+                        "nextFrame": null
+                    }
                 }
-            ]
+            }
         }
     },
     "tasks": {
