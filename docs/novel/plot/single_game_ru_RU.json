@@ -677,6 +677,7 @@
             "demoEnding": {
                 "id": "demoEnding",
                 "title": "Конец ознакомительного фрагмента",
+                "startFrame": "demoEnding_1",
                 "frames": {
                     "demoEnding_1": {
                         "id": "demoEnding_1",
