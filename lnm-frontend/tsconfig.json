@@ -8,7 +8,10 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "paths": {
-      "*": ["*"]
+      "*": ["*"],
+      "@/*": ["src/*"], // Alias for the `src` folder
+      "@styles/*": ["src/assets/styles/*"], // Alias for styles
+      "@assets/*": ["src/assets/*"] // Alias for assets
     },
     "baseUrl": "src",
     "jsx": "react-jsx",
