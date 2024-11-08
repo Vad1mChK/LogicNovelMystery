@@ -41,8 +41,10 @@
 		"anonymous": {
 			"id": "anonymous",
 			"name": "???",
-			"defaultPose": null,
-			"sprites": {}
+			"defaultPose": "angry",
+			"sprites": {
+				"idle": "/src/assets/img/characters/robot/idle.webp"
+			}
 		}
 	},
 	"locations": {
@@ -75,13 +77,13 @@
 			"id": "inception2",
 			"title": "Глава 2",
 			"startFrame": "inception2_start",
-			"knowledge": ["iAmSteve"]
+			"knowledge": ["iAmSteve", "mySuperior"]
 		},
 		"inception3": {
 			"id": "inception3",
 			"title": "Глава 3",
 			"startFrame": "inception3_start",
-			"knowledge": ["iAmSteve"]
+			"knowledge": ["iAmSteve", "mySuperior", "ifAssistedKevinThenCreatedVirus"]
 		}
 	},
 	"frames": {
@@ -113,7 +115,15 @@
 					"id": "inception1_02",
 					"dialogue": "Стив Хэриссон. С вами говорит директор ФБР Эдгар Гувер.",
 					"speaker": "director",
-					"nextFrame": "inception1_03"
+					"nextFrame": "inception1_03",
+					"effects": [
+						{
+							"type": "OPEN_KNOWLEDGE",
+							"args": {
+								"knowledgeId": "mySuperior"
+							}
+						}
+					]
 				},
 				"inception1_03": {
 					"id": "inception1_03",
@@ -238,7 +248,15 @@
 					"id": "inception2_06",
 					"dialogue": "Группа хакеров во главе с Кэвином Митником создала вирус.",
 					"speaker": "director",
-					"nextFrame": "inception2_07"
+					"nextFrame": "inception2_07",
+					"effects": [
+						{
+							"type": "OPEN_KNOWLEDGE",
+							"args": {
+								"knowledgeId": "ifAssistedKevinThenCreatedVirus"
+							}
+						}
+					]
 				},
 				"inception2_07": {
 					"id": "inception2_07",
@@ -320,7 +338,7 @@
 				"inception2_22": {
 					"id": "inception2_21",
 					"dialogue": "Все операции, в которых вы участвовали, выполнены вами на отлично!",
-					"nextFrame": "inception2_22"
+					"nextFrame": "inception2_23"
 				},
 				"inception2_23": {
 					"id": "inception2_23",
@@ -445,7 +463,8 @@
 							"hidden": true
 						},
 						{
-							"id": "anonymous"
+							"id": "anonymous",
+							"hidden": true
 						}
 					],
 					"speaker": "steve",
@@ -672,38 +691,44 @@
 			}
 		},
 		"endings": {
-			"id": "demoEnding",
-			"title": "Конец ознакомительного фрагмента",
-			"frames": [
-				{
-					"id": "demoEnding_1",
-					"location": "mansionEntrance",
-					"characters": [
-						{
-							"id": "steve",
-							"pose": "holdNotebook",
-							"position": "left",
-							"hidden": true
-						},
-						{
-							"id": "robot",
-							"pose": "angry",
-							"position": "center"
-						}
-					],
-					"speaker": "robot",
-					"dialogue": "Конец ознакомительного фрагмента."
-				},
-				{
-					"id": "demoEnding_2",
-					"dialogue": "Чтобы поиграть в полную версию, купите её за $42,069."
-				},
-				{
-					"id": "demoEnding_3",
-					"speaker": "steve",
-					"dialogue": "Что?"
+			"demoEnding": {
+				"id": "demoEnding",
+				"title": "Конец ознакомительного фрагмента",
+				"startFrame": "demoEnding_1",
+				"frames": {
+					"demoEnding_1": {
+						"id": "demoEnding_1",
+						"location": "mansionEntrance",
+						"characters": [
+							{
+								"id": "steve",
+								"pose": "holdNotebook",
+								"position": "left",
+								"hidden": true
+							},
+							{
+								"id": "robot",
+								"pose": "angry",
+								"position": "center"
+							}
+						],
+						"speaker": "robot",
+						"dialogue": "Конец ознакомительного фрагмента.",
+						"nextFrame": "demoEnding_2"
+					},
+					"demoEnding_2": {
+						"id": "demoEnding_2",
+						"dialogue": "Чтобы поиграть в полную версию, купите её за $42,069.",
+						"nextFrame": "demoEnding_3"
+					},
+					"demoEnding_3": {
+						"id": "demoEnding_3",
+						"speaker": "steve",
+						"dialogue": "Что?",
+						"nextFrame": null
+					}
 				}
-			]
+			}
 		}
 	},
 	"tasks": {},
@@ -713,6 +738,18 @@
 			"type": "fact",
 			"content": "fbi_agent(steve).",
 			"description": "Стив -- агент ФБР."
+		},
+		"mySuperior": {
+			"id": "mySuperior",
+			"type": "fact",
+			"content": "superior(director, steve).",
+			"description": "Директор ФБР -- руководитель Стива."
+		},
+		"ifAssistedKevinThenCreatedVirus": {
+			"id": "ifAssistedKevinThenHacked",
+			"type": "rule",
+			"content": "creates(X, virus) :-\n\t(assists(X, kevin); X = kevin),\n\thacker(X).",
+			"description": "Кэвин и все хакеры, помогавшие ему, участвовали в создании вируса."
 		}
 	}
 }
