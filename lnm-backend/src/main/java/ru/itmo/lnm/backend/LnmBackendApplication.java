@@ -16,9 +16,12 @@ public class LnmBackendApplication  {
     }
 
 
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(LnmBackendApplication.class);
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//        return application.sources(LnmBackendApplication.class);
+//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
-
 
 }
