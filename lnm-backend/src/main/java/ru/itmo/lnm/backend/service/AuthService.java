@@ -43,6 +43,8 @@ public class AuthService {
                 .email(registerUserDto.getEmail())
                 .password(passwordEncoder.encode(registerUserDto.getPassword()))
                 .createdAt(Instant.now())
+                .updatedAt(Instant.now())
+                .onlineTime(Instant.parse("0"))
                 .build();
 
         userRepository.save(user);
