@@ -26,7 +26,7 @@ import {
 	assignIfValidType,
 	objectToMap,
 	toEnumValue,
-} from '../util/typeUtils.ts';
+} from '../util/typeUtils';
 
 interface PlotLoaderProps {
 	plotUrl: string;
