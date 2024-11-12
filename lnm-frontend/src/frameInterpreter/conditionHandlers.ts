@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { LnmFrameCondition } from './types.ts';
 
@@ -9,7 +8,6 @@ type PartnerStateGetter = (chapter: string) => boolean;
 
 function _getHealth(): number {
 	// TODO retrieve health from app state
-	// eslint-disable-next-line no-magic-numbers
 	return 100;
 }
 

@@ -83,7 +83,11 @@
 			"id": "inception3",
 			"title": "Глава 3",
 			"startFrame": "inception3_start",
-			"knowledge": ["iAmSteve", "mySuperior", "ifAssistedKevinThenCreatedVirus"]
+			"knowledge": [
+				"iAmSteve",
+				"mySuperior",
+				"ifAssistedKevinThenCreatedVirus"
+			]
 		}
 	},
 	"frames": {
