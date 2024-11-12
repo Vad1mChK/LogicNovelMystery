@@ -2,8 +2,8 @@
 
 import evaluateConditionWithDefaults, {
 	createConditionEvaluator,
-} from './conditionHandlers.ts';
-import { LnmFrameCondition } from './types.ts';
+} from './conditionHandlers';
+import { LnmFrameCondition } from './types';
 
 let evaluateCondition = evaluateConditionWithDefaults;
 

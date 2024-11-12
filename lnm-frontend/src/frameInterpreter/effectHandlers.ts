@@ -4,7 +4,7 @@ import {
 	LnmEffectArgsMap,
 	LnmPlot,
 	LnmFrameCharacterData,
-} from './types.ts';
+} from './types';
 
 export type EffectHandler = (
 	effect: LnmFrameEffect,

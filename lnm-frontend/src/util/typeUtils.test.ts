@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { assignIfValidType, objectToMap, toEnumValue } from './typeUtils.ts';
+import { assignIfValidType, objectToMap, toEnumValue } from './typeUtils';
 import { expect } from '@playwright/test';
 
 enum _GameMode {

@@ -7,14 +7,14 @@ import {
 	_convertAndCreateEnding,
 	_convertAndCreateFrame,
 	_convertAndCreatePlot,
-} from './PlotLoader.tsx';
+} from './PlotLoader';
 import { expect } from '@playwright/test';
 import {
 	LnmEffectArgsMap,
 	LnmFrameEffectType,
 	LnmKnowledgeType,
 	LnmTaskType,
-} from './types.ts';
+} from './types';
 
 describe('Test plot loading', () => {
 	test('condition object should be converted to condition correctly', () => {

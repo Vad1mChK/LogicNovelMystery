@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 
-import { LnmFrameCondition } from './types.ts';
+import { LnmFrameCondition } from './types';
 
 type HealthGetter = () => number;
 type KnowledgeGetter = () => string[];
