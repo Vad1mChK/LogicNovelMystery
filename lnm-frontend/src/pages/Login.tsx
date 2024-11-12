@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -11,21 +13,14 @@ const Login: React.FC = () => {
         setError(null); // Сброс ошибки перед попыткой входа
 
         try {
-            const response = await fetch('/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            });
+            const response = await axios.post(
+                'http://localhost:8080/auth/login',
+                { username, password },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
 
-            if (!response.ok) {
-                throw new Error('Login failed');
-            }
-
-            const data = await response.json();
             // Сохраняем токен в localStorage
-            localStorage.setItem('AuthToken', data.token);
+            localStorage.setItem('AuthToken', response.data.token);
 
             // Перенаправляем пользователя на защищённую страницу (например, /dashboard)
             navigate('/dashboard');
@@ -33,7 +28,6 @@ const Login: React.FC = () => {
             console.error('Login error:', error);
             setError('Login failed. Please check your username and password.');
         }
-
     };
 
     return (

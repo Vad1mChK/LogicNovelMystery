@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
+import axios from 'axios';
+
 
 const Register: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -9,22 +11,17 @@ const Register: React.FC = () => {
     const [success, setSuccess] = useState<string | null>(null);
     const navigate = useNavigate();
 
+
     const handleRegister = async () => {
         setError(null); // Сброс ошибки перед попыткой регистрации
         setSuccess(null);
 
         try {
-            const response = await fetch('/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name: username, email, password }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Registration failed');
-            }
+            const response = await axios.post(
+                'http://localhost:8080/auth/register',
+                { name: username, email, password },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
 
             setSuccess('Registration successful! You can now log in.');
 
@@ -34,8 +31,8 @@ const Register: React.FC = () => {
             console.error('Registration error:', error);
             setError('Registration failed. Please check your details and try again.');
         }
-
     };
+
 
     return (
         <div className="form-container">
