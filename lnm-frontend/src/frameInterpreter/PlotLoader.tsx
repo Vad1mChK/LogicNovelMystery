@@ -22,11 +22,7 @@ import {
 	LnmPlot,
 	LnmTask,
 } from './types';
-import {
-	assignIfValidType,
-	objectToMap,
-	toEnumValue,
-} from '../util/typeUtils';
+import { assignIfValidType, objectToMap, toEnumValue } from '../util/typeUtils';
 
 interface PlotLoaderProps {
 	plotUrl: string;
