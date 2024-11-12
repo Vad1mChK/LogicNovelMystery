@@ -15,7 +15,6 @@
     },
     "baseUrl": "src",
     "jsx": "react-jsx",
-    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
