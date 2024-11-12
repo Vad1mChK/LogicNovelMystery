@@ -26,7 +26,7 @@ const Register: React.FC = () => {
             setSuccess('Registration successful! You can now log in.');
 
             // Перенаправление на страницу входа после успешной регистрации
-            setTimeout(() => navigate('/login'), 1000);
+            setTimeout(() => navigate('auth/login'), 1000);
         } catch (error) {
             console.error('Registration error:', error);
             setError('Registration failed. Please check your details and try again.');
