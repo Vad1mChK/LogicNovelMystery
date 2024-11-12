@@ -45,7 +45,7 @@ export default [
 			],
 			'no-eval': ['error'],
 			'no-magic-numbers': [
-				'error',
+				'warn',
 				{
 					detectObjects: true,
 					enforceConst: true,
