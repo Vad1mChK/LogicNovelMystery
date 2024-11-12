@@ -44,7 +44,7 @@ public class AuthService {
                 .password(passwordEncoder.encode(registerUserDto.getPassword()))
                 .createdAt(Instant.now())
                 .updatedAt(Instant.now())
-                .onlineTime(Instant.parse("0"))
+                .onlineTime(Instant.now())
                 .build();
 
         userRepository.save(user);
