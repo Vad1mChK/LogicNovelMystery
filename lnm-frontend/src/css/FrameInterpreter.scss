@@ -7,6 +7,8 @@
 	transition: all 0.3s ease-in-out;
 }
 
+$white: #f4f4f4;
+
 .game-dialogue-box {
 	position: absolute;
 	bottom: 5%;
@@ -19,19 +21,18 @@
 		margin-left: 0;
 		padding: 8px 64px;
 		width: fit-content;
-
 		background: color.scale(#0056b3, $alpha: -25%);
 		border-radius: 16px 16px 0 0;
-		border: 2px solid #f4f4f4;
+		border: 2px solid $white;
 		border-bottom: none;
 		font-size: smaller;
 	}
 
 	& .dialogue-text {
-		border: 2px solid #f4f4f4;
+		border: 2px solid $white;
 		background-color: color.scale(#101010, $alpha: -25%);
 		padding: 32px;
-		border-radius: 0 32px 32px 32px;
+		border-radius: 0 32px 32px;
 		overflow: hidden;
 		height: 3em;
 	}
@@ -54,7 +55,7 @@
 		width: auto; /* Default: stretch width */
 		height: 100%;
 
-		@media (min-aspect-ratio: 16/9) {
+		@media (aspect-ratio >= 16/9) {
 			/* Wider aspect ratios */
 			height: auto;
 			width: 100%;
@@ -78,22 +79,22 @@
 		filter: blur(3px);
 	}
 
-	&._hidden {
-		opacity: 0%;
+	&.hidden-character {
+		opacity: 0;
 	}
 
 	&.speaker {
-		filter: drop-shadow(0 0 25px color.scale(#f4f4f4, $alpha: -10%));
+		filter: drop-shadow(0 0 25px color.scale($white, $alpha: -10%));
 	}
 }
 
 .game-button {
 	transition: color 0.3s ease-in-out;
-	border: 2px solid #f4f4f4;
+	border: 2px solid $white;
 	background: color.scale(#101010, $alpha: -25%);
 
 	&:hover {
-		background-color: color.scale(#333, $alpha: -25%);
+		background-color: color.scale(#333333, $alpha: -25%);
 	}
 }
 
@@ -116,12 +117,12 @@
 	transform: translateX(-50%);
 	width: 75vw;
 	height: 75vh;
-	background-color: rgba(0, 0, 0, 0.8);
-	color: white;
+	background-color: rgb(0 0 0 / 80%);
+	color: $white;
 	padding: 20px;
 	border-radius: 10px;
 	backdrop-filter: blur(10px);
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 4px 10px rgb(0 0 0 / 50%);
 	z-index: 10;
 
 	.knowledge-tabs {
@@ -132,8 +133,8 @@
 		button {
 			padding: 10px 20px;
 			border: none;
-			background: #333;
-			color: white;
+			background: #333333;
+			color: $white;
 			border-radius: 5px;
 			cursor: pointer;
 
@@ -144,11 +145,16 @@
 	}
 
 	.knowledge-content {
-		background: rgba(255, 255, 255, 0.1);
-		border: 1px solid #555;
+		background: rgb(255 255 255 / 10%);
+		border: 1px solid #555555;
 		border-radius: 5px;
 		padding: 10px;
 		overflow-y: auto;
+
+		p {
+			text-align: center;
+			color: $white;
+		}
 
 		ul {
 			list-style: none;
@@ -157,7 +163,7 @@
 			li {
 				display: block;
 				margin-bottom: 10px;
-				border: 2px solid #f4f4f4;
+				border: 2px solid $white;
 				text-align: left;
 
 				code {
@@ -168,15 +174,10 @@
 				}
 
 				p {
-					color: #ccc;
+					color: #cccccc;
 					font-size: smaller;
 				}
 			}
-		}
-
-		p {
-			text-align: center;
-			color: #aaa;
 		}
 	}
 
@@ -186,7 +187,7 @@
 		width: 100%;
 		padding: 10px;
 		background: #ff4444;
-		color: white;
+		color: $white;
 		border: none;
 		border-radius: 5px;
 		cursor: pointer;

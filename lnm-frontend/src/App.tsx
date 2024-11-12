@@ -1,6 +1,6 @@
 import './css/App.css';
-import MainPage from "./pages/MainPage";
-import SelectedMode from "./pages/SelectedMode";
+import MainPage from './pages/MainPage';
+import SelectedMode from './pages/SelectedMode';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App: React.FC = () => {
