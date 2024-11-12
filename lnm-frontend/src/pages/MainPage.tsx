@@ -87,7 +87,7 @@ const MainMenu: React.FC = () => {
 							<option value="en">English</option>
 						</select>
 					</div>
-					<button className="modalButton" onClick={closeAllModals}>
+					<button className="modal-button" onClick={closeAllModals}>
 						{language === 'ru' ? 'Закрыть' : 'Close'}
 					</button>
 				</div>
@@ -102,7 +102,7 @@ const MainMenu: React.FC = () => {
 							? 'Это захватывающая игра, в которой вы сможете изучить основы языка Prolog в игровой форме, проходя увлекательные задания, чтобы спасти мир от злодея!'
 							: 'This is an exciting game where you can learn Prolog basics while completing thrilling tasks to save the world!'}
 					</p>
-					<button className="modalButton" onClick={closeAllModals}>
+					<button className="modal-button" onClick={closeAllModals}>
 						{language === 'ru' ? 'Закрыть' : 'Close'}
 					</button>
 				</div>
@@ -135,7 +135,7 @@ const MainMenu: React.FC = () => {
 							{/* Динамически добавленные строки таблицы будут здесь */}
 						</tbody>
 					</table>
-					<button className="modalButton" onClick={closeAllModals}>
+					<button className="modal-button" onClick={closeAllModals}>
 						{language === 'ru' ? 'Закрыть' : 'Close'}
 					</button>
 				</div>

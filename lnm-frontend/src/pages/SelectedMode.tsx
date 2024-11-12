@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import steveImage from '../assets/steve.png';
-import professorAndVicky from '../assets/professorAndVicky.png'
+import professorAndVicky from '../assets/professorAndVicky.png';
 import '../css/SelectedMode.scss';
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
 
 const GameSelection: React.FC = () => {
-	const [selectedCharacter, setSelectedCharacter] = useState<GameMode | null>(null);
+	const [selectedCharacter, setSelectedCharacter] = useState<GameMode | null>(
+		null
+	);
 
 	// Load selected character from localStorage on component mount
 	useEffect(() => {
-		const savedCharacter = localStorage.getItem('selectedCharacter') as GameMode | null;
+		const savedCharacter = localStorage.getItem(
+			'selectedCharacter'
+		) as GameMode | null;
 		setSelectedCharacter(savedCharacter);
 	}, []);
 

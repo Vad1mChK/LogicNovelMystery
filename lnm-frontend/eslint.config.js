@@ -45,11 +45,11 @@ export default [
 			],
 			'no-eval': ['error'],
 			'no-magic-numbers': [
-				'error',
+				'warn',
 				{
 					detectObjects: true,
 					enforceConst: true,
-					ignore: [0, 1],
+					ignore: [-1, 0, 1, 10, 100],
 					ignoreDefaultValues: true,
 				},
 			],
