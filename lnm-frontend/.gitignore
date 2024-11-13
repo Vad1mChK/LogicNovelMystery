@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 coverage
 test-results/
+
+# Typing files generated during build
+*.d.ts
+# Keep explicitly specified typing
+!src/types/**/*.d.ts
