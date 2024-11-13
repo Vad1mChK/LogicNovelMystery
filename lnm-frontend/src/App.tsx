@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import './App.css';
 import MainPage from './pages/MainPage';
- import SelectedMode from './pages/SelectMode';
+import SelectedMode from './pages/SelectMode';
 
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
