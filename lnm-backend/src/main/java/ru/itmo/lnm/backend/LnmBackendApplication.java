@@ -15,13 +15,13 @@ public class LnmBackendApplication  {
         SpringApplication.run(LnmBackendApplication.class, args);
     }
 
-//    @Override
+
 //    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 //        return application.sources(LnmBackendApplication.class);
 //    }
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
