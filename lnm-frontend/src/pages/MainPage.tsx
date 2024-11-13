@@ -55,19 +55,19 @@ const MainMenu: React.FC = () => {
 
 			{/* Затенение фона для модальных окон */}
 			{isSettingsOpen || isAboutOpen || isLeaderboardOpen ? (
-				<div className="modalOverlay" onClick={closeAllModals}></div>
+				<div className="modal-overlay" onClick={closeAllModals}></div>
 			) : null}
 
 			{/* Модальное окно с настройками */}
 			{isSettingsOpen && (
-				<div className="settingsModal">
+				<div className="settings-modal">
 					<h2>{language === 'ru' ? 'Настройки' : 'Settings'}</h2>
-					<label htmlFor="volumeRange">
+					<label htmlFor="volume-range">
 						{language === 'ru' ? 'Звук:' : 'Volume:'}
 					</label>
 					<input
 						type="range"
-						id="volumeRange"
+						id="volume-range"
 						className="volume-control"
 						min="0"
 						max="100"
@@ -76,11 +76,11 @@ const MainMenu: React.FC = () => {
 					/>
 					<span>{volume}%</span>
 					<div style={{ marginTop: '10px' }}>
-						<label htmlFor="languageSelect">
+						<label htmlFor="language-select">
 							{language === 'ru' ? 'Язык:' : 'Language:'}
 						</label>
 						<select
-							id="languageSelect"
+							id="language-select"
 							onChange={(e) => changeLanguage(e.target.value)}
 						>
 							<option value="ru">Русский</option>
@@ -95,7 +95,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с описанием игры */}
 			{isAboutOpen && (
-				<div className="aboutModal">
+				<div className="about-modal">
 					<h2>{language === 'ru' ? 'О игре' : 'About the Game'}</h2>
 					<p>
 						{language === 'ru'
@@ -110,7 +110,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с таблицей лидеров */}
 			{isLeaderboardOpen && (
-				<div className="leaderboardModal">
+				<div className="leaderboard-modal">
 					<h2>
 						{language === 'ru' ? 'Доска лидеров' : 'Leaderboard'}
 					</h2>
