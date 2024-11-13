@@ -1,0 +1,33 @@
+name: Main CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # Adjust as needed
+
+      - name: Install dependencies
+        working-directory: ./lnm-frontend
+        run: npm install
+
+      - name: Build project
+        working-directory: ./lnm-frontend
+        run: npm run build
+
+      - name: Upload pages artifact
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./lnm-frontend/dist # Adjust to your build folder
+          publish_branch: gh-pages
