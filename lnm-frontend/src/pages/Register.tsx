@@ -26,6 +26,7 @@ const Register: React.FC = () => {
 			return;
 		}
 
+		/* eslint-disable @typescript-eslint/no-explicit-any */
 		try {
 			/* const _response = */ await axios.post(
 				'http://localhost:8080/auth/register',
@@ -46,11 +47,10 @@ const Register: React.FC = () => {
 			setError(
 				'Registration failed. Please check your details and try again.'
 			);
-
 			// Проверяем, существует ли уже такой пользователь или возникла ошибка сервера
 			if (
-				error.response &&
-				error.response.data ===
+				(error as any).response &&
+				(error as any).response.data ===
 					'Registration failed: Username already exists'
 			) {
 				setError('This user is already registered.');
@@ -58,6 +58,7 @@ const Register: React.FC = () => {
 				setError('Registration failed. Please try again later.');
 			}
 		}
+		/* eslint-enable @typescript-eslint/no-explicit-any */
 	};
 
 	return (
