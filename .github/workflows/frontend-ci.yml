@@ -132,7 +132,6 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
-        working-directory: ./lnm-frontend
         with:
           node-version: '18' # Adjust as needed
 
