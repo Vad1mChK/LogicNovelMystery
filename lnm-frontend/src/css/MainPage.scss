@@ -32,8 +32,8 @@ body {
 	background-size: cover;
 	background-position: center;
 	position: fixed;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	top: 0;
 	left: 0;
 	// z-index: -1; /* Чтобы фон находился за содержимым */
@@ -74,7 +74,7 @@ body {
 #about-modal,
 #leaderboard-modal {
 	//display: none;
-	position: fixed;
+	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
