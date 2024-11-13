@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import steveImage from '../assets/img/characters/steve/idle.webp';
 import professorAndVicky from '../assets/img/professorAndVicky.png';
-import '../css/SelectedMode.scss';
+import '../css/SelectMode.scss';
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
