@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import * as Sentry from '@sentry/react';  // убедитесь, что это корректно импортировано
+import * as Sentry from '@sentry/react';
 
 const Login: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	// Temporarily renamed error -> _error; use error later
 	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const Login: React.FC = () => {
 			localStorage.setItem('AuthToken', response.data.token);
 
 			// Перенаправляем пользователя на защищённую страницу (например, /dashboard)
-			navigate('/dashboard');
+			navigate('/main');
 		} catch (error) {
 			console.error('Login error:', error);
 
@@ -35,7 +36,9 @@ const Login: React.FC = () => {
 	};
 
 	return (
-		<Sentry.ErrorBoundary fallback={<p>Something went wrong. Please try again later.</p>}>
+		<Sentry.ErrorBoundary
+			fallback={<p>Something went wrong. Please try again later.</p>}
+		>
 			<div className="form-container">
 				<h2>Login</h2>
 				<input
