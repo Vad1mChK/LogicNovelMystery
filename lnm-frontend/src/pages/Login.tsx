@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 			localStorage.setItem('AuthToken', response.data.token);
 
 			// Перенаправляем пользователя на защищённую страницу (например, /dashboard)
-			navigate('/dashboard');
+			navigate('/main');
 		} catch (error) {
 			console.error('Login error:', error);
 			setError('Login failed. Please check your username and password.');
@@ -33,6 +33,9 @@ const Login: React.FC = () => {
 	return (
 		<div className="form-container">
 			<h2>Login</h2>
+
+			{error && <p className="error-message">{error}</p>}
+
 			<input
 				type="text"
 				className="input-field" /* Добавляем класс */
