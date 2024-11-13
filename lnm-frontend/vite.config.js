@@ -6,6 +6,12 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': '/src',
-        }
-    }
+        },
+    },
+    build: {
+        outDir: 'dist',
+        rollupOptions: {
+            input: 'index.html',
+        },
+    },
 });
