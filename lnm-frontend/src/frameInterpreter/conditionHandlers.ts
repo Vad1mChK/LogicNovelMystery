@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-
 import { LnmFrameCondition } from './types';
 
 type HealthGetter = () => number;
@@ -19,21 +17,21 @@ function _getKnowledge(): string[] {
 function _isPartnerDeadOnChapter(chapter: string): boolean {
 	// TODO: for multiplayer, refer on some kind of update exchange
 	// For single player, always return false
-	chapter;
+	console.log(chapter);
 	return false;
 }
 
 function _isPartnerCurrentlyOnChapter(chapter: string): boolean {
 	// TODO: for multiplayer, refer on some kind of update exchange
 	// For single player, always return false
-	chapter;
+	console.log(chapter);
 	return false;
 }
 
 function _isPartnerPassedChapter(chapter: string): boolean {
 	// TODO: for multiplayer, refer on some kind of update exchange
 	// For single player, always return false
-	chapter;
+	console.log(chapter);
 	return false;
 }
 

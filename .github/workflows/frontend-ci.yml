@@ -132,21 +132,21 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
-        working-directory: lnm-frontend
+        working-directory: ./lnm-frontend
         with:
           node-version: '18' # Adjust as needed
 
       - name: Install dependencies
-        working-directory: lnm-frontend
+        working-directory: ./lnm-frontend
         run: npm install
 
       - name: Build project
-        working-directory: lnm-frontend
+        working-directory: ./lnm-frontend
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        working-directory: lnm-frontend
+        working-directory: ./lnm-frontend
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist # Adjust to your build folder
