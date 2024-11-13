@@ -145,7 +145,6 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        working-directory: ./lnm-frontend
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist # Adjust to your build folder
+          publish_dir: ./lnm-frontend/dist # Adjust to your build folder
