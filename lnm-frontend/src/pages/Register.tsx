@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Register: React.FC = () => {
@@ -60,6 +60,10 @@ const Register: React.FC = () => {
 				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<button onClick={handleRegister}>Register</button>
+			<p>
+				Already have an account?{' '}
+				<Link to="/auth/login">Sign in here</Link>
+			</p>
 		</div>
 	);
 };
