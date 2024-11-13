@@ -28,10 +28,7 @@ const MainMenu: React.FC = () => {
 		<div className="background">
 			<div className="main-container">
 				{/* Кнопка "Начать игру" */}
-				<button
-					className="button"
-					onClick={() => navigate('/select')}
-				>
+				<button className="button" onClick={() => navigate('/select')}>
 					{language === 'ru' ? 'Начать игру' : 'Start game'}
 				</button>
 

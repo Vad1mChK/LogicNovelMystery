@@ -1,19 +1,19 @@
 @use 'sass:color';
 
+$white: #f4f4f4;
+
 * {
 	overflow: hidden;
 	font-family: 'JetBrains Mono', monospace; // Later upload the font
 	font-size: 28px;
 	transition: all 0.3s ease-in-out;
-	color: white;
+	color: $white;
 }
 
 button {
 	padding: 16px;
 	border-radius: 32px;
 }
-
-$white: #f4f4f4;
 
 .game-dialogue-box {
 	position: absolute;
@@ -161,7 +161,6 @@ $white: #f4f4f4;
 		border-radius: 5px;
 		padding: 32px;
 		overflow-y: auto;
-
 		height: 80%;
 
 		p {

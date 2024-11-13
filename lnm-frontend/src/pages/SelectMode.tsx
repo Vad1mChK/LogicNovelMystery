@@ -77,7 +77,9 @@ const GameSelection: React.FC = () => {
 						<p className="character-name">Game for two</p>
 					</div>
 				</div>
-				<button className="start-game-button" onClick={startGame}>Start Game</button>
+				<button className="start-game-button" onClick={startGame}>
+					Start Game
+				</button>
 			</div>
 		</div>
 	);
