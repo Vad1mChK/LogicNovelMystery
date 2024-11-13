@@ -32,3 +32,5 @@ test-results/
 
 # TypeScript build cache files
 *.tsbuildinfo
+
+vite.config.js
