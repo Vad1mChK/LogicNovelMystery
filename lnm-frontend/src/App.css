@@ -94,3 +94,9 @@ body {
 	color: #ffffff;
 	text-decoration: underline;
 }
+
+.error-message {
+	color: #ff0000;
+	margin-top: 10px;
+	font-size: 0.9em;
+}

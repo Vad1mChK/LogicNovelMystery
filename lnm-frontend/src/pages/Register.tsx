@@ -12,9 +12,20 @@ const Register: React.FC = () => {
 	const [_success, setSuccess] = useState<string | null>(null);
 	const navigate = useNavigate();
 
+	const isValidEmail = (email: string) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(email);
+	};
+
 	const handleRegister = async () => {
 		setError(null); // Сброс ошибки перед попыткой регистрации
 		setSuccess(null);
+
+		// Проверяем формат email перед отправкой
+		if (!isValidEmail(email)) {
+			setError('Please enter a valid email address.');
+			return;
+		}
 
 		try {
 			/* const _response = */ await axios.post(
@@ -26,18 +37,26 @@ const Register: React.FC = () => {
 			setSuccess('Registration successful! You can now log in.');
 
 			// Перенаправление на страницу входа после успешной регистрации
-			navigate('auth/login');
+			navigate('/auth/login');
 		} catch (error) {
 			console.error('Registration error:', error);
-			setError(
-				'Registration failed. Please check your details and try again.'
-			);
+			// Проверяем, существует ли уже такой пользователь или возникла ошибка сервера
+			if (
+				error.response &&
+				error.response.data ===
+					'Registration failed: Username already exists'
+			) {
+				setError('This user is already registered.');
+			} else {
+				setError('Registration failed. Please try again later.');
+			}
 		}
 	};
 
 	return (
 		<div className="form-container">
 			<h2>Register</h2>
+			{error && <p className="error-message">{error}</p>}
 			<input
 				type="text"
 				className="input-field" /* Добавляем класс */
@@ -61,8 +80,7 @@ const Register: React.FC = () => {
 			/>
 			<button onClick={handleRegister}>Register</button>
 			<p>
-				Already have an account?{' '}
-				<Link to="/auth/login">Sign in here</Link>
+				Already have account? <Link to="/auth/login">Login here</Link>
 			</p>
 		</div>
 	);
