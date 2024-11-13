@@ -1,0 +1,173 @@
+{
+	"metadata": {
+		"name": "Mystery of the Forgotten Village",
+		"gamemode": "single",
+		"protagonist": "arin",
+		"author": "Your Name",
+		"version": "1.0",
+		"locale": "en-US"
+	},
+	"characters": {
+		"arin": {
+			"id": "arin",
+			"name": "Arin",
+			"defaultPose": "neutral",
+			"sprites": {
+				"neutral": "images/characters/arin/neutral.png",
+				"thinking": "images/characters/arin/thinking.png",
+				"excited": "images/characters/arin/excited.png"
+			}
+		},
+		"sage": {
+			"id": "sage",
+			"name": "Old Sage",
+			"defaultPose": "mysterious",
+			"sprites": {
+				"mysterious": "images/characters/sage/mysterious.png",
+				"serious": "images/characters/sage/serious.png"
+			}
+		}
+	},
+	"locations": {
+		"village_square": {
+			"id": "village_square",
+			"name": "Village Square",
+			"background": "images/locations/village_square.png"
+		},
+		"sage_hut": {
+			"id": "sage_hut",
+			"name": "Sage's Hut",
+			"background": "images/locations/sage_hut.png"
+		}
+	},
+	"music": {
+		"mystic_theme": {
+			"id": "mystic_theme",
+			"name": "Mystic Theme",
+			"performer": "Composer Name",
+			"file": "audio/music/mystic_theme.mp3",
+			"loop": true
+		}
+	},
+	"startChapter": "chapter1",
+	"chapters": {
+		"chapter1": {
+			"id": "chapter1",
+			"title": "Arrival at the Village",
+			"startFrame": "frame1",
+			"nextChapter": "chapter2",
+			"knowledge": ["village_mystery"]
+		},
+		"chapter2": {
+			"id": "chapter2",
+			"title": "Meeting the Sage",
+			"startFrame": "frame5",
+			"nextChapter": "",
+			"knowledge": []
+		}
+	},
+	"frames": {
+		"main": {
+			"chapter1": {
+				"frame1": {
+					"id": "frame1",
+					"location": "village_square",
+					"characters": [
+						{
+							"id": "arin",
+							"position": "center",
+							"pose": "neutral"
+						}
+					],
+					"dialogue": "Arin arrives at the quiet village square, feeling a sense of mystery in the air.",
+					"effects": [
+						{
+							"type": "PLAY_MUSIC",
+							"args": { "musicId": "mystic_theme" }
+						}
+					],
+					"nextFrame": "frame2"
+				},
+				"frame2": {
+					"id": "frame2",
+					"dialogue": "Arin: I wonder where everyone is...",
+					"speaker": "arin",
+					"nextFrame": "frame3"
+				},
+				"frame3": {
+					"id": "frame3",
+					"dialogue": "An old sage appears from the shadows.",
+					"effects": [
+						{
+							"type": "FADE_IN_CHARACTER",
+							"args": { "characterId": "sage", "duration": 2 }
+						}
+					],
+					"nextFrame": "frame4"
+				},
+				"frame4": {
+					"id": "frame4",
+					"characters": [
+						{
+							"id": "sage",
+							"position": "right",
+							"pose": "mysterious"
+						}
+					],
+					"dialogue": "Sage: Welcome, young one. I have been expecting you.",
+					"speaker": "sage",
+					"choices": [
+						{ "text": "Who are you?", "nextFrame": "frame5" },
+						{
+							"text": "Why are you expecting me?",
+							"nextFrame": "frame6"
+						}
+					]
+				},
+				"frame5": {
+					"id": "frame5",
+					"dialogue": "Sage: I am the keeper of secrets in this village. And you... you are here for a reason.",
+					"speaker": "sage",
+					"nextFrame": "frame7"
+				},
+				"frame6": {
+					"id": "frame6",
+					"dialogue": "Sage: That is for you to discover. But beware, some secrets are better left uncovered.",
+					"speaker": "sage",
+					"nextFrame": "frame7"
+				},
+				"frame7": {
+					"id": "frame7",
+					"dialogue": "Arin feels a chill run down his spine as he realizes the gravity of his journey.",
+					"nextFrame": "frame8"
+				},
+				"frame8": {
+					"id": "frame8",
+					"dialogue": "To be continued...",
+					"nextFrame": ""
+				}
+			}
+		},
+		"endings": {}
+	},
+	"tasks": {
+		"task1": {
+			"id": "task1",
+			"type": "SELECT_ONE",
+			"questionText": "What does Arin feel upon entering the village?",
+			"options": ["Curious", "Scared", "Excited"],
+			"correctAnswerIndices": 0,
+			"nextFrameOnSuccess": "frame2",
+			"nextFrameOnFailure": "frame1",
+			"failureScorePenalty": 1
+		}
+	},
+	"knowledge": {
+		"village_mystery": {
+			"id": "village_mystery",
+			"type": "fact",
+			"content": "holds(village, secrets).",
+			"description": "The village holds many secrets."
+		}
+	}
+}

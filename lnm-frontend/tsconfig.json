@@ -7,10 +7,16 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "paths": {
+      "*": ["*"],
+      "@/*": ["src/*"], // Alias for the `src` folder
+      "@styles/*": ["src/assets/styles/*"], // Alias for styles
+      "@assets/*": ["src/assets/*"] // Alias for assets
+    },
+    "baseUrl": "src",
     "jsx": "react-jsx",
-    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-    // другие опции
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
   }
 }
