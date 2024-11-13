@@ -1,13 +1,19 @@
 @use 'sass:color';
 
+$white: #f4f4f4;
+
 * {
 	overflow: hidden;
 	font-family: 'JetBrains Mono', monospace; // Later upload the font
-	font-size: 32px;
+	font-size: 28px;
 	transition: all 0.3s ease-in-out;
+	color: $white;
 }
 
-$white: #f4f4f4;
+button {
+	padding: 16px;
+	border-radius: 32px;
+}
 
 .game-dialogue-box {
 	position: absolute;
@@ -34,7 +40,7 @@ $white: #f4f4f4;
 		padding: 32px;
 		border-radius: 0 32px 32px;
 		overflow: hidden;
-		height: 3em;
+		height: 6em;
 	}
 }
 
@@ -125,9 +131,10 @@ $white: #f4f4f4;
 	box-shadow: 0 4px 10px rgb(0 0 0 / 50%);
 	z-index: 10;
 
-	.knowledge-tabs {
+	.knowledge-header {
 		display: flex;
-		justify-content: space-around;
+		justify-content: right;
+		gap: 32px;
 		margin-bottom: 10px;
 
 		button {
@@ -141,6 +148,10 @@ $white: #f4f4f4;
 			&.active {
 				background: #007acc;
 			}
+
+			&.close-button {
+				background: #ff4444;
+			}
 		}
 	}
 
@@ -148,8 +159,9 @@ $white: #f4f4f4;
 		background: rgb(255 255 255 / 10%);
 		border: 1px solid #555555;
 		border-radius: 5px;
-		padding: 10px;
+		padding: 32px;
 		overflow-y: auto;
+		height: 80%;
 
 		p {
 			text-align: center;
@@ -165,6 +177,7 @@ $white: #f4f4f4;
 				margin-bottom: 10px;
 				border: 2px solid $white;
 				text-align: left;
+				padding: 24px;
 
 				code {
 					padding: 10px;
@@ -179,17 +192,5 @@ $white: #f4f4f4;
 				}
 			}
 		}
-	}
-
-	.knowledge-close-button {
-		margin-top: 10px;
-		display: block;
-		width: 100%;
-		padding: 10px;
-		background: #ff4444;
-		color: $white;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
 	}
 }

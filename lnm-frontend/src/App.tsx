@@ -4,7 +4,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import './App.css';
 import MainPage from './pages/MainPage';
-import SelectedMode from './pages/SelectMode';
+import SelectMode from './pages/SelectMode';
+import GamePage from './pages/GamePage';
 
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
@@ -21,7 +22,8 @@ const App: React.FC = () => {
 			<Route path="/auth/login" element={<Login />} />
 			<Route path="/auth/register" element={<Register />} />
 			<Route path="/main" element={<MainPage />} />
-			<Route path="/select" element={<SelectedMode />} />
+			<Route path="/select" element={<SelectMode />} />
+			<Route path="/single-player" element={<GamePage />} />
 		</Routes>
 	);
 };

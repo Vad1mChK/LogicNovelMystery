@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import steveImage from '../assets/img/characters/steve/idle.webp';
 import professorAndVicky from '../assets/img/professorAndVicky.png';
 import '../css/SelectMode.scss';
+import { useNavigate } from 'react-router-dom';
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
@@ -10,6 +11,7 @@ const GameSelection: React.FC = () => {
 	const [selectedCharacter, setSelectedCharacter] = useState<GameMode | null>(
 		null
 	);
+	const navigate = useNavigate();
 
 	// Load selected character from localStorage on component mount
 	useEffect(() => {
@@ -27,7 +29,8 @@ const GameSelection: React.FC = () => {
 
 	// Start the game (add your game start logic here)
 	const startGame = () => {
-		window.location.href = ''; // Replace with the actual URL or logic to start the game
+		// window.location.href = ''; // Replace with the actual URL or logic to start the game
+		navigate('/single-player');
 	};
 
 	// Go back to the previous page or perform another action
@@ -74,7 +77,9 @@ const GameSelection: React.FC = () => {
 						<p className="character-name">Game for two</p>
 					</div>
 				</div>
-				<button onClick={startGame}>Start Game</button>
+				<button className="start-game-button" onClick={startGame}>
+					Start Game
+				</button>
 			</div>
 		</div>
 	);
