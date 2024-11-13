@@ -29,3 +29,6 @@ test-results/
 *.d.ts
 # Keep explicitly specified typing
 !src/types/**/*.d.ts
+
+# TypeScript build cache files
+*.tsbuildinfo
