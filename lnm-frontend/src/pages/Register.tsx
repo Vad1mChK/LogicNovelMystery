@@ -6,8 +6,10 @@ const Register: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState<string | null>(null);
-	const [success, setSuccess] = useState<string | null>(null);
+	// Temporarily renamed error -> _error; use error later
+	const [_error, setError] = useState<string | null>(null);
+	// Temporarily renamed success -> _success; use success later
+	const [_success, setSuccess] = useState<string | null>(null);
 	const navigate = useNavigate();
 
 	const handleRegister = async () => {
@@ -15,7 +17,7 @@ const Register: React.FC = () => {
 		setSuccess(null);
 
 		try {
-			const response = await axios.post(
+			/* const _response = */ await axios.post(
 				'http://localhost:8080/auth/register',
 				{ name: username, email, password },
 				{ headers: { 'Content-Type': 'application/json' } }
