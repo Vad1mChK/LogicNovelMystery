@@ -15,6 +15,9 @@
     },
     "baseUrl": "src",
     "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
     "esModuleInterop": true,
     "noUnusedLocals": false, // Temporary fix, re-enable later
     "noUnusedParameters": false, // Temporary fix, re-enable later
