@@ -45,6 +45,7 @@ public class AuthService {
                 .createdAt(Instant.now())
                 .updatedAt(Instant.now())
                 .onlineTime(Instant.now())
+
                 .build();
 
         userRepository.save(user);
