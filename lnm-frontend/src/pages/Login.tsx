@@ -5,7 +5,8 @@ import axios from 'axios';
 const Login: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState<string | null>(null);
+	// Temporarily renamed error -> _error; use error later
+	const [_error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
 
 	const handleLogin = async () => {
