@@ -27,7 +27,7 @@ const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 		<img
 			className={
 				'game-character' +
-				(characterData.hidden ? ' _hidden' : '') +
+				(characterData.hidden ? ' hidden-character' : '') +
 				(isSpeaker ? ' speaker' : '')
 			}
 			src={spriteUrl}
