@@ -143,8 +143,9 @@ jobs:
         working-directory: ./lnm-frontend
         run: npm run build
 
-      - name: Deploy to GitHub Pages
+      - name: Upload pages artifact
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./lnm-frontend/dist # Adjust to your build folder
+          publish_branch: gh-pages
