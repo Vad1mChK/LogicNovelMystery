@@ -58,8 +58,8 @@ const Register: React.FC = () => {
 				setError('Registration failed. Please try again later.');
 			}
 		}
+		/* eslint-enable @typescript-eslint/no-explicit-any */
 	};
-	/* eslint-enable @typescript-eslint/no-explicit-any */
 
 	return (
 		<div className="form-container">
