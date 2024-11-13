@@ -14,8 +14,8 @@ const App: React.FC = () => {
 			<Route path="auth/login" element={<Login />} />
 			<Route path="auth/register" element={<Register />} />
 			<Route path="/main" element={<MainPage />} />
+<!-- 			<Route path="/" element={<Navigate to="/auth/login" />} /> -->
 			{/* <Route path="/select" element={<SelectedMode />} /> */}
-			<Route path="/" element={<Navigate to="auth/login" />} />
 		</Routes>
 	);
 };
