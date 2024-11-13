@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import * as Sentry from '@sentry/react';
 
 const Login: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	// Temporarily renamed error -> _error; use error later
-	const [_error, setError] = useState<string | null>(null);
+	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
 
 	const handleLogin = async () => {
@@ -26,36 +27,42 @@ const Login: React.FC = () => {
 			navigate('/main');
 		} catch (error) {
 			console.error('Login error:', error);
+
+			// Фиксация ошибки в Sentry
+			Sentry.captureException(error);
+
 			setError('Login failed. Please check your username and password.');
 		}
 	};
 
 	return (
-		<div className="form-container">
-			<h2>Login</h2>
-
-			{error && <p className="error-message">{error}</p>}
-
-			<input
-				type="text"
-				className="input-field" /* Добавляем класс */
-				placeholder="Username"
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
-			/>
-			<input
-				type="password"
-				className="input-field" /* Добавляем класс */
-				placeholder="Password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-			/>
-			<button onClick={handleLogin}>Login</button>
-			<p>
-				No account? <Link to="/auth/register">Register here</Link>
-			</p>
-		</div>
+		<Sentry.ErrorBoundary
+			fallback={<p>Something went wrong. Please try again later.</p>}
+		>
+			<div className="form-container">
+				<h2>Login</h2>
+				<input
+					type="text"
+					className="input-field"
+					placeholder="Username"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+				/>
+				<input
+					type="password"
+					className="input-field"
+					placeholder="Password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<button onClick={handleLogin}>Login</button>
+				<p>
+					No account? <Link to="/auth/register">Register here</Link>
+				</p>
+				{error && <p className="error-message">{error}</p>}
+			</div>
+		</Sentry.ErrorBoundary>
 	);
 };
 
-export default Login;
+export default Sentry.withProfiler(Login);

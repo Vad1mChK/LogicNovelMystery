@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/MainPage.scss';
+import { useNavigate } from 'react-router-dom';
 
 const MainMenu: React.FC = () => {
 	const [language, setLanguage] = useState('ru');
@@ -7,6 +8,7 @@ const MainMenu: React.FC = () => {
 	const [isAboutOpen, setAboutOpen] = useState(false);
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 	const [volume, setVolume] = useState(50);
+	const navigate = useNavigate();
 
 	const closeAllModals = () => {
 		setSettingsOpen(false);
@@ -26,7 +28,7 @@ const MainMenu: React.FC = () => {
 		<div className="background">
 			<div className="main-container">
 				{/* Кнопка "Начать игру" */}
-				<button className="button start-game-button">
+				<button className="button" onClick={() => navigate('/select')}>
 					{language === 'ru' ? 'Начать игру' : 'Start game'}
 				</button>
 
@@ -48,7 +50,7 @@ const MainMenu: React.FC = () => {
 						className="button"
 						onClick={() => setAboutOpen(true)}
 					>
-						{language === 'ru' ? 'О игре' : 'About'}
+						{language === 'ru' ? 'Об игре' : 'About'}
 					</button>
 				</div>
 			</div>
@@ -60,7 +62,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с настройками */}
 			{isSettingsOpen && (
-				<div className="settings-modal">
+				<div id="settings-modal">
 					<h2>{language === 'ru' ? 'Настройки' : 'Settings'}</h2>
 					<label htmlFor="volume-range">
 						{language === 'ru' ? 'Звук:' : 'Volume:'}
@@ -95,8 +97,8 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с описанием игры */}
 			{isAboutOpen && (
-				<div className="about-modal">
-					<h2>{language === 'ru' ? 'О игре' : 'About the Game'}</h2>
+				<div id="about-modal">
+					<h2>{language === 'ru' ? 'Об игре' : 'About the Game'}</h2>
 					<p>
 						{language === 'ru'
 							? 'Это захватывающая игра, в которой вы сможете изучить основы языка Prolog в игровой форме, проходя увлекательные задания, чтобы спасти мир от злодея!'
@@ -110,7 +112,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с таблицей лидеров */}
 			{isLeaderboardOpen && (
-				<div className="leaderboard-modal">
+				<div id="leaderboard-modal">
 					<h2>
 						{language === 'ru' ? 'Доска лидеров' : 'Leaderboard'}
 					</h2>
