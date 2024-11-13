@@ -6,8 +6,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +20,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class User {
+@SuperBuilder
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false)
@@ -44,6 +49,10 @@ public class User {
     @Column(nullable = false)
     private Instant onlineTime;
 
+    public User() {
+
+    }
+
     @PrePersist
     protected void onCreate() {
         Instant now = Instant.now();
@@ -56,5 +65,30 @@ public class User {
         Instant now = Instant.now();
         updatedAt = now;
         onlineTime = now;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }
