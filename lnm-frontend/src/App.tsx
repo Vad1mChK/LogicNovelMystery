@@ -11,7 +11,7 @@ import MainPage from './pages/MainPage';
 const App: React.FC = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<Navigate to="/auth/login" />
+			<Route path="/" element={<Navigate to="/auth/login" />} />
 			<Route path="auth/login" element={<Login />} />
 			<Route path="auth/register" element={<Register />} />
 			<Route path="/main" element={<MainPage />} />
