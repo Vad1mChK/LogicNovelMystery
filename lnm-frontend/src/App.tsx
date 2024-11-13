@@ -10,6 +10,7 @@ import './App.css';
 import Dashboard from './pages/Dashboard.tsx';
 
 const App: React.FC = () => {
+	console.log('(...)');
 	return (
 		<Routes>
 			<Route path="/" element={<Navigate to="/auth/login" />} />
