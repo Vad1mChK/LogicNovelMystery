@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import * as Sentry from '@sentry/react';
 
 const Register: React.FC = () => {
 	const [username, setUsername] = useState('');
@@ -27,6 +28,10 @@ const Register: React.FC = () => {
 			navigate('auth/login');
 		} catch (error) {
 			console.error('Registration error:', error);
+
+			// Отправка ошибки в Sentry
+			Sentry.captureException(error);
+
 			setError(
 				'Registration failed. Please check your details and try again.'
 			);
@@ -58,6 +63,8 @@ const Register: React.FC = () => {
 				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<button onClick={handleRegister}>Register</button>
+			{error && <p className="error-message">{error}</p>}
+			{success && <p className="success-message">{success}</p>}
 		</div>
 	);
 };

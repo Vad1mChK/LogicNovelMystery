@@ -8,8 +8,19 @@ import './App.css';
 // import SelectedMode from './pages/SelectedMode';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard.tsx';
+import * as Sentry from '@sentry/react'
+import { BrowserTracing } from '@sentry/tracing'
+
+Sentry.init({
+	dsn: "https://2a79b7cbcd0c952c1d8bb6dcf79cc459@o4508292474339328.ingest.de.sentry.io/4508292540530768",
+	integrations: [new BrowserTracing()],
+	tracesSampleRate: 0.3,
+})
+
+
 
 const App: React.FC = () => {
+
 	return (
 		<Routes>
 			<Route path="auth/login" element={<Login />} />
