@@ -29,7 +29,7 @@ const MainMenu: React.FC = () => {
 			<div className="main-container">
 				{/* Кнопка "Начать игру" */}
 				<button
-					className="button start-game-button"
+					className="button"
 					onClick={() => navigate('/select')}
 				>
 					{language === 'ru' ? 'Начать игру' : 'Start game'}
@@ -65,7 +65,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с настройками */}
 			{isSettingsOpen && (
-				<div className="settings-modal">
+				<div id="settings-modal">
 					<h2>{language === 'ru' ? 'Настройки' : 'Settings'}</h2>
 					<label htmlFor="volume-range">
 						{language === 'ru' ? 'Звук:' : 'Volume:'}
@@ -100,7 +100,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с описанием игры */}
 			{isAboutOpen && (
-				<div className="about-modal">
+				<div id="about-modal">
 					<h2>{language === 'ru' ? 'Об игре' : 'About the Game'}</h2>
 					<p>
 						{language === 'ru'
@@ -115,7 +115,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с таблицей лидеров */}
 			{isLeaderboardOpen && (
-				<div className="leaderboard-modal">
+				<div id="leaderboard-modal">
 					<h2>
 						{language === 'ru' ? 'Доска лидеров' : 'Leaderboard'}
 					</h2>
