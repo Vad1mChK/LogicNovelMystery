@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import steveImage from '../assets/steve.png';
-import professorAndVicky from '../assets/professorAndVicky.png';
+import steveImage from '../assets/img/characters/steve/idle.webp';
+import professorAndVicky from '../assets/img/professorAndVicky.png';
 import '../css/SelectedMode.scss';
 
 // Типизация для режима игры
