@@ -4,7 +4,7 @@ import { LnmFrame, LnmFrameCharacterData, LnmLocation, LnmPlot } from './types';
 import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
-import '../css/FrameInterpreter.scss';
+// import '../css/FrameInterpreter.scss';
 import KnowledgeWindow from './KnowledgeWindow.tsx';
 
 interface FrameRendererProps {
