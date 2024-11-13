@@ -72,9 +72,9 @@ $white: #f4f4f4;
 
 	.game-character {
 		transition:
-						opacity 1s ease-in-out,
-						left 1s ease-in-out,
-						filter 0.3s ease-in-out;
+			opacity 1s ease-in-out,
+			left 1s ease-in-out,
+			filter 0.3s ease-in-out;
 		position: absolute;
 		bottom: 0;
 		height: 100vh;
