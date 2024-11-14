@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -37,7 +35,10 @@ public class SecurityConfiguration {
                         .accessDeniedHandler(
                                 (request, response, exception) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN)))
                 .authorizeHttpRequests(configurer -> configurer
-                        .anyRequest().permitAll())
+                        .requestMatchers("auth/**")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
                 .anonymous(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -47,7 +48,7 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // Разрешенный источник
+        configuration.setAllowedOrigins(List.of("http://localhost:5173", "https://vad1mchk.github.io")); // Разрешенный источник
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Разрешенные методы
         configuration.setAllowedHeaders(List.of("*")); // Разрешенные заголовки
         configuration.setAllowCredentials(true); // Поддержка кук и заголовков авторизации
@@ -56,5 +57,6 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 
 }

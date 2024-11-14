@@ -35,6 +35,9 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
+
+    volumes:
+      - ./build/libs/lnm-backend-0.0.1-SNAPSHOT.war:/app/lnm-backend.war
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase
       DATABASE_USERNAME: myuser
