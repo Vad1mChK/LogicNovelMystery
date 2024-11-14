@@ -1,0 +1,759 @@
+{
+	"metadata": {
+		"name": "single_game",
+		"gamemode": "single",
+		"protagonist": "steve",
+		"author": "Vad1mChK",
+		"version": "1.0",
+		"locale": "ru_RU"
+	},
+	"characters": {
+		"steve": {
+			"id": "steve",
+			"name": "Стив",
+			"defaultPose": "idle",
+			"sprites": {
+				"idle": "/src/assets/img/characters/steve/idle.webp",
+				"think": "/src/assets/img/characters/steve/think.webp",
+				"holdGlasses": "/src/assets/img/characters/steve/hold_glasses.webp",
+				"holdNotebook": "/src/assets/img/characters/steve/hold_notebook.webp"
+			}
+		},
+		"director": {
+			"id": "director",
+			"name": "Директор",
+			"defaultPose": "idle",
+			"sprites": {
+				"idle": "/src/assets/img/characters/director/idle.webp",
+				"phone": "/src/assets/img/characters/director/phone.webp"
+			}
+		},
+		"robot": {
+			"id": "robot",
+			"name": "Робот",
+			"defaultPose": "idle",
+			"sprites": {
+				"idle": "/src/assets/img/characters/robot/idle.webp",
+				"think": "/src/assets/img/characters/robot/think.webp",
+				"angry": "/src/assets/img/characters/robot/angry.webp"
+			}
+		},
+		"anonymous": {
+			"id": "anonymous",
+			"name": "???",
+			"defaultPose": "angry",
+			"sprites": {
+				"idle": "/src/assets/img/characters/robot/idle.webp"
+			}
+		}
+	},
+	"locations": {
+		"agentOffice": {
+			"id": "agentOffice",
+			"name": "Офис агента",
+			"background": "/src/assets/img/locations/AgentOffice.png"
+		},
+		"directorOffice": {
+			"id": "directorOffice",
+			"name": "Офис директора",
+			"background": "/src/assets/img/locations/DirectorOffice.png"
+		},
+		"mansionEntrance": {
+			"id": "mansionEntrance",
+			"name": "Вход в особняк",
+			"background": "/src/assets/img/locations/MansionEntrance.png"
+		}
+	},
+	"music": {},
+	"startChapter": "inception1",
+	"chapters": {
+		"inception1": {
+			"id": "inception1",
+			"title": "Глава 1",
+			"startFrame": "inception1_start",
+			"knowledge": ["iAmSteve"]
+		},
+		"inception2": {
+			"id": "inception2",
+			"title": "Глава 2",
+			"startFrame": "inception2_start",
+			"knowledge": ["iAmSteve", "mySuperior"]
+		},
+		"inception3": {
+			"id": "inception3",
+			"title": "Глава 3",
+			"startFrame": "inception3_start",
+			"knowledge": [
+				"iAmSteve",
+				"mySuperior",
+				"ifAssistedKevinThenCreatedVirus"
+			]
+		}
+	},
+	"frames": {
+		"main": {
+			"inception1": {
+				"inception1_start": {
+					"id": "inception1_start",
+					"location": "agentOffice",
+					"characters": [
+						{
+							"id": "steve",
+							"pose": "holdGlasses"
+						},
+						{
+							"id": "director",
+							"hidden": true
+						}
+					],
+					"speaker": "steve",
+					"dialogue": "(Так, уже 5 утра. Надо выпить кофе, а то до конца смены ещё далеко...)",
+					"nextFrame": "inception1_01"
+				},
+				"inception1_01": {
+					"id": "inception1_01",
+					"dialogue": "Алло! Специальный агент ФБР Хэриссон слушает вас.",
+					"nextFrame": "inception1_02"
+				},
+				"inception1_02": {
+					"id": "inception1_02",
+					"dialogue": "Стив Хэриссон. С вами говорит директор ФБР Эдгар Гувер.",
+					"speaker": "director",
+					"nextFrame": "inception1_03",
+					"effects": [
+						{
+							"type": "OPEN_KNOWLEDGE",
+							"args": {
+								"knowledgeId": "mySuperior"
+							}
+						}
+					]
+				},
+				"inception1_03": {
+					"id": "inception1_03",
+					"dialogue": "Слушаю вас, сэр!",
+					"speaker": "steve",
+					"nextFrame": "inception1_04"
+				},
+				"inception1_04": {
+					"id": "inception1_04",
+					"dialogue": "Это не телефонный разговор. Зайдите срочно ко мне в кабинет!",
+					"speaker": "director",
+					"nextFrame": "inception1_05",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "steve",
+								"newPose": "idle"
+							}
+						}
+					]
+				},
+				"inception1_05": {
+					"id": "inception1_05",
+					"dialogue": "Да, сэр!",
+					"speaker": "steve",
+					"nextFrame": "inception1_06"
+				},
+				"inception1_06": {
+					"id": "inception1_06",
+					"dialogue": "*клик*",
+					"nextFrame": "inception1_07"
+				},
+				"inception1_07": {
+					"id": "inception1_07",
+					"dialogue": "*клик*",
+					"nextFrame": "inception1_07",
+					"effects": [
+						{
+							"type": "JUMP_CHAPTER",
+							"args": {
+								"chapterId": "inception2"
+							}
+						}
+					]
+				}
+			},
+			"inception2": {
+				"inception2_start": {
+					"id": "inception2_start",
+					"location": "directorOffice",
+					"characters": [
+						{
+							"id": "steve",
+							"pose": "holdNotebook",
+							"position": "left",
+							"hidden": true
+						},
+						{
+							"id": "director",
+							"pose": "phone",
+							"position": "right"
+						}
+					],
+					"speaker": "director",
+					"dialogue": "Заходите и присаживайтесь.",
+					"nextFrame": "inception2_01"
+				},
+				"inception2_01": {
+					"id": "inception2_01",
+					"dialogue": "Здравствуйте, Стив.",
+					"nextFrame": "inception2_02",
+					"effects": [
+						{
+							"type": "FADE_IN_CHARACTER",
+							"args": {
+								"characterId": "steve"
+							}
+						},
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "director",
+								"newPose": "idle"
+							}
+						}
+					]
+				},
+				"inception2_02": {
+					"id": "inception2_02",
+					"dialogue": "Несмотря на столь раннее время, у меня к вам будет очень ответственное задание.",
+					"nextFrame": "inception2_03"
+				},
+				"inception2_03": {
+					"id": "inception2_03",
+					"dialogue": " Здравствуйте, директор! Я весь внимание!",
+					"speaker": "steve",
+					"nextFrame": "inception2_04",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "steve",
+								"newPose": "holdNotebook"
+							}
+						}
+					]
+				},
+				"inception2_04": {
+					"id": "inception2_04",
+					"dialogue": "Вам необходимо помочь своей стране! От вашей работы зависит жизнь всей планеты!",
+					"speaker": "director",
+					"nextFrame": "inception2_05"
+				},
+				"inception2_05": {
+					"id": "inception2_05",
+					"dialogue": "Всегда готов, сэр! В чем состоит моё задание?",
+					"speaker": "steve",
+					"nextFrame": "inception2_06"
+				},
+				"inception2_06": {
+					"id": "inception2_06",
+					"dialogue": "Группа хакеров во главе с Кэвином Митником создала вирус.",
+					"speaker": "director",
+					"nextFrame": "inception2_07",
+					"effects": [
+						{
+							"type": "OPEN_KNOWLEDGE",
+							"args": {
+								"knowledgeId": "ifAssistedKevinThenCreatedVirus"
+							}
+						}
+					]
+				},
+				"inception2_07": {
+					"id": "inception2_07",
+					"dialogue": "Он способен стереть все данные из памяти компьютера, внести сбой в работу всемирной сети.",
+					"nextFrame": "inception2_08"
+				},
+				"inception2_08": {
+					"id": "inception2_08",
+					"dialogue": "Распространяется он через обычное сообщение.",
+					"nextFrame": "inception2_09"
+				},
+				"inception2_09": {
+					"id": "inception2_09",
+					"dialogue": " Сегодня ночью был взломан компьютер специалиста по информационной безопасности Сары Паркер.",
+					"nextFrame": "inception2_10"
+				},
+				"inception2_10": {
+					"id": "inception2_10",
+					"dialogue": "С него были украдены файлы, и этот вирус был запущен в сеть.",
+					"nextFrame": "inception2_11"
+				},
+				"inception2_11": {
+					"id": "inception2_11",
+					"dialogue": "Для создания антивируса у нас осталось меньше 20 часов.",
+					"nextFrame": "inception2_12"
+				},
+				"inception2_12": {
+					"id": "inception2_12",
+					"dialogue": "Если не создать антивирус на языке Prolog, то начнётся всемирный хаос.",
+					"nextFrame": "inception2_13"
+				},
+				"inception2_13": {
+					"id": "inception2_13",
+					"dialogue": "Будет и падение самолётов, и сход космических кораблей с орбит.",
+					"nextFrame": "inception2_14"
+				},
+				"inception2_14": {
+					"id": "inception2_14",
+					"dialogue": " Также нам стало известно: Сара Паркер была похищена накануне вечером из собственного дома.",
+					"nextFrame": "inception2_15"
+				},
+				"inception2_15": {
+					"id": "inception2_15",
+					"dialogue": "Её местонахождение нам пока неизвестно...",
+					"nextFrame": "inception2_16"
+				},
+				"inception2_16": {
+					"id": "inception2_16",
+					"dialogue": "Но мы смогли установить местонахождение того самого компьютера, в который нужно ввести антивирус.",
+					"nextFrame": "inception2_17"
+				},
+				"inception2_17": {
+					"id": "inception2_17",
+					"dialogue": "Я понял вас, сэр. Однако есть небольшой нюанс...",
+					"speaker": "steve",
+					"nextFrame": "inception2_18"
+				},
+				"inception2_18": {
+					"id": "inception2_18",
+					"dialogue": "Я не слишком знаком с языком Prolog...",
+					"nextFrame": "inception2_19"
+				},
+				"inception2_19": {
+					"id": "inception2_19",
+					"dialogue": "Вы лучший эксперт по компьютерной безопасности. Вы лучший наш агент.",
+					"speaker": "director",
+					"nextFrame": "inception2_20"
+				},
+				"inception2_20": {
+					"id": "inception2_20",
+					"dialogue": "Вы быстрее всех способны обучаться всему новому. Разгадка любых загадок вам по силам!",
+					"nextFrame": "inception2_21"
+				},
+				"inception2_21": {
+					"id": "inception2_21",
+					"dialogue": "Мы знаем о ваших заслугах, Стив!",
+					"nextFrame": "inception2_22"
+				},
+				"inception2_22": {
+					"id": "inception2_21",
+					"dialogue": "Все операции, в которых вы участвовали, выполнены вами на отлично!",
+					"nextFrame": "inception2_23"
+				},
+				"inception2_23": {
+					"id": "inception2_23",
+					"dialogue": "Я сам лично вызвал вас в свой кабинет,",
+					"nextFrame": "inception2_24"
+				},
+				"inception2_24": {
+					"id": "inception2_24",
+					"dialogue": "ведь только вам я могу поручить столь ответственную миссию.",
+					"nextFrame": "inception2_25"
+				},
+				"inception2_25": {
+					"id": "inception2_25",
+					"dialogue": "На кону стоит жизнь всей планеты!",
+					"nextFrame": "inception2_26"
+				},
+				"inception2_26": {
+					"id": "inception2_26",
+					"dialogue": "Благодарю вас за оказанное доверие!",
+					"speaker": "steve",
+					"nextFrame": "inception2_27"
+				},
+				"inception2_27": {
+					"id": "inception2_27",
+					"dialogue": "Я попробую со всем разобраться. Я не подведу вас, сэр!",
+					"nextFrame": "inception2_28"
+				},
+				"inception2_28": {
+					"id": "inception2_28",
+					"dialogue": "Всегда будьте на шаг впереди своих врагов...",
+					"speaker": "director",
+					"nextFrame": "inception2_29"
+				},
+				"inception2_29": {
+					"id": "inception2_29",
+					"dialogue": "Всего одна ошибка может разрушить всё, что мы так долго создавали.",
+					"nextFrame": "inception2_30"
+				},
+				"inception2_30": {
+					"id": "inception2_30",
+					"dialogue": "Машина, которая доставит вас к тому самому особняку, ждёт у входа.",
+					"nextFrame": "inception2_31"
+				},
+				"inception2_31": {
+					"id": "inception2_31",
+					"dialogue": "Медлить нельзя!",
+					"nextFrame": "inception2_32",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "steve",
+								"newPose": "holdGlasses"
+							}
+						}
+					]
+				},
+				"inception2_32": {
+					"id": "inception2_32",
+					"dialogue": "Слушаюсь, сэр!",
+					"speaker": "steve",
+					"nextFrame": "inception2_33"
+				},
+				"inception2_33": {
+					"id": "inception2_33",
+					"dialogue": "Будьте осторожны, агент Хэриссон.",
+					"speaker": "director",
+					"nextFrame": "inception2_34"
+				},
+				"inception2_34": {
+					"id": "inception2_34",
+					"dialogue": "В этом заброшенном особняке повсюду стоят ловушки, опасные для жизни.",
+					"nextFrame": "inception2_35"
+				},
+				"inception2_35": {
+					"id": "inception2_35",
+					"dialogue": "Чтобы их обезопасить, нужно ввести верный код.",
+					"nextFrame": "inception2_36"
+				},
+				"inception2_36": {
+					"id": "inception2_36",
+					"dialogue": "Я верю в вас. Звоните мне в любое время. Удачи!",
+					"nextFrame": "inception2_37",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "director",
+								"newPose": "phone"
+							}
+						}
+					]
+				},
+				"inception2_37": {
+					"id": "inception2_37",
+					"dialogue": "",
+					"nextFrame": "inception2_37",
+					"effects": [
+						{
+							"type": "JUMP_CHAPTER",
+							"args": {
+								"chapterId": "inception3"
+							}
+						}
+					]
+				}
+			},
+			"inception3": {
+				"inception3_start": {
+					"id": "inception3_start",
+					"location": "mansionEntrance",
+					"characters": [
+						{
+							"id": "steve",
+							"pose": "holdNotebook",
+							"hidden": true
+						},
+						{
+							"id": "robot",
+							"pose": "angry",
+							"position": "center",
+							"hidden": true
+						},
+						{
+							"id": "anonymous",
+							"hidden": true
+						}
+					],
+					"speaker": "steve",
+					"dialogue": "Ну что ж, будем разбираться!",
+					"nextFrame": "inception3_01"
+				},
+				"inception3_01": {
+					"id": "inception3_01",
+					"speaker": "anonymous",
+					"dialogue": "Стой! Кто идёт?! Остановись, живое существо!",
+					"nextFrame": "inception3_02"
+				},
+				"inception3_02": {
+					"id": "inception3_02",
+					"dialogue": "В этих местах ты бродишь напрасно! Здесь таким существам ходить запрещено!",
+					"nextFrame": "inception3_03"
+				},
+				"inception3_03": {
+					"id": "inception3_03",
+					"dialogue": "...",
+					"speaker": "robot",
+					"nextFrame": "inception3_04",
+					"effects": [
+						{
+							"type": "FADE_IN_CHARACTER",
+							"args": {
+								"characterId": "robot"
+							}
+						}
+					]
+				},
+				"inception3_04": {
+					"id": "inception3_04",
+					"dialogue": "Оружие! У него оружие!",
+					"nextFrame": "inception3_05"
+				},
+				"inception3_05": {
+					"id": "inception3_05",
+					"dialogue": "Я вызываю полицию, здесь бандиты, помогите!",
+					"nextFrame": "inception3_06"
+				},
+				"inception3_06": {
+					"id": "inception3_06",
+					"speaker": "steve",
+					"dialogue": "Я и есть полиция! Агент ФБР Стив Хэриссон.",
+					"nextFrame": "inception3_07"
+				},
+				"inception3_07": {
+					"id": "inception3_07",
+					"speaker": "robot",
+					"dialogue": "Ох, здравствуйте, агент Стив Хэриссон. Вы бы оружие-то убрали.",
+					"nextFrame": "inception3_08",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "robot",
+								"newPose": "idle"
+							}
+						}
+					]
+				},
+				"inception3_08": {
+					"id": "inception3_08",
+					"dialogue": "Я ведь просто решил, что мародёры пришли, думал, опять будут пытаться взломать дверь.",
+					"nextFrame": "inception3_09"
+				},
+				"inception3_09": {
+					"id": "inception3_09",
+					"dialogue": "Ведь никто не может ввести правильный код.",
+					"nextFrame": "inception3_10"
+				},
+				"inception3_10": {
+					"id": "inception3_10",
+					"dialogue": "А я всего лишь робот третьего поколения, модель R3.",
+					"nextFrame": "inception3_11",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "robot",
+								"newPose": "think"
+							}
+						}
+					]
+				},
+				"inception3_11": {
+					"id": "inception3_11",
+					"dialogue": "Я не должен пускать сюда никого живого, ведь никто не знает о смертельных ловушках.",
+					"nextFrame": "inception3_12"
+				},
+				"inception3_12": {
+					"id": "inception3_12",
+					"dialogue": "Зачем вы здесь, агент Хэриссон?",
+					"nextFrame": "inception3_13",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "robot",
+								"newPose": "idle"
+							}
+						}
+					]
+				},
+				"inception3_13": {
+					"id": "inception3_13",
+					"speaker": "steve",
+					"dialogue": "У меня спецзадание...",
+					"nextFrame": "inception3_14"
+				},
+				"inception3_14": {
+					"id": "inception3_14",
+					"dialogue": "А ты, значит, робот модель R3, это робот -- помощник человека.",
+					"nextFrame": "inception3_15"
+				},
+				"inception3_15": {
+					"id": "inception3_15",
+					"dialogue": "Соблюдаешь строго три закона.",
+					"nextFrame": "inception3_16"
+				},
+				"inception3_16": {
+					"id": "inception3_16",
+					"dialogue": "В твои обязанности входит слушать и помогать любому человеку. Так ведь?",
+					"nextFrame": "inception3_17",
+					"effects": [
+						{
+							"type": "CHANGE_POSE",
+							"args": {
+								"characterId": "robot",
+								"newPose": "think"
+							}
+						}
+					]
+				},
+				"inception3_17": {
+					"id": "inception3_17",
+					"speaker": "robot",
+					"dialogue": "Да, абсолютно верно, сэр.",
+					"nextFrame": "inception3_18"
+				},
+				"inception3_18": {
+					"id": "inception3_18",
+					"dialogue": "Робот не может причинить вред человеку или своим бездействием позволить, чтобы человеку был причинен вред.",
+					"nextFrame": "inception3_19"
+				},
+				"inception3_19": {
+					"id": "inception3_19",
+					"dialogue": "Робот должен подчиняться приказам человека, за исключением случаев, которые противоречат первому закону.",
+					"nextFrame": "inception3_20"
+				},
+				"inception3_20": {
+					"id": "inception3_20",
+					"speaker": "steve",
+					"dialogue": "Отлично, тогда ты мне и поможешь. Слушай внимательно!",
+					"nextFrame": "inception3_21"
+				},
+				"inception3_21": {
+					"id": "inception3_21",
+					"dialogue": "Кэвин Митник создал вирус, который способен стереть все данные с памяти компьютера,",
+					"nextFrame": "inception3_22"
+				},
+				"inception3_22": {
+					"id": "inception3_22",
+					"dialogue": "внести сбой в работу всемирной сети, он уже запустил его.",
+					"nextFrame": "inception3_23"
+				},
+				"inception3_23": {
+					"id": "inception3_23",
+					"dialogue": "Осталось меньше 18 часов, чтобы создать антивирус на языке Prolog.",
+					"nextFrame": "inception3_24"
+				},
+				"inception3_24": {
+					"id": "inception3_24",
+					"dialogue": "Ты мне поможешь его изучить?",
+					"nextFrame": "inception3_25"
+				},
+				"inception3_25": {
+					"id": "inception3_25",
+					"speaker": "robot",
+					"dialogue": "Да, такая функция у меня запрограммирована.",
+					"nextFrame": "inception3_26"
+				},
+				"inception3_26": {
+					"id": "inception3_26",
+					"dialogue": "Но вы должны знать, что для того, чтобы изучать Prolog,",
+					"nextFrame": "inception3_27"
+				},
+				"inception3_27": {
+					"id": "inception3_27",
+					"dialogue": "нужно отойти от привычных форм программирования и постараться вникнуть в саму логику языка.",
+					"nextFrame": "inception3_28"
+				},
+				"inception3_28": {
+					"id": "inception3_28",
+					"dialogue": "Поверьте, это достаточно красивый и логичный язык.",
+					"nextFrame": "inception3_29"
+				},
+				"inception3_29": {
+					"id": "inception3_29",
+					"dialogue": "Очень скоро вы оцените всю его красоту и возможности.",
+					"nextFrame": "inception3_30"
+				},
+				"inception3_30": {
+					"id": "inception3_30",
+					"speaker": "steve",
+					"dialogue": "Я в этом не сомневаюсь. Может уже перейдём к уроку?",
+					"nextFrame": "inception3_31"
+				},
+				"inception3_31": {
+					"id": "inception3_31",
+					"speaker": "robot",
+					"dialogue": "Давайте приступим!",
+					"nextFrame": "inception3_31",
+					"effects": [
+						{
+							"type": "ENDING",
+							"args": {
+								"endingId": "demoEnding"
+							}
+						}
+					]
+				}
+			}
+		},
+		"endings": {
+			"demoEnding": {
+				"id": "demoEnding",
+				"title": "Конец ознакомительного фрагмента",
+				"startFrame": "demoEnding_1",
+				"frames": {
+					"demoEnding_1": {
+						"id": "demoEnding_1",
+						"location": "mansionEntrance",
+						"characters": [
+							{
+								"id": "steve",
+								"pose": "holdNotebook",
+								"position": "left",
+								"hidden": true
+							},
+							{
+								"id": "robot",
+								"pose": "angry",
+								"position": "center"
+							}
+						],
+						"speaker": "robot",
+						"dialogue": "Конец ознакомительного фрагмента.",
+						"nextFrame": "demoEnding_2"
+					},
+					"demoEnding_2": {
+						"id": "demoEnding_2",
+						"dialogue": "Чтобы поиграть в полную версию, купите её за $42,069.",
+						"nextFrame": "demoEnding_3"
+					},
+					"demoEnding_3": {
+						"id": "demoEnding_3",
+						"speaker": "steve",
+						"dialogue": "Что?",
+						"nextFrame": null
+					}
+				}
+			}
+		}
+	},
+	"tasks": {},
+	"knowledge": {
+		"iAmSteve": {
+			"id": "iAmSteve",
+			"type": "fact",
+			"content": "fbi_agent(steve).",
+			"description": "Стив -- агент ФБР."
+		},
+		"mySuperior": {
+			"id": "mySuperior",
+			"type": "fact",
+			"content": "superior(director, steve).",
+			"description": "Директор ФБР -- руководитель Стива."
+		},
+		"ifAssistedKevinThenCreatedVirus": {
+			"id": "ifAssistedKevinThenHacked",
+			"type": "rule",
+			"content": "creates(X, virus) :-\n\t(assists(X, kevin); X = kevin),\n\thacker(X).",
+			"description": "Кэвин и все хакеры, помогавшие ему, участвовали в создании вируса."
+		}
+	}
+}

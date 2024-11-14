@@ -11,7 +11,7 @@ const LocationBackground: React.FC<LocationBackgroundProps> = ({
 }) => (
 	<div className="game-background">
 		<img
-			src={`${location.background}`}
+			src={`${location.background?.replace(/^\/src/, import.meta.env.MODE === 'development' ? '' : '.')}`} // TODO Temporary hack, do not rely on Vite vars later
 			alt={location.name}
 			title={location.name}
 		/>

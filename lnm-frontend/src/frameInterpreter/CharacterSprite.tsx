@@ -13,9 +13,9 @@ const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 	isSpeaker,
 	characterData,
 }) => {
-	const spriteUrl = character.sprites.get(
-		characterData.pose || character.defaultPose || ''
-	);
+	const spriteUrl = character.sprites
+		.get(characterData.pose || character.defaultPose || '')
+		?.replace(/^\/src/, import.meta.env.MODE === 'development' ? '' : '.'); // TODO Temporary hack, do not rely on Vite vars later
 
 	const positionStyles = {
 		left: { left: '25%' },
