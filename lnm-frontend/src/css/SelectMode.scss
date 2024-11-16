@@ -1,0 +1,154 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+$red: #ff0000;
+$white: #ffffff;
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Arial, sans-serif;
+	overflow: hidden;
+}
+
+/* Задний фон */
+.background {
+	background-image: url('../assets/img/locations/MansionEntrance.png'); /* Путь к вашему фоновому изображению */
+	background-size: cover;
+	background-position: center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Центральный контейнер */
+.center-container {
+	background-color: rgb(0 0 112); /* Темно-синий цвет с прозрачностью */
+	padding: 40px 20px;
+	border-radius: 12px;
+	text-align: center;
+	color: $white;
+	width: 90%;
+	max-width: 600px;
+	box-shadow: 0 8px 16px rgb(0 0 0);
+}
+
+/* Заголовок */
+.center-container h1 {
+	margin-bottom: 25px;
+	font-size: 2em;
+	font-family: 'JetBrains Mono', monospace;
+}
+
+/* Разделительная линия */
+.hr {
+	height: 2px;
+	margin: 20px 0;
+	background: rgb(231 237 238);
+}
+
+/* Контейнер для выбора персонажей */
+.character-selection {
+	display: flex;
+	justify-content: space-around;
+	gap: 20px;
+	margin-top: 25px;
+}
+
+/* Контейнер для каждой карточки персонажа */
+.character-card-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* Карточка персонажа */
+.character-card {
+	position: relative;
+	width: 150px;
+	height: 250px;
+	border: 2px solid #cccccc;
+	border-radius: 8px;
+	padding: 10px;
+	background-color: $white;
+	cursor: pointer;
+	transition: border-color 0.3s;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	&.selected {
+		border-color: $red; /* Подсветка при выборе */
+	}
+}
+
+/* Изображение персонажа */
+.character-image {
+	position: absolute;
+	max-width: 100%;
+	max-height: 100%;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Имя персонажа */
+.character-name {
+	font-size: 1.1em;
+	font-weight: bold;
+	color: $white;
+	margin-top: 10px;
+}
+
+/* Стиль для кнопки Start Game */
+.start-game-button {
+	width: 100%;
+	max-width: 200px;
+	padding: 15px;
+	margin-top: 30px;
+	font-size: 1.2em;
+	color: $white;
+	background-color: #0066cc;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+
+	&:hover {
+		background-color: #004080;
+	}
+}
+
+/* Стили для кнопки Back */
+.back-button {
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	background-color: $white;
+	color: #333333;
+	border: none;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	box-shadow: 0 4px 8px rgb(0 0 0);
+	align-self: flex-start;
+	transition:
+		background-color 0.3s,
+		color 0.3s;
+
+	&:hover {
+		background-color: #333333;
+		color: #ffffff;
+	}
+}

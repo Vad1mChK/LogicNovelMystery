@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/MainPage.scss';
+import { useNavigate } from 'react-router-dom';
 
 const MainMenu: React.FC = () => {
 	const [language, setLanguage] = useState('ru');
@@ -7,6 +8,7 @@ const MainMenu: React.FC = () => {
 	const [isAboutOpen, setAboutOpen] = useState(false);
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 	const [volume, setVolume] = useState(50);
+	const navigate = useNavigate();
 
 	const closeAllModals = () => {
 		setSettingsOpen(false);
@@ -26,7 +28,7 @@ const MainMenu: React.FC = () => {
 		<div className="background">
 			<div className="main-container">
 				{/* Кнопка "Начать игру" */}
-				<button className="button start-game-button">
+				<button className="button" onClick={() => navigate('/select')}>
 					{language === 'ru' ? 'Начать игру' : 'Start game'}
 				</button>
 
@@ -48,26 +50,26 @@ const MainMenu: React.FC = () => {
 						className="button"
 						onClick={() => setAboutOpen(true)}
 					>
-						{language === 'ru' ? 'О игре' : 'About'}
+						{language === 'ru' ? 'Об игре' : 'About'}
 					</button>
 				</div>
 			</div>
 
 			{/* Затенение фона для модальных окон */}
 			{isSettingsOpen || isAboutOpen || isLeaderboardOpen ? (
-				<div className="modalOverlay" onClick={closeAllModals}></div>
+				<div className="modal-overlay" onClick={closeAllModals}></div>
 			) : null}
 
 			{/* Модальное окно с настройками */}
 			{isSettingsOpen && (
-				<div className="settingsModal">
+				<div id="settings-modal">
 					<h2>{language === 'ru' ? 'Настройки' : 'Settings'}</h2>
-					<label htmlFor="volumeRange">
+					<label htmlFor="volume-range">
 						{language === 'ru' ? 'Звук:' : 'Volume:'}
 					</label>
 					<input
 						type="range"
-						id="volumeRange"
+						id="volume-range"
 						className="volume-control"
 						min="0"
 						max="100"
@@ -76,18 +78,18 @@ const MainMenu: React.FC = () => {
 					/>
 					<span>{volume}%</span>
 					<div style={{ marginTop: '10px' }}>
-						<label htmlFor="languageSelect">
+						<label htmlFor="language-select">
 							{language === 'ru' ? 'Язык:' : 'Language:'}
 						</label>
 						<select
-							id="languageSelect"
+							id="language-select"
 							onChange={(e) => changeLanguage(e.target.value)}
 						>
 							<option value="ru">Русский</option>
 							<option value="en">English</option>
 						</select>
 					</div>
-					<button className="modalButton" onClick={closeAllModals}>
+					<button className="modal-button" onClick={closeAllModals}>
 						{language === 'ru' ? 'Закрыть' : 'Close'}
 					</button>
 				</div>
@@ -95,14 +97,14 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с описанием игры */}
 			{isAboutOpen && (
-				<div className="aboutModal">
-					<h2>{language === 'ru' ? 'О игре' : 'About the Game'}</h2>
+				<div id="about-modal">
+					<h2>{language === 'ru' ? 'Об игре' : 'About the Game'}</h2>
 					<p>
 						{language === 'ru'
 							? 'Это захватывающая игра, в которой вы сможете изучить основы языка Prolog в игровой форме, проходя увлекательные задания, чтобы спасти мир от злодея!'
 							: 'This is an exciting game where you can learn Prolog basics while completing thrilling tasks to save the world!'}
 					</p>
-					<button className="modalButton" onClick={closeAllModals}>
+					<button className="modal-button" onClick={closeAllModals}>
 						{language === 'ru' ? 'Закрыть' : 'Close'}
 					</button>
 				</div>
@@ -110,7 +112,7 @@ const MainMenu: React.FC = () => {
 
 			{/* Модальное окно с таблицей лидеров */}
 			{isLeaderboardOpen && (
-				<div className="leaderboardModal">
+				<div id="leaderboard-modal">
 					<h2>
 						{language === 'ru' ? 'Доска лидеров' : 'Leaderboard'}
 					</h2>
@@ -135,7 +137,7 @@ const MainMenu: React.FC = () => {
 							{/* Динамически добавленные строки таблицы будут здесь */}
 						</tbody>
 					</table>
-					<button className="modalButton" onClick={closeAllModals}>
+					<button className="modal-button" onClick={closeAllModals}>
 						{language === 'ru' ? 'Закрыть' : 'Close'}
 					</button>
 				</div>

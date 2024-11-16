@@ -1,0 +1,198 @@
+@use 'sass:color';
+
+$white: #f4f4f4;
+
+.frame-renderer {
+	* {
+		overflow: hidden;
+		font-family: 'JetBrains Mono', monospace; // Later upload the font
+		font-size: 28px;
+		transition: all 0.3s ease-in-out;
+		color: $white;
+	}
+
+	button {
+		padding: 16px;
+		border-radius: 32px;
+	}
+
+	.game-dialogue-box {
+		position: absolute;
+		bottom: 5%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 70vw;
+		vertical-align: bottom;
+
+		& .speaker-name {
+			margin-left: 0;
+			padding: 8px 64px;
+			width: fit-content;
+			background: color.scale(#0056b3, $alpha: -25%);
+			border-radius: 16px 16px 0 0;
+			border: 2px solid $white;
+			border-bottom: none;
+			font-size: smaller;
+		}
+
+		& .dialogue-text {
+			border: 2px solid $white;
+			background-color: color.scale(#101010, $alpha: -25%);
+			padding: 32px;
+			border-radius: 0 32px 32px;
+			overflow: hidden;
+			height: 6em;
+		}
+	}
+
+	.game-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		z-index: -2;
+
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: auto; /* Default: stretch width */
+			height: 100%;
+
+			@media (aspect-ratio >= 16/9) {
+				/* Wider aspect ratios */
+				height: auto;
+				width: 100%;
+			}
+		}
+	}
+
+	.game-character {
+		transition:
+			opacity 1s ease-in-out,
+			left 1s ease-in-out,
+			filter 0.3s ease-in-out;
+		position: absolute;
+		bottom: 0;
+		height: 100vh;
+		z-index: -1;
+		transform: translateX(-50%);
+		cursor: pointer;
+
+		&:hover {
+			filter: blur(3px);
+		}
+
+		&.hidden-character {
+			opacity: 0;
+		}
+
+		&.speaker {
+			filter: drop-shadow(0 0 25px color.scale($white, $alpha: -10%));
+		}
+	}
+
+	.game-button {
+		transition: color 0.3s ease-in-out;
+		border: 2px solid $white;
+		background: color.scale(#101010, $alpha: -25%);
+
+		&:hover {
+			background-color: color.scale(#333333, $alpha: -25%);
+		}
+	}
+
+	.next-frame-button {
+		position: absolute;
+		right: 5%;
+		bottom: 5%;
+	}
+
+	.view-knowledge-button {
+		position: absolute;
+		top: 5%;
+		right: 5%;
+	}
+
+	.game-knowledge-window {
+		position: absolute;
+		top: 10%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 75vw;
+		height: 75vh;
+		background-color: rgb(0 0 0 / 80%);
+		color: $white;
+		padding: 20px;
+		border-radius: 10px;
+		backdrop-filter: blur(10px);
+		box-shadow: 0 4px 10px rgb(0 0 0 / 50%);
+		z-index: 10;
+
+		.knowledge-header {
+			display: flex;
+			justify-content: right;
+			gap: 32px;
+			margin-bottom: 10px;
+
+			button {
+				padding: 10px 20px;
+				border: none;
+				background: #333333;
+				color: $white;
+				border-radius: 5px;
+				cursor: pointer;
+
+				&.active {
+					background: #007acc;
+				}
+
+				&.close-button {
+					background: #ff4444;
+				}
+			}
+		}
+
+		.knowledge-content {
+			background: rgb(255 255 255 / 10%);
+			border: 1px solid #555555;
+			border-radius: 5px;
+			padding: 32px;
+			overflow-y: auto;
+			height: 80%;
+
+			p {
+				text-align: center;
+				color: $white;
+			}
+
+			ul {
+				list-style: none;
+				padding: 0;
+
+				li {
+					display: block;
+					margin-bottom: 10px;
+					border: 2px solid $white;
+					text-align: left;
+					padding: 24px;
+
+					code {
+						padding: 10px;
+						display: block;
+						color: #00ff00;
+						margin-bottom: 5px;
+					}
+
+					p {
+						color: #cccccc;
+						font-size: smaller;
+					}
+				}
+			}
+		}
+	}
+}
