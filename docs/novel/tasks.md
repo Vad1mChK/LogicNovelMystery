@@ -140,7 +140,7 @@ find(X).
 #### Условие
 Что означает `X \= Y` в правиле?
 ```prolog
-investigation(fbi, evidence) :- work(X, Y), X \= Y.
+second_friends(X, Y) :- friends(X, Z), friends(Z, Y), X \= Y.
 ```
 #### Варианты ответа
 - (x) `X` не равно `Y`
