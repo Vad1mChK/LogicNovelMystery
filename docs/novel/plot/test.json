@@ -1,0 +1,306 @@
+{
+    "metadata": {
+        "name": "single_game",
+        "gamemode": "single",
+        "protagonist": "steve",
+        "author": "Vad1mChK",
+        "version": "1.0",
+        "locale": "ru_RU"
+    },
+    "characters": {
+        "steve": {
+            "id": "steve",
+            "name": "Стив",
+            "defaultPose": "idle",
+            "sprites": {
+                "idle": "/src/resources/img/characters/steve/idle.webp",
+                "think": "/src/resources/img/characters/steve/think.webp",
+                "holdGlasses": "/src/resources/img/characters/steve/hold_glasses.webp",
+                "holdNotebook": "/src/resources/img/characters/steve/hold_notebook.webp"
+            }
+        },
+        "director": {
+            "id": "director",
+            "name": "Директор",
+            "defaultPose": "idle",
+            "sprites": {
+                "idle": "/src/resources/img/characters/director/idle.webp",
+                "phone": "/src/resources/img/characters/director/phone.webp"
+            }
+        },
+        "robot": {
+            "id": "robot",
+            "name": "Робот",
+            "defaultPose": "idle",
+            "sprites": {
+                "idle": "/src/resources/img/characters/robot/idle.webp",
+                "think": "/src/resources/img/characters/robot/think.webp",
+                "angry": "/src/resources/img/characters/robot/angry.webp"
+            }
+        },
+        "anonymous": {
+            "id": "anonymous",
+            "name": "???",
+            "defaultPose": null,
+            "sprites": {}
+        }
+    },
+    "locations": {
+        "grandHall": {
+            "id": "grandHall",
+            "name": "Холл",
+            "background": "/src/resources/img/locations/GrandHall.png"
+        },
+        "studyRoom": {
+            "id": "studyRoom",
+            "name": "Кабинет",
+            "background": "/src/resources/img/locations/StudyRoom.png"
+        }
+    },
+    "music": {
+
+    },
+    "startChapter": "inception1",
+    "chapters": {
+        "inception1": {
+            "id": "inception1",
+            "title": "Глава 4",
+            "startFrame": "inception1_01",
+            "knowledge": [ "iAmSteve" ]
+        }
+    },
+    "frames": {
+        "main": {
+            "inception1": {
+                "inception1_01": {
+                    "id": "inception1_01",
+                    "speaker": "steve",
+                    "dialogue": "Первое задание выполнено успешно! Даже не ожидал, что так быстро получится!",
+                    "nextFrame": "inception1_02"
+                },
+                "inception1_02": {
+                    "id": "inception1_02",
+                    "dialogue": "Должен признать, что вы очень умны и догадливы! Я очень за вас рад! ",
+                    "speaker": "robot",
+                    "nextFrame": "inception1_03"
+                },
+                "inception1_03": {
+                    "id": "inception1_03",
+                    "dialogue": "Поступил звонок от директора. Слушаю, сэр!",
+                    "speaker": "steve",
+                    "nextFrame": "inception1_04"
+                },
+                "inception1_04": {
+                    "id": "inception1_04",
+                    "dialogue": "Специальный агент Стив Хэриссон, это директор ФБР Эдгар Гувер. У меня для вас срочные новости!",
+                    "speaker": "director",
+                    "nextFrame": "inception1_05",
+                    "effects": [
+                        {
+                            "type": "CHANGE_POSE",
+                            "args": {
+                                "characterId": "steve",
+                                "newPose": "idle"
+                            }
+                        }
+                    ]
+                },
+                "inception1_05": {
+                    "id": "inception1_05",
+                    "dialogue": "Нам удалось отследить местонахождение Кэвина Митника. Он находится где-то в доме. Будьте осторожны! У него может быть оружие!",
+                    "nextFrame": "inception1_06"
+                },
+                "inception1_06": {
+                    "id": "inception1_06",
+                    "dialogue": "Я вас понял. Какие-нибудь новые сведения о Саре Паркер не появились?",
+                    "speaker": "steve",
+                    "nextFrame": "inception1_07"
+                },
+                "inception1_07": {
+                    "id": "inception1_07",
+                    "dialogue": "Всех лиц, причастных к делу мы опросили, но, к сожалению, никаких новых сведений нам это не дало. Никто ничего не видел и не слышал. Она словно сквозь землю провалилась. ",
+                    "speaker": "director",
+                    "nextFrame": "inception1_08"
+                },
+                "inception1_08": {
+                    "id": "inception1_08",
+                    "dialogue": "Есть ощущение, что Митник держит её где-то возле себя...",
+                    "speaker": "steve",
+                    "nextFrame": "inception1_09"
+                },
+                "inception1_09": {
+                    "id": "inception1_09",
+                    "dialogue": "Эту версию вам также предстоит отработать. Желаю удачи! На вас лежит важная миссия!",
+                    "speaker": "director",
+                    "nextFrame": "inception1_10"
+                },
+                "inception1_10": {
+                    "id": "inception1_10",
+                    "dialogue": "Как же тут темно и мрачно! Но медлить нельзя. Если Митник где-то в доме, то и Сара Паркер должна быть поблизости. Пойдем поднимся наверх!",
+                    "speaker": "steve",
+                    "nextFrame": "inception1_11"
+                },
+                "inception1_11": {
+                    "id": "inception1_11",
+                    "dialogue": "Осторожнее поднимайтесь, сэр! В некоторых ступенях лестницы скрыты ловушки. Это и есть следующие задания...",
+                    "speaker": "robot",
+                    "nextFrame": "inception1_12"
+                }
+            },
+            "inception2": {
+                "inception2": {
+                    "id": "inception2",
+                    "location": "grandHall",
+                    "characters": [
+                        {
+                            "id": "steve",
+                            "pose": "holdNotebook",
+                            "position": "left",
+                            "hidden": true
+                        },
+                        {
+                            "id": "robot",
+                            "pose": "phone",
+                            "position": "right"
+                        }
+                    ],
+                    "speaker": "steve",
+                    "dialogue": "Очередная ловушка! Дверь снова заперта... Здесь тоже нужно ввести код. ",
+                    "nextFrame": "inception2_01"
+                },
+                "inception2_01": {
+                    "id": "inception2_01",
+                    "dialogue": "Вы уже справились с 2 заданиями! Не падайте духом, сэр!",
+                    "speaker": "robot",
+                    "nextFrame": "inception2_02"
+                },
+                "inception2_02": {
+                    "id": "inception2_02",
+                    "dialogue": "Мне кажется, что из-под этой двери доносятся какие то звуки! Такое ощущение, что там кто-то есть!Достану я пистолет...",
+                    "speaker": "steve",
+                    "nextFrame": "inception2_03"
+                },
+                "inception2_03": {
+                    "id": "inception2_03",
+                    "dialogue": "Пожалуйста, только никакого насилия! Мне страшно!!!",
+                    "speaker": "robot",
+                    "nextFrame": "inception2_04"
+                },
+                "inception2_04": {
+                    "id": "inception2_04",
+                    "dialogue": "Мне тоже! Но страшнее всего, это не успеть за 6 часов выполнить все задания! Тогда всему человечеству придёт конец! ",
+                    "speaker": "steve",
+                    "nextFrame": "inception2_05"
+                },
+                "inception2_05": {
+                    "id": "inception2_05",
+                    "dialogue": "Да, лучше давайте приступим к следующему заданию!",
+                    "speaker": "robot",
+                    "nextFrame": "inception2_06"
+                }
+            },
+             "inception3": {
+                "inception3_start": {
+                    "id": "inception3_start",
+                    "location": "studyRoom",
+                    "characters": [
+                        {
+                            "id": "steve",
+                            "pose": "holdNotebook",
+                            "hidden": true
+                        },
+                        {
+                            "id": "robot",
+                            "pose": "angry",
+                            "position": "center",
+                            "hidden": true
+                        }
+                        {
+                            "id": "anonymous"
+                        }
+                    ],
+                    "speaker": "steve",
+                    "dialogue": "Ну надо же, кто бы мог подумать, что в таком доме может быть настолько уютный кабинет.",
+                    "nextFrame": "inception3_01"
+                },
+                "inception3_01": {
+                    "id": "inception3_01",
+                    "dialogue": "У меня ощущение, что здесь недавно кто-то был, даже какие-то бумаги на столе оставил.",
+                    "nextFrame": "inception3_02"
+                },
+                "inception3_02": {
+                    "id": "inception3_02",
+                    "dialogue": "Весьма милое и симпатичное помещение.",
+                    "speaker": "robot",
+                    "nextFrame": "inception3_03"
+                },
+                "inception3_03": {
+                    "id": "inception3_03",
+                    "dialogue": "Но компьютера здесь нет, значит придётся искать дальше. Наверняка Митник буквально недавно был здесь.",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_04"
+                },
+                "inception3_04": {
+                    "id": "inception3_04",
+                    "dialogue": "Ты слышишь эти звуки?",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_05"
+                },
+                "inception3_05": {
+                    "id": "inception3_05",
+                    "dialogue": "Мммм... Ммм... Ммм.. ",
+                    "speaker": "inonumus",
+                    "nextFrame": "inception3_06"
+                },
+                "inception3_06": {
+                    "id": "inception3_06",
+                    "dialogue": "Может это мыши?",
+                    "speaker": "robot",
+                    "nextFrame": "inception3_07"
+                },
+                "inception3_07": {
+                    "id": "inception3_07",
+                    "dialogue": "Может это Митник решил вернуться в свой кабинет?",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_08"
+                },
+                "inception3_08": {
+                    "id": "inception3_08",
+                    "dialogue": "Спрячусь ка я под стол, чтобы меня никто не заметил. Ай , ай , ай.... тут очередная спрятанная ловушка.",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_09"
+                },
+                "inception3_09": {
+                    "id": "inception3_09",
+                    "dialogue": "Я случайно задел какой-то механизм и оказался в западне. Со всех сторон на меня опустились металлические прутья....",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_10"
+                },
+                "inception3_10": {
+                    "id": "inception3_10",
+                    "dialogue": "Вот это я облажался!",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_11"
+                },
+                "inception3_11": {
+                    "id": "inception3_11",
+                    "dialogue": "Тут надо выполнить очередное задание и ввести код. Только так получится у вас освободиться.",
+                    "speaker": "robot",
+                    "nextFrame": "inception3_12"
+                },
+                "inception3_12": {
+                    "id": "inception3_12",
+                    "dialogue": "Согласен, прутья слишком прочные...Времени остаётся мало! И плюс сюда войти может кто угодно! Надо скорее выполнить задание и отправиться уже на поиски компьютера.",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_13"
+                },
+                "inception3_13": {
+                    "id": "inception3_13",
+                    "dialogue": "Тогда приступим!",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_14"
+                }
+            }
+        }
+    }
+}
