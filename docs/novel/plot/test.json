@@ -64,16 +64,26 @@
     "chapters": {
         "inception1": {
             "id": "inception1",
-            "title": "Глава 4",
-            "startFrame": "inception1_01",
-            "knowledge": [ "iAmSteve" ]
+            "title": "Глава 1",
+            "startFrame": "inception1_start"
+        },
+        "inception2": {
+            "id": "inception2",
+            "title": "Глава 2",
+            "startFrame": "inception2_start"
+
+        },
+        "inception3": {
+            "id": "inception3",
+            "title": "Глава 3",
+            "startFrame": "inception3_start"
         }
     },
     "frames": {
         "main": {
             "inception1": {
-                "inception1_01": {
-                    "id": "inception1_01",
+                "inception1_start": {
+                    "id": "inception1_start",
                     "speaker": "steve",
                     "dialogue": "Первое задание выполнено успешно! Даже не ожидал, что так быстро получится!",
                     "nextFrame": "inception1_02"
@@ -145,11 +155,41 @@
                     "dialogue": "Осторожнее поднимайтесь, сэр! В некоторых ступенях лестницы скрыты ловушки. Это и есть следующие задания...",
                     "speaker": "robot",
                     "nextFrame": "inception1_12"
-                }
+                },
+                "inception1_12": {
+                    "id": "task_choose_weapon",
+                    "type": "SELECT_MANY",
+                    "questionText": "Что из перечисленного является базовым элементом Пролога?",
+                    "options": [
+                        "Массив",
+                        "Список",
+                        "Факты",
+                        "Правила",
+                        "Переменная"
+                      
+                    ],
+                    "correctAnswerIndices": [2 , 3],
+                    "nextFrameOnSuccess": "frame_weapon_success",
+                    "nextFrameOnFailure": "frame_weapon_failure",
+                    "failureScorePenalty": 2
+                  }
+            },
+            "inception1_13": {
+                "id": "inception1_13",
+                "dialogue": "",
+                "nextFrame": "inception1_13",
+                "effects": [
+                    {
+                        "type": "JUMP_CHAPTER",
+                        "args": {
+                            "chapterId": "inception2"
+                        }
+                    }
+                ]
             },
             "inception2": {
-                "inception2": {
-                    "id": "inception2",
+                "inception2_start": {
+                    "id": "inception2_start",
                     "location": "grandHall",
                     "characters": [
                         {
@@ -197,7 +237,42 @@
                     "dialogue": "Да, лучше давайте приступим к следующему заданию!",
                     "speaker": "robot",
                     "nextFrame": "inception2_06"
+                },
+                "inception2_06":{
+                    "id": "task_choose_weapon",
+                    "type": "SELECT_ONE",
+                    "questionText": "Можно ли использовать X в правилах?",
+                    "testCases": [
+                        {
+                          "input": "destroy(X) :- work(X, virus).",
+                          "expectedResult": true
+                        }
+                      ],
+                    "options": [
+                      "Да",
+                      "Нет",
+                      "Есть исключения"
+                    ],
+                    "correctAnswerIndices": 0,
+                    "hint": "Вспомни, что означает переменная Х",
+                    "nextFrameOnSuccess": "frame_weapon_success",
+                    "nextFrameOnFailure": "frame_weapon_failure",
+                    "failureScorePenalty": 1
+                  }
                 }
+            },
+            "inception2_07": {
+                "id": "inception2_07",
+                "dialogue": "",
+                "nextFrame": "inception2_08",
+                "effects": [
+                    {
+                        "type": "JUMP_CHAPTER",
+                        "args": {
+                            "chapterId": "inception3"
+                        }
+                    }
+                ]
             },
              "inception3": {
                 "inception3_start": {
@@ -214,7 +289,7 @@
                             "pose": "angry",
                             "position": "center",
                             "hidden": true
-                        }
+                        },
                         {
                             "id": "anonymous"
                         }
@@ -299,8 +374,30 @@
                     "dialogue": "Тогда приступим!",
                     "speaker": "steve",
                     "nextFrame": "inception3_14"
+                },
+                "inception3_14": {
+                    "id": "task_choose_weapon",
+                    "type": "SELECT_ONE",
+                    "questionText": "Даны следующие факты. Какой результат даст запрос `character(steve).` ?",
+                    "testCases": [
+                        {
+                          "input": "character(professor).\n character(steve). \n character(metnik).",
+                          "expectedResult": true
+                        }
+                      ],
+                    "options": [
+                      "true",
+                      "steve",
+                      "false",
+                      "professor"
+                    ],
+                    "correctAnswerIndices": 0, 
+                    "hint": "Подумай, что такое факт.",
+                    "nextFrameOnSuccess": "frame_weapon_success",
+                    "nextFrameOnFailure": "frame_weapon_failure",
+                    "failureScorePenalty": 1
                 }
-            }
         }
     }
 }
+    
