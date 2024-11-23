@@ -244,7 +244,7 @@
                     "nextFrame": "inception1_13",
                     "effects": [
                         {
-                            "type": "START_TASKS",
+                            "type": "START_TASK",
                             "args": {
                                 "tasks": "task_choose_weapon1"
                             }
@@ -322,7 +322,7 @@
                     "nextFrame": "inception2_07",
                     "effects": [
                         {
-                            "type": "START_TASKS",
+                            "type": "START_TASK",
                             "args": {
                                 "tasks": "task_choose_weapon2"
                             }
@@ -447,16 +447,28 @@
                 "inception3_14": {
                     "id": "inception3_14",
                     "dialogue": "",
-                    "nextFrame": "inception4",
+                    "nextFrame": "inception3_15",
                     "effects": [
                         {
-                            "type": "START_TASKS",
+                            "type": "START_TASK",
                             "args": {
                                 "tasks": "task_choose_weapon3"
                             }
                         }
                     ]
-                }
+                },
+                "inception3_15": {
+                "id": "inception3_15",
+                "dialogue": "",
+                "nextFrame": "inception4",
+                "effects": [
+                    {
+                        "type": "JUMP_CHAPTER",
+                        "args": {
+                            "chapterId": "inception4"
+                        }
+                    }
+                ]
             },
             "inception4": {
                 "inception4_start": {
@@ -552,7 +564,7 @@
                     "nextFrame": "inception5",
                     "effects": [
                         {
-                            "type": "START_TASKS",
+                            "type": "START_TASK",
                             "args": {
                                 "tasks": "task_choose_weapon4"
                             }
