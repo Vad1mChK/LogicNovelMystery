@@ -60,6 +60,83 @@
     "music": {
 
     },
+    "tasks": {
+        "task_choose_weapon1": {
+            "id": "task_choose_weapon1",
+            "type": "SELECT_MANY",
+            "questionText": "Что из перечисленного является базовым элементом Пролога?",
+            "options": [
+                "Массив",
+                "Список",
+                "Факты",
+                "Правила",
+                "Переменная"
+             ],
+            "correctAnswerIndices": [2 , 3],
+            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnFailure": "frame_weapon_failure",
+            "failureScorePenalty": 2
+        },
+        "task_choose_weapon2": {
+            "id": "task_choose_weapon2",
+            "type": "SELECT_ONE",
+            "questionText": "Можно ли использовать X в правилах?",
+            "testCases": [
+                {
+                  "input": "destroy(X) :- work(X, virus).",
+                  "expectedResult": true
+                }
+              ],
+            "options": [
+              "Да",
+              "Нет",
+              "Есть исключения"
+            ],
+            "correctAnswerIndices": 0,
+            "hint": "Вспомни, что означает переменная Х",
+            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnFailure": "frame_weapon_failure",
+            "failureScorePenalty": 1
+          },
+          "task_choose_weapon3": {
+            "id": "task_choose_weapon3",
+            "type": "SELECT_ONE",
+            "questionText": "Даны следующие факты. Какой результат даст запрос `character(steve).` ?",
+            "testCases": [
+                {
+                  "input": "character(professor).\n character(steve). \n character(metnik).",
+                  "expectedResult": true
+                }
+              ],
+            "options": [
+              "true",
+              "steve",
+              "false",
+              "professor"
+            ],
+            "correctAnswerIndices": 0, 
+            "hint": "Подумай, что такое факт.",
+            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnFailure": "frame_weapon_failure",
+            "failureScorePenalty": 1
+        },
+          "task_choose_weapon4": {
+            "id": "task_choose_weapon4",
+            "type": "SELECT_ONE",
+            "questionText": "Как можно найти длину списка [a, b, c, d] в Прологе?",
+            "options": [
+                "list_length([a, b, c, d], Length)",
+                "size([a, b, c, d], Length)",
+                "length([a, b, c, d], Length)",
+                "len([a, b, c, d], Length)"
+            ],
+            "correctAnswerIndices": 2,
+            "hint": "Вспомни про встроенные конструкции",
+            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnFailure": "frame_weapon_failure",
+            "failureScorePenalty": 1
+          }
+    },
     "startChapter": "inception1",
     "chapters": {
         "inception1": {
@@ -77,6 +154,11 @@
             "id": "inception3",
             "title": "Глава 3",
             "startFrame": "inception3_start"
+        },
+        "inception4": {
+            "id": "inception4",
+            "title": "Глава 4",
+            "startFrame": "inception4_start"
         }
     },
     "frames": {
@@ -157,22 +239,18 @@
                     "nextFrame": "inception1_12"
                 },
                 "inception1_12": {
-                    "id": "task_choose_weapon",
-                    "type": "SELECT_MANY",
-                    "questionText": "Что из перечисленного является базовым элементом Пролога?",
-                    "options": [
-                        "Массив",
-                        "Список",
-                        "Факты",
-                        "Правила",
-                        "Переменная"
-                      
-                    ],
-                    "correctAnswerIndices": [2 , 3],
-                    "nextFrameOnSuccess": "frame_weapon_success",
-                    "nextFrameOnFailure": "frame_weapon_failure",
-                    "failureScorePenalty": 2
-                  }
+                    "id": "inception1_12",
+                    "dialogue": "",
+                    "nextFrame": "inception1_13",
+                    "effects": [
+                        {
+                            "type": "START_TASKS",
+                            "args": {
+                                "tasks": "task_choose_weapon1"
+                            }
+                        }
+                    ]
+                }
             },
             "inception1_13": {
                 "id": "inception1_13",
@@ -238,27 +316,18 @@
                     "speaker": "robot",
                     "nextFrame": "inception2_06"
                 },
-                "inception2_06":{
-                    "id": "task_choose_weapon",
-                    "type": "SELECT_ONE",
-                    "questionText": "Можно ли использовать X в правилах?",
-                    "testCases": [
+                "inception2_06": {
+                    "id": "inception2_06",
+                    "dialogue": "",
+                    "nextFrame": "inception2_07",
+                    "effects": [
                         {
-                          "input": "destroy(X) :- work(X, virus).",
-                          "expectedResult": true
+                            "type": "START_TASKS",
+                            "args": {
+                                "tasks": "task_choose_weapon2"
+                            }
                         }
-                      ],
-                    "options": [
-                      "Да",
-                      "Нет",
-                      "Есть исключения"
-                    ],
-                    "correctAnswerIndices": 0,
-                    "hint": "Вспомни, что означает переменная Х",
-                    "nextFrameOnSuccess": "frame_weapon_success",
-                    "nextFrameOnFailure": "frame_weapon_failure",
-                    "failureScorePenalty": 1
-                  }
+                    ]
                 }
             },
             "inception2_07": {
@@ -376,27 +445,122 @@
                     "nextFrame": "inception3_14"
                 },
                 "inception3_14": {
-                    "id": "task_choose_weapon",
-                    "type": "SELECT_ONE",
-                    "questionText": "Даны следующие факты. Какой результат даст запрос `character(steve).` ?",
-                    "testCases": [
+                    "id": "inception3_14",
+                    "dialogue": "",
+                    "nextFrame": "inception4",
+                    "effects": [
                         {
-                          "input": "character(professor).\n character(steve). \n character(metnik).",
-                          "expectedResult": true
+                            "type": "START_TASKS",
+                            "args": {
+                                "tasks": "task_choose_weapon3"
+                            }
                         }
-                      ],
-                    "options": [
-                      "true",
-                      "steve",
-                      "false",
-                      "professor"
-                    ],
-                    "correctAnswerIndices": 0, 
-                    "hint": "Подумай, что такое факт.",
-                    "nextFrameOnSuccess": "frame_weapon_success",
-                    "nextFrameOnFailure": "frame_weapon_failure",
-                    "failureScorePenalty": 1
+                    ]
                 }
+            },
+            "inception4": {
+                "inception4_start": {
+                    "id": "inception4_start",
+                    "location": "studyRoom",
+                    "characters": [
+                        {
+                            "id": "steve",
+                            "pose": "holdNotebook",
+                            "hidden": true
+                        },
+                        {
+                            "id": "robot",
+                            "pose": "angry",
+                            "position": "center",
+                            "hidden": true
+                        },
+                        {
+                            "id": "sara",
+                            "hidden": true
+                        },
+                        {
+                            "id": "anonymous"
+                        }
+                    ],
+                    "speaker": "steve",
+                    "dialogue": "Вух! Все получилось!Я выбрался из заподни. Теперь надо скорее отправляться на поиски компьютера!",
+                    "nextFrame": "inception4_01"
+                },  
+                "inception4_01": {
+                    "id": "inception4_01",
+                    "dialogue": "Мммм... Ммм... Ммм.. ",
+                    "speaker": "inonumus",
+                    "nextFrame": "inception3_06"
+                },
+                "inception4_02": {
+                    "id": "inception4_02",
+                    "dialogue": "Ты слышишь опять эти странные звуки? Тут явно кто-то есть!",
+                    "speaker": "steve",
+                    "nextFrame": "inception3_03"
+                },
+                "inception4_03": {
+                    "id": "inception4_03",
+                    "dialogue": "Похоже на какое-то мычание. Звуки идут из того дальнего угла. ",
+                    "speaker": "robot",
+                    "nextFrame": "inception3_04"
+                },
+                "inception4_04": {
+                    "id": "inception4_04",
+                    "dialogue": "Давайка посмотрим что там! Похоже там действительно кто-то есть! ",
+                    "speaker": "steve",
+                    "nextFrame": "inception4_05"
+                },
+                "inception4_05": {
+                    "id": "inception4_05",
+                    "dialogue": "Да это же похищенная специалист по информационной безопасности Сара Паркер!",
+                    "speaker": "steve",
+                    "nextFrame": "inception4_06"
+                },
+                "inception4_06": {
+                    "id": "inception4_06",
+                    "dialogue": "Я специальный агент ФБР Стив Хэриссон. Расскажите, что произошло с вами...",
+                    "speaker": "steve",
+                    "nextFrame": "inception4_07"
+                },
+                "inception4_07": {
+                    "id": "inception4_07",
+                    "dialogue": "Кевин Митник меня похитил вчера вечером из моего собственного дома! Он сошёл с ума и его надо немедленно остановить!",
+                    "speaker": "sara",
+                    "nextFrame": "inception4_08"
+                },
+                "inception4_08": {
+                    "id": "inception4_08",
+                    "dialogue": "Помогите мне освободиться, пожалуйста! Я знаю где находится главный компьютер! Нам надо поторопиться, времени осталось мало! ",
+                    "speaker": "sara",
+                    "nextFrame": "inception4_09"
+                },
+                "inception4_09": {
+                    "id": "inception4_09",
+                    "dialogue": "А вы смелая девушка! Сейчас я выполню задание, введу код и мы вас освободим! Не переживайте! ",
+                    "speaker": "steve",
+                    "nextFrame": "inception4_10"
+                },
+                "inception4_10": {
+                    "id": "inception4_10",
+                    "dialogue": "Вот следующее задание! ",
+                    "speaker": "robot",
+                    "nextFrame": "inception4_11"
+                },
+                "inception4_11": {
+                    "id": "inception4_11",
+                    "dialogue": "",
+                    "nextFrame": "inception5",
+                    "effects": [
+                        {
+                            "type": "START_TASKS",
+                            "args": {
+                                "tasks": "task_choose_weapon4"
+                            }
+                        }
+                    ]
+                }
+
+            }
         }
     }
 }
