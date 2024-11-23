@@ -137,6 +137,8 @@
             "failureScorePenalty": 1
           }
     },
+    "knowledge": {
+    },
     "startChapter": "inception1",
     "chapters": {
         "inception1": {
@@ -166,6 +168,16 @@
             "inception1": {
                 "inception1_start": {
                     "id": "inception1_start",
+                    "characters": [
+                        {
+                            "id": "steve",
+                            "pose": "holdGlasses"
+                        },
+                        {
+                            "id": "director",
+                            "hidden": true
+                        }
+                    ],
                     "speaker": "steve",
                     "dialogue": "Первое задание выполнено успешно! Даже не ожидал, что так быстро получится!",
                     "nextFrame": "inception1_02"
@@ -184,6 +196,12 @@
                 },
                 "inception1_04": {
                     "id": "inception1_04",
+                    "characters": [
+                        {
+                            "id": "robot",
+                            "hidden": true
+                        }
+                    ],
                     "dialogue": "Специальный агент Стив Хэриссон, это директор ФБР Эдгар Гувер. У меня для вас срочные новости!",
                     "speaker": "director",
                     "nextFrame": "inception1_05",
@@ -228,6 +246,12 @@
                 },
                 "inception1_10": {
                     "id": "inception1_10",
+                    "characters": [
+                        {
+                            "id": "director",
+                            "hidden": true
+                        }
+                    ],
                     "dialogue": "Как же тут темно и мрачно! Но медлить нельзя. Если Митник где-то в доме, то и Сара Паркер должна быть поблизости. Пойдем поднимся наверх!",
                     "speaker": "steve",
                     "nextFrame": "inception1_11"
@@ -272,14 +296,11 @@
                     "characters": [
                         {
                             "id": "steve",
-                            "pose": "holdNotebook",
-                            "position": "left",
-                            "hidden": true
+                            "pose": "holdGlasses"
                         },
                         {
-                            "id": "robot",
-                            "pose": "phone",
-                            "position": "right"
+                            "id": "director",
+                            "hidden": true
                         }
                     ],
                     "speaker": "steve",
@@ -350,18 +371,16 @@
                     "characters": [
                         {
                             "id": "steve",
-                            "pose": "holdNotebook",
+                            "pose": "holdGlasses"
+                        },
+                        {
+                            "id": "director",
                             "hidden": true
                         },
                         {
-                            "id": "robot",
-                            "pose": "angry",
-                            "position": "center",
-                            "hidden": true
-                        },
-                        {
-                            "id": "anonymous"
+                        "id": "anonymous"
                         }
+
                     ],
                     "speaker": "steve",
                     "dialogue": "Ну надо же, кто бы мог подумать, что в таком доме может быть настолько уютный кабинет.",
@@ -393,7 +412,7 @@
                 "inception3_05": {
                     "id": "inception3_05",
                     "dialogue": "Мммм... Ммм... Ммм.. ",
-                    "speaker": "inonumus",
+                    "speaker": "anonymous",
                     "nextFrame": "inception3_06"
                 },
                 "inception3_06": {
@@ -492,6 +511,10 @@
                         },
                         {
                             "id": "anonymous"
+                        },
+                        {
+                            "id":"director",
+                            "hidden": true
                         }
                     ],
                     "speaker": "steve",
@@ -536,6 +559,20 @@
                 },
                 "inception4_07": {
                     "id": "inception4_07",
+                    "characters": [
+                        {
+                            "id": "steve",
+                            "pose": "holdGlasses"
+                        },
+                        {
+                            "id": "director",
+                            "hidden": true
+                        },
+                        {
+                            "id": "sara",
+                            "hidden": false
+                        }
+                    ],
                     "dialogue": "Кевин Митник меня похитил вчера вечером из моего собственного дома! Он сошёл с ума и его надо немедленно остановить!",
                     "speaker": "sara",
                     "nextFrame": "inception4_08"
