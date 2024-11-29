@@ -81,42 +81,51 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 	const metadata: LnmMetadata = plotObject.metadata as LnmMetadata;
 	const characters = new Map<string, LnmCharacter>(
 		Object.entries(plotObject.characters).map(
-			([characterId, characterData]) => [
-				characterId,
-				{
-					// @ts-expect-error character data is object
-					...characterData,
-					// @ts-expect-error sprites is object
-					sprites: objectToMap<string>(characterData.sprites), // Convert poses to Map<string, string>
-				} as LnmCharacter,
-			]
+			([characterId, characterData]) => {
+				if (signal?.aborted) throw new Error('Aborted');
+				return [
+					characterId,
+					{
+						// @ts-expect-error character data is object
+						...characterData,
+						// @ts-expect-error sprites is object
+						sprites: objectToMap<string>(characterData.sprites), // Convert poses to Map<string, string>
+					} as LnmCharacter,
+				];
+			}
 		)
 	);
 	const locations = objectToMap<LnmLocation>(plotObject.locations);
 	const music = new Map<string, LnmMusic>(
-		Object.entries(plotObject.music).map(([musicId, musicData]) => [
-			musicId,
-			{
-				...LNM_MUSIC_DEFAULTS,
-				// @ts-expect-error music data is any
-				...musicData,
-			},
-		])
+		Object.entries(plotObject.music).map(([musicId, musicData]) => {
+			if (signal?.aborted) throw new Error('Aborted');
+			return [
+				musicId,
+				{
+					...LNM_MUSIC_DEFAULTS,
+					// @ts-expect-error music data is any
+					...musicData,
+				},
+			];
+		})
 	);
 	const chapters = objectToMap<LnmChapter>(plotObject.chapters);
 	const framesMain = new Map(
 		Object.entries(plotObject.frames.main).map(
-			([chapterId, chapterData]) => [
-				chapterId,
-				new Map<string, LnmFrame>(
-					Object.entries(chapterData as Record<string, any>).map(
-						([frameId, frameData]) => [
-							frameId,
-							convertAndCreateFrame(frameData, signal),
-						]
-					)
-				),
-			]
+			([chapterId, chapterData]) => {
+				if (signal?.aborted) throw new Error('Aborted');
+				return [
+					chapterId,
+					new Map<string, LnmFrame>(
+						Object.entries(chapterData as Record<string, any>).map(
+							([frameId, frameData]) => [
+								frameId,
+								convertAndCreateFrame(frameData, signal),
+							]
+						)
+					),
+				];
+			}
 		)
 	);
 	const framesEndings = // objectToMap<LnmEnding>(plotObject.frames.endings);
