@@ -20,7 +20,6 @@ const HealthBar: React.FC<HealthBarProps> = ({ currentHealth, maxHealth }) => {
 			: healthPercentage >= LOW_THRESHOLD
 				? 'health-medium'
 				: 'health-low';
-	console.log(healthLevelClass);
 
 	return (
 		<div className="health-bar">
