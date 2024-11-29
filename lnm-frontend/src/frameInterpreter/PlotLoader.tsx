@@ -283,7 +283,9 @@ function convertAndCreateEnding(
 	return {
 		id,
 		title,
-		condition: condition ? convertAndCreateCondition(condition, signal) : undefined,
+		condition: condition
+			? convertAndCreateCondition(condition, signal)
+			: undefined,
 		startFrame,
 		frames: new Map(
 			Object.entries(frames).map(([frameId, frameData]) => [
