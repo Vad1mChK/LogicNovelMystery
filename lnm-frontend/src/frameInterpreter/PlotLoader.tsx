@@ -213,7 +213,7 @@ function convertAndCreateEffect(
 	const args = effectObject.args as LnmEffectArgsMap[typeof effectType];
 
 	const _if = effectObject.if
-		? convertAndCreateCondition(effectObject.if)
+		? convertAndCreateCondition(effectObject.if, signal)
 		: undefined;
 
 	const result: LnmFrameEffect<typeof effectType> = {
@@ -283,12 +283,12 @@ function convertAndCreateEnding(
 	return {
 		id,
 		title,
-		condition: condition ? convertAndCreateCondition(condition) : undefined,
+		condition: condition ? convertAndCreateCondition(condition, signal) : undefined,
 		startFrame,
 		frames: new Map(
 			Object.entries(frames).map(([frameId, frameData]) => [
 				frameId,
-				convertAndCreateFrame(frameData),
+				convertAndCreateFrame(frameData, signal),
 			])
 		),
 	} as LnmEnding;
