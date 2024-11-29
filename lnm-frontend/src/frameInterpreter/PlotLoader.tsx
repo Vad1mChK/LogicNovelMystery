@@ -1,6 +1,6 @@
 // PlotLoader.tsx
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import {
 	LNM_FRAME_CHARACTER_DATA_DEFAULTS,
@@ -35,32 +35,28 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 
 	// Uncomment to test abort
 	// plotUrl = 'https://httpbin.org/delay/10';
-
 	useEffect(() => {
 		const controller = new AbortController();
 		console.log('Controller created');
 		const { signal } = controller;
 
-		fetch(plotUrl, { signal })
+		axios
+			.get(plotUrl, { signal }) // Use signal in Axios config
 			.then((response) => {
-				if (!response.ok)
-					throw new Error('Network response was not ok');
 				console.log('Plot JSON fetched');
-				return response.json();
-			})
-			.then((plotObject) => {
-				const plot = convertAndCreatePlot(plotObject);
+				const plot = convertAndCreatePlot(response.data);
 				console.log('Plot converted and created');
 				onLoad(plot);
 			})
 			.catch((error) => {
-				if (error.name === 'AbortError') {
+				if (axios.isCancel(error)) {
 					console.log('Fetch aborted');
 				} else {
 					console.error('Failed to load plot:', error);
 				}
 			});
 
+		// Cleanup: Abort the request
 		return () => controller.abort();
 	}, [plotUrl, onLoad]);
 
@@ -71,7 +67,6 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 		</div>
 	);
 };
-
 function convertAndCreatePlot(plotObject: any): LnmPlot {
 	const metadata: LnmMetadata = plotObject.metadata as LnmMetadata;
 	const characters = new Map<string, LnmCharacter>(
