@@ -44,20 +44,27 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 			.get(plotUrl, { signal }) // Use signal in Axios config
 			.then((response) => {
 				console.log('Plot JSON fetched');
-				const plot = convertAndCreatePlot(response.data);
+				const plot = convertAndCreatePlot(response.data, signal);
 				console.log('Plot converted and created');
 				onLoad(plot);
 			})
 			.catch((error) => {
 				if (axios.isCancel(error)) {
-					console.log('Fetch aborted');
+					console.log('Fetch aborted: ', error);
+				} else if (
+					error.name === 'AbortError' ||
+					error.message === 'Aborted'
+				) {
+					console.log('Processing aborted: ', error);
 				} else {
 					console.error('Failed to load plot:', error);
 				}
 			});
 
 		// Cleanup: Abort the request
-		return () => controller.abort();
+		return () => {
+			controller.abort();
+		};
 	}, [plotUrl, onLoad]);
 
 	return (
@@ -67,7 +74,10 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 		</div>
 	);
 };
-function convertAndCreatePlot(plotObject: any): LnmPlot {
+
+function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
+	if (signal?.aborted) throw new Error('Aborted');
+
 	const metadata: LnmMetadata = plotObject.metadata as LnmMetadata;
 	const characters = new Map<string, LnmCharacter>(
 		Object.entries(plotObject.characters).map(
@@ -102,7 +112,7 @@ function convertAndCreatePlot(plotObject: any): LnmPlot {
 					Object.entries(chapterData as Record<string, any>).map(
 						([frameId, frameData]) => [
 							frameId,
-							convertAndCreateFrame(frameData),
+							convertAndCreateFrame(frameData, signal),
 						]
 					)
 				),
@@ -114,7 +124,7 @@ function convertAndCreatePlot(plotObject: any): LnmPlot {
 			Object.entries(plotObject.frames.endings).map(
 				([endingId, endingData]) => [
 					endingId,
-					convertAndCreateEnding(endingData),
+					convertAndCreateEnding(endingData, signal),
 				]
 			)
 		);
@@ -137,7 +147,12 @@ function convertAndCreatePlot(plotObject: any): LnmPlot {
 	};
 }
 
-function convertAndCreateFrame(frameObject: any): LnmFrame {
+function convertAndCreateFrame(
+	frameObject: any,
+	signal?: AbortSignal
+): LnmFrame {
+	if (signal?.aborted) throw new Error('Aborted');
+
 	const characters: LnmFrameCharacterData[] | undefined =
 		frameObject.characters
 			? frameObject.characters.map(
@@ -156,7 +171,9 @@ function convertAndCreateFrame(frameObject: any): LnmFrame {
 			)
 		: undefined;
 	const effects: LnmFrameEffect[] | undefined = frameObject.effects
-		? frameObject.effects.map((elem: any) => convertAndCreateEffect(elem))
+		? frameObject.effects.map((elem: any) =>
+				convertAndCreateEffect(elem, signal)
+			)
 		: undefined;
 	return {
 		id: frameObject.id,
@@ -170,7 +187,12 @@ function convertAndCreateFrame(frameObject: any): LnmFrame {
 	};
 }
 
-function convertAndCreateEffect(effectObject: any): LnmFrameEffect | null {
+function convertAndCreateEffect(
+	effectObject: any,
+	signal?: AbortSignal
+): LnmFrameEffect | null {
+	if (signal?.aborted) throw new Error('Aborted');
+
 	// Convert the `type` field to an enum value and check if it's valid
 	const effectType = toEnumValue(LnmFrameEffectType, effectObject.type);
 	if (!effectType) {
@@ -194,7 +216,12 @@ function convertAndCreateEffect(effectObject: any): LnmFrameEffect | null {
 	return result;
 }
 
-function convertAndCreateCondition(conditionObject: any): LnmFrameCondition {
+function convertAndCreateCondition(
+	conditionObject: any,
+	signal?: AbortSignal
+): LnmFrameCondition {
+	if (signal?.aborted) throw new Error('AbortError');
+
 	const {
 		hasKnowledge,
 		partnerDeadOnChapter,
@@ -224,18 +251,25 @@ function convertAndCreateCondition(conditionObject: any): LnmFrameCondition {
 		healthLess: assignIfValidType<number>(healthLess, 'number'),
 		healthEquals: assignIfValidType<number>(healthEquals, 'number'),
 		healthMore: assignIfValidType<number>(healthMore, 'number'),
-		or: Array.isArray(or) ? or.map(convertAndCreateCondition) : undefined,
+		or: Array.isArray(or)
+			? or.map((condObj) => convertAndCreateCondition(condObj, signal))
+			: undefined,
 		and: Array.isArray(and)
-			? and.map(convertAndCreateCondition)
+			? and.map((condObj) => convertAndCreateCondition(condObj, signal))
 			: undefined,
 		not:
 			not && typeof not === 'object'
-				? convertAndCreateCondition(not)
+				? convertAndCreateCondition(not, signal)
 				: undefined,
 	} as LnmFrameCondition;
 }
 
-function convertAndCreateEnding(endingObject: any): LnmEnding {
+function convertAndCreateEnding(
+	endingObject: any,
+	signal?: AbortSignal
+): LnmEnding {
+	if (signal?.aborted) throw new Error('Aborted');
+
 	const { id, title, condition, startFrame, frames } = endingObject;
 	return {
 		id,
