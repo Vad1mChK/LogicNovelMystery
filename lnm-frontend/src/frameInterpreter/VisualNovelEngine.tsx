@@ -38,8 +38,13 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 		null
 	);
 	const [currentSpeaker, setCurrentSpeaker] = useState<string | null>(null);
-	const { loadChapterKnowledge, addKnowledge, clearKnowledge, knowledge } =
-		useGameState();
+	const {
+		loadChapterKnowledge,
+		addKnowledge,
+		clearKnowledge,
+		knowledge,
+		setHealth,
+	} = useGameState();
 	const processedEffects = useRef<Map<string, boolean>>(new Map());
 
 	// Utility to get the current frame
@@ -159,6 +164,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	const handleNextFrame = (nextFrameId: string | null) => {
 		if (!nextFrameId) {
 			if (!isEnding && autoTriggerEnding()) {
+				console.log('Auto triggering ending...');
 				// TODO Automatically trigger ending if applicable
 				return;
 			}
@@ -192,6 +198,11 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 		}
 	};
 
+	const giveUp = () => {
+		console.log('Giving up...');
+		setHealth(0);
+	};
+
 	// Process frame effects after frame updates
 	useEffect(() => {
 		const currentFrame = getCurrentFrame();
@@ -219,6 +230,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 			currentSpeaker={currentSpeaker}
 			currentLocation={currentLocation}
 			onNextFrame={handleNextFrame}
+			onGiveUp={giveUp}
 			knowledge={knowledge}
 			plot={plot}
 		/>
