@@ -23,6 +23,7 @@ import {
 	LnmTask,
 } from './types';
 import { assignIfValidType, objectToMap, toEnumValue } from '../util/typeUtils';
+import { useNavigate } from 'react-router-dom';
 
 interface PlotLoaderProps {
 	plotUrl: string;
@@ -30,21 +31,45 @@ interface PlotLoaderProps {
 }
 
 const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
+	const navigate = useNavigate();
+
+	// Uncomment to test abort
+	// plotUrl = 'https://httpbin.org/delay/10';
+
 	useEffect(() => {
-		fetch(plotUrl)
+		const controller = new AbortController();
+		console.log('Controller created');
+		const { signal } = controller;
+
+		fetch(plotUrl, { signal })
 			.then((response) => {
 				if (!response.ok)
 					throw new Error('Network response was not ok');
+				console.log('Plot JSON fetched');
 				return response.json();
 			})
 			.then((plotObject) => {
 				const plot = convertAndCreatePlot(plotObject);
+				console.log('Plot converted and created');
 				onLoad(plot);
 			})
-			.catch((error) => console.error('Failed to load plot:', error));
+			.catch((error) => {
+				if (error.name === 'AbortError') {
+					console.log('Fetch aborted');
+				} else {
+					console.error('Failed to load plot:', error);
+				}
+			});
+
+		return () => controller.abort();
 	}, [plotUrl, onLoad]);
 
-	return <div>Loading plot...</div>;
+	return (
+		<div>
+			<p>Loading plot...</p>
+			<button onClick={() => navigate('/main')}>Cancel</button>
+		</div>
+	);
 };
 
 function convertAndCreatePlot(plotObject: any): LnmPlot {
