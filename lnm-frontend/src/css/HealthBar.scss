@@ -7,11 +7,9 @@
 	$HEALTH_LOW: #d6001e;
 
 	transition: all 1s ease-in-out;
-
 	position: absolute;
 	top: 5%;
 	left: 5%;
-
 	width: 192px;
 	height: 32px;
 	background: $HEALTH_BG;
@@ -32,15 +30,16 @@
 		left: 0;
 		height: 100%;
 		width: 100%;
-
 		background: $HEALTH_UNDEF;
 
 		&.health-high {
 			background: $HEALTH_HIGH;
 		}
+
 		&.health-medium {
 			background: $HEALTH_MEDIUM;
 		}
+
 		&.health-low {
 			animation: health-flash 1s ease-in-out infinite alternate;
 			background: $HEALTH_LOW;
@@ -50,6 +49,7 @@
 			0% {
 				opacity: 1;
 			}
+
 			100% {
 				opacity: 0.75;
 			}

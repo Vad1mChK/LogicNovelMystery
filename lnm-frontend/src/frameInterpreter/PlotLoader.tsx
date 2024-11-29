@@ -34,7 +34,7 @@ const PlotLoader: React.FC<PlotLoaderProps> = ({ plotUrl, onLoad }) => {
 	const navigate = useNavigate();
 
 	// Uncomment to test abort
-	// plotUrl = 'https://httpbin.org/delay/10';
+	plotUrl = 'https://httpbin.org/delay/10';
 	useEffect(() => {
 		const controller = new AbortController();
 		console.log('Controller created');
