@@ -695,6 +695,28 @@
 			}
 		},
 		"endings": {
+			"gameOver": {
+				"id": "gameOver",
+				"condition": {
+					"healthEquals": 0
+				},
+				"startFrame": "gameOver_1",
+				"frames": {
+					"gameOver_1": {
+						"id": "gameOver_1",
+						"location": "agentOffice",
+						"characters": [
+							{
+								"id": "steve",
+								"pose": "holdNotebook",
+								"position": "left",
+								"hidden": true
+							}
+						],
+						"dialogue": "Чёрт возьми... Не надо было растрачивать все попытки."
+					}
+				}
+			},
 			"demoEnding": {
 				"id": "demoEnding",
 				"title": "Конец ознакомительного фрагмента",

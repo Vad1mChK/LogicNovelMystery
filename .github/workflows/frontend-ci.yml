@@ -51,12 +51,12 @@ jobs:
     if: needs.check-changes-frontend.outputs.has_changes == 'true'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '23'
 
       - name: Install dependencies
         working-directory: ./lnm-frontend
@@ -75,12 +75,12 @@ jobs:
     needs: lint-frontend
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '23'
 
       - name: Install dependencies
         working-directory: ./lnm-frontend
