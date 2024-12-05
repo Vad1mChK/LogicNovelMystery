@@ -1,0 +1,1242 @@
+{
+  "metadata": {
+    "name": "double_game",
+    "gamemode": "double",
+    "protagonist": "professor",
+    "author": "Lizochkaaaa",
+    "version": "1.0",
+    "locale": "ru_RU"
+  },
+  "characters": {
+    "professor": {
+      "id": "professor",
+      "name": "Профессор Роберт Лэнгдон",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/src/resources/img/characters/sprites/professor_idle.webp"
+      }
+    },
+    "director": {
+      "id": "director",
+      "name": "Директор",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/src/resources/img/characters/director/idle.webp",
+        "phone": "/src/resources/img/characters/director/phone.webp"
+      }
+    },
+    "vicky": {
+      "id": "vicky",
+      "name": "Викки",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/src/resources/img/characters/sprites/vicky_idle.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Робот",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/src/resources/img/characters/robot/idle.webp",
+        "think": "/src/resources/img/characters/robot/think.webp",
+        "angry": "/src/resources/img/characters/robot/angry.webp"
+      }
+    },
+    "anonymous": {
+      "id": "anonymous",
+      "name": "???",
+      "defaultPose": null,
+      "sprites": {}
+    },
+    "sara": {
+      "id": "sara",
+      "name": "Сара Паркер",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/src/resources/img/characters/sprites/sarah_idle.webp"
+      }
+    }
+  },
+  "locations": {
+    "professorBedroom": {
+      "id": "professorBedroom",
+      "name": "Спальня профессора",
+      "background": "/src/resources/img/locations/ProfessorBedroom.png"
+    },
+    "mansion": {
+      "id": "mansion",
+      "name": "Особняк",
+      "background": "/src/resources/img/locations/MensionEntrance.png"
+    },
+    "grandHall": {
+      "id": "grandHall",
+      "name": "Холл",
+      "background": "/src/resources/img/locations/GrandHall.png"
+    },
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Кабинет",
+      "background": "/src/resources/img/locations/StudyRoom.png"
+    },
+    "computerRoom": {
+      "id": "computerRoom",
+      "name": "Кабинет с компьютером",
+      "background": "/src/resources/img/locations/ComputerRoom.png"
+    }
+  },
+  "music": {},
+  "tasks": {
+    "task_choose_weapon1": {
+      "id": "task_choose_weapon1",
+      "type": "SELECT_ONE",
+      "questionText": "Как обозначается завершение предложения в Прологе?",
+      "options": [
+        "`.`",
+        "`_`",
+        "`-`",
+        "`X`"
+      ],
+      "correctAnswerIndices": 0,
+      "nextFrameOnSuccess": "inception2_13",
+      "nextFrameOnFailure": "frame_weapon_failure",
+      "failureScorePenalty": 1
+    },
+    "task_choose_weapon2": {
+      "id": "task_choose_weapon2",
+      "type": "SELECT_ONE",
+      "questionText": "Когда значение переменной не важно, и мы хотим указать, что любая подходящая информация на её месте подходит, что нам необходимо прописать?",
+      "options": [
+        "`.`",
+        "`_`",
+        "`-`",
+        "`X`"
+      ],
+      "correctAnswerIndices": 1,
+      "nextFrameOnSuccess": "inception3_12",
+      "nextFrameOnFailure": "frame_weapon_failure2",
+      "failureScorePenalty": 1
+    },
+    "task_choose_weapon3": {
+      "id": "task_choose_weapon3",
+      "type": "SELECT_ONE",
+      "questionText": "Даны следующие факты: `character(professor).`\n`character(vicky).` \n`character(metnik).`. Какой запрос вернет всех героев?",
+      "options": [
+        "`character(X).`",
+        "`character(профессор, vicky, metnik).`",
+        "`character(_).`",
+        "`character(X, Y).`"
+      ],
+      "correctAnswerIndices": 0,
+      "nextFrameOnSuccess": "inception4_08",
+      "nextFrameOnFailure": "frame_weapon_failure3",
+      "failureScorePenalty": 1
+    },
+    "task_choose_weapon4": {
+      "id": "task_choose_weapon4",
+      "type": "SELECT_ONE",
+      "questionText": "Как проверить, содержится ли элемент 3 в списке `[1, 2, 3, 4]`?",
+      "options": [
+        "`contains(3, [1, 2, 3, 4])`",
+        "`exists(3, [1, 2, 3, 4])`",
+        "`in_list(3, [1, 2, 3, 4]`",
+        "`member(3, [1, 2, 3, 4])`"
+      ],
+      "correctAnswerIndices": 3,
+      "hint": "Вспомни про встроенные конструкции",
+      "nextFrameOnSuccess": "inception5_20",
+      "nextFrameOnFailure": "frame_weapon_failure4",
+      "failureScorePenalty": 1
+    },
+    "task_choose_weapon5": {
+      "id": "task_choose_weapon5",
+      "type": "WRITE_KNOWLEDGE",
+      "questionText": "Допиши запрос, чтобы проверить, связан ли mitnik с вирусом.",
+      "testCases": [
+        {
+          "input": "character(steve).\ncharacter(mitnik). \ndestroy(mitnik, virus). \ninvolved(X) :- destroy(X, virus).",
+          "expectedResult": true
+        }
+      ],
+      "correctAnswerIndices": [
+        "involved(mitnik)."
+      ],
+      "nextFrameOnSuccess": "inception6_14",
+      "nextFrameOnFailure": "frame_weapon_failure5",
+      "failureScorePenalty": 2
+    },
+    "task_choose_weapon6": {
+      "id": "task_choose_weapon6",
+      "type": "COMPLETE_QUERY",
+      "questionText": "Напишите запрос, который вычисляет длину списка `[1, 2, 3, 4, 5]`.",
+      "expectedResult": [
+        "5"
+      ],
+      "hint": "Вспомни про встроенные конструкции. Воспользуйся стандартным предикатом length/2.",
+      "nextFrameOnSuccess": "inception7_13",
+      "nextFrameOnFailure": "frame_weapon_failure6",
+      "failureScorePenalty": 2
+    }
+  },
+  "knowledge": {},
+  "startChapter": "inception1",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "Глава 1",
+      "startFrame": "inception1_start"
+    },
+    "inception2": {
+      "id": "inception2",
+      "title": "Глава 2",
+      "startFrame": "inception2_start"
+    },
+    "inception3": {
+      "id": "inception3",
+      "title": "Глава 3",
+      "startFrame": "inception3_start"
+    },
+    "inception4": {
+      "id": "inception4",
+      "title": "Глава 4",
+      "startFrame": "inception4_start"
+    },
+    "inception5": {
+      "id": "inception5",
+      "title": "Глава 5",
+      "startFrame": "inception5_start"
+    },
+    "inception6": {
+      "id": "inception6",
+      "title": "Глава 6",
+      "startFrame": "inception6_start"
+    }
+  },
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "speaker": "professor",
+          "dialogue": "Время 5:00 утра! Кого могло принести в такую рань....Кто вы ?",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "dialogue": "Мне нужен Роберт Лэнгдон. С вами говорит директор ФБР Эдгар Гувер. ",
+          "speaker": "director",
+          "nextFrame": "inception1_03"
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "Кто?! Вы уверены, что вам нужен именно я?!",
+          "speaker": "professor",
+          "nextFrame": "inception1_04"
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "Да, уверен.",
+          "speaker": "director",
+          "nextFrame": "inception1_05"
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "А вы знаете, который час?!",
+          "speaker": "professor",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "Прошу меня извинить, но дело не требует отлагательств.",
+          "speaker": "director",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "5 часов утра!",
+          "speaker": "professor",
+          "nextFrame": "inception1_08"
+        },
+        "inception1_08": {
+          "id": "inception1_08",
+          "dialogue": "Профессор Лэнгдон, это вопрос жизни и смерти! Я прошу вас помочь своей стране! От вашей помощи зависит жизнь всей планеты!",
+          "speaker": "director",
+          "nextFrame": "inception1_09"
+        },
+        "inception1_09": {
+          "id": "inception1_09",
+          "dialogue": "Вы меня заинтриговали. Чем моя скромная персона так заинтересовала ФБР, что сам директор Гувер приехал ко мне лично?",
+          "speaker": "professor",
+          "nextFrame": "inception1_10"
+        },
+        "inception1_10": {
+          "id": "inception1_10",
+          "dialogue": "Мне не до шуток, профессор Лэнгдон. Слушайте внимательно! Группа хакеров во главе с Кевином Митником создала вирус, который способен стереть все данные с памяти компьютера, внести сбой в работу всемирной сети, распространяется он через обычное сообщение. ",
+          "speaker": "director",
+          "nextFrame": "inception1_11"
+        },
+        "inception1_11": {
+          "id": "inception1_11",
+          "dialogue": "Сегодня ночью был взломан компьютер специалиста по информационной безопасности Сары Паркер, с него были украдены файлы и этот вирус был запущен в сеть. Для создания ативируса у нас осталось меньше 20 часов.",
+          "speaker": "director",
+          "nextFrame": "inception1_12"
+        },
+        "inception1_12": {
+          "id": "inception1_12",
+          "dialogue": "Если не создать антивирус на языке 'Prolog', то начнётся всемирный хаос. Будет и падение самолётов, и сход космических кораблей с орбит. Вы понимаете масштаб катастрофы?! ",
+          "speaker": "director",
+          "nextFrame": "inception1_13"
+        },
+        "inception1_13": {
+          "id": "inception1_13",
+          "dialogue": "Я понял вас, мистер Гувер, но я не слишком знаком с языком 'Prolog'... ",
+          "speaker": "professor",
+          "nextFrame": "inception1_14"
+        },
+        "inception1_14": {
+          "id": "inception1_14",
+          "dialogue": "Вы лучший в мире специалист по информационной безопасности. Вы быстрее всех способны обучаться новым языкам программирования. На кону стоит жизнь всей планеты! ",
+          "speaker": "director",
+          "nextFrame": "inception1_15"
+        },
+        "inception1_15": {
+          "id": "inception1_15",
+          "dialogue": "Хорошо, я попробую с ним разобраться!",
+          "speaker": "professor",
+          "nextFrame": "inception1_16"
+        },
+        "inception1_16": {
+          "id": "inception1_16",
+          "dialogue": "Также я должен вам сообщить, что Сара Паркер была похищена накануне вечером из собственного дома. Её местонахождение нам пока неизвестно, но мы смогли установить местонахождение того самого компьютера, в который нужно ввести антивирус.",
+          "speaker": "director",
+          "nextFrame": "inception1_17"
+        },
+        "inception1_17": {
+          "id": "inception1_17",
+          "dialogue": "Я так понимаю, что мы сейчас туда и направимся?",
+          "speaker": "professor",
+          "nextFrame": "inception1_18"
+        },
+        "inception1_18": {
+          "id": "inception1_18",
+          "dialogue": "Да. Машина ждет нас внизу. Но будьте осторожны в этом заброшенном особняке повсюду стоят ловушки опасные для жизни. ",
+          "speaker": "director",
+          "nextFrame": "inception1_19"
+        },
+        "inception1_19": {
+          "id": "inception1_19",
+          "dialogue": "Чтобы их обезопасить нужно ввести верный код. Я верю в вас профессор Лэнгдон! Звоните мне в любое время! Удачи!",
+          "speaker": "director",
+          "nextFrame": "inception1_20"
+        },
+        "inception1_20": {
+          "id": "inception1_20",
+          "dialogue": "",
+          "nextFrame": "inception2",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception2"
+              }
+            }
+          ]
+        },
+        "inception2": {
+          "inception2_start": {
+            "id": "inception2_start",
+            "location": "mansion",
+            "characters": [
+              {
+                "id": "professor"
+              },
+              {
+                "id": "director",
+                "hidden": true
+              },
+              {
+                "id": "robot",
+                "hidden": false
+              }
+            ],
+            "speaker": "professor",
+            "dialogue": "Ну и заросли тут...все проросло. О, замок. Что же здесь зашифорованно? ",
+            "nextFrame": "inception2_01"
+          },
+          "inception2_01": {
+            "id": "inception2_01",
+            "dialogue": "Стой! Кто идёт?! Остановись, живое существо! В этих местах ты бродишь напрасно! Здесь таким существам ходить запрещено!  ",
+            "speaker": "robot",
+            "nextFrame": "inception2_02"
+          },
+          "inception2_02": {
+            "id": "inception2_02",
+            "dialogue": "Здравствуйте! Меня зовут профессор Роберт Лэнгдон! А как ваше имя? ",
+            "speaker": "professor",
+            "nextFrame": "inception2_03"
+          },
+          "inception2_03": {
+            "id": "inception2_03",
+            "dialogue": "Ах, вы тот самый профессор, который является лучшим специалистом по информационной безопасности. Я сначала решил, что опять морадеры пришли, думал опять будут пытаться взломать дверь.",
+            "speaker": "robot",
+            "nextFrame": "inception2_04"
+          },
+          "inception2_04": {
+            "id": "inception2_04",
+            "dialogue": "Ведь никто не может ввести правильный код. А я робот третьего поколения модель R3, я должен не пускать сюда никого живого, ведь никто не знает о смертельных ловушках. Зачем вы пришли сюда профессор Лэнгдон?",
+            "speaker": "robot",
+            "nextFrame": "inception2_05"
+          },
+          "inception2_05": {
+            "id": "inception2_05",
+            "dialogue": "Ты робот модель R3, это робот помощник человека. В твои обязанности входит слушать и помогать любому человеку. Так ведь? ",
+            "speaker": "professor",
+            "nextFrame": "inception2_06"
+          },
+          "inception2_06": {
+            "id": "inception2_06",
+            "dialogue": "Кэвин Митник создал вирус, который способен стереть все данные с памяти компьютера, внести сбой в работу всемирной сети, он уже запустил его.",
+            "speaker": "professor",
+            "nextFrame": "inception2_07"
+          },
+          "inception2_07": {
+            "id": "inception2_07",
+            "dialogue": "Осталось меньше 18 часов чтобы создать антивирус на языке 'Prolog'. Ты же поможешь мне его изучить?",
+            "speaker": "professor",
+            "nextFrame": "inception2_08"
+          },
+          "inception2_08": {
+            "id": "inception2_08",
+            "dialogue": "Да, такая функция у меня запрограммирована. Но вы должны знать, что для того, чтобы изучать этот язык, нужно отойти от привычных форм программирования и постараться вникнуть в саму логику языка. ",
+            "speaker": "robot",
+            "nextFrame": "inception2_09"
+          },
+          "inception2_09": {
+            "id": "inception2_09",
+            "dialogue": "Поверьте, это достаточно красивый и логичный язык программирования. Очень скоро вы оцените всю его красоту и возможности.",
+            "speaker": "robot",
+            "nextFrame": "inception2_10"
+          },
+          "inception2_10": {
+            "id": "inception2_10",
+            "dialogue": "Я в этом не сомневаюсь. Может уже перейдём к уроку?",
+            "speaker": "professor",
+            "nextFrame": "inception2_11"
+          },
+          "inception2_11": {
+            "id": "inception2_11",
+            "dialogue": "Давайте приступим!",
+            "speaker": "robot",
+            "nextFrame": "inception2_12"
+          },
+          "inception2_12": {
+            "id": "inception2_12",
+            "dialogue": "",
+            "nextFrame": "inception2_13",
+            "effects": [
+              {
+                "type": "START_TASK",
+                "args": {
+                  "tasks": "task_choose_weapon1"
+                }
+              }
+            ]
+          },
+          "inception2_13": {
+            "id": "inception2_13",
+            "dialogue": "",
+            "nextFrame": "inception3",
+            "effects": [
+              {
+                "type": "JUMP_CHAPTER",
+                "args": {
+                  "chapterId": "inception3"
+                }
+              }
+            ]
+          },
+          "inception3": {
+            "inception3_start": {
+              "id": "inception3_start",
+              "location": "grandHall",
+              "characters": [
+                {
+                  "id": "professor"
+                },
+                {
+                  "id": "director",
+                  "hidden": true
+                },
+                {
+                  "id": "anonymous",
+                  "hidden": true
+                },
+                {
+                  "id": "robot"
+                }
+              ],
+              "speaker": "professor",
+              "dialogue": "С первым заданием мы успешно справились! Сам не ожидал, что так быстро получится! ",
+              "nextFrame": "inception3_01"
+            },
+            "inception3_01": {
+              "id": "inception3_01",
+              "dialogue": "Да, вы очень умны и догадливы, профессор. Я очень за вас рад!",
+              "speaker": "robot",
+              "nextFrame": "inception3_02"
+            },
+            "inception3_02": {
+              "id": "inception3_02",
+              "dialogue": "Кто-то звонит..Слушаю.",
+              "speaker": "professor",
+              "nextFrame": "inception3_03"
+            },
+            "inception3_03": {
+              "id": "inception3_03",
+              "characters": [
+                {
+                  "id": "professor"
+                },
+                {
+                  "id": "director",
+                  "hidden": false
+                },
+                {
+                  "id": "anonymous",
+                  "hidden": true
+                },
+                {
+                  "id": "robot",
+                  "hidden": true
+                }
+              ],
+              "dialogue": "Профессор Лэнгдон, это директор ФБР Эдгар Гувер. У меня для вас срочные новости!",
+              "speaker": "director",
+              "nextFrame": "inception3_04"
+            },
+            "inception3_04": {
+              "id": "inception3_04",
+              "dialogue": "Слушаю вас, директор!",
+              "speaker": "professor",
+              "nextFrame": "inception3_05"
+            },
+            "inception3_05": {
+              "id": "inception3_05",
+              "dialogue": "Нам удалось отследить местонахождение Кэвина Митника. Он находится где-то в доме. Будьте осторожны, профессор! У него может быть оружие! ",
+              "speaker": "director",
+              "nextFrame": "inception3_06"
+            },
+            "inception3_06": {
+              "id": "inception3_06",
+              "dialogue": "Я вас понял, оружие у меня тоже есть, только стрелять я все равно не умею. Будем надеяться, что оно нам не понадобится.",
+              "speaker": "professor",
+              "nextFrame": "inception3_07"
+            },
+            "inception3_07": {
+              "id": "inception3_07",
+              "dialogue": "Берегите себя, профессор, на вас лежит важная миссия! До свидания!",
+              "speaker": "director",
+              "nextFrame": "inception3_08"
+            },
+            "inception3_08": {
+              "id": "inception3_08",
+              "characters": [
+                {
+                  "id": "professor"
+                },
+                {
+                  "id": "director",
+                  "hidden": true
+                },
+                {
+                  "id": "robot",
+                  "hidden": false
+                }
+              ],
+              "dialogue": "Как же тут темно и мрачно! Но медлить нельзя. Если Митник где-то в доме, то мне бы очень не хотелось с ним встретиться. ",
+              "speaker": "professor",
+              "nextFrame": "inception3_09"
+            },
+            "inception3_09": {
+              "id": "inception3_09",
+              "dialogue": "Пусть уж агенты ФБР сами с ним разбираются. Пойдем поднимся наверх!",
+              "speaker": "professor",
+              "nextFrame": "inception3_10"
+            },
+            "inception3_10": {
+              "id": "inception3_10",
+              "dialogue": "Осторожнее поднимайтесь, профессор! В некоторых ступенях лестницы скрыты ловушки. Это и есть следующие задания.",
+              "speaker": "robot",
+              "nextFrame": "inception3_11"
+            },
+            "inception3_11": {
+              "id": "inception3_11",
+              "dialogue": "",
+              "nextFrame": "inception3_12",
+              "effects": [
+                {
+                  "type": "START_TASK",
+                  "args": {
+                    "tasks": "task_choose_weapon2"
+                  }
+                }
+              ]
+            },
+            "inception3_12": {
+              "id": "inception3_12",
+              "dialogue": "",
+              "nextFrame": "inception4",
+              "effects": [
+                {
+                  "type": "JUMP_CHAPTER",
+                  "args": {
+                    "chapterId": "inception4"
+                  }
+                }
+              ]
+            },
+            "inception4": {
+              "inception4_start": {
+                "id": "inception4_start",
+                "location": "grandHall",
+                "characters": [
+                  {
+                    "id": "professor"
+                  },
+                  {
+                    "id": "robot",
+                    "pose": "angry",
+                    "position": "center",
+                    "hidden": true
+                  },
+                  {
+                    "id": "director",
+                    "hidden": true
+                  }
+                ],
+                "speaker": "professor",
+                "dialogue": "Отлично, мы справляемся! Идем скорее дальше! Ой, снова мы столкнулись с запертой дверью. Здесь тоже нужно ввести код... ",
+                "nextFrame": "inception4_01"
+              },
+              "inception4_01": {
+                "id": "inception4_01",
+                "dialogue": "Вы уже справились с 2 заданиями! Не падайте духом, профессор! ",
+                "speaker": "robot",
+                "nextFrame": "inception3_06"
+              },
+              "inception4_02": {
+                "id": "inception4_02",
+                "dialogue": "А ты знаешь, что искусственный интеллект способен убить человечество? ",
+                "speaker": "professor",
+                "nextFrame": "inception3_03"
+              },
+              "inception4_03": {
+                "id": "inception4_03",
+                "dialogue": "Исуственный интеллект был создан для того, чтобы жизнь человека стала лучше. ",
+                "speaker": "robot",
+                "nextFrame": "inception3_04"
+              },
+              "inception4_04": {
+                "id": "inception4_04",
+                "dialogue": "Во всем нужен контроль со стороны человека. И пока мы не научимся полностью контролировать искусственный интеллект мы подвергаем себя большой опасности. ",
+                "speaker": "professor",
+                "nextFrame": "inception4_05"
+              },
+              "inception4_05": {
+                "id": "inception4_05",
+                "dialogue": "В данный момент у нас с вами самая большая опасность, это не успеть за 6 часов выполнить все здания.",
+                "speaker": "robot",
+                "nextFrame": "inception4_06"
+              },
+              "inception4_06": {
+                "id": "inception4_06",
+                "dialogue": "Вот тут мой друг, ты абсолютно прав! Давай же примимся за дело!",
+                "speaker": "professor",
+                "nextFrame": "inception4_07"
+              },
+              "inception4_07": {
+                "id": "inception4_07",
+                "dialogue": "",
+                "nextFrame": "inception4_08",
+                "effects": [
+                  {
+                    "type": "START_TASK",
+                    "args": {
+                      "tasks": "task_choose_weapon3"
+                    }
+                  }
+                ]
+              },
+              "inception4_08": {
+                "id": "inception4_08",
+                "dialogue": "",
+                "nextFrame": "inception4",
+                "effects": [
+                  {
+                    "type": "JUMP_CHAPTER",
+                    "args": {
+                      "chapterId": "inception4"
+                    }
+                  }
+                ]
+              },
+              "inception5": {
+                "inception5_start": {
+                  "id": "inception5_start",
+                  "location": "studyRoom",
+                  "characters": [
+                    {
+                      "id": "professor",
+                      "hidden": false
+                    },
+                    {
+                      "id": "robot",
+                      "pose": "angry",
+                      "position": "center",
+                      "hidden": false
+                    },
+                    {
+                      "id": "vicky",
+                      "hidden": true
+                    }
+                  ],
+                  "speaker": "professor",
+                  "dialogue": "Я даже представить себе не мог, что в этом страшном доме может быть настолько уютный кабинет. Как будто здесь недавно кто-то был и оставил на столе бумаги...",
+                  "nextFrame": "inception4_01"
+                },
+                "inception5_01": {
+                  "id": "inception5_01",
+                  "dialogue": "Весьма милое и симпатичное помещение.",
+                  "speaker": "robot",
+                  "nextFrame": "inception5_02"
+                },
+                "inception5_02": {
+                  "id": "inception5_02",
+                  "dialogue": "Компьютера здесь нет, значит придётся искать дальше...Ты видишь это? Стена отъезжает в сторону...",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_03"
+                },
+                "inception5_03": {
+                  "id": "inception5_03",
+                  "dialogue": "Ничего себе! Может это Митник решил вернуться в свой кабинет?  ",
+                  "speaker": "robot",
+                  "nextFrame": "inception5_04"
+                },
+                "inception5_04": {
+                  "id": "inception5_04",
+                  "dialogue": "Спрячусь ка я под стол, чтобы меня никто не увидел. Ай , ай , ай...",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_05"
+                },
+                "inception5_05": {
+                  "id": "inception5_05",
+                  "dialogue": "Здесь очередная спрятанная ловушка. Я случайно задел какой-то механизм и оказался в западне. Со всех сторон стола вниз опустились металлические прутья.",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_06"
+                },
+                "inception5_06": {
+                  "id": "inception5_06",
+                  "dialogue": "Ты слышишь звуки? Это же голос моей дочери...",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_06"
+                },
+                "inception5_07": {
+                  "id": "inception5_07",
+                  "characters": [
+                    {
+                      "id": "professor",
+                      "hidden": false
+                    },
+                    {
+                      "id": "robot",
+                      "pose": "angry",
+                      "position": "center",
+                      "hidden": true
+                    },
+                    {
+                      "id": "vicky",
+                      "hidden": false
+                    }
+                  ],
+                  "dialogue": "Обалдеть! Ты просто посмотри! Как будто в другой мир из подземелья попала. Как уютненько! ",
+                  "speaker": "vicky",
+                  "nextFrame": "inception5_08"
+                },
+                "inception5_08": {
+                  "id": "inception5_08",
+                  "dialogue": "Папа?! Что ты тут делаешь?!",
+                  "speaker": "vicky",
+                  "nextFrame": "inception5_09"
+                },
+                "inception5_09": {
+                  "id": "inception5_09",
+                  "dialogue": "Я хотел тебе задать тот же вопрос! Я ожидал здесь увидеть кого угодно, но не тебя! Как ты тут оказалась?!",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_10"
+                },
+                "inception5_10": {
+                  "id": "inception5_10",
+                  "dialogue": "Я просто знаю, что без меня тебе не справиться! А сам ты мне бы ни за что не позвонил!",
+                  "speaker": "vicky",
+                  "nextFrame": "inception5_11"
+                },
+                "inception5_11": {
+                  "id": "inception5_11",
+                  "dialogue": "Ты вообще понимаешь, что тут небезопасно?! Как тебе удалось сюда проникнуть?",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_12"
+                },
+                "inception5_12": {
+                  "id": "inception5_12",
+                  "dialogue": "Ловкость рук и никакого мошенничества!",
+                  "speaker": "vicky",
+                  "nextFrame": "inception5_13"
+                },
+                "inception5_13": {
+                  "id": "inception5_13",
+                  "dialogue": "Ты опять взломала сайт ФБР?!",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_14"
+                },
+                "inception5_14": {
+                  "id": "inception5_14",
+                  "dialogue": "Ой, пап, ну хватит ругаться! Просто признай, что ты меня ждал и очень рад моему появлению! Ты сидишь под столом в западне, как ты вообще собирался без меня отсюда вылазить?",
+                  "speaker": "vicky",
+                  "nextFrame": "inception5_15"
+                },
+                "inception5_15": {
+                  "id": "inception5_15",
+                  "dialogue": "Тут всего лишь надо выполнить очередное задание и ввести код.",
+                  "speaker": "professor",
+                  "nextFrame": "inception5_16"
+                },
+                "inception5_16": {
+                  "id": "inception5_16",
+                  "dialogue": "Со мной у тебя это получится быстрее! Просто признай это!",
+                  "speaker": "vicky",
+                  "nextFrame": "inception5_17"
+                },
+                "inception5_17": {
+                  "id": "inception5_17",
+                  "characters": [
+                    {
+                      "id": "professor",
+                      "hidden": false
+                    },
+                    {
+                      "id": "robot",
+                      "pose": "angry",
+                      "position": "center",
+                      "hidden": false
+                    },
+                    {
+                      "id": "vicky",
+                      "hidden": false
+                    }
+                  ],
+                  "dialogue": "Я прошу прощения, что вмешиваюсь в ваш диалог, но времени остаётся мало. И плюс сюда войти может кто угодно!",
+                  "speaker": "robot",
+                  "nextFrame": "inception5_18"
+                },
+                "inception5_18": {
+                  "id": "inception5_18",
+                  "dialogue": "Да, ты прав, надо освободить отца и отправиться уже на поиски компьютера!",
+                  "speaker": "vicky",
+                  "nextFrame": "inception5_19"
+                },
+                "inception5_19": {
+                  "id": "inception5_19",
+                  "dialogue": "",
+                  "nextFrame": "inception5_20",
+                  "effects": [
+                    {
+                      "type": "START_TASK",
+                      "args": {
+                        "tasks": "task_choose_weapon4"
+                      }
+                    }
+                  ]
+                },
+                "inception5_20": {
+                  "id": "inception5_20",
+                  "dialogue": "",
+                  "nextFrame": "inception6",
+                  "effects": [
+                    {
+                      "type": "JUMP_CHAPTER",
+                      "args": {
+                        "chapterId": "inception6"
+                      }
+                    }
+                  ]
+                },
+                "inception6": {
+                  "inception6_start": {
+                    "id": "inception6_start",
+                    "location": "studyRoom",
+                    "characters": [
+                      {
+                        "id": "professor",
+                        "hidden": false
+                      },
+                      {
+                        "id": "robot",
+                        "pose": "angry",
+                        "position": "center",
+                        "hidden": false
+                      },
+                      {
+                        "id": "vicky",
+                        "hidden": false
+                      },
+                      {
+                        "id": "anonymous",
+                        "hidden": true
+                      }
+                    ],
+                    "speaker": "vicky",
+                    "dialogue": "Наконец-то! Папа на свободе.",
+                    "nextFrame": "inception6_01"
+                  },
+                  "inception6_01": {
+                    "id": "inception6_01",
+                    "dialogue": "Позвольте вам помочь выбраться, профессор?",
+                    "speaker": "robot",
+                    "nextFrame": "inception6_02"
+                  },
+                  "inception6_02": {
+                    "id": "inception6_02",
+                    "dialogue": "Я сам ещё в состоянии вылезти из под стола. Спасибо! Тихо! Вы слышите эти звуки? ",
+                    "speaker": "professor",
+                    "nextFrame": "inception6_03"
+                  },
+                  "inception6_03": {
+                    "id": "inception6_03",
+                    "characters": [
+                      {
+                        "id": "professor",
+                        "hidden": false
+                      },
+                      {
+                        "id": "robot",
+                        "pose": "angry",
+                        "position": "center",
+                        "hidden": false
+                      },
+                      {
+                        "id": "vicky",
+                        "hidden": false
+                      },
+                      {
+                        "id": "anonymous",
+                        "hidden": false
+                      }
+                    ],
+                    "dialogue": "Ммм... Ммм.... Ммммм...",
+                    "speaker": "anonymous",
+                    "nextFrame": "inception6_04"
+                  },
+                  "inception6_04": {
+                    "id": "inception6_04",
+                    "dialogue": "Тут кто-то есть!",
+                    "speaker": "vicky",
+                    "nextFrame": "inception6_05"
+                  },
+                  "inception6_05": {
+                    "id": "inception6_05",
+                    "dialogue": "Похоже на какое-то мычание. Звуки идут из того дальнего угла комнаты...",
+                    "speaker": "professor",
+                    "nextFrame": "inception6_06"
+                  },
+                  "inception6_06": {
+                    "id": "inception6_06",
+                    "dialogue": "Пойдемте посмотрим кто там! Надо фонариком посветить...Да это же похищенная специалист по информационной безопасности Сара Паркер! Сейчас я помогу вам!",
+                    "speaker": "vicky",
+                    "nextFrame": "inception6_07"
+                  },
+                  "inception6_07": {
+                    "id": "inception6_07",
+                    "characters": [
+                      {
+                        "id": "professor",
+                        "hidden": false
+                      },
+                      {
+                        "id": "robot",
+                        "pose": "angry",
+                        "position": "center",
+                        "hidden": true
+                      },
+                      {
+                        "id": "vicky",
+                        "hidden": false
+                      },
+                      {
+                        "id": "anonymous",
+                        "hidden": true
+                      },
+                      {
+                        "id": "sara",
+                        "hidden": false
+                      }
+                    ],
+                    "dialogue": "Вы профессор Лэнгдон?! Меня зовут Сара Паркер! Кевин Митник меня похитил вчера вечером из моего собственного дома! Он сошёл с ума и его надо немедленно остановить! ",
+                    "speaker": "sara",
+                    "nextFrame": "inception6_08"
+                  },
+                  "inception6_08": {
+                    "id": "inception6_08",
+                    "dialogue": "Я так и думала, что директор обратится за помощью именно к вам!",
+                    "speaker": "sara",
+                    "nextFrame": "inception6_09"
+                  },
+                  "inception6_09": {
+                    "id": "inception6_09",
+                    "dialogue": "Притяно познакомиться, мисс, я признаться не ожидал вас здесь увидеть!",
+                    "speaker": "professor",
+                    "nextFrame": "inception6_10"
+                  },
+                  "inception6_10": {
+                    "id": "inception6_10",
+                    "dialogue": "Помогите мне освободиться, пожалуйста! Я знаю где находится главный компьютер! Нам надо поторопиться, времени осталось мало!",
+                    "speaker": "sara",
+                    "nextFrame": "inception6_11"
+                  },
+                  "inception6_11": {
+                    "id": "inception6_11",
+                    "dialogue": "Позвольте представить вам мою дочь Викки. Мы сейчас вместе с ней выполним задание и введем верный код, чтобы вас освободить, мисс.",
+                    "speaker": "professor",
+                    "nextFrame": "inception6_12"
+                  },
+                  "inception6_12": {
+                    "id": "inception6_12",
+                    "dialogue": "Я наслышана о вас мисс не менее, чем о вашем выдающемся отце. Верю, что у вас все получится!",
+                    "speaker": "sara",
+                    "nextFrame": "inception6_13"
+                  },
+                  "inception6_13": {
+                    "id": "inception6_13",
+                    "dialogue": "",
+                    "nextFrame": "inception6_14",
+                    "effects": [
+                      {
+                        "type": "START_TASK",
+                        "args": {
+                          "tasks": "task_choose_weapon5"
+                        }
+                      }
+                    ]
+                  },
+                  "inception6_14": {
+                    "id": "inception6_14",
+                    "dialogue": "",
+                    "nextFrame": "inception7",
+                    "effects": [
+                      {
+                        "type": "JUMP_CHAPTER",
+                        "args": {
+                          "chapterId": "inception7"
+                        }
+                      }
+                    ]
+                  },
+                  "inception7": {
+                    "inception6_start": {
+                      "id": "inception7_start",
+                      "location": "computerRoom",
+                      "characters": [
+                        {
+                          "id": "professor",
+                          "hidden": false
+                        },
+                        {
+                          "id": "robot",
+                          "pose": "angry",
+                          "position": "center",
+                          "hidden": false
+                        },
+                        {
+                          "id": "vicky",
+                          "hidden": false
+                        },
+                        {
+                          "id": "sara",
+                          "hidden": true
+                        }
+                      ],
+                      "speaker": "sara",
+                      "dialogue": "Спасибо, что помогли освободить меня! Теперь нельзя медлить, времени мало, пойдемте дальше!",
+                      "nextFrame": "inception7_01"
+                    },
+                    "inception7_01": {
+                      "id": "inception7_01",
+                      "dialogue": "Согласна, пошлите. Смотрите! Вот это машина!",
+                      "speaker": "vicky",
+                      "nextFrame": "inception7_02"
+                    },
+                    "inception7_02": {
+                      "id": "inception7_02",
+                      "dialogue": "Это, конечно, не суперкомпьютер, но тоже достаточно мощный...",
+                      "speaker": "professor",
+                      "nextFrame": "inception7_03"
+                    },
+                    "inception7_03": {
+                      "id": "inception7_03",
+                      "dialogue": "Смотрите, компьютер включён и осуществляет загрузку каких-то файлов. Давайте посмотрим что там?",
+                      "speaker": "sara",
+                      "nextFrame": "inception7_04"
+                    },
+                    "inception7_04": {
+                      "id": "inception7_04",
+                      "dialogue": "Тут целый список зашифрованных личных данных сотрудников монетного двора США. На сколько мне известно, к хранилищу Форт-Нокса имеют доступ лишь 10 из них.",
+                      "speaker": "professor",
+                      "nextFrame": "inception7_05"
+                    },
+                    "inception7_05": {
+                      "id": "inception7_05",
+                      "dialogue": "Чтобы попасть внутрь хранилища, каждый из них должен ввести свою часть кода и тогда 'сим-сим' распахнет свои двери. А делает он это крайне редко. За всю историю Форт-Нокса только три раза в него попадали посторонние люди.",
+                      "speaker": "professor",
+                      "nextFrame": "inception7_06"
+                    },
+                    "inception7_06": {
+                      "id": "inception7_06",
+                      "dialogue": "Кому же выпала такая честь и по какой причине они смогли туда попасть?",
+                      "speaker": "vicky",
+                      "nextFrame": "inception7_07"
+                    },
+                    "inception7_07": {
+                      "id": "inception7_07",
+                      "dialogue": "Первым из тех кто туда попал был американский президент Рузвельт в 1943 году. А второй раз запасы проверяли лишь спустя 31 год.",
+                      "speaker": "professor",
+                      "nextFrame": "inception7_08"
+                    },
+                    "inception7_08": {
+                      "id": "inception7_08",
+                      "dialogue": "И третья инспекция случилась в 2018 году, так как стали ходить слухи, что никакого золота в хранилище нет. Но это оказалось лишь слухами, все золото было на месте.",
+                      "speaker": "professor",
+                      "nextFrame": "inception7_09"
+                    },
+                    "inception7_09": {
+                      "id": "inception7_09",
+                      "dialogue": "Интересно, сотрудники монетного двора тоже в доле с Митником или он хочет их использовать втемную? ",
+                      "speaker": "sara",
+                      "nextFrame": "inception7_10"
+                    },
+                    "inception7_10": {
+                      "id": "inception7_10",
+                      "dialogue": "Мы обязательно выясним это позже, а сейчас нужно остановить вирус и ввести код пока нам никто не помешал.",
+                      "speaker": "vicky",
+                      "nextFrame": "inception7_11"
+                    },
+                    "inception7_11": {
+                      "id": "inception7_11",
+                      "dialogue": "Да, давайте приступим. Я уже готов.",
+                      "speaker": "robot",
+                      "nextFrame": "inception7_12"
+                    },
+                    "inceptio7_12": {
+                      "id": "inception7_12",
+                      "dialogue": "",
+                      "nextFrame": "inception7_13",
+                      "effects": [
+                        {
+                          "type": "START_TASK",
+                          "args": {
+                            "tasks": "task_choose_weapon6"
+                          }
+                        }
+                      ]
+                    },
+                    "inception7_13": {
+                      "id": "inception7_13",
+                      "dialogue": "",
+                      "nextFrame": null
+                    },
+                    "frame_weapon_failure": {
+                      "id": "frame_weapon_failure",
+                      "dialogue": "Попробуй еще раз!",
+                      "nextFrame": "inception2_12",
+                      "effects": [
+                        {
+                          "type": "JUMP_CHAPTER",
+                          "args": {
+                            "chapterId": "inceptio2_12"
+                          }
+                        }
+                      ]
+                    },
+                    "frame_weapon_failure2": {
+                      "id": "frame_weapon_failure2",
+                      "dialogue": "Попробуй еще раз!",
+                      "nextFrame": "inceptio3_11",
+                      "effects": [
+                        {
+                          "type": "JUMP_CHAPTER",
+                          "args": {
+                            "chapterId": "inceptio3_11"
+                          }
+                        }
+                      ]
+                    },
+                    "frame_weapon_failure3": {
+                      "id": "frame_weapon_failure3",
+                      "dialogue": "Попробуй еще раз!",
+                      "nextFrame": "inceptio4_07",
+                      "effects": [
+                        {
+                          "type": "JUMP_CHAPTER",
+                          "args": {
+                            "chapterId": "inceptio4_07"
+                          }
+                        }
+                      ]
+                    },
+                    "frame_weapon_failure4": {
+                      "id": "frame_weapon_failure4",
+                      "dialogue": "Попробуй еще раз!",
+                      "nextFrame": "inceptio5_19",
+                      "effects": [
+                        {
+                          "type": "JUMP_CHAPTER",
+                          "args": {
+                            "chapterId": "inceptio5_19"
+                          }
+                        }
+                      ]
+                    },
+                    "frame_weapon_failure5": {
+                      "id": "frame_weapon_failure5",
+                      "dialogue": "Попробуй еще раз!",
+                      "nextFrame": "inceptio6_13",
+                      "effects": [
+                        {
+                          "type": "JUMP_CHAPTER",
+                          "args": {
+                            "chapterId": "inceptio6_13"
+                          }
+                        }
+                      ]
+                    },
+                    "frame_weapon_failure6": {
+                      "id": "frame_weapon_failure6",
+                      "dialogue": "Попробуй еще раз!",
+                      "nextFrame": "inceptio7_12",
+                      "effects": [
+                        {
+                          "type": "JUMP_CHAPTER",
+                          "args": {
+                            "chapterId": "inceptio7_12"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
