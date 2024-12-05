@@ -9,6 +9,7 @@ import GamePage from './pages/GamePage';
 
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
+import SecretPage from "./pages/SecretPage.tsx";
 
 Sentry.init({
 	dsn: 'https://2a79b7cbcd0c952c1d8bb6dcf79cc459@o4508292474339328.ingest.de.sentry.io/4508292540530768',
@@ -24,6 +25,7 @@ const App: React.FC = () => {
 			<Route path="/main" element={<MainPage />} />
 			<Route path="/select" element={<SelectMode />} />
 			<Route path="/single-player" element={<GamePage />} />
+			<Route path="/secret" element={<SecretPage />} />
 		</Routes>
 	);
 };
