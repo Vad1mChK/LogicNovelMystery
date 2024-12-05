@@ -115,13 +115,7 @@
     "task_choose_weapon3": {
       "id": "task_choose_weapon3",
       "type": "SELECT_ONE",
-      "questionText": "Даны следующие факты. Что вернет запрос 'character(_)'",
-      "testCases": [
-        {
-          "input": "character(professor).\ncharacter(vicky).\ncharacter(metnik).",
-          "expectedResult": true
-        }
-      ],
+      "questionText": "Даны следующие факты: `character(professor).`\n`character(vicky).`\n`character(metnik).`. Что вернет запрос 'character(_)'",
       "options": [
         "true",
         "false",
@@ -138,10 +132,10 @@
       "type": "SELECT_ONE",
       "questionText": "Как разделить список `[1, 2, 3, 4]` на два списка: `[1, 2]` и `[3, 4]`?",
       "options": [
-        "append([1, 2], [3, 4], [1, 2, 3, 4])",
-        "[1, 2] | [3, 4] = [1, 2, 3, 4]",
-        "split([1, 2, 3, 4], [1, 2], [3, 4])",
-        "[Head, Tail] = [1, 2, 3, 4]"
+        "`append([1, 2], [3, 4], [1, 2, 3, 4])`",
+        "`[1, 2]` | `[3, 4]` = `[1, 2, 3, 4]`",
+        "`split([1, 2, 3, 4], [1, 2], [3, 4])`",
+        "`[Head, Tail]` = `[1, 2, 3, 4]`"
       ],
       "correctAnswerIndices": 2,
       "hint": "Вспомни про встроенные конструкции",
@@ -602,15 +596,7 @@
               "inception4_11": {
                 "id": "inception4_11",
                 "dialogue": "",
-                "nextFrame": "inception5",
-                "effects": [
-                  {
-                    "type": "JUMP_CHAPTER",
-                    "args": {
-                      "chapterId": "inception5"
-                    }
-                  }
-                ]
+                "nextFrame": null
               },
               "frame_weapon_failure": {
                 "id": "frame_weapon_failure",
