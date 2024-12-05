@@ -87,7 +87,7 @@
                 "Переменная"
              ],
             "correctAnswerIndices": [2 , 3],
-            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnSuccess": "inception1_13",
             "nextFrameOnFailure": "frame_weapon_failure",
             "failureScorePenalty": 2
         },
@@ -108,7 +108,7 @@
             ],
             "correctAnswerIndices": 0,
             "hint": "Вспомни, что означает переменная Х",
-            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnSuccess": "inception2_07",
             "nextFrameOnFailure": "frame_weapon_failure",
             "failureScorePenalty": 1
           },
@@ -130,14 +130,14 @@
             ],
             "correctAnswerIndices": 0, 
             "hint": "Подумай, что такое факт.",
-            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnSuccess": "inception3_15",
             "nextFrameOnFailure": "frame_weapon_failure",
             "failureScorePenalty": 1
         },
           "task_choose_weapon4": {
             "id": "task_choose_weapon4",
             "type": "SELECT_ONE",
-            "questionText": "Как можно найти длину списка [a, b, c, d] в Прологе?",
+            "questionText": "Как можно найти длину списка `[a, b, c, d]` в Прологе?",
             "options": [
                 "list_length([a, b, c, d], Length)",
                 "size([a, b, c, d], Length)",
@@ -146,17 +146,17 @@
             ],
             "correctAnswerIndices": 2,
             "hint": "Вспомни про встроенные конструкции",
-            "nextFrameOnSuccess": "frame_weapon_success",
+            "nextFrameOnSuccess": "inception4_12",
             "nextFrameOnFailure": "frame_weapon_failure",
             "failureScorePenalty": 1
           },
           "task_choose_weapon5": {
             "id": "task_choose_weapon5",
             "type": "COMPLETE_QUERY",
-            "questionText": "Напиши запрос, который объединяет два списка в третий Result = [1, 2, 3, 4]. Подсказка: воспользуйтесь стандартным предикатом append/3",
-            "expectedResult": ["append([1, 2], [3, 4], Result)."],
-            "hint": "Вспомни про встроенные конструкции",
-            "nextFrameOnSuccess": "frame_weapon_success",
+            "questionText": "Напиши запрос, который объединяет два списка в третий `Result = [1, 2, 3, 4]`.",
+            "expectedResult": ["Result = [1, 2, 3, 4]"],
+            "hint": "Вспомни про встроенные конструкции. Воспользуйся стандартным предикатом append/3.",
+            "nextFrameOnSuccess": "inception5_11",
             "nextFrameOnFailure": "frame_weapon_failure",
             "failureScorePenalty": 2
           }
@@ -671,13 +671,13 @@
                         "dialogue": "Есть! Мы почти у цели! А вот и компьютер... Однако это не суперкомпьютер, но тоже достаточно мощная машина! ",
                         "nextFrame": "inception5_01"
                     },  
-                    "inception5_01": {
+                "inception5_01": {
                         "id": "inception5_01",
                         "dialogue": "Смотрите, компьютер включён и осуществляет загрузку каких-то файлов. Давайте посмотрим что там?",
                         "speaker": "sara",
                         "nextFrame": "inception5_02"
                     },
-                    "inception5_02": {
+                "inception5_02": {
                         "id": "inception5_02",
                         "dialogue": "Тут целый список зашифрованных личных данных сотрудников монетного двора США. На сколько мне известно, к хранилищу Форт-Нокса имеют доступ лишь 10 из них.",
                         "speaker": "steve",
@@ -756,14 +756,27 @@
                         ]
                     },
                     "inception5_11": {
-                    "id": "inception5_11",
-                    "dialogue": "",
-                    "nextFrame": "inception6",
+                      "id": "inception5_11",
+                       "dialogue": "",
+                       "nextFrame": "null",
+                        "effects": [
+                           {
+                            "type": "JUMP_CHAPTER",
+                            "args": {
+                                "chapterId": "null"
+                            }
+                          }
+                    ]
+                },
+                "frame_weapon_failure": {
+                    "id": "frame_weapon_failure",
+                    "dialogue": "Попробуй еще раз!",
+                    "nextFrame": "null",
                     "effects": [
                         {
                             "type": "JUMP_CHAPTER",
                             "args": {
-                                "chapterId": "inception6"
+                                "chapterId": "null"
                             }
                         }
                     ]
