@@ -109,7 +109,7 @@
             "correctAnswerIndices": 0,
             "hint": "Вспомни, что означает переменная Х",
             "nextFrameOnSuccess": "inception2_07",
-            "nextFrameOnFailure": "frame_weapon_failure",
+            "nextFrameOnFailure": "frame_weapon_failure2",
             "failureScorePenalty": 1
           },
           "task_choose_weapon3": {
@@ -131,7 +131,7 @@
             "correctAnswerIndices": 0, 
             "hint": "Подумай, что такое факт.",
             "nextFrameOnSuccess": "inception3_15",
-            "nextFrameOnFailure": "frame_weapon_failure",
+            "nextFrameOnFailure": "frame_weapon_failure3",
             "failureScorePenalty": 1
         },
           "task_choose_weapon4": {
@@ -147,7 +147,7 @@
             "correctAnswerIndices": 2,
             "hint": "Вспомни про встроенные конструкции",
             "nextFrameOnSuccess": "inception4_12",
-            "nextFrameOnFailure": "frame_weapon_failure",
+            "nextFrameOnFailure": "frame_weapon_failure4",
             "failureScorePenalty": 1
           },
           "task_choose_weapon5": {
@@ -157,7 +157,7 @@
             "expectedResult": ["Result = [1, 2, 3, 4]"],
             "hint": "Вспомни про встроенные конструкции. Воспользуйся стандартным предикатом append/3.",
             "nextFrameOnSuccess": "inception5_11",
-            "nextFrameOnFailure": "frame_weapon_failure",
+            "nextFrameOnFailure": "frame_weapon_failure5",
             "failureScorePenalty": 2
           }
 
@@ -771,14 +771,66 @@
                 "frame_weapon_failure": {
                     "id": "frame_weapon_failure",
                     "dialogue": "Попробуй еще раз!",
-                    "nextFrame": "null",
+                    "nextFrame": "inception1_12",
                     "effects": [
                         {
                             "type": "JUMP_CHAPTER",
                             "args": {
-                                "chapterId": "null"
+                                "chapterId": "inception1_12"
                             }
                         }
+                    ]
+                },
+                "frame_weapon_failure2": {
+                       "id": "frame_weapon_failure2",
+                       "dialogue": "Попробуй еще раз!",
+                       "nextFrame": "inceptio2_06",
+                       "effects": [
+                          {
+                            "type": "JUMP_CHAPTER",
+                            "args": {
+                                "chapterId": "inceptio2_06"
+                            }
+                          }
+                    ]
+                },
+                "frame_weapon_failure3": {
+                       "id": "frame_weapon_failure3",
+                       "dialogue": "Попробуй еще раз!",
+                       "nextFrame": "inceptio3_14",
+                       "effects": [
+                          {
+                            "type": "JUMP_CHAPTER",
+                            "args": {
+                                "chapterId": "inceptio3_14"
+                            }
+                          }
+                    ]
+                },
+                "frame_weapon_failure4": {
+                       "id": "frame_weapon_failure4",
+                       "dialogue": "Попробуй еще раз!",
+                       "nextFrame": "inceptio4_11",
+                       "effects": [
+                          {
+                            "type": "JUMP_CHAPTER",
+                            "args": {
+                                "chapterId": "inceptio4_11"
+                            }
+                          }
+                    ]
+                },
+                "frame_weapon_failure5": {
+                       "id": "frame_weapon_failure5",
+                       "dialogue": "Попробуй еще раз!",
+                       "nextFrame": "inceptio5_10",
+                       "effects": [
+                          {
+                            "type": "JUMP_CHAPTER",
+                            "args": {
+                                "chapterId": "inceptio5_10"
+                            }
+                          }
                     ]
                 }
             }    
