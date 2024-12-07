@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../css/MainPage.scss';
 import { useNavigate } from 'react-router-dom';
+import { AudioContext } from '../pages/AudioContext';
+import defaultMusic from '../assets/music/fon.mp3';
 
 const MainMenu: React.FC = () => {
 	const [language, setLanguage] = useState('ru');
@@ -9,6 +11,17 @@ const MainMenu: React.FC = () => {
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 	const [volume, setVolume] = useState(50);
 	const navigate = useNavigate();
+	const audioContext = useContext(AudioContext);
+
+	const { isMusicPlaying, toggleMusic, setMusicFile } = useContext(AudioContext)!;
+
+	// Устанавливаем музыку при загрузке страницы
+	useEffect(() => {
+		setMusicFile(defaultMusic);
+		if (!isMusicPlaying) {
+			toggleMusic(); // Запускаем музыку, если она не играет
+		}
+	}, []);
 
 	const closeAllModals = () => {
 		setSettingsOpen(false);
