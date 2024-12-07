@@ -1,6 +1,9 @@
-import React from "react";
-import "prismjs/themes/prism-twilight.css";
-import { LnmTaskType } from "./types.ts";
+import React from 'react';
+import 'prismjs/themes/prism-twilight.css';
+import { LnmTaskType } from './types.ts';
+import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput.tsx';
+import SyntaxHighlightDisplayInline from "../markupElements/SyntaxHighlightDisplayInline.tsx";
+import SyntaxHighlightDisplay from "../markupElements/SyntaxHighlightDisplay.tsx";
 
 interface TaskWindowProps {
 	taskType: LnmTaskType;
@@ -18,8 +21,20 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 	correctAnswerIndices,
 }) => {
 	return (
-		<form>
-			<p>{questionText.replace(/\n/, '<br/>')}</p>
+		<form
+			style={{
+				width: '50vw',
+				height: '50vh',
+			}}
+		>
+			<p>
+				{questionText}
+				<SyntaxHighlightDisplay
+					value={'friends(X, Y) :-\n\tfriend(X, Y);\n\tfriend(Y, X).'}
+				/>
+				4 5 6
+				<SyntaxHighlightDisplayInline value="friends(Who, vadim)." />
+			</p>
 			{taskType == LnmTaskType.SELECT_MANY && (
 				<ul>
 					{options?.map((option, index) => (
@@ -45,7 +60,7 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 								type="radio"
 								name="select-many"
 								id={`select-many-${index}`}
-								checked={index === 0}
+								defaultChecked={index === 0}
 								required={index === 0}
 							/>
 							<label htmlFor={`select-many-${index}`}>
@@ -55,7 +70,13 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 					)) ?? <li>Error loading answer options</li>}
 				</ul>
 			)}
-			<input type='submit' />
+			<SyntaxHighlightInput
+				width="75%"
+				height="50%"
+				value="f(X, Y) :- X \= Y."
+				placeholder="Your code goes here..."
+			/>
+			<input type="submit" />
 		</form>
 	);
 };

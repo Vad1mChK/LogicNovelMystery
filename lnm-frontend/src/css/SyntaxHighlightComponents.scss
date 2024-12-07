@@ -1,0 +1,150 @@
+@use "sass:color";
+
+.syntax-highlight {
+  transition: 0.3s all ease-in-out;
+
+  font-family: 'JetBrains Mono', monospace;
+  $WHITE: #f4f4f4;
+  $ORANGE: #F57D2380;
+  $DARK-GRAY: #3E3C39;
+
+  & > * {
+    font: inherit;
+  }
+
+  &.display-inline {
+    background: $DARK-GRAY;
+    display: inline;
+    padding: 4px;
+    border-radius: 4px;
+
+    & > .syntax-highlight-top-row-button {
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+
+      margin: 0;
+
+      width: 1em;
+      height: 1em;
+
+      background: transparent;
+      color: inherit;
+      border: none;
+      border-radius: 8px;
+
+      &:hover {
+        background: color.adjust($DARK-GRAY, $lightness: 20%);
+      }
+    }
+  }
+
+  &.input, &.display {
+    $Z-INDEX: 42;
+
+    position: relative;
+
+    border: 2px solid $WHITE;
+    border-radius: 4px;
+
+    & > .syntax-highlight-top-row {
+      z-index: $Z-INDEX + 2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      align-items: center;
+      gap: 8px;
+
+      padding: 4px;
+
+      & > .syntax-highlight-top-row-button {
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+
+        width: 24px;
+        height: 24px;
+
+        background: transparent;
+        color: inherit;
+        border: none;
+        border-radius: 8px;
+
+        &:hover {
+          background: color.adjust($DARK-GRAY, $lightness: 20%);
+        }
+      }
+    }
+
+    &.display > .syntax-highlight-code-area > .syntax-highlight-display-content {
+      padding: 16px;
+      font: inherit;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    &.input > .syntax-highlight-code-area {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      border: none;
+
+      & > .syntax-highlight-code-area-display, & > .syntax-highlight-code-area-editable {
+        position: absolute;
+
+        padding: 16px;
+
+        font: inherit;
+
+        overflow: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      & > .syntax-highlight-code-area-display {
+        z-index: $Z-INDEX;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        color: $WHITE;
+
+        pointer-events: none;
+      }
+
+      & > .syntax-highlight-code-area-editable {
+        width: 100%;
+        height: 100%;
+
+        z-index: $Z-INDEX + 1;
+        resize: none;
+
+        background: transparent;
+        color: transparent;
+        caret-color: $WHITE;
+        border: none;
+      }
+
+      & > .syntax-highlight-code-area-tab-warning {
+        transition: all 0.3s ease-in-out;
+
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 100%;
+        transform: translateX(-50%);
+
+        padding: 8px;
+
+        background: $ORANGE;
+        font-size: smaller;
+      }
+    }
+  }
+}
