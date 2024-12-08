@@ -15,6 +15,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [currentMusicFile, setCurrentMusicFile] = useState<string | null>(null);
     const [volume, setVolumeState] = useState(50);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [userInteracted, setUserInteracted] = useState(false); // Новый флаг для отслеживания взаимодействия пользователя
 
     // Инициализация аудио-элемента
     useEffect(() => {
@@ -23,6 +24,21 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             audioRef.current.loop = true;
         }
     }, []);
+
+    // Обработчик для отслеживания взаимодействия пользователя
+    const handleUserInteraction = () => {
+        setUserInteracted(true);
+        document.removeEventListener('click', handleUserInteraction);
+    };
+
+    useEffect(() => {
+        if (!userInteracted) {
+            document.addEventListener('click', handleUserInteraction);
+        }
+        return () => {
+            document.removeEventListener('click', handleUserInteraction);
+        };
+    }, [userInteracted]);
 
     // Устанавливаем файл музыки
     const setMusicFile = (file: string) => {
@@ -34,13 +50,17 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     // Управляем воспроизведением музыки
     const toggleMusic = () => {
-        if (audioRef.current) {
+        if (audioRef.current && userInteracted) {
             if (isMusicPlaying) {
                 audioRef.current.pause();
             } else {
-                audioRef.current.play();
+                audioRef.current.play().catch((error) => {
+                    console.error('Audio playback failed:', error);
+                });
             }
             setMusicPlaying(!isMusicPlaying);
+        } else if (!userInteracted) {
+            console.warn('User has not interacted with the document yet.');
         }
     };
 

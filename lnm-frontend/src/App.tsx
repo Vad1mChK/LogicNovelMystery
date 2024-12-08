@@ -5,7 +5,6 @@ import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import SelectMode from './pages/SelectMode';
 import GamePage from './pages/GamePage';
-import Task from './pages/task.tsx';
 import { AudioProvider, AudioContext } from './pages/AudioContext';
 
 const App: React.FC = () => {
@@ -18,7 +17,6 @@ const App: React.FC = () => {
 			<Route path="/main" element={<MainPage />} />
 			<Route path="/select" element={<SelectMode />} />
 			<Route path="/single-player" element={<GamePage />} />
-			<Route path="/task" element={<Task />} />
 		  </Routes>
 		</AudioProvider>
 	);

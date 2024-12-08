@@ -1,19 +1,19 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../css/MainPage.scss';
 import { useNavigate } from 'react-router-dom';
 import { AudioContext } from '../pages/AudioContext';
+import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 import defaultMusic from '../assets/music/fon.mp3';
 
 const MainMenu: React.FC = () => {
-	const [language, setLanguage] = useState('ru');
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
 	const [isAboutOpen, setAboutOpen] = useState(false);
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 	const [volume, setVolume] = useState(50);
 	const navigate = useNavigate();
-	const audioContext = useContext(AudioContext);
 
 	const { isMusicPlaying, toggleMusic, setMusicFile } = useContext(AudioContext)!;
+	const { t, i18n } = useTranslation(); // Используем локализацию
 
 	// Устанавливаем музыку при загрузке страницы
 	useEffect(() => {
@@ -34,7 +34,7 @@ const MainMenu: React.FC = () => {
 	};
 
 	const changeLanguage = (selectedLanguage: string) => {
-		setLanguage(selectedLanguage);
+		i18n.changeLanguage(selectedLanguage); // Меняем язык
 	};
 
 	return (
@@ -42,7 +42,7 @@ const MainMenu: React.FC = () => {
 			<div className="main-container">
 				{/* Кнопка "Начать игру" */}
 				<button className="button" onClick={() => navigate('/select')}>
-					{language === 'ru' ? 'Начать игру' : 'Start game'}
+					{t('Start game')}
 				</button>
 
 				{/* Блок с дополнительными кнопками */}
@@ -51,19 +51,19 @@ const MainMenu: React.FC = () => {
 						className="button"
 						onClick={() => setLeaderboardOpen(true)}
 					>
-						{language === 'ru' ? 'Доска лидеров' : 'Leaderboard'}
+						{t('Leaderboard')}
 					</button>
 					<button
 						className="button"
 						onClick={() => setSettingsOpen(true)}
 					>
-						{language === 'ru' ? 'Настройки' : 'Settings'}
+						{t('Settings')}
 					</button>
 					<button
 						className="button"
 						onClick={() => setAboutOpen(true)}
 					>
-						{language === 'ru' ? 'Об игре' : 'About'}
+						{t('About')}
 					</button>
 				</div>
 			</div>
@@ -76,10 +76,8 @@ const MainMenu: React.FC = () => {
 			{/* Модальное окно с настройками */}
 			{isSettingsOpen && (
 				<div id="settings-modal">
-					<h2>{language === 'ru' ? 'Настройки' : 'Settings'}</h2>
-					<label htmlFor="volume-range">
-						{language === 'ru' ? 'Звук:' : 'Volume:'}
-					</label>
+					<h2>{t('Settings')}</h2>
+					<label htmlFor="volume-range">{t('Volume')}:</label>
 					<input
 						type="range"
 						id="volume-range"
@@ -91,19 +89,18 @@ const MainMenu: React.FC = () => {
 					/>
 					<span>{volume}%</span>
 					<div style={{ marginTop: '10px' }}>
-						<label htmlFor="language-select">
-							{language === 'ru' ? 'Язык:' : 'Language:'}
-						</label>
+						<label htmlFor="language-select">{t('Language')}:</label>
 						<select
 							id="language-select"
-							onChange={(e) => changeLanguage(e.target.value)}
+							value={i18n.language} // Устанавливаем текущее значение языка
+							onChange={(e) => changeLanguage(e.target.value)} // Слушаем изменения
 						>
-							<option value="ru">Русский</option>
-							<option value="en">English</option>
+							<option value="ru">{t('Russian')}</option>
+							<option value="en">{t('English')}</option>
 						</select>
 					</div>
 					<button className="modal-button" onClick={closeAllModals}>
-						{language === 'ru' ? 'Закрыть' : 'Close'}
+						{t('Close')}
 					</button>
 				</div>
 			)}
@@ -111,14 +108,10 @@ const MainMenu: React.FC = () => {
 			{/* Модальное окно с описанием игры */}
 			{isAboutOpen && (
 				<div id="about-modal">
-					<h2>{language === 'ru' ? 'Об игре' : 'About the Game'}</h2>
-					<p>
-						{language === 'ru'
-							? 'Это захватывающая игра, в которой вы сможете изучить основы языка Prolog в игровой форме, проходя увлекательные задания, чтобы спасти мир от злодея!'
-							: 'This is an exciting game where you can learn Prolog basics while completing thrilling tasks to save the world!'}
-					</p>
+					<h2>{t('About')}</h2>
+					<p>{t('AboutText')}</p>
 					<button className="modal-button" onClick={closeAllModals}>
-						{language === 'ru' ? 'Закрыть' : 'Close'}
+						{t('Close')}
 					</button>
 				</div>
 			)}
@@ -126,32 +119,22 @@ const MainMenu: React.FC = () => {
 			{/* Модальное окно с таблицей лидеров */}
 			{isLeaderboardOpen && (
 				<div id="leaderboard-modal">
-					<h2>
-						{language === 'ru' ? 'Доска лидеров' : 'Leaderboard'}
-					</h2>
+					<h2>{t('Leaderboard')}</h2>
 					<table>
 						<thead>
-							<tr>
-								<th>№</th>
-								<th>{language === 'ru' ? 'Имя' : 'Name'}</th>
-								<th>
-									{language === 'ru'
-										? 'Итоговый счёт'
-										: 'Score'}
-								</th>
-								<th>
-									{language === 'ru'
-										? 'Режим игры'
-										: 'Game Mode'}
-								</th>
-							</tr>
+						<tr>
+							<th>№</th>
+							<th>{t('Name')}</th>
+							<th>{t('Score')}</th>
+							<th>{t('GameMode')}</th>
+						</tr>
 						</thead>
 						<tbody>
-							{/* Динамически добавленные строки таблицы будут здесь */}
+						{/* Динамически добавленные строки таблицы будут здесь */}
 						</tbody>
 					</table>
 					<button className="modal-button" onClick={closeAllModals}>
-						{language === 'ru' ? 'Закрыть' : 'Close'}
+						{t('Close')}
 					</button>
 				</div>
 			)}
