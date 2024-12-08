@@ -3,6 +3,7 @@ import steveImage from '../assets/img/characters/steve/idle.webp';
 import professorAndVicky from '../assets/img/professorAndVicky.png';
 import '../css/SelectMode.scss';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
@@ -12,6 +13,7 @@ const GameSelection: React.FC = () => {
 		null
 	);
 	const navigate = useNavigate();
+	const { t } = useTranslation(); // Подключаем локализацию
 
 	// Load selected character from localStorage on component mount
 	useEffect(() => {
@@ -29,13 +31,16 @@ const GameSelection: React.FC = () => {
 
 	// Start the game (add your game start logic here)
 	const startGame = () => {
-		// window.location.href = ''; // Replace with the actual URL or logic to start the game
-		navigate('/single-player');
+		// Redirect based on selected character
+		if (selectedCharacter === 'Game for one') {
+			navigate('/single-player');
+		} else if (selectedCharacter === 'Game for two') {
+			navigate('/multi-player');
+		}
 	};
 
 	// Go back to the previous page or perform another action
 	const goBack = () => {
-		// This could be window.history.back(), or any other logic for going back
 		window.history.back();
 	};
 
@@ -44,9 +49,9 @@ const GameSelection: React.FC = () => {
 			<div className="center-container">
 				{/* Corrected onClick handler */}
 				<button className="back-button" onClick={goBack}>
-					Back
+					{t('Back')}
 				</button>
-				<h1>Select game mode</h1>
+				<h1>{t('Select game mode')}</h1>
 				<div className="hr"></div>
 				<div className="character-selection">
 					<div className="character-card-container">
@@ -56,11 +61,11 @@ const GameSelection: React.FC = () => {
 						>
 							<img
 								src={steveImage}
-								alt="Персонаж 1"
+								alt={t('Character1')}
 								className="character-image"
 							/>
 						</div>
-						<p className="character-name">Game for one</p>
+						<p className="character-name">{t('Game for one')}</p>
 					</div>
 
 					<div className="character-card-container">
@@ -70,15 +75,19 @@ const GameSelection: React.FC = () => {
 						>
 							<img
 								src={professorAndVicky}
-								alt="Персонаж 2"
+								alt={t('Character2')}
 								className="character-image"
 							/>
 						</div>
-						<p className="character-name">Game for two</p>
+						<p className="character-name">{t('Game for two')}</p>
 					</div>
 				</div>
-				<button className="start-game-button" onClick={startGame}>
-					Start Game
+				<button
+					className="start-game-button"
+					onClick={startGame}
+					disabled={!selectedCharacter} // Disable button if no character selected
+				>
+					{t('Start Game')}
 				</button>
 			</div>
 		</div>
