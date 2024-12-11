@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/MainPage.scss';
 import { useNavigate } from 'react-router-dom';
+import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 
 const MainMenu: React.FC = () => {
 	const [language, setLanguage] = useState('ru');
@@ -25,7 +26,12 @@ const MainMenu: React.FC = () => {
 	};
 
 	return (
-		<div className="background">
+		<div
+			className="background"
+			style={{
+				backgroundImage: `url(${mainPageBackground})`,
+			}}
+		>
 			<div className="main-container">
 				{/* Кнопка "Начать игру" */}
 				<button className="button" onClick={() => navigate('/select')}>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import steveImage from '../assets/img/characters/steve/idle.webp';
-import professorAndVicky from '../assets/img/professorAndVicky.png';
+import steveImage from '../assets/img/steve.webp';
+import professorAndVicky from '../assets/img/prof_and_vicky.webp';
 import '../css/SelectMode.scss';
+import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import { useNavigate } from 'react-router-dom';
 
 // Типизация для режима игры
@@ -40,7 +41,12 @@ const GameSelection: React.FC = () => {
 	};
 
 	return (
-		<div className="background">
+		<div
+			className="background"
+			style={{
+				backgroundImage: `url(${mainPageBackground})`,
+			}}
+		>
 			<div className="center-container">
 				{/* Corrected onClick handler */}
 				<button className="back-button" onClick={goBack}>
