@@ -8,11 +8,14 @@ import '../css/FrameInterpreter.scss';
 const GamePage: React.FC = () => {
 	const [plot, setPlot] = useState<LnmPlot | null>(null);
 
-	const plotUrl =
-		import.meta.env.MODE === 'development'
-			? '/assets/plot/single_game_ru_RU_.json' // Path for `npm run dev`
-			: './assets/plot/single_game_ru_RU_.json'; // Path for `npm run build`
-	// TODO Replace it with a better solution
+	// const plotUrl =
+	// 	import.meta.env.MODE === 'development'
+	// 		? '/assets/plot/single_game_ru_RU_.json' // Path for `npm run dev`
+	// 		: './assets/plot/single_game_ru_RU_.json'; // Path for `npm run build`
+	// // TODO Replace it with a better solution
+
+	console.log(import.meta.env.BASE_URL);
+	const plotUrl = `${import.meta.env.BASE_URL}assets/plot/single_game_ru_RU_.json`;
 
 	const startChapterId = 'inception1';
 	return (
