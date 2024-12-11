@@ -5,6 +5,8 @@ import 'prismjs/components/prism-prolog';
 import '../css/SyntaxHighlightComponents.scss';
 import copyCodeIcon from '../assets/img/svg/copyCodeIcon.svg';
 import { copyTextToClipboard } from './markupUtils';
+import { IconButton, Tooltip } from "@mui/material";
+import CopyIcon from "@mui/icons-material/ContentCopy";
 
 interface SyntaxHighlightDisplayProps {
 	value: string; // Code to display
@@ -52,13 +54,11 @@ const SyntaxHighlightDisplay: React.FC<SyntaxHighlightDisplayProps> = ({
 			}}
 		>
 			<div className="syntax-highlight-top-row">
-				<img
-					src={copyCodeIcon}
-					onClick={copyCode}
-					className="syntax-highlight-top-row-button"
-					alt="Copy code"
-					title="Copy code"
-				/>
+				<Tooltip title="Copy code">
+					<IconButton onClick={copyCode}>
+						<CopyIcon className="syntax-highlight-icon-button" />
+					</IconButton>
+				</Tooltip>
 			</div>
 			<div className="syntax-highlight-code-area">
 				<pre

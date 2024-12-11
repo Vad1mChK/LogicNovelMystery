@@ -1,24 +1,16 @@
 import React from 'react';
 import 'prismjs/themes/prism-twilight.css';
-import { LnmTaskType } from './types.ts';
+import { LnmTask, LnmTaskType } from './types.ts';
 import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput.tsx';
-import SyntaxHighlightDisplayInline from '../markupElements/SyntaxHighlightDisplayInline.tsx';
-import SyntaxHighlightDisplay from '../markupElements/SyntaxHighlightDisplay.tsx';
+import TextSyntaxHighlighter from '../markupElements/TextSyntaxHighlighter.tsx';
+import HintDisplay from "../markupElements/HintDisplay.tsx";
 
 interface TaskWindowProps {
-	taskType: LnmTaskType;
-	questionText: string;
-	placeholderCode?: string;
-	options?: string[];
-	correctAnswerIndices?: number | number[];
+	task: LnmTask,
 }
 
 const TaskWindow: React.FC<TaskWindowProps> = ({
-	taskType,
-	questionText,
-	placeholderCode,
-	options,
-	correctAnswerIndices,
+	task
 }) => {
 	return (
 		<form
@@ -27,17 +19,11 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 				height: '50vh',
 			}}
 		>
-			<p>
-				{questionText}
-				<SyntaxHighlightDisplay
-					value={'friends(X, Y) :-\n\tfriend(X, Y);\n\tfriend(Y, X).'}
-				/>
-				4 5 6
-				<SyntaxHighlightDisplayInline value="friends(Who, vadim)." />
-			</p>
-			{taskType == LnmTaskType.SELECT_MANY && (
+			<TextSyntaxHighlighter input={task.questionText} />
+			{task.hint && <HintDisplay hintText={task.hint} />}
+			{task.type == LnmTaskType.SELECT_MANY && (
 				<ul>
-					{options?.map((option, index) => (
+					{task.options?.map((option, index) => (
 						<li key={index}>
 							<input
 								type="checkbox"
@@ -52,9 +38,9 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 					)) ?? <li>Error loading answer options</li>}
 				</ul>
 			)}
-			{taskType == LnmTaskType.SELECT_ONE && (
+			{task.type == LnmTaskType.SELECT_ONE && (
 				<ul>
-					{options?.map((option, index) => (
+					{task.options?.map((option, index) => (
 						<li key={index}>
 							<input
 								type="radio"
@@ -70,14 +56,9 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 					)) ?? <li>Error loading answer options</li>}
 				</ul>
 			)}
-			{taskType in
-				[LnmTaskType.WRITE_KNOWLEDGE, LnmTaskType.COMPLETE_QUERY] && (
-				<SyntaxHighlightInput
-					width="75%"
-					height="50%"
-					value="f(X, Y) :- X \= Y."
-					placeholder={placeholderCode}
-				/>
+			{(task.type == LnmTaskType.WRITE_KNOWLEDGE ||
+				task.type == LnmTaskType.COMPLETE_QUERY) && (
+				<SyntaxHighlightInput placeholder={task.default} />
 			)}
 			<input type="submit" value={'Отправить'} />
 		</form>

@@ -4,9 +4,12 @@ import 'prismjs/themes/prism-twilight.css'; // Import a Prism theme
 import 'prismjs/components/prism-prolog';
 import '../css/SyntaxHighlightComponents.scss';
 import { copyTextToClipboard } from './markupUtils';
-import copyCodeIcon from '../assets/img/svg/copyCodeIcon.svg';
-import clearCodeIcon from '../assets/img/svg/clearCodeIcon.svg';
-import resetCodeIcon from '../assets/img/svg/resetCodeIcon.svg';
+import { IconButton, Tooltip } from '@mui/material';
+import {
+	Restore as RestoreIcon,
+	ContentCopy as CopyIcon,
+	Clear as ClearIcon,
+} from '@mui/icons-material';
 
 interface SyntaxHighlightBoxProps {
 	placeholder?: string;
@@ -21,7 +24,7 @@ const SyntaxHighlightInput: React.FC<SyntaxHighlightBoxProps> = ({
 	value = '',
 	onUpdate = () => {},
 	width = '100%',
-	height = '100%',
+	height = '10rem',
 }) => {
 	const [content, setContent] = useState(value); // Internal state for content
 	const [displayTabWarning, setDisplayTabWarning] = useState(false);
@@ -112,7 +115,7 @@ const SyntaxHighlightInput: React.FC<SyntaxHighlightBoxProps> = ({
 		onUpdate(''); // Notify parent
 	};
 
-	const resetCode = (ev: React.MouseEvent) => {
+	const restoreCode = (ev: React.MouseEvent) => {
 		ev.preventDefault();
 		setContent(initialValue.current ?? ''); // Reset to initial value
 		onUpdate(initialValue.current ?? ''); // Notify parent
@@ -127,27 +130,21 @@ const SyntaxHighlightInput: React.FC<SyntaxHighlightBoxProps> = ({
 			}}
 		>
 			<div className="syntax-highlight-top-row">
-				<img
-					src={copyCodeIcon}
-					onClick={copyCode}
-					className="syntax-highlight-top-row-button"
-					alt="Copy code"
-					title="Copy code"
-				/>
-				<img
-					src={resetCodeIcon}
-					onClick={resetCode}
-					className="syntax-highlight-top-row-button"
-					alt="Reset code"
-					title="Reset code"
-				/>
-				<img
-					src={clearCodeIcon}
-					onClick={clearCode}
-					className="syntax-highlight-top-row-button"
-					alt="Clear code"
-					title="Clear code"
-				/>
+				<Tooltip title="Copy code">
+					<IconButton onClick={copyCode}>
+						<CopyIcon className="syntax-highlight-icon-button" />
+					</IconButton>
+				</Tooltip>
+				<Tooltip title="Restore code">
+					<IconButton onClick={restoreCode}>
+						<RestoreIcon className="syntax-highlight-icon-button" />
+					</IconButton>
+				</Tooltip>
+				<Tooltip title="Clear code">
+					<IconButton onClick={clearCode}>
+						<ClearIcon className="syntax-highlight-icon-button" />
+					</IconButton>
+				</Tooltip>
 			</div>
 			<div className="syntax-highlight-code-area">
 				<pre

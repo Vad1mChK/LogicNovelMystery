@@ -7,10 +7,17 @@ const SecretPage: React.FC = () => {
 	return (
 		<div>
 			<TaskWindow
-				taskType={LnmTaskType.SELECT_ONE}
-				questionText={'1\n2\n3'}
-				options={['One', 'Two', 'Three']}
-				correctAnswerIndices={0}
+				task={{
+					id: 'someTask',
+					type: LnmTaskType.SELECT_ONE,
+					questionText:
+						'Can you feel the `sunshine`\nbrightening up your day?```friends(X, Y) :-\n\tfriend(X, Y); friend(Y, X).```',
+					hint: 'The student should be going to `investigate(thatScream)` now.',
+					options: ['One', 'Two', 'Three', 'Four'],
+					correctAnswerIndices: 0,
+					nextFrameOnSuccess: '1',
+					nextFrameOnFailure: '2',
+				}}
 			/>
 		</div>
 	);

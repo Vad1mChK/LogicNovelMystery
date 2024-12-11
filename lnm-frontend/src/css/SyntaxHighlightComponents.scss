@@ -1,7 +1,7 @@
 @use "sass:color";
 
 .syntax-highlight {
-  transition: 0.3s all ease-in-out;
+  transition: 0.1s all ease-in-out;
 
   font-family: 'JetBrains Mono', monospace;
   $WHITE: #f4f4f4;
@@ -17,25 +17,6 @@
     display: inline;
     padding: 4px;
     border-radius: 4px;
-
-    & > .syntax-highlight-top-row-button {
-      transition: 0.3s ease-in-out;
-      cursor: pointer;
-
-      margin: 0;
-
-      width: 1em;
-      height: 1em;
-
-      background: transparent;
-      color: inherit;
-      border: none;
-      border-radius: 8px;
-
-      &:hover {
-        background: color.adjust($DARK-GRAY, $lightness: 20%);
-      }
-    }
   }
 
   &.input, &.display {
@@ -60,31 +41,17 @@
       gap: 8px;
 
       padding: 4px;
-
-      & > .syntax-highlight-top-row-button {
-        transition: 0.3s ease-in-out;
-        cursor: pointer;
-
-        width: 24px;
-        height: 24px;
-
-        background: transparent;
-        color: inherit;
-        border: none;
-        border-radius: 8px;
-
-        &:hover {
-          background: color.adjust($DARK-GRAY, $lightness: 20%);
-        }
-      }
     }
 
-    &.display > .syntax-highlight-code-area > .syntax-highlight-display-content {
-      padding: 16px;
-      font: inherit;
-      overflow: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+    &.display > .syntax-highlight-code-area {
+
+      & > .syntax-highlight-display-content {
+        padding: 16px;
+        font: inherit;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
     }
 
     &.input > .syntax-highlight-code-area {
@@ -146,5 +113,9 @@
         font-size: smaller;
       }
     }
+  }
+
+  & .syntax-highlight-icon-button {
+    color: $WHITE;
   }
 }

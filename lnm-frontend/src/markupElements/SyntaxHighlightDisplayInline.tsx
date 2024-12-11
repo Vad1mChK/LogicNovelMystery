@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import 'prismjs/themes/prism-twilight.css'; // Import a Prism theme
-import 'prismjs/components/prism-prolog';
+// import 'prismjs/components/prism-prolog';
 import Prism from 'prismjs';
 import { copyTextToClipboard } from './markupUtils';
-import copyCodeIcon from '../assets/img/svg/copyCodeIcon.svg';
+import { IconButton, Tooltip } from '@mui/material';
+import CopyIcon from '@mui/icons-material/ContentCopy';
 
 interface SyntaxHighlightDisplayInlineProps {
 	value: string;
+	copyable: boolean;
 }
 
 const SyntaxHighlightDisplayInline: React.FC<
 	SyntaxHighlightDisplayInlineProps
-> = ({ value = '' }) => {
+> = ({ value = '', copyable = true }) => {
 	const [highlightedContent, setHighlightedContent] = useState<string>(''); // Highlighted version
+
+	useEffect(() => {
+		// Dynamically load Prolog syntax highlighting if not already loaded
+		if (!Prism.languages.prolog) {
+			// @ts-expect-error prism-prolog has an any type
+			import('prismjs/components/prism-prolog').catch((err) =>
+				console.error('Failed to load Prolog language syntax:', err)
+			);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (Prism.languages['prolog']) {
@@ -41,13 +53,13 @@ const SyntaxHighlightDisplayInline: React.FC<
 				className="syntax-highlight-display-inline-code"
 				dangerouslySetInnerHTML={{ __html: highlightedContent }}
 			/>
-			<img
-				src={copyCodeIcon}
-				onClick={copyCode}
-				className="syntax-highlight-top-row-button"
-				alt="Copy code"
-				title="Copy code"
-			/>
+			{copyable && (
+				<Tooltip title="Copy code">
+					<IconButton onClick={copyCode}>
+						<CopyIcon className="syntax-highlight-icon-button" />
+					</IconButton>
+				</Tooltip>
+			)}
 		</span>
 	);
 };
