@@ -1,19 +1,18 @@
 @use "sass:color";
+@use "colors";
 
 .syntax-highlight {
   transition: 0.1s all ease-in-out;
 
   font-family: 'JetBrains Mono', monospace;
-  $WHITE: #f4f4f4;
-  $ORANGE: #F57D2380;
-  $DARK-GRAY: #3E3C39;
+  $ORANGE-TRANSLUCENT: color.adjust(colors.$ORANGE, $alpha: -0.5);
 
   & > * {
     font: inherit;
   }
 
   &.display-inline {
-    background: $DARK-GRAY;
+    background: colors.$DARK-GRAY;
     display: inline;
     padding: 4px;
     border-radius: 4px;
@@ -24,7 +23,7 @@
 
     position: relative;
 
-    border: 2px solid $WHITE;
+    border: 2px solid colors.$WHITE;
     border-radius: 4px;
 
     & > .syntax-highlight-top-row {
@@ -80,7 +79,7 @@
         bottom: 0;
         right: 0;
 
-        color: $WHITE;
+        color: colors.$WHITE;
 
         pointer-events: none;
       }
@@ -94,7 +93,7 @@
 
         background: transparent;
         color: transparent;
-        caret-color: $WHITE;
+        caret-color: colors.$WHITE;
         border: none;
       }
 
@@ -109,13 +108,13 @@
 
         padding: 8px;
 
-        background: $ORANGE;
+        background: $ORANGE-TRANSLUCENT;
         font-size: smaller;
       }
     }
   }
 
   & .syntax-highlight-icon-button {
-    color: $WHITE;
+    color: colors.$WHITE;
   }
 }
