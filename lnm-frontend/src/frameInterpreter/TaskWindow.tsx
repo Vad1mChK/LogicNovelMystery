@@ -2,8 +2,8 @@ import React from 'react';
 import 'prismjs/themes/prism-twilight.css';
 import { LnmTaskType } from './types.ts';
 import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput.tsx';
-import SyntaxHighlightDisplayInline from "../markupElements/SyntaxHighlightDisplayInline.tsx";
-import SyntaxHighlightDisplay from "../markupElements/SyntaxHighlightDisplay.tsx";
+import SyntaxHighlightDisplayInline from '../markupElements/SyntaxHighlightDisplayInline.tsx';
+import SyntaxHighlightDisplay from '../markupElements/SyntaxHighlightDisplay.tsx';
 
 interface TaskWindowProps {
 	taskType: LnmTaskType;
@@ -70,13 +70,16 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 					)) ?? <li>Error loading answer options</li>}
 				</ul>
 			)}
-			<SyntaxHighlightInput
-				width="75%"
-				height="50%"
-				value="f(X, Y) :- X \= Y."
-				placeholder="Your code goes here..."
-			/>
-			<input type="submit" />
+			{taskType in
+				[LnmTaskType.WRITE_KNOWLEDGE, LnmTaskType.COMPLETE_QUERY] && (
+				<SyntaxHighlightInput
+					width="75%"
+					height="50%"
+					value="f(X, Y) :- X \= Y."
+					placeholder={placeholderCode}
+				/>
+			)}
+			<input type="submit" value={'Отправить'} />
 		</form>
 	);
 };

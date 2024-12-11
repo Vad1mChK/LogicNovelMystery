@@ -10,8 +10,8 @@ const GamePage: React.FC = () => {
 
 	const plotUrl =
 		import.meta.env.MODE === 'development'
-			? '/assets/plot/single_game_ru_RU.json' // Path for `npm run dev`
-			: './assets/plot/single_game_ru_RU.json'; // Path for `npm run build`
+			? '/assets/plot/single_game_ru_RU_.json' // Path for `npm run dev`
+			: './assets/plot/single_game_ru_RU_.json'; // Path for `npm run build`
 	// TODO Replace it with a better solution
 
 	const startChapterId = 'inception1';
