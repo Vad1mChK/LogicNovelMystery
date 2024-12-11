@@ -14,7 +14,7 @@
 разной формы. Справа от кровати находится небольшая тумбочка со светильником и часами.
 Светильник включён и от него падает еле уловимый свет. Под кроватью стоит пара тапочек.
 
-**Путь к изображению**: [/docs/novel/images/locations/ProfessorBedroom.png](./images/locations/ProfessorBedroom.png)
+**Путь к изображению**: [/docs/novel/images/locations/ProfessorBedroom.webp](./images/locations/ProfessorBedroom.webp)
 
 ---
 ### Локация 2 (режим на одного): Кабинет агента ФБР
@@ -27,7 +27,7 @@
 У каждого стола стоят офисные компьютерные кресла. Напротив столов на стене висит большой 
 экран. Помещение тускло освещено офисными потолочными лампами. На полу серая кафельная плитка.
 
-**Путь к изображению**: [/docs/novel/images/locations/AgentOffice.png](./images/locations/AgentOffice.png)
+**Путь к изображению**: [/docs/novel/images/locations/AgentOffice.webp](./images/locations/AgentOffice.webp)
 
 ---
 ### Локация 3 (режим на одного): Кабинет директора ФБР
@@ -38,7 +38,7 @@
 На стене висит большой экран. Над экраном висят круглые часы 6 штук, показывающие разное время
 разных часовых поясов. Помещение имеет большие стеклянные раздвижные двери. В кабинете приглушенный свет.
 
-**Путь к изображению**: [/docs/novel/images/locations/DirectorOffice.png](./images/locations/DirectorOffice.png)
+**Путь к изображению**: [/docs/novel/images/locations/DirectorOffice.webp](./images/locations/DirectorOffice.webp)
 
 ---
 ### Локация 4 (режим на двоих): Комната Вики
@@ -51,7 +51,7 @@
 записками, часть из них валяется на полу на ламинате. Также на ламинате валяются остатки чипсов. Напротив стола 
 стоит большое чёрное игровое компьютерное кресло. На потолке по периметру включена светодиодная розовая подсветка.
 
-**Путь к изображению**: [/docs/novel/images/locations/VickyRoom.png](./images/locations/VickyRoom.png)
+**Путь к изображению**: [/docs/novel/images/locations/VickyRoom.webp](./images/locations/VickyRoom.webp)
 
 ---
 ### Локация 5 (режим на двоих и одного): Двухэтажный особняк
@@ -63,7 +63,7 @@
 как будто давно сюда никто не заходил. Дверь в дом металлическая,
 добротная с кодовым замком, покрыта толстым слоем пыли и паутины.
 На ступеньках крыльца трещины.  
-**Путь к изображению**: [/docs/novel/images/locations/MansionEntrance.png](./images/locations/MansionEntrance.png)
+**Путь к изображению**: [/docs/novel/images/locations/MansionEntrance.webp](./images/locations/MansionEntrance.webp)
 
 ---
 
@@ -78,7 +78,7 @@
 переходя из комнаты в комнату. Двери открываются только при правильных
 ответах, которые герои вводят на экране. Чтобы войти в холл,
 тоже нужно пройти через дверь террасы.  
-**Путь к изображению**: [/docs/novel/images/locations/GrandHall.png](./images/locations/GrandHall.png)
+**Путь к изображению**: [/docs/novel/images/locations/GrandHall.webp](./images/locations/GrandHall.webp)
 
 ---
 
@@ -91,7 +91,7 @@
 У другой стены — камин и кресло, за столом тоже кресло.
 В столе находятся письменные принадлежности. В другом углу — раковина
 с краном. Также есть дверь с монитором.  
-**Путь к изображению**: [/docs/novel/images/locations/StudyRoom.png](./images/locations/StudyRoom.png)
+**Путь к изображению**: [/docs/novel/images/locations/StudyRoom.webp](./images/locations/StudyRoom.webp)
 
 ---
 
@@ -104,7 +104,7 @@
 Под столом расположены несколько системных блоков, от которых отходит
 множество проводов. Вся комната завалена проводами. Рядом со столом
 стоят серверы и системы охлаждения, а на полу валяются бумажки.  
-**Путь к изображению**: [/docs/novel/images/locations/ComputerRoom.png](./images/locations/ComputerRoom.pmg)
+**Путь к изображению**: [/docs/novel/images/locations/ComputerRoom.webp](./images/locations/ComputerRoom.webp)
 
 ---
 
@@ -113,7 +113,7 @@
 Девочка идёт через чёрный ход. Дверь с экраном, вокруг заросли травы,
 а дверь покрыта паутиной и выглядит прогнившей. Всё вокруг заросло
 кустарником и выглядит заброшенным.  
-**Путь к изображению**: [/docs/novel/images/locations/BackdoorWithScreen.png](./images/locations/BackdoorWithScreen.png)
+**Путь к изображению**: [/docs/novel/images/locations/BackdoorWithScreen.webp](./images/locations/BackdoorWithScreen.webp)
 
 ---
 
@@ -123,6 +123,6 @@
 Один светильник тускло горит, вокруг паутина и грязь.
 На полу лужа воды, повсюду разбросаны коробки с мусором
 и старым барахлом. Всё гнилое и разрушенное.  
-**Путь к изображению**: [/docs/novel/images/locations/GrimBackEntrance.png](./images/locations/GrimBackEntrance.png)
+**Путь к изображению**: [/docs/novel/images/locations/GrimBackEntrance.webp](./images/locations/GrimBackEntrance.webp)
 
 ---
