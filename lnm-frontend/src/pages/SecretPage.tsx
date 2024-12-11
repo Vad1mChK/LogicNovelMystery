@@ -9,12 +9,17 @@ const SecretPage: React.FC = () => {
 			<TaskWindow
 				task={{
 					id: 'someTask',
-					type: LnmTaskType.SELECT_ONE,
+					type: LnmTaskType.SELECT_MANY,
 					questionText:
-						'Can you feel the `sunshine`\nbrightening up your day?```friends(X, Y) :-\n\tfriend(X, Y); friend(Y, X).```',
+						'Given the facts and the rule: ```friend(edgeworth, gumshoe).\nfriend(gumshoe, kay).\nfriends(X, Y) :-\n\tfriend(X, Y);\n\tfriend(Y, X).```What results will `friends(Who, edgeworth).` find?',
+					options: [
+						'`Who = edgeworth`',
+						'`Who = gumshoe`',
+						'`Who = kay`',
+						'`None`',
+					],
+					correctAnswerIndices: [1, 2],
 					hint: 'The student should be going to `investigate(thatScream)` now.',
-					options: ['One', 'Two', 'Three', 'Four'],
-					correctAnswerIndices: 0,
 					nextFrameOnSuccess: '1',
 					nextFrameOnFailure: '2',
 				}}

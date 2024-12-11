@@ -8,7 +8,7 @@ import CopyIcon from '@mui/icons-material/ContentCopy';
 
 interface SyntaxHighlightDisplayInlineProps {
 	value: string;
-	copyable: boolean;
+	copyable?: boolean;
 }
 
 const SyntaxHighlightDisplayInline: React.FC<

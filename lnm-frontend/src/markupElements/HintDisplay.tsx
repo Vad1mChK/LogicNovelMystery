@@ -11,7 +11,7 @@ interface HintDisplayProps {
 const HintDisplay: React.FC<HintDisplayProps> = ({ hintText }) => {
 	const [hintHidden, setHintHidden] = useState<boolean>(true);
 
-	const toggleHintShown = () => {
+	const toggleHintHidden = () => {
 		setHintHidden(!hintHidden);
 	};
 
@@ -20,11 +20,12 @@ const HintDisplay: React.FC<HintDisplayProps> = ({ hintText }) => {
 			<b>Подсказка: </b>
 			<span
 				className={`hint-display-text ${hintHidden ? 'hint-display-text-hidden' : ''}`}
+				onClick={toggleHintHidden}
 			>
 				<TextSyntaxHighlighter input={hintText} copyable={false} />
 			</span>
 			<Tooltip title="Toggle hint" className="hint-display-toggle-button">
-				<IconButton onClick={toggleHintShown}>
+				<IconButton onClick={toggleHintHidden}>
 					{hintHidden ? <Visibility /> : <VisibilityOff />}
 				</IconButton>
 			</Tooltip>

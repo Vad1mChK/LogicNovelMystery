@@ -3,10 +3,9 @@ import Prism from 'prismjs'; // Ensure Prism is installed
 import 'prismjs/themes/prism-twilight.css'; // Import a Prism theme
 import 'prismjs/components/prism-prolog';
 import '../css/SyntaxHighlightComponents.scss';
-import copyCodeIcon from '../assets/img/svg/copyCodeIcon.svg';
 import { copyTextToClipboard } from './markupUtils';
-import { IconButton, Tooltip } from "@mui/material";
-import CopyIcon from "@mui/icons-material/ContentCopy";
+import { IconButton, Tooltip } from '@mui/material';
+import CopyIcon from '@mui/icons-material/ContentCopy';
 
 interface SyntaxHighlightDisplayProps {
 	value: string; // Code to display
