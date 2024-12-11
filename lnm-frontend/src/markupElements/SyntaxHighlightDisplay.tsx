@@ -9,13 +9,13 @@ import { copyTextToClipboard } from './markupUtils';
 interface SyntaxHighlightDisplayProps {
 	value: string; // Code to display
 	width?: number | string;
-	height?: number | string;
+	height?: number | string | undefined;
 }
 
 const SyntaxHighlightDisplay: React.FC<SyntaxHighlightDisplayProps> = ({
 	value,
 	width = '100%',
-	height = '100%',
+	height,
 }) => {
 	const [highlightedContent, setHighlightedContent] = useState<string>(''); // Highlighted version
 	const preRef = useRef<HTMLPreElement>(null);
