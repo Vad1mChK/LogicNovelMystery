@@ -1,120 +1,121 @@
-@use "sass:color";
-@use "colors";
+@use 'sass:color';
+@use 'colors';
 
 .syntax-highlight {
-  transition: 0.1s all ease-in-out;
+	transition: 0.1s all ease-in-out;
 
-  font-family: 'JetBrains Mono', monospace;
-  $ORANGE-TRANSLUCENT: color.adjust(colors.$ORANGE, $alpha: -0.5);
+	font-family: 'JetBrains Mono', monospace;
+	$ORANGE-TRANSLUCENT: color.adjust(colors.$ORANGE, $alpha: -0.5);
 
-  & > * {
-    font: inherit;
-  }
+	& > * {
+		font: inherit;
+	}
 
-  &.display-inline {
-    background: colors.$DARK-GRAY;
-    display: inline;
-    padding: 4px;
-    border-radius: 4px;
-  }
+	&.display-inline {
+		background: colors.$DARK-GRAY;
+		display: inline;
+		padding: 4px;
+		border-radius: 4px;
+	}
 
-  &.input, &.display {
-    $Z-INDEX: 42;
+	&.input,
+	&.display {
+		$Z-INDEX: 42;
 
-    position: relative;
+		position: relative;
 
-    border: 2px solid colors.$WHITE;
-    border-radius: 4px;
+		border: 2px solid colors.$WHITE;
+		border-radius: 4px;
 
-    & > .syntax-highlight-top-row {
-      z-index: $Z-INDEX + 2;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+		& > .syntax-highlight-top-row {
+			z-index: $Z-INDEX + 2;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
 
-      display: flex;
-      flex-direction: row;
-      justify-content: right;
-      align-items: center;
-      gap: 8px;
+			display: flex;
+			flex-direction: row;
+			justify-content: right;
+			align-items: center;
+			gap: 8px;
 
-      padding: 4px;
-    }
+			padding: 4px;
+		}
 
-    &.display > .syntax-highlight-code-area {
+		&.display > .syntax-highlight-code-area {
+			& > .syntax-highlight-display-content {
+				padding: 16px;
+				font: inherit;
+				overflow: auto;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+			}
+		}
 
-      & > .syntax-highlight-display-content {
-        padding: 16px;
-        font: inherit;
-        overflow: auto;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-      }
-    }
+		&.input > .syntax-highlight-code-area {
+			position: relative;
+			width: 100%;
+			height: 100%;
 
-    &.input > .syntax-highlight-code-area {
-      position: relative;
-      width: 100%;
-      height: 100%;
+			border: none;
 
-      border: none;
+			& > .syntax-highlight-code-area-display,
+			& > .syntax-highlight-code-area-editable {
+				position: absolute;
 
-      & > .syntax-highlight-code-area-display, & > .syntax-highlight-code-area-editable {
-        position: absolute;
+				padding: 16px;
 
-        padding: 16px;
+				font: inherit;
 
-        font: inherit;
+				overflow: auto;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+			}
 
-        overflow: auto;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-      }
+			& > .syntax-highlight-code-area-display {
+				z-index: $Z-INDEX;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
 
-      & > .syntax-highlight-code-area-display {
-        z-index: $Z-INDEX;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
+				color: colors.$WHITE;
 
-        color: colors.$WHITE;
+				pointer-events: none;
+			}
 
-        pointer-events: none;
-      }
+			& > .syntax-highlight-code-area-editable {
+				width: 100%;
+				height: 100%;
 
-      & > .syntax-highlight-code-area-editable {
-        width: 100%;
-        height: 100%;
+				z-index: $Z-INDEX + 1;
+				resize: none;
 
-        z-index: $Z-INDEX + 1;
-        resize: none;
+				background: transparent;
+				color: transparent;
+				caret-color: colors.$WHITE;
+				border: none;
+			}
 
-        background: transparent;
-        color: transparent;
-        caret-color: colors.$WHITE;
-        border: none;
-      }
+			& > .syntax-highlight-code-area-tab-warning {
+				transition: all 0.3s ease-in-out;
 
-      & > .syntax-highlight-code-area-tab-warning {
-        transition: all 0.3s ease-in-out;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				width: 100%;
+				transform: translateX(-50%);
 
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 100%;
-        transform: translateX(-50%);
+				padding: 8px;
 
-        padding: 8px;
+				background: $ORANGE-TRANSLUCENT;
+				font-size: smaller;
+			}
+		}
+	}
 
-        background: $ORANGE-TRANSLUCENT;
-        font-size: smaller;
-      }
-    }
-  }
-
-  & .syntax-highlight-icon-button {
-    color: colors.$WHITE;
-  }
+	& .syntax-highlight-icon-button {
+		color: colors.$WHITE;
+	}
 }

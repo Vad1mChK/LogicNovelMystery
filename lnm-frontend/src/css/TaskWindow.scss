@@ -1,7 +1,7 @@
-@use "colors";
+@use 'colors';
 
 .task-window {
-  & input[type=radio] {
-    color: colors.$WHITE;
-  }
+	& input[type='radio'] {
+		color: colors.$WHITE;
+	}
 }

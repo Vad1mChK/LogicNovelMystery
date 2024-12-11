@@ -1,5 +1,5 @@
 @use 'sass:color';
-@use "colors";
+@use 'colors';
 
 .frame-renderer {
 	* {
@@ -90,7 +90,9 @@
 		}
 
 		&.speaker {
-			filter: drop-shadow(0 0 25px color.scale(colors.$WHITE, $alpha: -10%));
+			filter: drop-shadow(
+				0 0 25px color.scale(colors.$WHITE, $alpha: -10%)
+			);
 		}
 	}
 

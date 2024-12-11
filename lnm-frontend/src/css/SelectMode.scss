@@ -1,5 +1,5 @@
-@use "sass:color";
-@use "colors";
+@use 'sass:color';
+@use 'colors';
 
 * {
 	margin: 0;
@@ -32,7 +32,10 @@ body {
 
 /* Центральный контейнер */
 .center-container {
-	background-color: color.adjust(colors.$DARK-BLUE, $alpha: -0.25); /* Темно-синий цвет с прозрачностью */
+	background-color: color.adjust(
+		colors.$DARK-BLUE,
+		$alpha: -0.25
+	); /* Темно-синий цвет с прозрачностью */
 	padding: 40px 20px;
 	border-radius: 12px;
 	text-align: center;

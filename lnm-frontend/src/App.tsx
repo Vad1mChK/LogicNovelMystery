@@ -1,15 +1,17 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+import './css/global.scss';
+
 import Login from './pages/Login';
 import Register from './pages/Register';
-import './App.css';
 import MainPage from './pages/MainPage';
 import SelectMode from './pages/SelectMode';
 import GamePage from './pages/GamePage';
+import SecretPage from './pages/SecretPage.tsx';
 
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import SecretPage from "./pages/SecretPage.tsx";
 
 Sentry.init({
 	dsn: 'https://2a79b7cbcd0c952c1d8bb6dcf79cc459@o4508292474339328.ingest.de.sentry.io/4508292540530768',

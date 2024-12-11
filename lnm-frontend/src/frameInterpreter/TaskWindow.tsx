@@ -3,19 +3,23 @@ import 'prismjs/themes/prism-twilight.css';
 import { LnmTask, LnmTaskType } from './types.ts';
 import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput.tsx';
 import TextSyntaxHighlighter from '../markupElements/TextSyntaxHighlighter.tsx';
-import HintDisplay from "../markupElements/HintDisplay.tsx";
-import { Checkbox, colors, FormControlLabel, FormGroup, Radio, RadioGroup } from "@mui/material";
+import HintDisplay from '../markupElements/HintDisplay.tsx';
+import {
+	Checkbox,
+	FormControlLabel,
+	FormGroup,
+	Radio,
+	RadioGroup,
+} from '@mui/material';
 import '../css/TaskWindow.scss';
 
 interface TaskWindowProps {
-	task: LnmTask,
+	task: LnmTask;
 }
 
 const _WHITE = '#F4F4F4';
 
-const TaskWindow: React.FC<TaskWindowProps> = ({
-	task
-}) => {
+const TaskWindow: React.FC<TaskWindowProps> = ({ task }) => {
 	return (
 		<form
 			style={{
@@ -33,9 +37,19 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 						<FormControlLabel
 							key={index}
 							control={
-								<Checkbox name="select-many" value={index} sx={{color: _WHITE}} color='default'/>
+								<Checkbox
+									name="select-many"
+									value={index}
+									sx={{ color: _WHITE }}
+									color="default"
+								/>
 							}
-							label={<TextSyntaxHighlighter input={option} copyable={false}/>}
+							label={
+								<TextSyntaxHighlighter
+									input={option}
+									copyable={false}
+								/>
+							}
 						/>
 					)) ?? <div>Error loading answer options</div>}
 				</FormGroup>
@@ -55,10 +69,15 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 									sx={{
 										color: _WHITE,
 									}}
-									color='default'
+									color="default"
 								/>
 							}
-							label={<TextSyntaxHighlighter input={option} copyable={false}/>}
+							label={
+								<TextSyntaxHighlighter
+									input={option}
+									copyable={false}
+								/>
+							}
 						/>
 					)) ?? <div>Error loading answer options</div>}
 				</RadioGroup>
@@ -66,7 +85,7 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 			{(task.type == LnmTaskType.WRITE_KNOWLEDGE ||
 				task.type == LnmTaskType.COMPLETE_QUERY) && (
 				<SyntaxHighlightInput
-					placeholder='Enter your solution here...'
+					placeholder="Enter your solution here..."
 					value={task.default}
 				/>
 			)}

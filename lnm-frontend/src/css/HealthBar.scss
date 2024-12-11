@@ -1,5 +1,5 @@
-@use "colors";
-@use "sass:color";
+@use 'colors';
+@use 'sass:color';
 
 .health-bar {
 	$HEALTH_BG: color.adjust(colors.$BLACK, $alpha: -0.25);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LnmKnowledge, LnmKnowledgeType } from './types';
-import SyntaxHighlightDisplayInline from "../markupElements/SyntaxHighlightDisplayInline.tsx";
+import SyntaxHighlightDisplayInline from '../markupElements/SyntaxHighlightDisplayInline.tsx';
 // import '../assets/styles/FrameInterpreter.scss';
 
 interface KnowledgeWindowProps {

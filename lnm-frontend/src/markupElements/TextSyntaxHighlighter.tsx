@@ -4,7 +4,7 @@ import SyntaxHighlightDisplayInline from './SyntaxHighlightDisplayInline';
 
 interface ParsedSegment {
 	type: 'text' | 'inlineCode' | 'blockCode';
-	content: string,
+	content: string;
 }
 
 // Helper function to process code blocks
@@ -64,7 +64,7 @@ function replaceNewlinesWithBreaks(content: string): React.ReactNode[] {
 
 interface TextSyntaxHighlighterProps {
 	input: string;
-	copyable: boolean;
+	copyable?: boolean;
 }
 
 /**
@@ -85,7 +85,13 @@ const TextSyntaxHighlighter: React.FC<TextSyntaxHighlighterProps> = ({
 		if (seg.type === 'blockCode') {
 			return <SyntaxHighlightDisplay key={i} value={seg.content} />;
 		} else if (seg.type === 'inlineCode') {
-			return <SyntaxHighlightDisplayInline key={i} value={seg.content} copyable={copyable}/>;
+			return (
+				<SyntaxHighlightDisplayInline
+					key={i}
+					value={seg.content}
+					copyable={copyable}
+				/>
+			);
 		} else {
 			// text segment
 			return (
