@@ -1,0 +1,22 @@
+@use "sass:color";
+
+.hint-display {
+  $WHITE: #f4f4f4;
+  $DARK-GRAY: #3E3C39;
+
+  & .hint-display-text {
+    transition: all 0.3s ease-in-out;
+    background: color.adjust($DARK-GRAY, $alpha: -0.5);
+    padding: 8px;
+    border-radius: 8px;
+
+    &.hint-display-text-hidden {
+      background: $DARK-GRAY;
+      color: transparent;
+    }
+  }
+
+  & .hint-display-toggle-button {
+    color: $WHITE;
+  }
+}
