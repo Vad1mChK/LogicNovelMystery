@@ -5,9 +5,10 @@ import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
 // import '../css/FrameInterpreter.scss';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import KnowledgeWindow from './KnowledgeWindow.tsx';
 import HealthBar from './HealthBar.tsx';
-import { useGameState } from './GameStateContext.tsx';
 
 interface FrameRendererProps {
 	frame: LnmFrame;
@@ -34,7 +35,7 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 		onNextFrame(nextFrameId);
 	};
 	const [isKnowledgeOpen, setKnowledgeOpen] = useState(false);
-	const { health } = useGameState();
+	const health = useSelector((state: RootState) => state.gameState.health);
 
 	const knowledgeDetails = knowledge
 		.map((id) => plot.knowledge.get(id))
