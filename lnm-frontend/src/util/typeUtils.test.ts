@@ -5,7 +5,6 @@ import {
 	objectToMap,
 	toEnumValue,
 } from './typeUtils';
-import { expect } from '@playwright/test';
 
 enum _GameMode {
 	SINGLE = 'single',

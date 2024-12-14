@@ -217,16 +217,18 @@ interface LnmBaseTask {
 interface LnmWriteKnowledgeTask extends LnmBaseTask {
 	type: LnmTaskType.WRITE_KNOWLEDGE;
 	testCases: {
-		input: string;
-		expectedResult: boolean;
+		query: string;
+		expectedResults: { variables: Record<string, string> }[];
 	}[];
+	knowledge: string[];
 	default?: string;
 }
 
 // COMPLETE_QUERY Task
 interface LnmCompleteQueryTask extends LnmBaseTask {
 	type: LnmTaskType.COMPLETE_QUERY;
-	expectedResult: string[];
+	expectedResults: { variables: Record<string, string> }[];
+	knowledge: string[];
 	default?: string;
 }
 
@@ -234,14 +236,14 @@ interface LnmCompleteQueryTask extends LnmBaseTask {
 interface LnmSelectOneTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_ONE;
 	options: string[];
-	correctAnswerIndices: number; // Single index for the correct answer
+	correctAnswerIndex: number;
 }
 
 // SELECT_MANY Task
 interface LnmSelectManyTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_MANY;
 	options: string[];
-	correctAnswerIndices: number[]; // Array of indices for multiple correct answers
+	correctAnswerIndices: number[];
 }
 
 // Union Type for All Tasks

@@ -8,7 +8,6 @@ import {
 	_convertAndCreateFrame,
 	_convertAndCreatePlot,
 } from './PlotLoader';
-import { expect } from '@playwright/test';
 import {
 	LnmEffectArgsMap,
 	LnmFrameEffectType,

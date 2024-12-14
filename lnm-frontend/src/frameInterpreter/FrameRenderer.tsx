@@ -11,6 +11,7 @@ import KnowledgeWindow from './KnowledgeWindow.tsx';
 import HealthBar from './HealthBar.tsx';
 
 interface FrameRendererProps {
+	isEnding: boolean;
 	frame: LnmFrame;
 	plot: LnmPlot;
 	currentCharacters: LnmFrameCharacterData[] | null;
@@ -22,6 +23,7 @@ interface FrameRendererProps {
 }
 
 const FrameRenderer: React.FC<FrameRendererProps> = ({
+	isEnding,
 	frame,
 	plot,
 	currentCharacters,
@@ -92,12 +94,14 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 				>
 					Знания
 				</button>
-				<button
-					className="game-button give-up-button"
-					onClick={onGiveUp}
-				>
-					Сдаться
-				</button>
+				{!isEnding && (
+					<button
+						className="game-button give-up-button"
+						onClick={onGiveUp}
+					>
+						Сдаться
+					</button>
+				)}
 			</div>
 
 			{isKnowledgeOpen && (

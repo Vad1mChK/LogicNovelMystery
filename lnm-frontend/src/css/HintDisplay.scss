@@ -12,6 +12,10 @@
 		&.hint-display-text-hidden {
 			background: colors.$DARK-GRAY;
 			color: transparent;
+
+			& * {
+				color: inherit;
+			}
 		}
 	}
 

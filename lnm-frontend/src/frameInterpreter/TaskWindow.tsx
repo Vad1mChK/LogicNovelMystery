@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'prismjs/themes/prism-twilight.css';
 import { LnmTask, LnmTaskType } from './types.ts';
 import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput.tsx';
@@ -12,25 +12,74 @@ import {
 	RadioGroup,
 } from '@mui/material';
 import '../css/TaskWindow.scss';
+import { validateTask } from './taskValidation/taskValidation.ts';
 
 interface TaskWindowProps {
 	task: LnmTask;
+	onSubmit?: (result: boolean) => void;
 }
 
 const _WHITE = '#F4F4F4';
 
-const TaskWindow: React.FC<TaskWindowProps> = ({ task }) => {
+const TaskWindow: React.FC<TaskWindowProps> = ({
+	task,
+	onSubmit = () => {},
+}) => {
+	const [userInputSelectOne, setUserInputSelectOne] = useState<number | null>(
+		null
+	);
+	const [userInputSelectMany, setUserInputSelectMany] = useState<number[]>(
+		[]
+	);
+	const [userInputText, setUserInputText] = useState<string | null>(null);
+	const [error, setError] = useState<string | null>(null);
+
+	useEffect(() => {
+		setUserInputSelectOne(null);
+		setUserInputSelectMany([]);
+		setUserInputText(null);
+		setError(null); // Clear error on task change
+	}, [task]);
+
+	const handleSubmit = async (ev: React.FormEvent) => {
+		ev.preventDefault();
+		let finalInput: number | number[] | string;
+
+		switch (task.type) {
+			case LnmTaskType.SELECT_ONE: {
+				finalInput = userInputSelectOne ?? -1;
+				break;
+			}
+			case LnmTaskType.SELECT_MANY: {
+				finalInput = userInputSelectMany;
+				break;
+			}
+			case LnmTaskType.WRITE_KNOWLEDGE:
+			case LnmTaskType.COMPLETE_QUERY: {
+				finalInput = userInputText ?? '';
+				break;
+			}
+			default: {
+				throw new Error('Unsupported task type.');
+			}
+		}
+
+		try {
+			const result = await validateTask(task, finalInput);
+			onSubmit(result);
+		} catch (e) {
+			console.error(e);
+			setError(e?.toString ?? 'Unknown error');
+		}
+	};
+
 	return (
-		<form
-			style={{
-				width: '50vw',
-				height: '50vh',
-			}}
-			className="task-window"
-		>
-			<TextSyntaxHighlighter input={task.questionText} copyable />
-			{task.hint && <HintDisplay hintText={task.hint} />}
-			<hr />
+		<form className="task-window" onSubmit={handleSubmit}>
+			<div>
+				<TextSyntaxHighlighter input={task.questionText} copyable />
+				{task.hint && <HintDisplay hintText={task.hint} />}
+				<hr />
+			</div>
 			{task.type === LnmTaskType.SELECT_MANY && (
 				<FormGroup>
 					{task.options?.map((option, index) => (
@@ -42,6 +91,23 @@ const TaskWindow: React.FC<TaskWindowProps> = ({ task }) => {
 									value={index}
 									sx={{ color: _WHITE }}
 									color="default"
+									onChange={(e) => {
+										setUserInputSelectMany(
+											(prev: number[] | null) => {
+												const val = Number(
+													e.target.value
+												);
+												if (!prev) return [val];
+												if (e.target.checked) {
+													return [...prev, val];
+												} else {
+													return prev.filter(
+														(item) => item !== val
+													);
+												}
+											}
+										);
+									}}
 								/>
 							}
 							label={
@@ -54,9 +120,13 @@ const TaskWindow: React.FC<TaskWindowProps> = ({ task }) => {
 					)) ?? <div>Error loading answer options</div>}
 				</FormGroup>
 			)}
-			{/**/}
 			{task.type === LnmTaskType.SELECT_ONE && (
-				<RadioGroup name="select-one">
+				<RadioGroup
+					name="select-one"
+					onChange={(ev) =>
+						setUserInputSelectOne(Number(ev.target.value))
+					}
+				>
 					{task.options?.map((option, index) => (
 						<FormControlLabel
 							key={index}
@@ -64,8 +134,7 @@ const TaskWindow: React.FC<TaskWindowProps> = ({ task }) => {
 								<Radio
 									name="select-one"
 									value={index}
-									defaultChecked={index === 0}
-									required={index === 0}
+									defaultChecked={index == 0}
 									sx={{
 										color: _WHITE,
 									}}
@@ -87,9 +156,16 @@ const TaskWindow: React.FC<TaskWindowProps> = ({ task }) => {
 				<SyntaxHighlightInput
 					placeholder="Enter your solution here..."
 					value={task.default}
+					onUpdate={(newValue) => setUserInputText(newValue)}
 				/>
 			)}
-			<input type="submit" value={'Отправить'} />
+			<div className="task-window-button-row">
+				{task.type == LnmTaskType.WRITE_KNOWLEDGE && (
+					<input type="button" value={'Протестировать'} />
+				)}
+				<input type="submit" value={'Отправить'} />
+			</div>
+			{error && <p className="task-window-error">{error}</p>}
 		</form>
 	);
 };
