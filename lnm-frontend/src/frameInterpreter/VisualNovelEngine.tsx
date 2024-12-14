@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
 	LnmPlot,
 	LnmFrameEffect,
@@ -9,7 +9,17 @@ import {
 import FrameRenderer from './FrameRenderer';
 import evaluateCondition from './conditionHandlers.ts';
 import { effectHandlers } from './effectHandlers.ts';
-import { useGameState } from './GameStateContext.tsx'; // Import your condition evaluation logic
+import { RootState } from '../store.ts';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	clearKnowledge,
+	setKnowledge,
+	addKnowledge,
+	decreaseHealth,
+	increaseHealth,
+	setCurrentFrame,
+	setCurrentChapter,
+} from './gameStore/gameStateSlice.ts';
 
 interface VisualNovelEngineProps {
 	plot: LnmPlot;
@@ -20,15 +30,16 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	plot,
 	startChapterId,
 }) => {
+	console.log('Rerender');
 	const initialChapterId = plot.chapters.has(startChapterId || '')
 		? startChapterId!
 		: plot.startChapter;
 
-	const [currentChapterId, setCurrentChapterId] =
-		useState<string>(initialChapterId);
-	const [currentFrameId, setCurrentFrameId] = useState<string>(
-		plot.chapters.get(initialChapterId)?.startFrame || ''
-	);
+	// const [currentChapterId, setCurrentChapterId] =
+	// 	useState<string>(initialChapterId);
+	// const [currentFrameId, setCurrentFrameId] = useState<string>(
+	// 	plot.chapters.get(initialChapterId)?.startFrame || ''
+	// );
 	const [isEnding, setIsEnding] = useState<boolean>(false);
 	const [currentEndingId, setCurrentEndingId] = useState<string | null>(null);
 	const [currentCharacters, setCurrentCharacters] = useState<
@@ -38,17 +49,28 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 		null
 	);
 	const [currentSpeaker, setCurrentSpeaker] = useState<string | null>(null);
-	const {
-		loadChapterKnowledge,
-		addKnowledge,
-		clearKnowledge,
-		knowledge,
-		setHealth,
-	} = useGameState();
-	const processedEffects = useRef<Map<string, boolean>>(new Map());
+
+	const dispatch = useDispatch();
+	const knowledge = useSelector(
+		(state: RootState) => state.gameState.knowledge
+	);
+	const currentFrameId = useSelector(
+		(state: RootState) => state.gameState.currentFrameId
+	);
+	const currentChapterId = useSelector(
+		(state: RootState) => state.gameState.currentChapterId
+	);
+
+	// Initialize the chapter and frame once on mount
+	useEffect(() => {
+		dispatch(setCurrentChapter(initialChapterId));
+		const initialFrameId =
+			plot.chapters.get(initialChapterId)?.startFrame || '';
+		dispatch(setCurrentFrame(initialFrameId));
+	}, [initialChapterId, plot, dispatch]);
 
 	// Utility to get the current frame
-	const getCurrentFrame = (): LnmFrame | undefined => {
+	const getCurrentFrame = useCallback((): LnmFrame | undefined => {
 		if (isEnding && currentEndingId) {
 			// Get frame from the ending
 			const ending = plot.frames.endings.get(currentEndingId);
@@ -61,17 +83,24 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 			const chapterFrames = plot.frames.main.get(currentChapterId);
 			return chapterFrames?.get(currentFrameId);
 		}
-	};
+	}, [
+		currentChapterId,
+		currentEndingId,
+		currentFrameId,
+		isEnding,
+		plot.frames.endings,
+		plot.frames.main,
+	]);
 
 	useEffect(() => {
 		console.log('useEffect hook: load from initial chapter');
 		// Load knowledge for the initial chapter
 		const initialChapter = plot.chapters.get(initialChapterId);
 		if (initialChapter) {
-			clearKnowledge();
-			loadChapterKnowledge(initialChapter.knowledge);
+			dispatch(clearKnowledge());
+			dispatch(setKnowledge(initialChapter.knowledge));
 		}
-	}, [initialChapterId, plot]);
+	}, [initialChapterId, plot, dispatch]);
 
 	useEffect(() => {
 		const currentFrame = getCurrentFrame();
@@ -103,8 +132,12 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	const autoTriggerEnding = () => {
 		for (const [endingId, ending] of plot.frames.endings.entries()) {
 			if (ending.condition && evaluateCondition(ending.condition)) {
+				console.log(
+					`Condition for auto-triggered ending '${ending.id}' is now satisfied: `,
+					ending.condition
+				);
 				setCurrentEndingId(endingId);
-				setCurrentFrameId(ending.startFrame);
+				dispatch(setCurrentFrame(ending.startFrame));
 				setIsEnding(true);
 				return true;
 			}
@@ -118,46 +151,33 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 			if (!effects) return;
 
 			const frameKey = `${currentChapterId}-${currentFrameId}`;
-			if (processedEffects.current.has(frameKey)) {
-				console.log(
-					'Skipping effects for already processed frame:',
-					frameKey
-				);
-				return;
-			}
-
 			console.log('Processing effects for frame:', frameKey);
 
 			for (const effect of effects) {
 				const handler = effectHandlers[effect.type];
 				if (handler) {
 					handler(effect, {
-						setCurrentFrameId,
-						setCurrentChapterId,
+						setCurrentFrameId: (frameId: string) =>
+							dispatch(setCurrentFrame(frameId)),
+						setCurrentChapterId: (chapterId: string) =>
+							dispatch(setCurrentChapter(chapterId)),
 						setCurrentEndingId,
 						setIsEnding,
 						setCurrentCharacters,
-						addKnowledge,
+						addKnowledge: (knowledgeId: string) =>
+							dispatch(addKnowledge(knowledgeId)),
 						plot,
+						decreaseHealth: (amount: number | 'kill') =>
+							dispatch(decreaseHealth(amount)),
+						increaseHealth: (amount: number | 'full') =>
+							dispatch(increaseHealth(amount)),
 					});
 				} else {
 					console.warn(`Unhandled effect type: ${effect.type}`);
 				}
 			}
-
-			processedEffects.current.set(frameKey, true);
 		},
-		[
-			currentChapterId,
-			currentFrameId,
-			addKnowledge,
-			setCurrentFrameId,
-			setCurrentChapterId,
-			setCurrentEndingId,
-			setIsEnding,
-			setCurrentCharacters,
-			plot,
-		]
+		[currentChapterId, currentFrameId, plot, dispatch]
 	);
 
 	// Handle next frame transition
@@ -175,19 +195,19 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 
 		if (isEnding && currentEndingId) {
 			// Stay within the ending frames
-			setCurrentFrameId(nextFrameId);
+			dispatch(setCurrentFrame(nextFrameId));
 		} else {
 			// Handle main plot frames
 			const chapterFrames = plot.frames.main.get(currentChapterId);
 
 			if (chapterFrames?.has(nextFrameId)) {
-				setCurrentFrameId(nextFrameId);
+				dispatch(setCurrentFrame(nextFrameId));
 			} else {
 				const nextChapter = plot.chapters.get(nextFrameId);
 				if (nextChapter) {
 					// clearKnowledge();
-					setCurrentChapterId(nextFrameId);
-					setCurrentFrameId(nextChapter.startFrame);
+					dispatch(setCurrentChapter(nextFrameId));
+					dispatch(setCurrentFrame(nextChapter.startFrame));
 					// loadChapterKnowledge(nextChapter.knowledge);
 				} else {
 					console.warn(
@@ -200,7 +220,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 
 	const giveUp = () => {
 		console.log('Giving up...');
-		setHealth(0);
+		dispatch(decreaseHealth('kill'));
 	};
 
 	// Process frame effects after frame updates
