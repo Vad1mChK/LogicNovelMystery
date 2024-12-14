@@ -66,6 +66,10 @@ export function createConditionEvaluator(
 
 	function evaluateCondition(condition: LnmFrameCondition): boolean {
 		for (const [key, value] of Object.entries(condition)) {
+			if (value === undefined) {
+				continue;
+			}
+
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-expect-error
 			if (handlers.has(key) && !handlers.get(key)!(value)) {
