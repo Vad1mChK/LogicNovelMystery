@@ -7,7 +7,7 @@ import {
 	LnmFrameCharacterData,
 } from './types';
 import FrameRenderer from './FrameRenderer';
-import evaluateCondition from './conditionHandlers.ts';
+import { createConditionEvaluator } from './conditionHandlers.ts';
 import { effectHandlers } from './effectHandlers.ts';
 import { RootState } from '../store.ts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,12 +54,15 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	const knowledge = useSelector(
 		(state: RootState) => state.gameState.knowledge
 	);
+	const health = useSelector((state: RootState) => state.gameState.health);
 	const currentFrameId = useSelector(
 		(state: RootState) => state.gameState.currentFrameId
 	);
 	const currentChapterId = useSelector(
 		(state: RootState) => state.gameState.currentChapterId
 	);
+
+	const evaluateCondition = createConditionEvaluator(() => health);
 
 	// Initialize the chapter and frame once on mount
 	useEffect(() => {
@@ -129,20 +132,23 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	]);
 
 	// Automatically trigger the first matching ending if applicable
-	const autoTriggerEnding = () => {
+	const findSuitableEnding = () => {
 		for (const [endingId, ending] of plot.frames.endings.entries()) {
+			console.log(
+				`Reviewing ending: ${ending.id} with condition ${ending.condition}`
+			);
 			if (ending.condition && evaluateCondition(ending.condition)) {
 				console.log(
-					`Condition for auto-triggered ending '${ending.id}' is now satisfied: `,
+					`Condition for auto-triggered ending '${endingId}' is now satisfied: `,
 					ending.condition
 				);
-				setCurrentEndingId(endingId);
-				dispatch(setCurrentFrame(ending.startFrame));
-				setIsEnding(true);
-				return true;
+				// setCurrentEndingId(endingId);
+				// dispatch(setCurrentFrame(ending.startFrame));
+				// setIsEnding(true);
+				return endingId;
 			}
 		}
-		return false;
+		return null;
 	};
 
 	// Handle frame effects
@@ -182,33 +188,46 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 
 	// Handle next frame transition
 	const handleNextFrame = (nextFrameId: string | null) => {
-		if (!nextFrameId) {
-			if (!isEnding && autoTriggerEnding()) {
-				console.log('Auto triggering ending...');
-				// TODO Automatically trigger ending if applicable
-				return;
+		// If we're not currently in an ending, try to auto-trigger one
+		if (!isEnding) {
+			const endingId = findSuitableEnding();
+			if (endingId) {
+				console.log(`Auto triggering ending: ${endingId}...`);
+				const ending = plot.frames.endings.get(endingId);
+				if (ending) {
+					setCurrentEndingId(endingId);
+					dispatch(setCurrentFrame(ending.startFrame));
+					setIsEnding(true);
+					return; // Immediately return to avoid executing normal flow
+				} else {
+					console.warn(`Ending data not found for ID: ${endingId}`);
+				}
 			}
+		}
 
+		// If no next frame is provided and no ending triggered, end the flow
+		if (!nextFrameId) {
 			console.log('No next frame.');
-			return; // End of current flow
+			return;
 		}
 
 		if (isEnding && currentEndingId) {
-			// Stay within the ending frames
+			// If we are in ending mode, just set the frame within the ending frames
 			dispatch(setCurrentFrame(nextFrameId));
 		} else {
-			// Handle main plot frames
+			// Handle main plot frames as before
 			const chapterFrames = plot.frames.main.get(currentChapterId);
 
 			if (chapterFrames?.has(nextFrameId)) {
 				dispatch(setCurrentFrame(nextFrameId));
 			} else {
+				// Possibly a chapter transition
 				const nextChapter = plot.chapters.get(nextFrameId);
 				if (nextChapter) {
-					// clearKnowledge();
+					// If needed, clearKnowledge();
 					dispatch(setCurrentChapter(nextFrameId));
 					dispatch(setCurrentFrame(nextChapter.startFrame));
-					// loadChapterKnowledge(nextChapter.knowledge);
+					// loadChapterKnowledge(nextChapter.knowledge) if required
 				} else {
 					console.warn(
 						`Frame or chapter not found for ID: ${nextFrameId}`
@@ -237,14 +256,18 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 		handleEffects,
 	]);
 
+	useEffect(() => {
+		if (health <= 0) {
+			console.log('Health reached 0, checking for suitable ending...');
+			handleNextFrame(currentFrameId ?? null);
+		}
+	}, [currentFrameId, handleNextFrame, health]);
+
 	const currentFrame = getCurrentFrame();
 
-	if (!currentFrame) {
-		return <div>Frame not found.</div>;
-	}
-
-	return (
+	return currentFrame ? (
 		<FrameRenderer
+			isEnding={isEnding}
 			frame={currentFrame}
 			currentCharacters={currentCharacters}
 			currentSpeaker={currentSpeaker}
@@ -254,6 +277,8 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 			knowledge={knowledge}
 			plot={plot}
 		/>
+	) : (
+		<div>Frame not found.</div>
 	);
 };
 

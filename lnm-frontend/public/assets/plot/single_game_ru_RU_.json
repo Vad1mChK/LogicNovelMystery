@@ -126,6 +126,12 @@
 							"args": {
 								"knowledgeId": "mySuperior"
 							}
+						},
+						{
+							"type": "DECREASE_HEALTH",
+							"args": {
+								"amount": 40
+							}
 						}
 					]
 				},
@@ -250,7 +256,7 @@
 				},
 				"inception2_06": {
 					"id": "inception2_06",
-					"dialogue": "Группа хакеров во главе с Кэвином Митником создала вирус.",
+					"dialogue": "Группа хакеров во главе с Кэвином Митником создала вирус.",
 					"speaker": "director",
 					"nextFrame": "inception2_07",
 					"effects": [
@@ -258,6 +264,12 @@
 							"type": "OPEN_KNOWLEDGE",
 							"args": {
 								"knowledgeId": "ifAssistedKevinThenCreatedVirus"
+							}
+						},
+						{
+							"type": "INCREASE_HEALTH",
+							"args": {
+								"amount": "full"
 							}
 						}
 					]
