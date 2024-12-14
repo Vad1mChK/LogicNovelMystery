@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { GameStateProvider } from '../frameInterpreter/GameStateContext.tsx';
 import VisualNovelEngine from '../frameInterpreter/VisualNovelEngine.tsx';
 import { LnmPlot } from '../frameInterpreter/types.ts';
 import PlotLoader from '../frameInterpreter/PlotLoader.tsx';
 import '../css/FrameInterpreter.scss';
+import { Provider } from 'react-redux';
+import store from '../store.ts';
 
 const GamePage: React.FC = () => {
 	const [plot, setPlot] = useState<LnmPlot | null>(null);
@@ -19,7 +20,7 @@ const GamePage: React.FC = () => {
 
 	const startChapterId = 'inception1';
 	return (
-		<GameStateProvider>
+		<Provider store={store}>
 			<div className="frame-renderer">
 				{plot ? (
 					<VisualNovelEngine
@@ -30,7 +31,7 @@ const GamePage: React.FC = () => {
 					<PlotLoader plotUrl={plotUrl} onLoad={setPlot} />
 				)}
 			</div>
-		</GameStateProvider>
+		</Provider>
 	);
 };
 
