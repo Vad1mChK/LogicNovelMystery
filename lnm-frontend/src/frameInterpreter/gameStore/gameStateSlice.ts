@@ -6,6 +6,8 @@ interface GameState {
 	knowledge: string[]; // Example: List of known facts
 	currentChapterId: string;
 	currentFrameId: string;
+	errorSum: number;
+	errorCount: number;
 }
 
 // Define the initial state
@@ -14,6 +16,8 @@ const initialState: GameState = {
 	knowledge: [],
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
+	errorSum: 0,
+	errorCount: 0,
 };
 
 // Create the slice
@@ -21,14 +25,18 @@ const gameStateSlice = createSlice({
 	name: 'gameState',
 	initialState,
 	reducers: {
-		setHealth(
-			state,
-			action: PayloadAction<number | ((current: number) => number)>
-		) {
-			if (typeof action.payload === 'function') {
-				state.health = action.payload(state.health);
+		increaseHealth(state, action: PayloadAction<number | 'full'>) {
+			if (action.payload === 'full') {
+				state.health = 100;
 			} else {
-				state.health = Math.max(0, Math.min(action.payload, 100)); // Clamp health between 0 and 100
+				state.health = Math.min(100, state.health + action.payload);
+			}
+		},
+		decreaseHealth(state, action: PayloadAction<number | 'kill'>) {
+			if (action.payload === 'kill') {
+				state.health = 0;
+			} else {
+				state.health = Math.max(0, state.health - action.payload);
 			}
 		},
 		addKnowledge(state, action: PayloadAction<string>) {
@@ -46,17 +54,35 @@ const gameStateSlice = createSlice({
 		setCurrentFrame(state, action: PayloadAction<string>) {
 			state.currentFrameId = action.payload;
 		},
+		// Error management reducers
+		incrementErrorSum(state, action: PayloadAction<number>) {
+			state.errorSum += action.payload;
+		},
+		clearErrorSum(state) {
+			state.errorSum = 0;
+		},
+		incrementErrorCount(state, action: PayloadAction<number>) {
+			state.errorCount += action.payload;
+		},
+		clearErrorCount(state) {
+			state.errorCount = 0;
+		},
 	},
 });
 
 // Export actions and reducer
 export const {
-	setHealth,
+	increaseHealth,
+	decreaseHealth,
 	addKnowledge,
 	clearKnowledge,
 	setKnowledge,
 	setCurrentChapter,
 	setCurrentFrame,
+	incrementErrorSum,
+	clearErrorSum,
+	incrementErrorCount,
+	clearErrorCount,
 } = gameStateSlice.actions;
 
 export default gameStateSlice.reducer;
