@@ -143,7 +143,7 @@
       "id": "task_choose_weapon5",
       "type": "COMPLETE_QUERY",
       "questionText": "Напиши запрос, который объединяет два списка в третий `Result = [1, 2, 3, 4]`.",
-      "expectedResult": [
+      "expectedResults": [
         {
           "variables": {
             "Result": "[1,2,3,4]"
