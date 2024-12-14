@@ -17,6 +17,8 @@ export type EffectHandler = (
 			React.SetStateAction<LnmFrameCharacterData[] | null>
 		>;
 		addKnowledge: (knowledgeId: string) => void;
+		decreaseHealth: (amount: number | 'kill') => void;
+		increaseHealth: (amount: number | 'full') => void;
 		plot: LnmPlot;
 	}
 ) => void;
@@ -115,6 +117,24 @@ export const effectHandlers: Partial<
 		console.log('Processing OPEN_KNOWLEDGE effect:', args);
 		if (args.knowledgeId) {
 			addKnowledge(args.knowledgeId);
+		}
+	},
+
+	[LnmFrameEffectType.DECREASE_HEALTH]: (effect, { decreaseHealth }) => {
+		const args =
+			effect.args as LnmEffectArgsMap[LnmFrameEffectType.DECREASE_HEALTH];
+		console.log('Processing DECREASE_HEALTH effect:', args);
+		if (args.amount) {
+			decreaseHealth(args.amount);
+		}
+	},
+
+	[LnmFrameEffectType.INCREASE_HEALTH]: (effect, { increaseHealth }) => {
+		const args =
+			effect.args as LnmEffectArgsMap[LnmFrameEffectType.INCREASE_HEALTH];
+		console.log('Processing INCREASE_HEALTH effect:', args);
+		if (args.amount) {
+			increaseHealth(args.amount);
 		}
 	},
 
