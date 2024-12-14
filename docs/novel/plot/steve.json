@@ -144,7 +144,11 @@
       "type": "COMPLETE_QUERY",
       "questionText": "Напиши запрос, который объединяет два списка в третий `Result = [1, 2, 3, 4]`.",
       "expectedResult": [
-        "Result = [1, 2, 3, 4]"
+        {
+          "variables": {
+            "Result": "[1,2,3,4]"
+          }
+        }
       ],
       "hint": "Вспомни про встроенные конструкции. Воспользуйся стандартным предикатом `append/3`.",
       "nextFrameOnSuccess": "inception5_11",
