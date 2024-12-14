@@ -90,14 +90,14 @@
     "task_choose_weapon1": {
       "id": "task_choose_weapon1",
       "type": "SELECT_ONE",
-      "questionText": "Как обозначается завершение предложения в Прологе?",
+      "questionText": "Какой оператор завершает предложение (правило, факт, запрос) в Прологе?",
       "options": [
-        "`.`",
-        "`_`",
-        "`-`",
+        "`.` (точка)",
+        "`_` (нижнее подчёркивание)",
+        "`-` (дефис)",
         "`X`"
       ],
-      "correctAnswerIndices": 0,
+      "correctAnswerIndex": 0,
       "nextFrameOnSuccess": "inception2_13",
       "nextFrameOnFailure": "frame_weapon_failure",
       "failureScorePenalty": 1
@@ -105,14 +105,14 @@
     "task_choose_weapon2": {
       "id": "task_choose_weapon2",
       "type": "SELECT_ONE",
-      "questionText": "Когда значение переменной не важно, и мы хотим указать, что любая подходящая информация на её месте подходит, что нам необходимо прописать?",
+      "questionText": "Когда значение переменной не важно, и мы хотим указать, что любая информация на её месте подходит, что нам необходимо прописать?",
       "options": [
-        "`.`",
-        "`_`",
-        "`-`",
+        "`.` (точка)",
+        "`_` (нижнее подчёркивание)",
+        "`-` (дефис)",
         "`X`"
       ],
-      "correctAnswerIndices": 1,
+      "correctAnswerIndex": 1,
       "nextFrameOnSuccess": "inception3_12",
       "nextFrameOnFailure": "frame_weapon_failure2",
       "failureScorePenalty": 1
@@ -120,14 +120,14 @@
     "task_choose_weapon3": {
       "id": "task_choose_weapon3",
       "type": "SELECT_ONE",
-      "questionText": "Даны следующие факты: `character(professor).`\n`character(vicky).` \n`character(metnik).`. Какой запрос вернет всех героев?",
+      "questionText": "Даны следующие факты: ```character(professor).\ncharacter(vicky).\ncharacter(metnik).```. Какой запрос вернет всех героев?",
       "options": [
         "`character(X).`",
-        "`character(профессор, vicky, metnik).`",
+        "`character(professor, vicky, metnik).`",
         "`character(_).`",
         "`character(X, Y).`"
       ],
-      "correctAnswerIndices": 0,
+      "correctAnswerIndex": 0,
       "nextFrameOnSuccess": "inception4_08",
       "nextFrameOnFailure": "frame_weapon_failure3",
       "failureScorePenalty": 1
@@ -142,7 +142,7 @@
         "`in_list(3, [1, 2, 3, 4]`",
         "`member(3, [1, 2, 3, 4])`"
       ],
-      "correctAnswerIndices": 3,
+      "correctAnswerIndex": 3,
       "hint": "Вспомни про встроенные конструкции",
       "nextFrameOnSuccess": "inception5_20",
       "nextFrameOnFailure": "frame_weapon_failure4",
@@ -150,17 +150,9 @@
     },
     "task_choose_weapon5": {
       "id": "task_choose_weapon5",
-      "type": "WRITE_KNOWLEDGE",
-      "questionText": "Допиши запрос, чтобы проверить, связан ли mitnik с вирусом.",
-      "testCases": [
-        {
-          "input": "character(steve).\ncharacter(mitnik). \ndestroy(mitnik, virus). \ninvolved(X) :- destroy(X, virus).",
-          "expectedResult": true
-        }
-      ],
-      "correctAnswerIndices": [
-        "involved(mitnik)."
-      ],
+      "type": "COMPLETE_QUERY",
+      "questionText": "Даны знания: ```character(steve).\ncharacter(mitnik).\ndestroy(mitnik, virus).\ninvolved(X) :- destroy(X, virus).```Допиши запрос, чтобы проверить, связан ли `mitnik` с вирусом.",
+      "expectedResult": "true",
       "nextFrameOnSuccess": "inception6_14",
       "nextFrameOnFailure": "frame_weapon_failure5",
       "failureScorePenalty": 2
@@ -168,9 +160,9 @@
     "task_choose_weapon6": {
       "id": "task_choose_weapon6",
       "type": "COMPLETE_QUERY",
-      "questionText": "Напишите запрос, который вычисляет длину списка `[1, 2, 3, 4, 5]`.",
+      "questionText": "Напишите запрос, который вычисляет длину списка `[1, 2, 3, 4, 5]` и записывает значение в переменную `Length`.",
       "expectedResult": [
-        "5"
+        "Length = 5"
       ],
       "hint": "Вспомни про встроенные конструкции. Воспользуйся стандартным предикатом length/2.",
       "nextFrameOnSuccess": "inception7_13",
