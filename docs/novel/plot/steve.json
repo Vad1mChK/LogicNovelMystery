@@ -142,6 +142,7 @@
     "task_choose_weapon5": {
       "id": "task_choose_weapon5",
       "type": "COMPLETE_QUERY",
+      "knowledge": [],
       "questionText": "Напиши запрос, который объединяет два списка в третий `Result = [1, 2, 3, 4]`.",
       "expectedResults": [
         {
