@@ -151,8 +151,18 @@
     "task_choose_weapon5": {
       "id": "task_choose_weapon5",
       "type": "COMPLETE_QUERY",
-      "questionText": "Даны знания: ```character(steve).\ncharacter(mitnik).\ndestroy(mitnik, virus).\ninvolved(X) :- destroy(X, virus).```Допиши запрос, чтобы проверить, связан ли `mitnik` с вирусом.",
-      "expectedResult": "true",
+      "knowledge": [
+        "character(steve).",
+        "character(mitnik).",
+        "destroy(mitnik, virus).",
+        "involved(X) :- destroy(X, virus)."
+      ],
+      "questionText": "Даны знания: ```character(steve).\ncharacter(mitnik).\ndevelop(mitnik, virus).\ninvolved(X) :- develop(X, virus).```Допиши запрос, чтобы проверить, связан ли `mitnik` с вирусом.",
+      "expectedResult": [
+        {
+          "variables": {}
+        }
+      ],
       "nextFrameOnSuccess": "inception6_14",
       "nextFrameOnFailure": "frame_weapon_failure5",
       "failureScorePenalty": 2
@@ -161,8 +171,13 @@
       "id": "task_choose_weapon6",
       "type": "COMPLETE_QUERY",
       "questionText": "Напишите запрос, который вычисляет длину списка `[1, 2, 3, 4, 5]` и записывает значение в переменную `Length`.",
+      "knowledge": [],
       "expectedResult": [
-        "Length = 5"
+        {
+          "variables": {
+            "Length": "5"
+          }
+        }
       ],
       "hint": "Вспомни про встроенные конструкции. Воспользуйся стандартным предикатом length/2.",
       "nextFrameOnSuccess": "inception7_13",
