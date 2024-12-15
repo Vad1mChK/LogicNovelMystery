@@ -208,7 +208,6 @@ interface LnmBaseTask {
 	nextFrameOnSuccess: string;
 	nextFrameOnFailure: string;
 	failureScorePenalty?: number;
-	maxTimeout?: number;
 }
 
 // Task-Specific Interfaces
@@ -221,7 +220,7 @@ interface LnmWriteKnowledgeTask extends LnmBaseTask {
 		expectedResults: { variables: Record<string, string> }[];
 	}[];
 	knowledge: string[];
-	default?: string;
+	defaultValue?: string;
 }
 
 // COMPLETE_QUERY Task
@@ -229,7 +228,7 @@ interface LnmCompleteQueryTask extends LnmBaseTask {
 	type: LnmTaskType.COMPLETE_QUERY;
 	expectedResults: { variables: Record<string, string> }[];
 	knowledge: string[];
-	default?: string;
+	defaultValue?: string;
 }
 
 // SELECT_ONE Task
