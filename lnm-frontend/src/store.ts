@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import gameStateReducer from './frameInterpreter/gameStore/gameStateSlice.ts';
+import gameStateReducer, {
+	GameState,
+} from './frameInterpreter/gameStore/gameStateSlice';
 
 const store = configureStore({
 	reducer: {
@@ -7,7 +9,9 @@ const store = configureStore({
 	},
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = {
+	gameState: GameState;
+};
 export type AppDispatch = typeof store.dispatch;
 
 export default store;

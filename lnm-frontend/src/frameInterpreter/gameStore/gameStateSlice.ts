@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define the shape of your game state
-interface GameState {
+export interface GameState {
 	health: number;
 	knowledge: string[]; // Example: List of known facts
 	currentChapterId: string;
