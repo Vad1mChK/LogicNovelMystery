@@ -1,5 +1,5 @@
 export function shuffle<T>(array: T[]): T[] {
-	if (array.length === 0) {
+	if (array.length <= 1) {
 		return array;
 	}
 
