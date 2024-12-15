@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LnmTask, LnmTaskType } from '../types.ts';
+import { LnmTask, LnmTaskType } from '../types';
 
 const API_TIMEOUT = 5000;
 

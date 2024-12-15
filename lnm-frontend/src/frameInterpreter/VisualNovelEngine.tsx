@@ -8,9 +8,9 @@ import {
 	LnmTask,
 } from './types';
 import FrameRenderer from './FrameRenderer';
-import { createConditionEvaluator } from './conditionHandlers.ts';
-import { effectHandlers } from './effectHandlers.ts';
-import { RootState } from '../store.ts';
+import { createConditionEvaluator } from './conditionHandlers';
+import { effectHandlers } from './effectHandlers';
+import { RootState } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	clearKnowledge,
@@ -20,7 +20,7 @@ import {
 	increaseHealth,
 	setCurrentFrame,
 	setCurrentChapter,
-} from './gameStore/gameStateSlice.ts';
+} from './gameStore/gameStateSlice';
 
 interface VisualNovelEngineProps {
 	plot: LnmPlot;

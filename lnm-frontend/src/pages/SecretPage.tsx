@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/FrameInterpreter.scss';
 import TaskWindow from '../frameInterpreter/TaskWindow.tsx';
-import { LnmTask, LnmTaskType } from '../frameInterpreter/types.ts';
+import { LnmTask, LnmTaskType } from '../frameInterpreter/types';
 
 // used by devs for development purposes only...
 const SecretPage: React.FC = () => {

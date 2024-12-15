@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'prismjs/themes/prism-twilight.css';
-import { LnmTask, LnmTaskType } from './types.ts';
+import { LnmTask, LnmTaskType } from './types';
 import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput.tsx';
 import TextSyntaxHighlighter from '../markupElements/TextSyntaxHighlighter.tsx';
 import HintDisplay from '../markupElements/HintDisplay.tsx';
@@ -12,7 +12,7 @@ import {
 	RadioGroup,
 } from '@mui/material';
 import '../css/TaskWindow.scss';
-import { validateTask } from './taskValidation/taskValidation.ts';
+import { validateTask } from './taskValidation/taskValidation';
 
 interface TaskWindowProps {
 	task: LnmTask;

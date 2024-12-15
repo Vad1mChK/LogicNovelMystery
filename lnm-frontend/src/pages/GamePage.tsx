@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import VisualNovelEngine from '../frameInterpreter/VisualNovelEngine.tsx';
-import { LnmPlot } from '../frameInterpreter/types.ts';
+import { LnmPlot } from '../frameInterpreter/types';
 import PlotLoader from '../frameInterpreter/PlotLoader.tsx';
 import '../css/FrameInterpreter.scss';
 import { Provider } from 'react-redux';
-import store from '../store.ts';
+import store from '../store';
 
 const GamePage: React.FC = () => {
 	const [plot, setPlot] = useState<LnmPlot | null>(null);
