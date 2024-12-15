@@ -37,7 +37,7 @@
     "@funboxteam/eslint-plugin-no-only-tests": "^5.0.0",
     "@playwright/test": "^1.48.0",
     "@testing-library/jest-dom": "^6.5.0",
-    "@types/jest": "^29.5.13",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
