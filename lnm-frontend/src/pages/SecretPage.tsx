@@ -63,7 +63,7 @@ const SecretPage: React.FC = () => {
 				},
 			],
 			hint: 'Use logical operators `;` and `,` and inequality check `\\=`.',
-			default: 'friends(X, Y) :-\n\t% Write your solution here',
+			defaultValue: 'friends(X, Y) :-\n\t% Write your solution here',
 			nextFrameOnSuccess: '1',
 			nextFrameOnFailure: '2',
 		},
@@ -78,10 +78,11 @@ const SecretPage: React.FC = () => {
 				'friends(X, Y) :- friend(X, Y); friend(Y, X).',
 			],
 			questionText:
-				"Given the facts and the rule: ```friend(edgeworth, gumshoe).\nfriend(gumshoe, kay).\nfriend(kay, franziska)\nfriend(franziska, adrian).\nfriends(X, Y) :- friend(X, Y); friend(Y, X).```Write a query to find all second-order friends of `kay` (`second_friends(X, Y)`).\nA second-order friend is not one's friend, but has mutual friends with them.",
+				"Given the facts and the rule: ```friend(edgeworth, gumshoe).\nfriend(gumshoe, kay).\nfriend(kay, franziska)\nfriend(franziska, adrian).\nfriends(X, Y) :- friend(X, Y); friend(Y, X).```Write a query to find all second-order friends of `gumshoe`. \nA second-order friend is not one's friend, but has mutual friends with them.\nMutual friend variable: `Mid`, second friend variable: `Who`.",
 			expectedResults: [{ variables: { Who: 'edgeworth' } }],
 			hint: 'Use logical operators `;` and `,` and inequality check `\\=`.',
-			default: 'second_friends(X, Y) :-\n\t% Write your solution here...',
+			defaultValue:
+				'second_friends(X, Y) :-\n\t% Write your solution here...',
 			nextFrameOnSuccess: '1',
 			nextFrameOnFailure: '2',
 		},

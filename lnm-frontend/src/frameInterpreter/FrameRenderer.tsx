@@ -1,14 +1,20 @@
 // FrameRenderer.tsx
 import React, { useState } from 'react';
-import { LnmFrame, LnmFrameCharacterData, LnmLocation, LnmPlot } from './types';
+import {
+	LnmFrame,
+	LnmFrameCharacterData,
+	LnmLocation,
+	LnmPlot,
+	LnmTask,
+} from './types';
 import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
-// import '../css/FrameInterpreter.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import KnowledgeWindow from './KnowledgeWindow.tsx';
 import HealthBar from './HealthBar.tsx';
+import TaskWindow from './TaskWindow';
 
 interface FrameRendererProps {
 	isEnding: boolean;
@@ -17,9 +23,11 @@ interface FrameRendererProps {
 	currentCharacters: LnmFrameCharacterData[] | null;
 	currentSpeaker: string | null;
 	currentLocation: LnmLocation | null;
+	currentTask: LnmTask | null;
 	knowledge: string[];
 	onNextFrame: (nextFrameId: string) => void;
 	onGiveUp: () => void;
+	onTaskSubmit: (result: boolean) => void;
 }
 
 const FrameRenderer: React.FC<FrameRendererProps> = ({
@@ -29,9 +37,11 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 	currentCharacters,
 	currentSpeaker,
 	currentLocation,
+	currentTask,
 	knowledge,
 	onNextFrame,
 	onGiveUp,
+	onTaskSubmit
 }) => {
 	const handleChoiceSelect = (nextFrameId: string) => {
 		onNextFrame(nextFrameId);
@@ -48,69 +58,75 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 			{currentLocation && (
 				<LocationBackground location={currentLocation} />
 			)}
-			{currentCharacters?.map((charData) => {
-				const character = plot.characters.get(charData.id);
-				return character ? (
-					<CharacterSprite
-						key={charData.id}
-						character={character}
-						isSpeaker={character.id == currentSpeaker}
-						characterData={charData}
+			{!currentTask && (
+				<>
+					{currentCharacters?.map((charData) => {
+						const character = plot.characters.get(charData.id);
+						return character ? (
+							<CharacterSprite
+								key={charData.id}
+								character={character}
+								isSpeaker={character.id == currentSpeaker}
+								characterData={charData}
+							/>
+						) : null;
+					})}
+					<DialogueBox
+						speakerName={
+							plot.characters.get(currentSpeaker ?? '')?.name ??
+							currentSpeaker ??
+							undefined
+						}
+						text={frame.dialogue}
 					/>
-				) : null;
-			})}
-			<DialogueBox
-				speakerName={
-					plot.characters.get(currentSpeaker ?? '')?.name ??
-					currentSpeaker ??
-					undefined
-				}
-				text={frame.dialogue}
-			/>
-			{frame.choices && (
-				<div className="choices">
-					{frame.choices.map((choice, index) => (
+					{frame.choices && (
+						<div className="choices">
+							{frame.choices.map((choice, index) => (
+								<button
+									key={index}
+									onClick={() =>
+										handleChoiceSelect(choice.nextFrame)
+									}
+								>
+									{choice.text}
+								</button>
+							))}
+						</div>
+					)}
+					{!frame.choices && frame.nextFrame && (
 						<button
-							key={index}
-							onClick={() => handleChoiceSelect(choice.nextFrame)}
+							className="next-frame-button game-button"
+							onClick={() => onNextFrame(frame.nextFrame!)}
 						>
-							{choice.text}
+							-&gt;
 						</button>
-					))}
-				</div>
-			)}
-			{!frame.choices && frame.nextFrame && (
-				<button
-					className="next-frame-button game-button"
-					onClick={() => onNextFrame(frame.nextFrame!)}
-				>
-					-&gt;
-				</button>
-			)}
-			<div className="top-button-bar">
-				<button
-					className="game-button"
-					onClick={() => setKnowledgeOpen(true)}
-				>
-					Знания
-				</button>
-				{!isEnding && (
-					<button
-						className="game-button give-up-button"
-						onClick={onGiveUp}
-					>
-						Сдаться
-					</button>
-				)}
-			</div>
+					)}
+					<div className="top-button-bar">
+						<button
+							className="game-button"
+							onClick={() => setKnowledgeOpen(true)}
+						>
+							Знания
+						</button>
+						{!isEnding && (
+							<button
+								className="game-button give-up-button"
+								onClick={onGiveUp}
+							>
+								Сдаться
+							</button>
+						)}
+					</div>
 
-			{isKnowledgeOpen && (
-				<KnowledgeWindow
-					knowledge={knowledgeDetails}
-					onClose={() => setKnowledgeOpen(false)}
-				/>
+					{isKnowledgeOpen && (
+						<KnowledgeWindow
+							knowledge={knowledgeDetails}
+							onClose={() => setKnowledgeOpen(false)}
+						/>
+					)}
+				</>
 			)}
-
+			{currentTask && <TaskWindow task={currentTask} onSubmit={onTaskSubmit} />}
 			<HealthBar currentHealth={health} maxHealth={100} />
 		</div>
 	);

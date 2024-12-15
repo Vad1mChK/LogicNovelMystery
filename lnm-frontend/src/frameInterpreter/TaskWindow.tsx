@@ -89,7 +89,7 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 								<Checkbox
 									name="select-many"
 									value={index}
-									sx={{ color: _WHITE }}
+									sx={{ color: _WHITE, fontSize: '24px' }}
 									color="default"
 									onChange={(e) => {
 										setUserInputSelectMany(
@@ -136,7 +136,7 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 									value={index}
 									defaultChecked={index == 0}
 									sx={{
-										color: _WHITE,
+										color: _WHITE, fontSize: '24px'
 									}}
 									color="default"
 								/>
@@ -155,7 +155,7 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 				task.type == LnmTaskType.COMPLETE_QUERY) && (
 				<SyntaxHighlightInput
 					placeholder="Enter your solution here..."
-					value={task.default}
+					value={task.defaultValue}
 					onUpdate={(newValue) => setUserInputText(newValue)}
 				/>
 			)}

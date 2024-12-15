@@ -3,8 +3,8 @@ import {
 	LnmFrameEffectType,
 	LnmEffectArgsMap,
 	LnmPlot,
-	LnmFrameCharacterData,
-} from './types';
+	LnmFrameCharacterData, LnmTask
+} from "./types";
 
 export type EffectHandler = (
 	effect: LnmFrameEffect,
@@ -19,6 +19,7 @@ export type EffectHandler = (
 		addKnowledge: (knowledgeId: string) => void;
 		decreaseHealth: (amount: number | 'kill') => void;
 		increaseHealth: (amount: number | 'full') => void;
+		openTaskWindow: (task: LnmTask) => void;
 		plot: LnmPlot;
 	}
 ) => void;
@@ -138,5 +139,14 @@ export const effectHandlers: Partial<
 		}
 	},
 
+	[LnmFrameEffectType.START_TASK]: (effect, { openTaskWindow, plot }) => {
+		const args = effect.args as { taskId: string };
+		const task = plot.tasks.get(args.taskId); // Assume tasks are stored in the plot object
+		if (task) {
+			openTaskWindow(task);
+		} else {
+			console.warn(`Task with ID ${args.taskId} not found.`);
+		}
+	},
 	// TODO: Add handlers for other effect types as needed
 };
