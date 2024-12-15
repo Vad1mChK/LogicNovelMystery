@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import VisualNovelEngine from '../frameInterpreter/VisualNovelEngine.tsx';
 import { LnmPlot } from '../frameInterpreter/types.ts';
 import PlotLoader from '../frameInterpreter/PlotLoader.tsx';
@@ -18,14 +18,21 @@ const GamePage: React.FC = () => {
 	console.log(import.meta.env.BASE_URL);
 	const plotUrl = `${import.meta.env.BASE_URL}assets/plot/single_game_ru_RU_.json`;
 
-	const startChapterId = 'inception1';
+	const [startChapter, setStartChapter] = useState<string | undefined>(
+		undefined
+	);
+
+	useEffect(() => {
+		if (plot) setStartChapter(plot.startChapter);
+	}, [plot]);
+
 	return (
 		<Provider store={store}>
 			<div className="frame-renderer">
 				{plot ? (
 					<VisualNovelEngine
 						plot={plot}
-						startChapterId={startChapterId}
+						startChapterId={startChapter}
 					/>
 				) : (
 					<PlotLoader plotUrl={plotUrl} onLoad={setPlot} />
