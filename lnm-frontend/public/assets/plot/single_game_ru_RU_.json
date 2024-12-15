@@ -1563,19 +1563,19 @@
           "dialogue": "Подождите, это сработало?..",
           "nextFrame": "elaboration5_15"
         },
-		  "elaboration5_15": {
-			  "id": "elaboration5_15",
-			  "dialogue": "",
-			  "effects": [
-				  {
-					  "type": "ENDING",
-					  "args": {
-						  "endingId": "demoEnding"
-					  }
-				  }
-			  ]
-		  }
-	  }
+        "elaboration5_15": {
+          "id": "elaboration5_15",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "ENDING",
+              "args": {
+                "endingId": "demoEnding"
+              }
+            }
+          ]
+        }
+      }
     },
     "endings": {
       "gameOver": {
@@ -1596,7 +1596,7 @@
                 "hidden": true
               }
             ],
-			  "speaker": "steve",
+            "speaker": "steve",
             "dialogue": "Чёрт возьми... Не надо было растрачивать все попытки."
           }
         }
