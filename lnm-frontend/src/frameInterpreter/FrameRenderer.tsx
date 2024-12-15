@@ -41,7 +41,7 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 	knowledge,
 	onNextFrame,
 	onGiveUp,
-	onTaskSubmit
+	onTaskSubmit,
 }) => {
 	const handleChoiceSelect = (nextFrameId: string) => {
 		onNextFrame(nextFrameId);
@@ -126,7 +126,9 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 					)}
 				</>
 			)}
-			{currentTask && <TaskWindow task={currentTask} onSubmit={onTaskSubmit} />}
+			{currentTask && (
+				<TaskWindow task={currentTask} onSubmit={onTaskSubmit} />
+			)}
 			<HealthBar currentHealth={health} maxHealth={100} />
 		</div>
 	);

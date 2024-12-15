@@ -27,5 +27,4 @@ describe('Test array utils', () => {
 		const arr = [1];
 		expect(shuffle(arr)).toEqual([1]);
 	});
-
 });

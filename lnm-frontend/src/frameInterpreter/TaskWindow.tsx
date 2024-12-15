@@ -136,7 +136,8 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 									value={index}
 									defaultChecked={index == 0}
 									sx={{
-										color: _WHITE, fontSize: '24px'
+										color: _WHITE,
+										fontSize: '24px',
 									}}
 									color="default"
 								/>

@@ -3,8 +3,9 @@ import {
 	LnmFrameEffectType,
 	LnmEffectArgsMap,
 	LnmPlot,
-	LnmFrameCharacterData, LnmTask
-} from "./types";
+	LnmFrameCharacterData,
+	LnmTask,
+} from './types';
 
 export type EffectHandler = (
 	effect: LnmFrameEffect,
