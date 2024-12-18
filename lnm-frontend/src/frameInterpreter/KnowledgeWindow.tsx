@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LnmKnowledge, LnmKnowledgeType } from './types';
+import SyntaxHighlightDisplayInline from '../markupElements/SyntaxHighlightDisplayInline.tsx';
 // import '../assets/styles/FrameInterpreter.scss';
 
 interface KnowledgeWindowProps {
@@ -45,7 +46,9 @@ const KnowledgeWindow: React.FC<KnowledgeWindowProps> = ({
 					<ul>
 						{filteredKnowledge.map((item) => (
 							<li key={item.id}>
-								<code className="content">{item.content}</code>
+								<SyntaxHighlightDisplayInline
+									value={item.content}
+								/>
 								{item.description && (
 									<p className="description">
 										{item.description}

@@ -1,10 +1,13 @@
+@use 'colors';
+@use 'sass:color';
+
 .health-bar {
-	$HEALTH_BG: #101010cc;
-	$HEALTH_BORDER: #f4f4f4;
-	$HEALTH_UNDEF: #078bc9;
-	$HEALTH_HIGH: #94bc0e;
-	$HEALTH_MEDIUM: #fcb100;
-	$HEALTH_LOW: #d6001e;
+	$HEALTH_BG: color.adjust(colors.$BLACK, $alpha: -0.25);
+	$HEALTH_BORDER: colors.$WHITE;
+	$HEALTH_UNDEF: colors.$DARK-AZUR;
+	$HEALTH_HIGH: colors.$BRIGHT-LIME;
+	$HEALTH_MEDIUM: colors.$YELLOWISH-ORANGE;
+	$HEALTH_LOW: colors.$RED;
 
 	transition: all 1s ease-in-out;
 	position: absolute;

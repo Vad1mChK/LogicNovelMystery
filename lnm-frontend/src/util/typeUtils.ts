@@ -18,3 +18,12 @@ export function assignIfValidType<T>(
 ): T | undefined {
 	return typeof value === typeName ? (value as T) : undefined;
 }
+
+/**
+ * Utility to retrieve all enum values.
+ */
+export function allEnumValues<T extends object>(enumObj: T): Array<T[keyof T]> {
+	return Object.keys(enumObj)
+		.filter((key) => isNaN(Number(key))) // Ignore reverse mappings for numeric enums
+		.map((key) => enumObj[key as keyof T]);
+}

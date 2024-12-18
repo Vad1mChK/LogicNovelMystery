@@ -1,11 +1,11 @@
+@use 'sass:color';
+@use 'colors';
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-
-$red: #ff0000;
-$white: #ffffff;
 
 html,
 body {
@@ -14,13 +14,12 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: Arial, sans-serif;
+	// font-family: Arial, sans-serif;
 	overflow: hidden;
 }
 
 /* Задний фон */
 .background {
-	background-image: url('../assets/img/locations/MansionEntrance.png'); /* Путь к вашему фоновому изображению */
 	background-size: cover;
 	background-position: center;
 	position: absolute;
@@ -33,14 +32,18 @@ body {
 
 /* Центральный контейнер */
 .center-container {
-	background-color: rgb(0 0 112); /* Темно-синий цвет с прозрачностью */
+	background-color: color.adjust(
+		colors.$DARK-BLUE,
+		$alpha: -0.25
+	); /* Темно-синий цвет с прозрачностью */
+
 	padding: 40px 20px;
 	border-radius: 12px;
 	text-align: center;
-	color: $white;
+	color: colors.$WHITE;
 	width: 90%;
 	max-width: 600px;
-	box-shadow: 0 8px 16px rgb(0 0 0);
+	box-shadow: 0 8px 16px colors.$BLACK;
 }
 
 /* Заголовок */
@@ -54,7 +57,7 @@ body {
 .hr {
 	height: 2px;
 	margin: 20px 0;
-	background: rgb(231 237 238);
+	background: colors.$STONE-MOON;
 }
 
 /* Контейнер для выбора персонажей */
@@ -77,10 +80,10 @@ body {
 	position: relative;
 	width: 150px;
 	height: 250px;
-	border: 2px solid #cccccc;
+	border: 2px solid colors.$STONE-MOON;
 	border-radius: 8px;
 	padding: 10px;
-	background-color: $white;
+	background-color: colors.$WHITE;
 	cursor: pointer;
 	transition: border-color 0.3s;
 	text-align: center;
@@ -90,7 +93,7 @@ body {
 	justify-content: center;
 
 	&.selected {
-		border-color: $red; /* Подсветка при выборе */
+		border-color: colors.$RED; /* Подсветка при выборе */
 	}
 }
 
@@ -108,7 +111,7 @@ body {
 .character-name {
 	font-size: 1.1em;
 	font-weight: bold;
-	color: $white;
+	color: colors.$WHITE;
 	margin-top: 10px;
 }
 
@@ -119,15 +122,15 @@ body {
 	padding: 15px;
 	margin-top: 30px;
 	font-size: 1.2em;
-	color: $white;
-	background-color: #0066cc;
+	color: colors.$WHITE;
+	background-color: colors.$BLUE;
 	border: none;
 	border-radius: 8px;
 	cursor: pointer;
 	transition: background-color 0.3s;
 
 	&:hover {
-		background-color: #004080;
+		background-color: colors.$DARK-AZUR;
 	}
 }
 
@@ -136,19 +139,19 @@ body {
 	padding: 10px 20px;
 	font-size: 16px;
 	cursor: pointer;
-	background-color: $white;
-	color: #333333;
+	background-color: colors.$WHITE;
+	color: colors.$DARK-GRAY;
 	border: none;
 	border-radius: 8px;
 	margin-bottom: 20px;
-	box-shadow: 0 4px 8px rgb(0 0 0);
+	box-shadow: 0 4px 8px colors.$BLACK;
 	align-self: flex-start;
 	transition:
 		background-color 0.3s,
 		color 0.3s;
 
 	&:hover {
-		background-color: #333333;
-		color: #ffffff;
+		background-color: colors.$DARK-GRAY;
+		color: colors.$WHITE;
 	}
 }
