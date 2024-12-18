@@ -1,5 +1,6 @@
 import React from 'react';
-import '../css/HealthBar.scss'; // Styling
+import '../css/HealthBar.scss';
+import { Tooltip } from '@mui/material'; // Styling
 
 interface HealthBarProps {
 	currentHealth: number;
@@ -22,14 +23,16 @@ const HealthBar: React.FC<HealthBarProps> = ({ currentHealth, maxHealth }) => {
 				: 'health-low';
 
 	return (
-		<div className="health-bar">
-			<div
-				className={`health-bar-fill ${healthLevelClass}`}
-				style={{
-					width: `${healthPercentage}%`,
-				}}
-			></div>
-		</div>
+		<Tooltip title={`${healthPercentage}%`}>
+			<div className="health-bar">
+				<div
+					className={`health-bar-fill ${healthLevelClass}`}
+					style={{
+						width: `${healthPercentage}%`,
+					}}
+				></div>
+			</div>
+		</Tooltip>
 	);
 };
 
