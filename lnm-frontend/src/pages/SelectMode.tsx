@@ -47,7 +47,7 @@ const GameSelection: React.FC = () => {
 	const sendRequest = async () => {
 		const sessionToken = generateToken();
 		try {
-			const result = await axios.post(
+			/*const result = */ await axios.post(
 				'http://localhost:8080/session', // Замените на ваш API-эндпоинт
 				{ sessionToken }, // Токен передается в теле запроса
 				{
@@ -58,7 +58,7 @@ const GameSelection: React.FC = () => {
 				}
 			);
 			// Сохраняем токен JWT в localStorage
-			localStorage.setItem('jwtToken', result.data.token);
+			localStorage.setItem('sessionToken', sessionToken);
 		} catch (err) {
 			// Устанавливаем сообщение об ошибке
 			throw new Error(
