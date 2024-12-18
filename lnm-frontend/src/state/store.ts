@@ -12,6 +12,7 @@ const saveStateToLocalStorage = (state: GameState) => {
 };
 
 const persistenceMiddleware =
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	(storeAPI: any) => (next: any) => (action: any) => {
 		const result = next(action); // Pass the action to the reducer
 		const state = storeAPI.getState(); // Get the updated state
