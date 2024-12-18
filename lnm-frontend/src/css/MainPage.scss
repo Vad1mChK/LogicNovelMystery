@@ -119,42 +119,6 @@ body {
 	height: 50%;
 }
 
-/* Таблица */
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 10px;
-
-	/* Стили для заголовка таблицы */
-	th {
-		background-color: colors.$WHITE;
-		color: colors.$BLUE;
-		font-weight: bold;
-	}
-
-	th,
-	td {
-		border: 1px solid colors.$STONE-MOON;
-		padding: 8px;
-		text-align: center;
-	}
-
-	/* Затенение для кнопок в таблице */
-	button {
-		background-color: colors.$BLUE;
-		color: colors.$WHITE;
-		border: none;
-		border-radius: 5px;
-		padding: 5px 10px;
-		cursor: pointer;
-		transition: background-color 0.3s;
-
-		&:hover {
-			background-color: colors.$DARK-AZUR;
-		}
-	}
-}
-
 /* Стили для всех кнопок в модальных окнах */
 .modal-button {
 	display: block;
@@ -172,7 +136,19 @@ table {
 	&:hover {
 		background-color: colors.$DARK-AZUR;
 	}
+
+	/* Когда кнопка недоступна */
+	&:disabled {
+		background-color: color.adjust(colors.$BLUE, $lightness: 40%);
+		color: color.adjust(colors.$WHITE, $alpha: -0.5);
+		cursor: not-allowed;
+
+		&:hover {
+			background-color: color.adjust(colors.$BLUE, $lightness: 40%); /* Не изменяется при наведении */
+		}
+	}
 }
+
 
 /* Ползунок звука */
 .volume-control {
@@ -194,4 +170,69 @@ table {
 	padding: 8px;
 	font-size: 16px;
 	margin-top: 5px;
+}
+
+/* Таблица */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+	border: 2px solid colors.$STONE-MOON; /* Четкие границы таблицы */
+
+	/* Стили для заголовка таблицы */
+	th {
+		background-color: colors.$BLUE; /* Фон заголовков таблицы */
+		color: colors.$WHITE; /* Цвет текста заголовков */
+		font-weight: bold;
+		font-size: 16px;
+		padding: 12px; /* Увеличенный отступ для удобства чтения */
+		border: 1px solid colors.$STONE-MOON;
+		text-align: center;
+	}
+
+	th,
+	td {
+		border: 1px solid colors.$STONE-MOON; /* Четкие границы ячеек */
+		padding: 10px;
+		text-align: center;
+		font-size: 14px; /* Размер шрифта */
+	}
+
+	/* Стили для строк */
+	tr {
+		&:nth-child(odd) {
+			background-color: color.adjust(colors.$STONE-MOON, $lightness: 90%); /* Чередование цвета строк */
+		}
+
+		&:nth-child(even) {
+			background-color: color.adjust(colors.$STONE-MOON, $lightness: 95%);
+		}
+
+		&:hover {
+			background-color: color.scale(colors.$BLUE, $lightness: 80%); /* Подсветка строки при наведении */
+			cursor: pointer;
+		}
+	}
+
+	/* Стили для записей */
+	td {
+		color: colors.$BLACK; /* Цвет текста записей */
+		font-weight: 500; /* Чуть более жирный шрифт */
+		box-shadow: 0 1px 2px color.adjust(colors.$STONE-MOON, $alpha: -0.7); /* Небольшая тень */
+	}
+
+	/* Стили для кнопок в таблице */
+	button {
+		background-color: colors.$BLUE;
+		color: colors.$WHITE;
+		border: none;
+		border-radius: 5px;
+		padding: 5px 10px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: colors.$DARK-AZUR;
+		}
+	}
 }

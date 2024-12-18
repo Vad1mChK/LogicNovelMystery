@@ -5,6 +5,20 @@ import { AudioContext } from '../pages/AudioContext';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 import defaultMusic from '../assets/music/fon.mp3';
 import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
+import axios from 'axios';
+
+interface LeaderboardEntry {
+	score: number;
+	name: string;
+	gameMode: string;
+}
+
+//todo del cause it's just a mock data
+const fallbackLeaderboardData = [
+	{ name: 'Иванов', score: 100, gameMode: 'Single' },
+	{ name: 'Петров', score: 90, gameMode: 'Single' },
+	{ name: 'Сидоров', score: 80, gameMode: 'Single' },
+];
 
 const MainMenu: React.FC = () => {
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
@@ -17,6 +31,14 @@ const MainMenu: React.FC = () => {
 		useContext(AudioContext)!;
 	const { t, i18n } = useTranslation(); // Используем локализацию
 
+	//todo replace without mock
+	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
+		fallbackLeaderboardData
+	);
+
+	const [isRefreshDisabled, setRefreshDisabled] = useState(false);
+	const [timer, setTimer] = useState(0);
+
 	// Устанавливаем музыку при загрузке страницы
 	useEffect(() => {
 		setMusicFile(defaultMusic);
@@ -24,6 +46,47 @@ const MainMenu: React.FC = () => {
 			toggleMusic(); // Запускаем музыку, если она не играет
 		}
 	}, []);
+
+	// Запрос данных с сервера
+	const fetchLeaderboardData = async () => {
+		try {
+			const response = await axios.get('/api/leaderboard'); // Замените на ваш URL
+			if (Array.isArray(response.data)) {
+				setLeaderboardData(response.data);
+			} else {
+				//todo replace mock and add locale
+				console.warn(
+					'Некорректный формат данных от сервера, используем заглушку.'
+				);
+				setLeaderboardData(fallbackLeaderboardData); // Используем заглушку
+			}
+		} catch (error) {
+			//todo replace mock and add locale
+			console.error('Ошибка при запросе данных:', error);
+			setLeaderboardData(fallbackLeaderboardData); // Используем заглушку
+		}
+	};
+	// Деактивация кнопки Refresh с таймером
+	const handleRefresh = () => {
+		setRefreshDisabled(true);
+		setTimer(90); // 1:30 = 90 секунд
+		fetchLeaderboardData();
+
+		const countdown = setInterval(() => {
+			setTimer((prev) => {
+				if (prev <= 1) {
+					clearInterval(countdown);
+					setRefreshDisabled(false);
+					return 0;
+				}
+				return prev - 1;
+			});
+		}, 1000);
+	};
+
+	useEffect(() => {
+		if (isLeaderboardOpen) fetchLeaderboardData();
+	}, [isLeaderboardOpen]);
 
 	const closeAllModals = () => {
 		setSettingsOpen(false);
@@ -139,9 +202,25 @@ const MainMenu: React.FC = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{/* Динамически добавленные строки таблицы будут здесь */}
+							{leaderboardData.map((leader, index) => (
+								<tr key={index}>
+									<td>{index + 1}</td>
+									<td>{leader.name}</td>
+									<td>{leader.gameMode}</td>
+									<td>{leader.score}</td>
+								</tr>
+							))}
 						</tbody>
 					</table>
+					<button
+						className="modal-button"
+						onClick={handleRefresh}
+						disabled={isRefreshDisabled}
+					>
+						{isRefreshDisabled
+							? `${t('Refresh in')} ${timer} ${t('sec.')}`
+							: t('Refresh')}
+					</button>
 					<button className="modal-button" onClick={closeAllModals}>
 						{t('Close')}
 					</button>
