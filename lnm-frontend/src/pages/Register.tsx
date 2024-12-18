@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import * as Sentry from '@sentry/react';
 import { useTranslation } from 'react-i18next';
 
@@ -49,8 +49,8 @@ const Register: React.FC = () => {
 
 			// Проверка, если пользователь уже зарегистрирован
 			if (
-				(error as any).response &&
-				(error as any).response.data ===
+				(error as AxiosError).response &&
+				(error as AxiosError).response?.data ===
 					'Registration failed: Username already exists'
 			) {
 				setError(t('register.usernameExists')); // Локализованное сообщение о существующем пользователе
