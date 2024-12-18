@@ -30,15 +30,15 @@ const App: React.FC = () => {
 
 	return (
 		<AudioProvider>
-		  <Routes>
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/register" element={<Register />} />
-        <Route path="/main" element={<MainPage />} />
-        <Route path="/select" element={<SelectMode />} />
-        <Route path="/single-player" element={<GamePage />} />
-        <Route path="/secret" element={<SecretPage />} />
-        <Route path="/" element={<Navigate to="/auth/login" />} />
-		  </Routes>
+			<Routes>
+				<Route path="/auth/login" element={<Login />} />
+				<Route path="/auth/register" element={<Register />} />
+				<Route path="/main" element={<MainPage />} />
+				<Route path="/select" element={<SelectMode />} />
+				<Route path="/single-player" element={<GamePage />} />
+				<Route path="/secret" element={<SecretPage />} />
+				<Route path="/" element={<Navigate to="/auth/login" />} />
+			</Routes>
 		</AudioProvider>
 	);
 };

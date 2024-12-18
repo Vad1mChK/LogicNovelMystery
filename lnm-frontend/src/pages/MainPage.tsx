@@ -13,7 +13,8 @@ const MainMenu: React.FC = () => {
 	const [volume, setVolume] = useState(50);
 	const navigate = useNavigate();
 
-	const { isMusicPlaying, toggleMusic, setMusicFile } = useContext(AudioContext)!;
+	const { isMusicPlaying, toggleMusic, setMusicFile } =
+		useContext(AudioContext)!;
 	const { t, i18n } = useTranslation(); // Используем локализацию
 
 	// Устанавливаем музыку при загрузке страницы
@@ -95,7 +96,9 @@ const MainMenu: React.FC = () => {
 					/>
 					<span>{volume}%</span>
 					<div style={{ marginTop: '10px' }}>
-						<label htmlFor="language-select">{t('Language')}:</label>
+						<label htmlFor="language-select">
+							{t('Language')}:
+						</label>
 						<select
 							id="language-select"
 							value={i18n.language} // Устанавливаем текущее значение языка
@@ -128,15 +131,15 @@ const MainMenu: React.FC = () => {
 					<h2>{t('Leaderboard')}</h2>
 					<table>
 						<thead>
-						<tr>
-							<th>№</th>
-							<th>{t('Name')}</th>
-							<th>{t('Score')}</th>
-							<th>{t('GameMode')}</th>
-						</tr>
+							<tr>
+								<th>№</th>
+								<th>{t('Name')}</th>
+								<th>{t('Score')}</th>
+								<th>{t('GameMode')}</th>
+							</tr>
 						</thead>
 						<tbody>
-						{/* Динамически добавленные строки таблицы будут здесь */}
+							{/* Динамически добавленные строки таблицы будут здесь */}
 						</tbody>
 					</table>
 					<button className="modal-button" onClick={closeAllModals}>

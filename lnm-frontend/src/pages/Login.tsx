@@ -57,7 +57,8 @@ const Login: React.FC = () => {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<button onClick={handleLogin}>{t('login.loginButton')}</button> {/* Локализация кнопки */}
+				<button onClick={handleLogin}>{t('login.loginButton')}</button>{' '}
+				{/* Локализация кнопки */}
 				<p>
 					{t('login.noAccount')}{' '}
 					<Link to="/auth/register">{t('login.registerLink')}</Link>

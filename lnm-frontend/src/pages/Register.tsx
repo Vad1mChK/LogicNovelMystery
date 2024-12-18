@@ -51,7 +51,7 @@ const Register: React.FC = () => {
 			if (
 				(error as any).response &&
 				(error as any).response.data ===
-				'Registration failed: Username already exists'
+					'Registration failed: Username already exists'
 			) {
 				setError(t('register.usernameExists')); // Локализованное сообщение о существующем пользователе
 			} else {
@@ -85,10 +85,11 @@ const Register: React.FC = () => {
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 			/>
-			<button onClick={handleRegister}>{t('register.registerButton')}</button> {/* Локализованная кнопка */}
-
+			<button onClick={handleRegister}>
+				{t('register.registerButton')}
+			</button>{' '}
+			{/* Локализованная кнопка */}
 			{success && <p className="success-message">{success}</p>}
-
 			<p>
 				{t('register.alreadyHaveAccount')}{' '}
 				<Link to="/auth/login">{t('register.loginLink')}</Link>
