@@ -15,7 +15,7 @@ import TagManager from 'react-gtm-module';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
 
 Sentry.init({
