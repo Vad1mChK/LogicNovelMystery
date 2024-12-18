@@ -15,5 +15,5 @@ export default defineConfig({
 			input: 'index.html',
 		},
 	},
-	base: './',
+	base: process.env.DEPLOY_TARGET === 'github' ? '/LogicNovelMystery/' : './',
 });
