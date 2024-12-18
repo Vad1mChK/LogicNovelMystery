@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import React, { /*useContext, */ useEffect } from 'react';
+import { Routes, Route, Navigate /*, useLocation*/ } from 'react-router-dom';
 import './App.css';
 import './css/global.scss';
 
@@ -9,7 +9,7 @@ import MainPage from './pages/MainPage';
 import SelectMode from './pages/SelectMode';
 import GamePage from './pages/GamePage';
 
-import { AudioProvider, AudioContext } from './pages/AudioContext';
+import { AudioProvider /*AudioContext*/ } from './pages/AudioContext';
 
 import SecretPage from './pages/SecretPage.tsx';
 
