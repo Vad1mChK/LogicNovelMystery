@@ -11,7 +11,7 @@ import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { RootState } from '../state/store';
 import KnowledgeWindow from './KnowledgeWindow.tsx';
 import HealthBar from './HealthBar.tsx';
 import TaskWindow from './TaskWindow';

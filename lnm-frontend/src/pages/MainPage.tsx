@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next'; // Импортируем хук
 import defaultMusic from '../assets/music/fon.mp3';
 import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setLanguage } from '../state/languageSlice';
 
 interface LeaderboardEntry {
 	score: number;
@@ -25,6 +27,8 @@ const MainMenu: React.FC = () => {
 	const [isAboutOpen, setAboutOpen] = useState(false);
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 	const navigate = useNavigate();
+
+	const dispatch = useDispatch();
 
 	const { isMusicPlaying, toggleMusic, setMusicFile, volume, setVolume } =
 		useContext(AudioContext)!;
@@ -104,6 +108,7 @@ const MainMenu: React.FC = () => {
 
 	const changeLanguage = (selectedLanguage: string) => {
 		i18n.changeLanguage(selectedLanguage); // Меняем язык
+		dispatch(setLanguage(selectedLanguage));
 	};
 
 	return (
@@ -122,19 +127,19 @@ const MainMenu: React.FC = () => {
 				{/* Блок с дополнительными кнопками */}
 				<div className="side-buttons">
 					<button
-						className="button"
+						className="button leaderboard-button"
 						onClick={() => setLeaderboardOpen(true)}
 					>
 						{t('Leaderboard')}
 					</button>
 					<button
-						className="button"
+						className="button settings-button"
 						onClick={() => setSettingsOpen(true)}
 					>
 						{t('Settings')}
 					</button>
 					<button
-						className="button"
+						className="button about-button"
 						onClick={() => setAboutOpen(true)}
 					>
 						{t('About')}

@@ -10,7 +10,7 @@ import {
 import FrameRenderer from './FrameRenderer';
 import { createConditionEvaluator } from './conditionHandlers';
 import { effectHandlers } from './effectHandlers';
-import { RootState } from '../store';
+import { RootState } from '../state/store';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	clearKnowledge,
@@ -20,7 +20,7 @@ import {
 	increaseHealth,
 	setCurrentFrame,
 	setCurrentChapter,
-} from './gameStore/gameStateSlice';
+} from '../state/gameStateSlice.ts';
 
 interface VisualNovelEngineProps {
 	plot: LnmPlot;

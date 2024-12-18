@@ -3,8 +3,6 @@ import VisualNovelEngine from '../frameInterpreter/VisualNovelEngine.tsx';
 import { LnmPlot } from '../frameInterpreter/types';
 import PlotLoader from '../frameInterpreter/PlotLoader.tsx';
 import '../css/FrameInterpreter.scss';
-import { Provider } from 'react-redux';
-import store from '../store';
 
 const GamePage: React.FC = () => {
 	const [plot, setPlot] = useState<LnmPlot | null>(null);
@@ -27,18 +25,13 @@ const GamePage: React.FC = () => {
 	}, [plot]);
 
 	return (
-		<Provider store={store}>
-			<div className="frame-renderer">
-				{plot ? (
-					<VisualNovelEngine
-						plot={plot}
-						startChapterId={startChapter}
-					/>
-				) : (
-					<PlotLoader plotUrl={plotUrl} onLoad={setPlot} />
-				)}
-			</div>
-		</Provider>
+		<div className="frame-renderer">
+			{plot ? (
+				<VisualNovelEngine plot={plot} startChapterId={startChapter} />
+			) : (
+				<PlotLoader plotUrl={plotUrl} onLoad={setPlot} />
+			)}
+		</div>
 	);
 };
 

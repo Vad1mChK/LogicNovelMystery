@@ -51,7 +51,9 @@ test.describe('Example e2e Test Suite', () => {
 		const buttonTextInRussian = await settingsButton.innerText(); // Await the innerText() call
 		expect(buttonTextInRussian).toBe('Настройки'); // Compare the string
 	});
-	test('Selected language should persist across reloads', async ({ page }) => {
+	test('Selected language should persist across reloads', async ({
+		page,
+	}) => {
 		await page.goto('http://localhost:5173/LogicNovelMystery/main');
 
 		// Open settings and select Russian

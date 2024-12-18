@@ -5,6 +5,8 @@ import App from './App';
 // import './css/index.css';
 import '../i18n.js';
 import { AudioProvider } from './pages/AudioContext';
+import { Provider } from 'react-redux';
+import store from './state/store';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	// Strict:
@@ -17,8 +19,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	// </React.StrictMode>
 	// Non-strict: Uncomment if you don't need the thing
 	<AudioProvider>
-		<BrowserRouter basename="/LogicNovelMystery">
-			<App />
-		</BrowserRouter>
+		<Provider store={store}>
+			<BrowserRouter basename="/LogicNovelMystery">
+				<App />
+			</BrowserRouter>
+		</Provider>
 	</AudioProvider>
 );

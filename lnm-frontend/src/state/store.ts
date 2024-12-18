@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import gameStateReducer, { GameState } from './gameStateSlice.ts';
-import languageReducer, { LanguageState } from './languageSlice.ts';
+import gameStateReducer, { GameState } from './gameStateSlice';
+import languageReducer, { LanguageState } from './languageSlice';
 
 const store = configureStore({
 	reducer: {
