@@ -10,7 +10,7 @@ import gameStateReducer, {
 	clearErrorSum,
 	incrementErrorCount,
 	clearErrorCount,
-} from './gameStateSlice.ts';
+} from './gameStateSlice';
 
 // Initial state for testing
 const initialState = {
