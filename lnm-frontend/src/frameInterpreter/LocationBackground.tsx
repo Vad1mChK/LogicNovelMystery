@@ -11,11 +11,12 @@ const LocationBackground: React.FC<LocationBackgroundProps> = ({
 }) => (
 	<div className="game-background">
 		<img
-			src={`${location.background?.replace(/^\/src/, import.meta.env.MODE === 'development' ? '' : '.')}`} // TODO Temporary hack, do not rely on Vite vars later
+			src={`${import.meta.env.BASE_URL}${location.background || ''}`}
 			alt={location.name}
 			title={location.name}
 		/>
 	</div>
 );
+// Url in JSON is expected to begin with 'assets' and not with '/assets'
 
 export default LocationBackground;

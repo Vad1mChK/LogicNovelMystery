@@ -13,10 +13,10 @@
       "name": "Стив",
       "defaultPose": "idle",
       "sprites": {
-        "idle": "/assets/img/characters/steve/idle.webp",
-        "think": "/assets/img/characters/steve/think.webp",
-        "holdGlasses": "/assets/img/characters/steve/hold_glasses.webp",
-        "holdNotebook": "/assets/img/characters/steve/hold_notebook.webp"
+        "idle": "assets/img/characters/steve/idle.webp",
+        "think": "assets/img/characters/steve/think.webp",
+        "holdGlasses": "assets/img/characters/steve/hold_glasses.webp",
+        "holdNotebook": "assets/img/characters/steve/hold_notebook.webp"
       }
     },
     "director": {
@@ -24,8 +24,8 @@
       "name": "Директор",
       "defaultPose": "idle",
       "sprites": {
-        "idle": "/assets/img/characters/director/idle.webp",
-        "phone": "/assets/img/characters/director/phone.webp"
+        "idle": "assets/img/characters/director/idle.webp",
+        "phone": "assets/img/characters/director/phone.webp"
       }
     },
     "robot": {
@@ -33,9 +33,9 @@
       "name": "Робот",
       "defaultPose": "idle",
       "sprites": {
-        "idle": "/assets/img/characters/robot/idle.webp",
-        "think": "/assets/img/characters/robot/think.webp",
-        "angry": "/assets/img/characters/robot/angry.webp"
+        "idle": "assets/img/characters/robot/idle.webp",
+        "think": "assets/img/characters/robot/think.webp",
+        "angry": "assets/img/characters/robot/angry.webp"
       }
     },
     "anonymous": {
@@ -43,7 +43,7 @@
       "name": "???",
       "defaultPose": "angry",
       "sprites": {
-        "idle": "/assets/img/characters/robot/idle.webp"
+        "idle": "assets/img/characters/robot/idle.webp"
       }
     },
     "sarah": {
@@ -51,8 +51,8 @@
       "name": "Сара",
       "defaultPose": "idle",
       "sprites": {
-        "idle": "/assets/img/characters/sarah/idle.webp",
-        "hostage": "/assets/img/characters/sarah/hostage.webp"
+        "idle": "assets/img/characters/sarah/idle.webp",
+        "hostage": "assets/img/characters/sarah/hostage.webp"
       }
     }
   },
@@ -60,36 +60,36 @@
     "agentOffice": {
       "id": "agentOffice",
       "name": "Офис агента",
-      "background": "/assets/img/locations/AgentOffice.webp"
+      "background": "assets/img/locations/AgentOffice.webp"
     },
     "directorOffice": {
       "id": "directorOffice",
       "name": "Офис директора",
-      "background": "/assets/img/locations/DirectorOffice.webp"
+      "background": "assets/img/locations/DirectorOffice.webp"
     },
     "mansionEntrance": {
       "id": "mansionEntrance",
       "name": "Вход в особняк",
-      "background": "/assets/img/locations/MansionEntrance.webp"
+      "background": "assets/img/locations/MansionEntrance.webp"
     },
     "grandHall": {
       "id": "grandHall",
       "name": "Холл",
-      "background": "/assets/img/locations/GrandHall.webp"
+      "background": "assets/img/locations/GrandHall.webp"
     },
     "studyRoom": {
       "id": "studyRoom",
       "name": "Кабинет",
-      "background": "/assets/img/locations/StudyRoom.webp"
+      "background": "assets/img/locations/StudyRoom.webp"
     },
     "computerRoom": {
       "id": "computerRoom",
       "name": "Комната с компьютером",
-      "background": "/assets/img/locations/ComputerRoom.webp"
+      "background": "assets/img/locations/ComputerRoom.webp"
     }
   },
   "music": {},
-  "startChapter": "elaboration5",
+  "startChapter": "elaboration2",
   "chapters": {
     "inception1": {
       "id": "inception1",

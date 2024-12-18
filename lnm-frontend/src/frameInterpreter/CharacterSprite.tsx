@@ -13,9 +13,12 @@ const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 	isSpeaker,
 	characterData,
 }) => {
-	const spriteUrl = character.sprites
-		.get(characterData.pose || character.defaultPose || '')
-		?.replace(/^\/src/, import.meta.env.MODE === 'development' ? '' : '.'); // TODO Temporary hack, do not rely on Vite vars later
+	const spriteUrl = `${import.meta.env.BASE_URL}${
+		character.sprites.get(
+			characterData.pose || character.defaultPose || ''
+		) || ''
+	}`; // Url in JSON is expected to begin with 'assets' and not with '/assets'
+	// console.log(spriteUrl);
 
 	const positionStyles = {
 		left: { left: '25%' },
