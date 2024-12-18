@@ -1,0 +1,26 @@
+@use 'sass:color';
+@use 'colors';
+
+.hint-display {
+	& .hint-display-text {
+		transition: all 0.3s ease-in-out;
+		background: color.adjust(colors.$DARK-GRAY, $alpha: -0.5);
+		padding: 8px;
+		border-radius: 8px;
+		cursor: pointer;
+
+		&.hint-display-text-hidden {
+			background: colors.$DARK-GRAY;
+			color: transparent;
+
+			& .syntax-highlight * {
+				color: transparent;
+			}
+		}
+	}
+
+	& .hint-display-toggle-button {
+		color: colors.$WHITE;
+		cursor: pointer;
+	}
+}

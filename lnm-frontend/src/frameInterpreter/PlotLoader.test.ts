@@ -7,8 +7,8 @@ import {
 	_convertAndCreateEnding,
 	_convertAndCreateFrame,
 	_convertAndCreatePlot,
+	_convertAndCreateTask,
 } from './PlotLoader';
-import { expect } from '@playwright/test';
 import {
 	LnmEffectArgsMap,
 	LnmFrameEffectType,
@@ -221,5 +221,133 @@ describe('Test plot loading', () => {
 		expect(ending.startFrame).toBe('sampleEnding_start');
 		expect(ending.frames.keys()).toContain(ending.startFrame);
 		expect(ending.frames.size).toBe(2);
+	});
+	test('task of type `SELECT_ONE` should be created correctly', () => {
+		const taskObject = {
+			id: 'someTask',
+			type: 'SELECT_ONE',
+			questionText: '...',
+			options: [
+				'`Who = gumshoe` and `Who = kay`',
+				'`Who = gumshoe`',
+				'`Who = kay`',
+				'Nothing (returns `false`)',
+			],
+			correctAnswerIndex: 1,
+			hint: 'The student should be going to `investigate(thatScream)` now.',
+			nextFrameOnSuccess: '1',
+			nextFrameOnFailure: '2',
+		};
+		const task = _convertAndCreateTask(taskObject);
+		expect(task.id).toBe('someTask');
+		expect(task.type).toBe(LnmTaskType.SELECT_ONE);
+		expect(task.nextFrameOnSuccess).toBe('1');
+		expect(task.nextFrameOnFailure).toBe('2');
+		if (task.type === LnmTaskType.SELECT_ONE) {
+			expect(task.options.length).toBe(4);
+			expect(task.correctAnswerIndex).toBe(1);
+		} else {
+			fail();
+		}
+	});
+	test('task of type `SELECT_MANY` should be created correctly', () => {
+		const taskObject = {
+			id: 'someTask',
+			type: 'SELECT_MANY',
+			questionText: '...',
+			options: [
+				'`Who = edgeworth`',
+				'`Who = gumshoe`',
+				'`Who = kay`',
+				'`None`',
+			],
+			correctAnswerIndices: [1, 2],
+			hint: 'The student should be going to `investigate(thatScream)` now.',
+			nextFrameOnSuccess: '1',
+			nextFrameOnFailure: '2',
+		};
+		const task = _convertAndCreateTask(taskObject);
+		expect(task.type).toBe(LnmTaskType.SELECT_MANY);
+		if (task.type === LnmTaskType.SELECT_MANY) {
+			expect(task.correctAnswerIndices).toEqual([1, 2]);
+		} else {
+			fail();
+		}
+	});
+	test('task of type `WRITE_KNOWLEDGE` should be created correctly', () => {
+		const taskObject = {
+			id: 'someTask',
+			type: LnmTaskType.WRITE_KNOWLEDGE,
+			knowledge: ['friend(edgeworth, gumshoe).', 'friend(gumshoe, kay).'],
+			questionText: '...',
+			testCases: [
+				{
+					query: 'friends(kay, gumshoe).',
+					expectedResults: [{ variables: {} }],
+				},
+				{
+					query: 'friends(edgeworth, gumshoe).',
+					expectedResults: [{ variables: {} }],
+				},
+				{
+					query: 'friends(gumshoe, gumshoe).',
+					expectedResults: [],
+				},
+			],
+			hint: 'Use logical operators `;` and `,` and inequality check `\\=`.',
+			defaultValue: 'friends(X, Y) :-\n\t% Write your solution here',
+			nextFrameOnSuccess: '1',
+			nextFrameOnFailure: '2',
+		};
+		const task = _convertAndCreateTask(taskObject);
+		expect(task.type).toBe(LnmTaskType.WRITE_KNOWLEDGE);
+		if (task.type !== LnmTaskType.WRITE_KNOWLEDGE) {
+			fail();
+		}
+		expect(task.defaultValue?.length).not.toBe(0);
+		expect(task.knowledge.length).toBe(2);
+		expect(task.testCases.length).toBe(3);
+		expect(task.testCases[0].expectedResults).toHaveLength(1);
+		expect(task.testCases[0].expectedResults[0].variables).toEqual({});
+		expect(task.testCases[2].expectedResults).toHaveLength(0);
+	});
+	test('task of type `COMPLETE_QUERY` should be created correctly', () => {
+		const taskObject = {
+			id: 'someTask',
+			type: LnmTaskType.COMPLETE_QUERY,
+			knowledge: [
+				'friend(edgeworth, gumshoe).',
+				'friend(gumshoe, kay).',
+				'friend(kay, franziska).',
+				'friend(franziska, adrian).',
+				'friends(X, Y) :- friend(X, Y); friend(Y, X).',
+			],
+			questionText: '...',
+			expectedResults: [
+				{
+					variables: {
+						Who: 'franziska',
+						Mid: 'kay',
+					},
+				},
+			],
+			defaultValue:
+				'second_friends(X, Y) :-\n\t% Write your solution here...',
+			nextFrameOnSuccess: '1',
+			nextFrameOnFailure: '2',
+		};
+		const task = _convertAndCreateTask(taskObject);
+		expect(task.type).toBe(LnmTaskType.COMPLETE_QUERY);
+		if (task.type !== LnmTaskType.COMPLETE_QUERY) {
+			fail();
+		}
+		expect(task.defaultValue?.length).not.toBe(0);
+		expect(task.knowledge).toHaveLength(5);
+		expect(task.hint).not.toBeDefined();
+		expect(task.expectedResults).toHaveLength(1);
+		expect(Object.keys(task.expectedResults[0].variables)).toEqual([
+			'Who',
+			'Mid',
+		]);
 	});
 });
