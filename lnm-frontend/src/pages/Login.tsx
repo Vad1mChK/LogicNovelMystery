@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as Sentry from '@sentry/react';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
-import '../css/index.css'; // Подключение CSS для стилей формы (опционально)
+// import '../css/index.css'; // Подключение CSS для стилей формы (опционально)
 
 const Login: React.FC = () => {
 	const [username, setUsername] = useState('');

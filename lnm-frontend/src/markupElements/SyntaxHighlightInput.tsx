@@ -10,6 +10,7 @@ import {
 	ContentCopy as CopyIcon,
 	Clear as ClearIcon,
 } from '@mui/icons-material';
+import { t } from 'i18next';
 
 interface SyntaxHighlightBoxProps {
 	placeholder?: string;
@@ -130,17 +131,17 @@ const SyntaxHighlightInput: React.FC<SyntaxHighlightBoxProps> = ({
 			}}
 		>
 			<div className="syntax-highlight-top-row">
-				<Tooltip title="Copy code">
+				<Tooltip title={t('game.taskWindow.syntaxHighlight.copy')}>
 					<IconButton onClick={copyCode}>
 						<CopyIcon className="syntax-highlight-icon-button" />
 					</IconButton>
 				</Tooltip>
-				<Tooltip title="Restore code">
+				<Tooltip title={t('game.taskWindow.syntaxHighlight.restore')}>
 					<IconButton onClick={restoreCode}>
 						<RestoreIcon className="syntax-highlight-icon-button" />
 					</IconButton>
 				</Tooltip>
-				<Tooltip title="Clear code">
+				<Tooltip title={t('game.taskWindow.syntaxHighlight.clear')}>
 					<IconButton onClick={clearCode}>
 						<ClearIcon className="syntax-highlight-icon-button" />
 					</IconButton>
@@ -164,8 +165,7 @@ const SyntaxHighlightInput: React.FC<SyntaxHighlightBoxProps> = ({
 				/>
 				{displayTabWarning && (
 					<div className="syntax-highlight-code-area-tab-warning">
-						If you use a Tab, you will be unable to undo the changes
-						before the last tab insertion.
+						{t('game.taskWindow.textInput.tabWarning')}
 					</div>
 				)}
 			</div>

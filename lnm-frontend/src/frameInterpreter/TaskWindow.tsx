@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import '../css/TaskWindow.scss';
 import { validateTask } from './taskValidation/taskValidation';
+import { t } from 'i18next';
 
 interface TaskWindowProps {
 	task: LnmTask;
@@ -155,16 +156,19 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 			{(task.type == LnmTaskType.WRITE_KNOWLEDGE ||
 				task.type == LnmTaskType.COMPLETE_QUERY) && (
 				<SyntaxHighlightInput
-					placeholder="Enter your solution here..."
+					placeholder={t('game.taskWindow.textInput.placeholder')}
 					value={task.defaultValue}
 					onUpdate={(newValue) => setUserInputText(newValue)}
 				/>
 			)}
 			<div className="task-window-button-row">
-				{task.type == LnmTaskType.WRITE_KNOWLEDGE && (
-					<input type="button" value={'Протестировать'} />
-				)}
-				<input type="submit" value={'Отправить'} />
+				{/*{task.type == LnmTaskType.WRITE_KNOWLEDGE && (*/}
+				{/*	<input type="button" value={t('game.taskWindow.testButton')} />*/}
+				{/*)}*/}
+				<input
+					type="submit"
+					value={t('game.taskWindow.submitButton')}
+				/>
 			</div>
 			{error && <p className="task-window-error">{error}</p>}
 		</form>

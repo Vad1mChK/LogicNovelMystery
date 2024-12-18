@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LnmKnowledge, LnmKnowledgeType } from './types';
 import SyntaxHighlightDisplayInline from '../markupElements/SyntaxHighlightDisplayInline.tsx';
+import { t } from 'i18next';
 // import '../assets/styles/FrameInterpreter.scss';
 
 interface KnowledgeWindowProps {
@@ -27,7 +28,7 @@ const KnowledgeWindow: React.FC<KnowledgeWindowProps> = ({
 					}`}
 					onClick={() => setActiveTab(LnmKnowledgeType.FACT)}
 				>
-					Факты
+					{t('game.knowledgeWindow.facts')}
 				</button>
 				<button
 					className={`tab-button ${
@@ -35,7 +36,7 @@ const KnowledgeWindow: React.FC<KnowledgeWindowProps> = ({
 					}`}
 					onClick={() => setActiveTab(LnmKnowledgeType.RULE)}
 				>
-					Правила
+					{t('game.knowledgeWindow.rules')}
 				</button>
 				<button className="close-button" onClick={onClose}>
 					&times;

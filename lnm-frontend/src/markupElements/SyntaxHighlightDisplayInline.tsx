@@ -5,6 +5,7 @@ import Prism from 'prismjs';
 import { copyTextToClipboard } from './markupUtils';
 import { IconButton, Tooltip } from '@mui/material';
 import CopyIcon from '@mui/icons-material/ContentCopy';
+import { t } from 'i18next';
 
 interface SyntaxHighlightDisplayInlineProps {
 	value: string;
@@ -54,7 +55,7 @@ const SyntaxHighlightDisplayInline: React.FC<
 				dangerouslySetInnerHTML={{ __html: highlightedContent }}
 			/>
 			{copyable && (
-				<Tooltip title="Copy code">
+				<Tooltip title={t('game.taskWindow.syntaxHighlight.copy')}>
 					<IconButton onClick={copyCode}>
 						<CopyIcon className="syntax-highlight-icon-button" />
 					</IconButton>

@@ -15,6 +15,7 @@ import { RootState } from '../store';
 import KnowledgeWindow from './KnowledgeWindow.tsx';
 import HealthBar from './HealthBar.tsx';
 import TaskWindow from './TaskWindow';
+import { t } from 'i18next';
 
 interface FrameRendererProps {
 	isEnding: boolean;
@@ -106,14 +107,14 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 							className="game-button"
 							onClick={() => setKnowledgeOpen(true)}
 						>
-							Знания
+							{t('game.knowledgeButton')}
 						</button>
 						{!isEnding && (
 							<button
 								className="game-button give-up-button"
 								onClick={onGiveUp}
 							>
-								Сдаться
+								{t('game.giveUpButton')}
 							</button>
 						)}
 					</div>

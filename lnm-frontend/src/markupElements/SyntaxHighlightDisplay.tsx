@@ -6,6 +6,7 @@ import '../css/SyntaxHighlightComponents.scss';
 import { copyTextToClipboard } from './markupUtils';
 import { IconButton, Tooltip } from '@mui/material';
 import CopyIcon from '@mui/icons-material/ContentCopy';
+import { t } from 'i18next';
 
 interface SyntaxHighlightDisplayProps {
 	value: string; // Code to display
@@ -53,7 +54,7 @@ const SyntaxHighlightDisplay: React.FC<SyntaxHighlightDisplayProps> = ({
 			}}
 		>
 			<div className="syntax-highlight-top-row">
-				<Tooltip title="Copy code">
+				<Tooltip title={t('game.taskWindow.syntaxHighlight.copy')}>
 					<IconButton onClick={copyCode}>
 						<CopyIcon className="syntax-highlight-icon-button" />
 					</IconButton>
