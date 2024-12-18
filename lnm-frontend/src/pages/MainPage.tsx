@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AudioContext } from '../pages/AudioContext';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 import defaultMusic from '../assets/music/fon.mp3';
+import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 
 const MainMenu: React.FC = () => {
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
@@ -38,7 +39,12 @@ const MainMenu: React.FC = () => {
 	};
 
 	return (
-		<div className="background">
+		<div
+			className="background"
+			style={{
+				backgroundImage: `url(${mainPageBackground})`,
+			}}
+		>
 			<div className="main-container">
 				{/* Кнопка "Начать игру" */}
 				<button className="button" onClick={() => navigate('/select')}>

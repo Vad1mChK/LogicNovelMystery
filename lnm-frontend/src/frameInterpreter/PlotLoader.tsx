@@ -21,6 +21,7 @@ import {
 	LnmMusic,
 	LnmPlot,
 	LnmTask,
+	LnmTaskType,
 } from './types';
 import { assignIfValidType, objectToMap, toEnumValue } from '../util/typeUtils';
 import { useNavigate } from 'react-router-dom';
@@ -137,7 +138,12 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 				]
 			)
 		);
-	const tasks = objectToMap<LnmTask>(plotObject.tasks);
+	const tasks = new Map(
+		Object.entries(plotObject.tasks).map(([taskId, taskData]) => [
+			taskId,
+			convertAndCreateTask(taskData, signal),
+		])
+	);
 	const knowledge = objectToMap<LnmKnowledge>(plotObject.knowledge);
 
 	return {
@@ -216,13 +222,11 @@ function convertAndCreateEffect(
 		? convertAndCreateCondition(effectObject.if, signal)
 		: undefined;
 
-	const result: LnmFrameEffect<typeof effectType> = {
+	return {
 		type: effectType,
 		if: _if,
 		args,
 	};
-
-	return result;
 }
 
 function convertAndCreateCondition(
@@ -296,6 +300,100 @@ function convertAndCreateEnding(
 	} as LnmEnding;
 }
 
+function convertAndCreateTask(taskObject: any, signal?: AbortSignal): LnmTask {
+	if (signal?.aborted) throw new Error('Aborted');
+
+	const {
+		id,
+		type,
+		questionText,
+		hint,
+		nextFrameOnSuccess,
+		nextFrameOnFailure,
+		failureScorePenalty,
+	} = taskObject;
+
+	switch (type) {
+		case LnmTaskType.SELECT_ONE: {
+			const { options, correctAnswerIndex } = taskObject;
+			return {
+				id,
+				type,
+				questionText,
+				hint,
+				nextFrameOnSuccess,
+				nextFrameOnFailure,
+				failureScorePenalty,
+				options,
+				correctAnswerIndex,
+			};
+		}
+		case LnmTaskType.SELECT_MANY: {
+			const { options, correctAnswerIndices } = taskObject;
+			return {
+				id,
+				type,
+				questionText,
+				hint,
+				nextFrameOnSuccess,
+				nextFrameOnFailure,
+				failureScorePenalty,
+				options,
+				correctAnswerIndices,
+			};
+		}
+		case LnmTaskType.WRITE_KNOWLEDGE: {
+			const { knowledge, defaultValue } = taskObject;
+			const testCasesObject = taskObject.testCases;
+			const testCases = testCasesObject.map((testCase: any) => ({
+				input: testCase.input,
+				expectedResults: testCase.expectedResults.map(
+					(result: any) => ({
+						variables: result.variables,
+					})
+				),
+			}));
+			return {
+				id,
+				type,
+				questionText,
+				hint,
+				nextFrameOnSuccess,
+				nextFrameOnFailure,
+				failureScorePenalty,
+				knowledge,
+				defaultValue,
+				testCases,
+			};
+		}
+		case LnmTaskType.COMPLETE_QUERY: {
+			const { knowledge, defaultValue } = taskObject;
+			const expectedResultsObject = taskObject.expectedResults;
+			const expectedResults = expectedResultsObject.map(
+				(result: any) => ({
+					variables: result.variables,
+				})
+			);
+
+			return {
+				id,
+				type,
+				questionText,
+				hint,
+				nextFrameOnSuccess,
+				nextFrameOnFailure,
+				failureScorePenalty,
+				knowledge,
+				expectedResults,
+				defaultValue,
+			};
+		}
+		default: {
+			throw new Error('Unknown task type');
+		}
+	}
+}
+
 export default PlotLoader;
 export {
 	convertAndCreateCondition as _convertAndCreateCondition,
@@ -303,4 +401,5 @@ export {
 	convertAndCreateFrame as _convertAndCreateFrame,
 	convertAndCreatePlot as _convertAndCreatePlot,
 	convertAndCreateEnding as _convertAndCreateEnding,
+	convertAndCreateTask as _convertAndCreateTask,
 };

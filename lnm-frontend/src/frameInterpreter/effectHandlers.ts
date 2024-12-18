@@ -4,6 +4,7 @@ import {
 	LnmEffectArgsMap,
 	LnmPlot,
 	LnmFrameCharacterData,
+	LnmTask,
 } from './types';
 
 export type EffectHandler = (
@@ -17,6 +18,9 @@ export type EffectHandler = (
 			React.SetStateAction<LnmFrameCharacterData[] | null>
 		>;
 		addKnowledge: (knowledgeId: string) => void;
+		decreaseHealth: (amount: number | 'kill') => void;
+		increaseHealth: (amount: number | 'full') => void;
+		openTaskWindow: (task: LnmTask) => void;
 		plot: LnmPlot;
 	}
 ) => void;
@@ -118,5 +122,32 @@ export const effectHandlers: Partial<
 		}
 	},
 
+	[LnmFrameEffectType.DECREASE_HEALTH]: (effect, { decreaseHealth }) => {
+		const args =
+			effect.args as LnmEffectArgsMap[LnmFrameEffectType.DECREASE_HEALTH];
+		console.log('Processing DECREASE_HEALTH effect:', args);
+		if (args.amount) {
+			decreaseHealth(args.amount);
+		}
+	},
+
+	[LnmFrameEffectType.INCREASE_HEALTH]: (effect, { increaseHealth }) => {
+		const args =
+			effect.args as LnmEffectArgsMap[LnmFrameEffectType.INCREASE_HEALTH];
+		console.log('Processing INCREASE_HEALTH effect:', args);
+		if (args.amount) {
+			increaseHealth(args.amount);
+		}
+	},
+
+	[LnmFrameEffectType.START_TASK]: (effect, { openTaskWindow, plot }) => {
+		const args = effect.args as { taskId: string };
+		const task = plot.tasks.get(args.taskId); // Assume tasks are stored in the plot object
+		if (task) {
+			openTaskWindow(task);
+		} else {
+			console.warn(`Task with ID ${args.taskId} not found.`);
+		}
+	},
 	// TODO: Add handlers for other effect types as needed
 };
