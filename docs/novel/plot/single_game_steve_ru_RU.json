@@ -1,0 +1,1760 @@
+{
+  "metadata": {
+    "name": "single_game",
+    "gamemode": "single",
+    "protagonist": "steve",
+    "author": "Vad1mChK, LizOchkaaaa",
+    "version": "1.0",
+    "locale": "ru_RU"
+  },
+  "characters": {
+    "steve": {
+      "id": "steve",
+      "name": "Стив",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/assets/img/characters/steve/idle.webp",
+        "think": "/assets/img/characters/steve/think.webp",
+        "holdGlasses": "/assets/img/characters/steve/hold_glasses.webp",
+        "holdNotebook": "/assets/img/characters/steve/hold_notebook.webp"
+      }
+    },
+    "director": {
+      "id": "director",
+      "name": "Директор",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/assets/img/characters/director/idle.webp",
+        "phone": "/assets/img/characters/director/phone.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Робот",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/assets/img/characters/robot/idle.webp",
+        "think": "/assets/img/characters/robot/think.webp",
+        "angry": "/assets/img/characters/robot/angry.webp"
+      }
+    },
+    "anonymous": {
+      "id": "anonymous",
+      "name": "???",
+      "defaultPose": "angry",
+      "sprites": {
+        "idle": "/assets/img/characters/robot/idle.webp"
+      }
+    },
+    "sarah": {
+      "id": "sarah",
+      "name": "Сара",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "/assets/img/characters/sarah/idle.webp",
+        "hostage": "/assets/img/characters/sarah/hostage.webp"
+      }
+    }
+  },
+  "locations": {
+    "agentOffice": {
+      "id": "agentOffice",
+      "name": "Офис агента",
+      "background": "/assets/img/locations/AgentOffice.webp"
+    },
+    "directorOffice": {
+      "id": "directorOffice",
+      "name": "Офис директора",
+      "background": "/assets/img/locations/DirectorOffice.webp"
+    },
+    "mansionEntrance": {
+      "id": "mansionEntrance",
+      "name": "Вход в особняк",
+      "background": "/assets/img/locations/MansionEntrance.webp"
+    },
+    "grandHall": {
+      "id": "grandHall",
+      "name": "Холл",
+      "background": "/assets/img/locations/GrandHall.webp"
+    },
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Кабинет",
+      "background": "/assets/img/locations/StudyRoom.webp"
+    },
+    "computerRoom": {
+      "id": "computerRoom",
+      "name": "Комната с компьютером",
+      "background": "/assets/img/locations/ComputerRoom.webp"
+    }
+  },
+  "music": {},
+  "startChapter": "inception4",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "Начало, Глава 1",
+      "startFrame": "inception1_start",
+      "knowledge": [
+        "iAmSteve"
+      ]
+    },
+    "inception2": {
+      "id": "inception2",
+      "title": "Начало, Глава 2",
+      "startFrame": "inception2_start",
+      "knowledge": [
+        "iAmSteve",
+        "mySuperior"
+      ]
+    },
+    "inception3": {
+      "id": "inception3",
+      "title": "Начало, Глава 3",
+      "startFrame": "inception3_start",
+      "knowledge": [
+        "iAmSteve",
+        "mySuperior",
+        "ifAssistedKevinThenCreatedVirus"
+      ]
+    },
+    "inception4": {
+      "id": "inception4",
+      "title": "Начало, Глава 4",
+      "startFrame": "inception4_start",
+      "knowledge": [
+        "iAmSteve",
+        "mySuperior",
+        "ifAssistedKevinThenCreatedVirus"
+      ]
+    },
+    "elaboration1": {
+      "id": "elaboration1",
+      "title": "Продолжение, Глава 1",
+      "startFrame": "elaboration1_start",
+      "knowledge": []
+    },
+    "elaboration2": {
+      "id": "elaboration2",
+      "title": "Продолжение, Глава 2",
+      "startFrame": "elaboration2_start",
+      "knowledge": []
+    },
+    "elaboration3": {
+      "id": "elaboration3",
+      "title": "Продолжение, Глава 3",
+      "startFrame": "elaboration3_start",
+      "knowledge": []
+    },
+    "elaboration4": {
+      "id": "elaboration4",
+      "title": "Продолжение, Глава 4",
+      "startFrame": "elaboration4_start",
+      "knowledge": []
+    },
+    "elaboration5": {
+      "id": "elaboration5",
+      "title": "Продолжение, Глава 5",
+      "startFrame": "elaboration5_start",
+      "knowledge": []
+    }
+  },
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "location": "agentOffice",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdGlasses"
+            },
+            {
+              "id": "director",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "(Так, уже 5 утра. Надо выпить кофе, а то до конца смены ещё далеко...)",
+          "nextFrame": "inception1_01"
+        },
+        "inception1_01": {
+          "id": "inception1_01",
+          "dialogue": "Алло! Специальный агент ФБР Хэриссон слушает вас.",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "dialogue": "Стив Хэриссон. С вами говорит директор ФБР Эдгар Гувер.",
+          "speaker": "director",
+          "nextFrame": "inception1_03",
+          "effects": [
+            {
+              "type": "OPEN_KNOWLEDGE",
+              "args": {
+                "knowledgeId": "mySuperior"
+              }
+            },
+            {
+              "type": "DECREASE_HEALTH",
+              "args": {
+                "amount": 40
+              }
+            }
+          ]
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "Слушаю вас, сэр!",
+          "speaker": "steve",
+          "nextFrame": "inception1_04"
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "Это не телефонный разговор. Зайдите срочно ко мне в кабинет!",
+          "speaker": "director",
+          "nextFrame": "inception1_05",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "Да, сэр!",
+          "speaker": "steve",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "*клик*",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "*клик*",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception2"
+              }
+            }
+          ]
+        }
+      },
+      "inception2": {
+        "inception2_start": {
+          "id": "inception2_start",
+          "location": "directorOffice",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "director",
+              "pose": "phone",
+              "position": "right"
+            }
+          ],
+          "speaker": "director",
+          "dialogue": "Заходите и присаживайтесь.",
+          "nextFrame": "inception2_01"
+        },
+        "inception2_01": {
+          "id": "inception2_01",
+          "dialogue": "Здравствуйте, Стив.",
+          "nextFrame": "inception2_02",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "steve"
+              }
+            },
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "director",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception2_02": {
+          "id": "inception2_02",
+          "dialogue": "Несмотря на столь раннее время, у меня к вам будет очень ответственное задание.",
+          "nextFrame": "inception2_03"
+        },
+        "inception2_03": {
+          "id": "inception2_03",
+          "dialogue": " Здравствуйте, директор! Я весь внимание!",
+          "speaker": "steve",
+          "nextFrame": "inception2_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "holdNotebook"
+              }
+            }
+          ]
+        },
+        "inception2_04": {
+          "id": "inception2_04",
+          "dialogue": "Вам необходимо помочь своей стране! От вашей работы зависит жизнь всей планеты!",
+          "speaker": "director",
+          "nextFrame": "inception2_05"
+        },
+        "inception2_05": {
+          "id": "inception2_05",
+          "dialogue": "Всегда готов, сэр! В чем состоит моё задание?",
+          "speaker": "steve",
+          "nextFrame": "inception2_06"
+        },
+        "inception2_06": {
+          "id": "inception2_06",
+          "dialogue": "Группа хакеров во главе с Кэвином Митником создала вирус.",
+          "speaker": "director",
+          "nextFrame": "inception2_07",
+          "effects": [
+            {
+              "type": "OPEN_KNOWLEDGE",
+              "args": {
+                "knowledgeId": "ifAssistedKevinThenCreatedVirus"
+              }
+            },
+            {
+              "type": "INCREASE_HEALTH",
+              "args": {
+                "amount": "full"
+              }
+            }
+          ]
+        },
+        "inception2_07": {
+          "id": "inception2_07",
+          "dialogue": "Он способен стереть все данные из памяти компьютера, внести сбой в работу всемирной сети.",
+          "nextFrame": "inception2_08"
+        },
+        "inception2_08": {
+          "id": "inception2_08",
+          "dialogue": "Распространяется он через обычное сообщение.",
+          "nextFrame": "inception2_09"
+        },
+        "inception2_09": {
+          "id": "inception2_09",
+          "dialogue": " Сегодня ночью был взломан компьютер специалиста по информационной безопасности Сары Паркер.",
+          "nextFrame": "inception2_10"
+        },
+        "inception2_10": {
+          "id": "inception2_10",
+          "dialogue": "С него были украдены файлы, и этот вирус был запущен в сеть.",
+          "nextFrame": "inception2_11"
+        },
+        "inception2_11": {
+          "id": "inception2_11",
+          "dialogue": "Для создания антивируса у нас осталось меньше 20 часов.",
+          "nextFrame": "inception2_12"
+        },
+        "inception2_12": {
+          "id": "inception2_12",
+          "dialogue": "Если не создать антивирус на языке Prolog, то начнётся всемирный хаос.",
+          "nextFrame": "inception2_13"
+        },
+        "inception2_13": {
+          "id": "inception2_13",
+          "dialogue": "Будет и падение самолётов, и сход космических кораблей с орбит.",
+          "nextFrame": "inception2_14"
+        },
+        "inception2_14": {
+          "id": "inception2_14",
+          "dialogue": " Также нам стало известно: Сара Паркер была похищена накануне вечером из собственного дома.",
+          "nextFrame": "inception2_15"
+        },
+        "inception2_15": {
+          "id": "inception2_15",
+          "dialogue": "Её местонахождение нам пока неизвестно...",
+          "nextFrame": "inception2_16"
+        },
+        "inception2_16": {
+          "id": "inception2_16",
+          "dialogue": "Но мы смогли установить местонахождение того самого компьютера, в который нужно ввести антивирус.",
+          "nextFrame": "inception2_17"
+        },
+        "inception2_17": {
+          "id": "inception2_17",
+          "dialogue": "Я понял вас, сэр. Однако есть небольшой нюанс...",
+          "speaker": "steve",
+          "nextFrame": "inception2_18"
+        },
+        "inception2_18": {
+          "id": "inception2_18",
+          "dialogue": "Я не слишком знаком с языком Prolog...",
+          "nextFrame": "inception2_19"
+        },
+        "inception2_19": {
+          "id": "inception2_19",
+          "dialogue": "Вы лучший эксперт по компьютерной безопасности. Вы лучший наш агент.",
+          "speaker": "director",
+          "nextFrame": "inception2_20"
+        },
+        "inception2_20": {
+          "id": "inception2_20",
+          "dialogue": "Вы быстрее всех способны обучаться всему новому. Разгадка любых загадок вам по силам!",
+          "nextFrame": "inception2_21"
+        },
+        "inception2_21": {
+          "id": "inception2_21",
+          "dialogue": "Мы знаем о ваших заслугах, Стив!",
+          "nextFrame": "inception2_22"
+        },
+        "inception2_22": {
+          "id": "inception2_21",
+          "dialogue": "Все операции, в которых вы участвовали, выполнены вами на отлично!",
+          "nextFrame": "inception2_23"
+        },
+        "inception2_23": {
+          "id": "inception2_23",
+          "dialogue": "Я сам лично вызвал вас в свой кабинет, ведь только вам я могу поручить столь ответственную миссию.",
+          "nextFrame": "inception2_25"
+        },
+        "inception2_25": {
+          "id": "inception2_25",
+          "dialogue": "На кону стоит жизнь всей планеты!",
+          "nextFrame": "inception2_26"
+        },
+        "inception2_26": {
+          "id": "inception2_26",
+          "dialogue": "Благодарю вас за оказанное доверие!",
+          "speaker": "steve",
+          "nextFrame": "inception2_27"
+        },
+        "inception2_27": {
+          "id": "inception2_27",
+          "dialogue": "Я попробую со всем разобраться. Я не подведу вас, сэр!",
+          "nextFrame": "inception2_28"
+        },
+        "inception2_28": {
+          "id": "inception2_28",
+          "dialogue": "Всегда будьте на шаг впереди своих врагов...",
+          "speaker": "director",
+          "nextFrame": "inception2_29"
+        },
+        "inception2_29": {
+          "id": "inception2_29",
+          "dialogue": "Всего одна ошибка может разрушить всё, что мы так долго создавали.",
+          "nextFrame": "inception2_30"
+        },
+        "inception2_30": {
+          "id": "inception2_30",
+          "dialogue": "Машина, которая доставит вас к тому самому особняку, ждёт у входа.",
+          "nextFrame": "inception2_31"
+        },
+        "inception2_31": {
+          "id": "inception2_31",
+          "dialogue": "Медлить нельзя!",
+          "nextFrame": "inception2_32",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "holdGlasses"
+              }
+            }
+          ]
+        },
+        "inception2_32": {
+          "id": "inception2_32",
+          "dialogue": "Слушаюсь, сэр!",
+          "speaker": "steve",
+          "nextFrame": "inception2_33"
+        },
+        "inception2_33": {
+          "id": "inception2_33",
+          "dialogue": "Будьте осторожны, агент Хэриссон.",
+          "speaker": "director",
+          "nextFrame": "inception2_34"
+        },
+        "inception2_34": {
+          "id": "inception2_34",
+          "dialogue": "В этом заброшенном особняке повсюду стоят ловушки, опасные для жизни.",
+          "nextFrame": "inception2_35"
+        },
+        "inception2_35": {
+          "id": "inception2_35",
+          "dialogue": "Чтобы их обезопасить, нужно ввести верный код.",
+          "nextFrame": "inception2_36"
+        },
+        "inception2_36": {
+          "id": "inception2_36",
+          "dialogue": "Я верю в вас. Звоните мне в любое время. Удачи!",
+          "nextFrame": "inception2_37",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "director",
+                "newPose": "phone"
+              }
+            }
+          ]
+        },
+        "inception2_37": {
+          "id": "inception2_37",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception3"
+              }
+            }
+          ]
+        }
+      },
+      "inception3": {
+        "inception3_start": {
+          "id": "inception3_start",
+          "location": "mansionEntrance",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "center",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Ну что ж, будем разбираться!",
+          "nextFrame": "inception3_01"
+        },
+        "inception3_01": {
+          "id": "inception3_01",
+          "speaker": "anonymous",
+          "dialogue": "Стой! Кто идёт?! Остановись, живое существо!",
+          "nextFrame": "inception3_02"
+        },
+        "inception3_02": {
+          "id": "inception3_02",
+          "dialogue": "В этих местах ты бродишь напрасно! Здесь таким существам ходить запрещено!",
+          "nextFrame": "inception3_03"
+        },
+        "inception3_03": {
+          "id": "inception3_03",
+          "dialogue": "...",
+          "speaker": "robot",
+          "nextFrame": "inception3_04",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception3_04": {
+          "id": "inception3_04",
+          "dialogue": "Оружие! У него оружие!",
+          "nextFrame": "inception3_05"
+        },
+        "inception3_05": {
+          "id": "inception3_05",
+          "dialogue": "Я вызываю полицию, здесь бандиты, помогите!",
+          "nextFrame": "inception3_06"
+        },
+        "inception3_06": {
+          "id": "inception3_06",
+          "speaker": "steve",
+          "dialogue": "Я и есть полиция! Агент ФБР Стив Хэриссон.",
+          "nextFrame": "inception3_07"
+        },
+        "inception3_07": {
+          "id": "inception3_07",
+          "speaker": "robot",
+          "dialogue": "Ох, здравствуйте, агент Стив Хэриссон. Вы бы оружие-то убрали.",
+          "nextFrame": "inception3_08",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_08": {
+          "id": "inception3_08",
+          "dialogue": "Я ведь просто решил, что мародёры пришли, думал, опять будут пытаться взломать дверь. Ведь никто не может ввести правильный код.",
+          "nextFrame": "inception3_10"
+        },
+        "inception3_10": {
+          "id": "inception3_10",
+          "dialogue": "А я всего лишь робот третьего поколения, модель R3.",
+          "nextFrame": "inception3_11",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception3_11": {
+          "id": "inception3_11",
+          "dialogue": "Я не должен пускать сюда никого живого, ведь никто не знает о смертельных ловушках.",
+          "nextFrame": "inception3_12"
+        },
+        "inception3_12": {
+          "id": "inception3_12",
+          "dialogue": "Зачем вы здесь, агент Хэриссон?",
+          "nextFrame": "inception3_13",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_13": {
+          "id": "inception3_13",
+          "speaker": "steve",
+          "dialogue": "У меня спецзадание...",
+          "nextFrame": "inception3_14"
+        },
+        "inception3_14": {
+          "id": "inception3_14",
+          "dialogue": "А ты, значит, робот модель R3, это робот -- помощник человека.",
+          "nextFrame": "inception3_15"
+        },
+        "inception3_15": {
+          "id": "inception3_15",
+          "dialogue": "Соблюдаешь строго три закона.",
+          "nextFrame": "inception3_16"
+        },
+        "inception3_16": {
+          "id": "inception3_16",
+          "dialogue": "В твои обязанности входит слушать и помогать любому человеку. Так ведь?",
+          "nextFrame": "inception3_17",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception3_17": {
+          "id": "inception3_17",
+          "speaker": "robot",
+          "dialogue": "Да, абсолютно верно, сэр.",
+          "nextFrame": "inception3_18"
+        },
+        "inception3_18": {
+          "id": "inception3_18",
+          "dialogue": "Робот не может причинить вред человеку или своим бездействием позволить, чтобы человеку был причинен вред.",
+          "nextFrame": "inception3_19"
+        },
+        "inception3_19": {
+          "id": "inception3_19",
+          "dialogue": "Робот должен подчиняться приказам человека, за исключением случаев, которые противоречат первому закону.",
+          "nextFrame": "inception3_20"
+        },
+        "inception3_20": {
+          "id": "inception3_20",
+          "speaker": "steve",
+          "dialogue": "Отлично, тогда ты мне и поможешь. Слушай внимательно!",
+          "nextFrame": "inception3_21"
+        },
+        "inception3_21": {
+          "id": "inception3_21",
+          "dialogue": "Кэвин Митник создал вирус, который способен стереть все данные с памяти компьютера, внести сбой в работу всемирной сети. И уже запустил его.",
+          "nextFrame": "inception3_23"
+        },
+        "inception3_23": {
+          "id": "inception3_23",
+          "dialogue": "Осталось меньше 18 часов, чтобы создать антивирус на языке Prolog.",
+          "nextFrame": "inception3_24"
+        },
+        "inception3_24": {
+          "id": "inception3_24",
+          "dialogue": "Ты мне поможешь его изучить?",
+          "nextFrame": "inception3_25"
+        },
+        "inception3_25": {
+          "id": "inception3_25",
+          "speaker": "robot",
+          "dialogue": "Да, такая функция у меня запрограммирована.",
+          "nextFrame": "inception3_26"
+        },
+        "inception3_26": {
+          "id": "inception3_26",
+          "dialogue": "Но вы должны знать, что для того, чтобы изучать Prolog, нужно отойти от привычных форм программирования.",
+          "nextFrame": "inception3_28"
+        },
+        "inception3_28": {
+          "id": "inception3_28",
+          "dialogue": "Постарайтесь вникнуть в саму логику языка. Поверьте, это достаточно красивый и логичный язык.",
+          "nextFrame": "inception3_29"
+        },
+        "inception3_29": {
+          "id": "inception3_29",
+          "dialogue": "Очень скоро вы оцените всю его красоту и возможности.",
+          "nextFrame": "inception3_30"
+        },
+        "inception3_30": {
+          "id": "inception3_30",
+          "speaker": "steve",
+          "dialogue": "Я в этом не сомневаюсь. Может, уже перейдём к уроку?",
+          "nextFrame": "inception3_31"
+        },
+        "inception3_31": {
+          "id": "inception3_31",
+          "speaker": "robot",
+          "dialogue": "Давайте приступим!",
+          "nextFrame": "inception3_32"
+        },
+        "inception3_32": {
+          "id": "inception3_32",
+          "speaker": "robot",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception4"
+              }
+            }
+          ]
+        }
+      },
+      "inception4": {
+        "inception4_start": {
+          "id": "inception4_start",
+          "location": "mansionEntrance",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "pose": "think",
+              "position": "right"
+            }
+          ],
+          "speaker": "robot",
+          "dialogue": "Итак, Prolog -- это язык логического программирования.",
+          "nextFrame": "inception4_01"
+        },
+        "inception4_01": {
+          "id": "inception4_01",
+          "dialogue": "Он основан на логике дизъюнктов Хорна. Она -- подмножество логики первого порядка... ",
+          "nextFrame": "inception4_02"
+        },
+        "inception4_02": {
+          "id": "inception4_02",
+          "speaker": "steve",
+          "dialogue": "Прости, но у меня не весь день... Лучше скажи: где он обычно применяется?",
+          "nextFrame": "inception4_03"
+        },
+        "inception4_03": {
+          "id": "inception4_03",
+          "speaker": "robot",
+          "dialogue": "Где применяется? Хорошо... Его часто используют для составления баз знаний.",
+          "nextFrame": "inception4_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception4_04": {
+          "id": "inception4_04",
+          "speaker": "steve",
+          "dialogue": "Базы знаний? Доводилось работать с базами данных, это же что-то похожее?",
+          "nextFrame": "inception4_05"
+        },
+        "inception4_05": {
+          "id": "inception4_05",
+          "speaker": "robot",
+          "dialogue": "Да. Но записи в базах данных позволяют задать лишь существующие знания -- мы называем их фактами.",
+          "nextFrame": "inception4_06"
+        },
+        "inception4_06": {
+          "id": "inception4_06",
+          "dialogue": "Но есть ещё и правила. Это конструкции, позволяющие выводить новые знания.",
+          "nextFrame": "inception4_07"
+        },
+        "inception4_07": {
+          "id": "inception4_07",
+          "dialogue": "Чтобы получать знания из базы, мы используем запросы. Как и в базах данных.",
+          "nextFrame": "inception4_08"
+        },
+        "inception4_08": {
+          "id": "inception4_08",
+          "dialogue": "Для работы с базами знаний достаточно знать 3 ключевых понятия Prolog: факты, правила, запросы.",
+          "nextFrame": "inception4_09"
+        },
+        "inception4_09": {
+          "id": "inception4_09",
+          "dialogue": "Но прежде чем мы продолжим...",
+          "nextFrame": "inception4_10",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception4_10": {
+          "id": "inception4_10",
+          "dialogue": "Я проверю, насколько внимательно вы слушали. Пожалуйста, ответьте на простой вопрос.",
+          "nextFrame": "inception4_11"
+        },
+        "inception4_11": {
+          "id": "inception4_11",
+          "dialogue": "Будьте внимательны. Совершите слишком много ошибок -- не сможете продолжить.",
+          "nextFrame": "inception4_12"
+        },
+        "inception4_12": {
+          "id": "inception4_12",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task0"
+              }
+            }
+          ]
+        },
+        "inception4_failTask0_01": {
+          "id": "inception4_failTask0_01",
+          "dialogue": "Будьте внимательны, пожалуйста. Подумайте ещё.",
+          "nextFrame": "inception4_12",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "healthLess": 50
+              },
+              "args": {
+                "frameId": "inception4_failTask0_02"
+              }
+            }
+          ]
+        },
+        "inception4_failTask0_02": {
+          "id": "inception4_failTask0_02",
+          "dialogue": "Будьте внимательны, пожалуйста. И следите за своим здоровьем. Кажется, вы начинаете нервничать...",
+          "nextFrame": "inception4_12",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "not": {
+                  "healthMore": 10
+                }
+              },
+              "args": {
+                "frameId": "inception4_failTask0_03"
+              }
+            }
+          ]
+        },
+        "inception4_failTask0_03": {
+          "id": "inception4_failTask0_02",
+          "dialogue": "Сфокусируйтесь, агент! Это ваша последняя попытка...",
+          "nextFrame": "inception4_12"
+        },
+        "inception4_13": {
+          "id": "inception4_13",
+          "dialogue": "...Хорошо. Вижу, самое время продолжить наш путь... и наше обучение.",
+          "nextFrame": "inception4_14"
+        },
+        "inception4_14": {
+          "id": "inception4_14",
+          "dialogue": "...Хорошо. Вижу, самое время продолжить наш путь... и наше обучение.",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration1"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration1": {
+        "elaboration1_start": {
+          "id": "elaboration1_start",
+          "location": "grandHall",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdGlasses",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "pose": "think",
+              "position": "right"
+            },
+            {
+              "id": "director",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Первое задание выполнено успешно! Даже не ожидал, что так быстро получится!",
+          "nextFrame": "elaboration1_02"
+        },
+        "elaboration1_02": {
+          "id": "elaboration1_02",
+          "dialogue": "Должен признать, что вы очень умны и догадливы! Я очень за вас рад! ",
+          "speaker": "robot",
+          "nextFrame": "elaboration1_03"
+        },
+        "elaboration1_03": {
+          "id": "elaboration1_03",
+          "dialogue": "Поступил звонок от директора. Слушаю, сэр!",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_04"
+        },
+        "elaboration1_04": {
+          "id": "elaboration1_04",
+          "dialogue": "Специальный агент Стив Хэриссон, это директор ФБР. У меня для вас срочные новости!",
+          "speaker": "director",
+          "nextFrame": "elaboration1_05",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "elaboration1_05": {
+          "id": "elaboration1_05",
+          "dialogue": "Мы отследили местонахождение Кэвина Митника. Он находится где-то в доме. Будьте осторожны! У него может быть оружие!",
+          "nextFrame": "elaboration1_06"
+        },
+        "elaboration1_06": {
+          "id": "elaboration1_06",
+          "dialogue": "Я вас понял. Какие-нибудь новые сведения о Саре Паркер не появились?",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_07"
+        },
+        "elaboration1_07": {
+          "id": "elaboration1_07",
+          "dialogue": "Всех лиц, причастных к делу, мы опросили, но новых сведений нам это не дало. Никто ничего не видел и не слышал. Она словно сквозь землю провалилась. ",
+          "speaker": "director",
+          "nextFrame": "elaboration1_08"
+        },
+        "elaboration1_08": {
+          "id": "elaboration1_08",
+          "dialogue": "Есть ощущение, что Митник держит её где-то возле себя...",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_09"
+        },
+        "elaboration1_09": {
+          "id": "elaboration1_09",
+          "dialogue": "Эту версию вам также предстоит отработать. Желаю удачи! На вас лежит важная миссия!",
+          "speaker": "director",
+          "nextFrame": "elaboration1_10"
+        },
+        "elaboration1_10": {
+          "id": "elaboration1_10",
+          "dialogue": "Как же тут темно и мрачно! Но медлить нельзя. Если Митник где-то в доме, то и Сара должна быть поблизости. Поднимемся наверх!",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_11"
+        },
+        "elaboration1_11": {
+          "id": "elaboration1_11",
+          "dialogue": "Осторожнее поднимайтесь, сэр! В некоторых ступенях лестницы скрыты ловушки. Это и есть следующие задания...",
+          "speaker": "robot",
+          "nextFrame": "elaboration1_12"
+        },
+        "elaboration1_12": {
+          "id": "elaboration1_12",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task1"
+              }
+            }
+          ]
+        },
+        "elaboration1_failTask1_01": {
+          "id": "elaboration1_failTask1_01",
+          "dialogue": "Будьте внимательнее, агент! Я же говорил, задания -- это и есть ловушки.",
+          "nextFrame": "elaboration1_12"
+        },
+        "elaboration1_13": {
+          "id": "elaboration1_13",
+          "dialogue": "Хорошо, агент. Давайте пройдём дальше.",
+          "nextFrame": "elaboration1_13",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration2"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration2": {
+        "elaboration2_start": {
+          "id": "elaboration2_start",
+          "location": "grandHall",
+          "characters": [
+            {
+              "id": "steve",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Очередная ловушка! Дверь снова заперта... Здесь тоже нужно ввести код. ",
+          "nextFrame": "elaboration2_01"
+        },
+        "elaboration2_01": {
+          "id": "elaboration2_01",
+          "dialogue": "Вы уже справились с 2 заданиями! Не падайте духом, сэр!",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_02"
+        },
+        "elaboration2_02": {
+          "id": "elaboration2_02",
+          "dialogue": "Мне кажется, что из-под этой двери доносятся какие то звуки! Такое ощущение, что там кто-то есть! Достану-ка пистолет...",
+          "speaker": "steve",
+          "nextFrame": "elaboration2_03"
+        },
+        "elaboration2_03": {
+          "id": "elaboration2_03",
+          "dialogue": "Пожалуйста, только никакого насилия! Мне страшно!!!",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_04"
+        },
+        "elaboration2_04": {
+          "id": "elaboration2_04",
+          "dialogue": "Мне тоже! Но страшнее всего, это не успеть за 6 часов выполнить все задания! Тогда всему человечеству придёт конец! ",
+          "speaker": "steve",
+          "nextFrame": "elaboration2_05"
+        },
+        "elaboration2_05": {
+          "id": "elaboration2_05",
+          "dialogue": "Да, лучше давайте приступим к следующему заданию!",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_06"
+        },
+        "elaboration2_06": {
+          "id": "elaboration2_06",
+          "dialogue": "",
+          "nextFrame": "elaboration2_06",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task2"
+              }
+            }
+          ]
+        },
+        "elaboration2_failTask2_01": {
+          "id": "elaboration2_failTask2_01",
+          "dialogue": "Попробуйте еще раз!",
+          "nextFrame": "elaboration2_06"
+        },
+        "elaboration2_07": {
+          "id": "elaboration2_07",
+          "dialogue": "Вы делаете успехи, агент. Самое время открыть комнату...",
+          "nextFrame": "elaboration2_08"
+        },
+        "elaboration2_08": {
+          "id": "elaboration2_08",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration3"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration3": {
+        "elaboration3_start": {
+          "id": "elaboration3_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "steve",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "think"
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Ну надо же, кто бы мог подумать, что в таком доме может быть настолько уютный кабинет.",
+          "nextFrame": "elaboration3_01"
+        },
+        "elaboration3_01": {
+          "id": "elaboration3_01",
+          "dialogue": "У меня ощущение, что здесь недавно кто-то был, даже какие-то бумаги на столе оставил.",
+          "nextFrame": "elaboration3_02"
+        },
+        "elaboration3_02": {
+          "id": "elaboration3_02",
+          "dialogue": "Весьма милое и симпатичное помещение.",
+          "speaker": "robot",
+          "nextFrame": "elaboration3_03"
+        },
+        "elaboration3_03": {
+          "id": "elaboration3_03",
+          "dialogue": "Но компьютера здесь нет, значит придётся искать дальше. Наверняка Митник буквально недавно был здесь.",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_04"
+        },
+        "elaboration3_04": {
+          "id": "elaboration3_04",
+          "dialogue": "Ты слышишь эти звуки?",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_05"
+        },
+        "elaboration3_05": {
+          "id": "elaboration3_05",
+          "dialogue": "Мммм... Ммм... Ммм.. ",
+          "speaker": "anonymous",
+          "nextFrame": "elaboration3_06"
+        },
+        "elaboration3_06": {
+          "id": "elaboration3_06",
+          "dialogue": "Может, это мыши?",
+          "speaker": "robot",
+          "nextFrame": "elaboration3_07"
+        },
+        "elaboration3_07": {
+          "id": "elaboration3_07",
+          "dialogue": "Может, это Митник решил вернуться в свой кабинет?",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_08"
+        },
+        "elaboration3_08": {
+          "id": "elaboration3_08",
+          "dialogue": "Спрячусь-ка я под стол, чтобы меня никто не заметил. Ай, ай, ай... тут очередная спрятанная ловушка.",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_09"
+        },
+        "elaboration3_09": {
+          "id": "elaboration3_09",
+          "dialogue": "Я случайно задел какой-то механизм и оказался в западне. Со всех сторон на меня опустились металлические прутья....",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_10"
+        },
+        "elaboration3_10": {
+          "id": "elaboration3_10",
+          "dialogue": "Вот это я облажался!",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_11"
+        },
+        "elaboration3_11": {
+          "id": "elaboration3_11",
+          "dialogue": "Тут надо выполнить очередное задание и ввести код. Только так получится у вас освободиться.",
+          "speaker": "robot",
+          "nextFrame": "elaboration3_12"
+        },
+        "elaboration3_12": {
+          "id": "elaboration3_12",
+          "dialogue": "Согласен, прутья слишком прочные...И плюс, сюда войти может кто угодно! Надо скорее выполнить задание и отправиться уже на поиски компьютера.",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_13"
+        },
+        "elaboration3_13": {
+          "id": "elaboration3_13",
+          "dialogue": "Тогда приступим!",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_14"
+        },
+        "elaboration3_14": {
+          "id": "elaboration3_14",
+          "dialogue": "",
+          "nextFrame": "elaboration3_14",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task3"
+              }
+            }
+          ]
+        },
+        "elaboration3_failTask3_01": {
+          "id": "elaboration3_failTask3_01",
+          "dialogue": "Чёрт... Попробую-ка ещё раз.",
+          "nextFrame": "elaboration3_14"
+        },
+        "elaboration3_15": {
+          "id": "elaboration3_15",
+          "dialogue": "Хорошо... Похоже, ловушка деактивирована.",
+          "nextFrame": "elaboration3_16"
+        },
+        "elaboration3_16": {
+          "id": "elaboration3_16",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration4"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration4": {
+        "elaboration4_start": {
+          "id": "elaboration4_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "idle",
+              "position": "left"
+            },
+            {
+              "id": "sarah",
+              "pose": "hostage",
+              "position": "right",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Вух! Все получилось! Я выбрался из западни. Теперь надо скорее отправляться на поиски компьютера!",
+          "nextFrame": "elaboration4_01"
+        },
+        "elaboration4_01": {
+          "id": "elaboration4_01",
+          "dialogue": "Мммм... Ммм... Ммм.. ",
+          "speaker": "anonymous",
+          "nextFrame": "elaboration4_02"
+        },
+        "elaboration4_02": {
+          "id": "elaboration4_02",
+          "dialogue": "Ты слышишь опять эти странные звуки? Тут явно кто-то есть!",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_03"
+        },
+        "elaboration4_03": {
+          "id": "elaboration4_03",
+          "dialogue": "Похоже на какое-то мычание. Звуки идут из того дальнего угла. ",
+          "speaker": "robot",
+          "nextFrame": "elaboration4_04"
+        },
+        "elaboration4_04": {
+          "id": "elaboration4_04",
+          "dialogue": "Давай-ка посмотрим, что там! Похоже, там действительно кто-то есть! ",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_05"
+        },
+        "elaboration4_05": {
+          "id": "elaboration4_05",
+          "dialogue": "Да это же похищенная специалист по информационной безопасности Сара Паркер!",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_06",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "sarah"
+              }
+            }
+          ]
+        },
+        "elaboration4_06": {
+          "id": "elaboration4_06",
+          "dialogue": "Я специальный агент ФБР Стив Хэриссон. Расскажите, что произошло с вами...",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_07"
+        },
+        "elaboration4_07": {
+          "id": "elaboration4_07",
+          "dialogue": "Кэвин Митник меня похитил вчера вечером из моего собственного дома! Он сошёл с ума и его надо немедленно остановить!",
+          "speaker": "sarah",
+          "nextFrame": "elaboration4_08"
+        },
+        "elaboration4_08": {
+          "id": "elaboration4_08",
+          "dialogue": "Помогите мне освободиться, пожалуйста! Я знаю где находится главный компьютер! Нам надо поторопиться, времени осталось мало! ",
+          "nextFrame": "elaboration4_09"
+        },
+        "elaboration4_09": {
+          "id": "elaboration4_09",
+          "dialogue": "А вы смелая девушка! Сейчас я выполню задание, введу код и мы вас освободим! Не переживайте! ",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_10"
+        },
+        "elaboration4_10": {
+          "id": "elaboration4_10",
+          "dialogue": "Робот, какое задание следующее?",
+          "nextFrame": "elaboration4_11"
+        },
+        "elaboration4_11": {
+          "id": "elaboration4_11",
+          "dialogue": "",
+          "nextFrame": "elaboration4_11",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task4"
+              }
+            }
+          ]
+        },
+        "elaboration4_failTask4_01": {
+          "id": "elaboration4_failTask4_01",
+          "dialogue": "Попробуйте еще раз!",
+          "nextFrame": "elaboration4_11"
+        },
+        "elaboration4_12": {
+          "id": "elaboration4_12",
+          "speaker": "steve",
+          "dialogue": "Ещё немного и...",
+          "nextFrame": "elaboration4_13"
+        },
+        "elaboration4_13": {
+          "id": "elaboration4_13",
+          "dialogue": "Есть, я освободил вас!",
+          "nextFrame": "elaboration4_14",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "sarah",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "elaboration4_14": {
+          "id": "elaboration4_14",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration5"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration5": {
+        "elaboration5_start": {
+          "id": "elaboration5_start",
+          "location": "computerRoom",
+          "characters": [
+            {
+              "id": "steve",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "sarah",
+              "position": "right",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Есть! Мы почти у цели! А вот и компьютер... Однако это не суперкомпьютер, но тоже достаточно мощная машина! ",
+          "nextFrame": "elaboration5_01"
+        },
+        "elaboration5_01": {
+          "id": "elaboration5_01",
+          "dialogue": "Смотрите, компьютер включён и осуществляет загрузку каких-то файлов. Давайте посмотрим, что там?",
+          "speaker": "sarah",
+          "nextFrame": "elaboration5_02",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "sarah"
+              }
+            }
+          ]
+        },
+        "elaboration5_02": {
+          "id": "elaboration5_02",
+          "dialogue": "Тут целый список зашифрованных личных данных сотрудников монетного двора США. Как я знаю, к хранилищу Форт-Нокса имеют доступ лишь 10 из них.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_03"
+        },
+        "elaboration5_03": {
+          "id": "elaboration5_03",
+          "dialogue": "Чтобы попасть внутрь хранилища, каждый из них должен ввести свою часть кода и тогда 'сим-сим' распахнет свои двери.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_04"
+        },
+        "elaboration5_04": {
+          "id": "elaboration5_04",
+          "dialogue": "А делает он это крайне редко. За всю историю Форт-Нокса только три раза в него попадали посторонние люди.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_05"
+        },
+        "elaboration5_05": {
+          "id": "elaboration5_05",
+          "dialogue": "Кому же выпала такая честь? Как они смогли туда попасть?",
+          "speaker": "sarah",
+          "nextFrame": "elaboration5_06"
+        },
+        "elaboration5_06": {
+          "id": "elaboration5_06",
+          "dialogue": "Первым из тех, кто туда попал, был президент Рузвельт в 1943 году. Второй раз запасы проверяли лишь спустя 31 год.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_07"
+        },
+        "elaboration5_07": {
+          "id": "elaboration5_07",
+          "dialogue": "И третья инспекция случилась в 2018 году, так как стали ходить слухи, что никакого золота в хранилище нет.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_08"
+        },
+        "elaboration5_08": {
+          "id": "elaboration5_08",
+          "dialogue": "Однако это оказалось лишь слухами, все золото было на месте.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_09"
+        },
+        "elaboration5_09": {
+          "id": "elaboration5_09",
+          "dialogue": "Интересно, сотрудники монетного двора тоже в доме с Митником или он хочет их использовать втемную?",
+          "speaker": "sarah",
+          "nextFrame": "elaboration5_10"
+        },
+        "elaboration5_10": {
+          "id": "elaboration5_10",
+          "dialogue": "Мы обязательно выясним это позже, а сейчас нужно остановить вирус и ввести код, пока нам никто не помешал.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_11"
+        },
+        "elaboration5_11": {
+          "id": "elaboration5_11",
+          "dialogue": "Да, давайте приступим.",
+          "speaker": "robot",
+          "nextFrame": "elaboration5_12",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "elaboration5_12": {
+          "id": "elaboration5_12",
+          "dialogue": "Сейчас открою терминал... нет, лучше редактор кода.",
+          "nextFrame": "elaboration5_13"
+        },
+        "elaboration5_13": {
+          "id": "elaboration5_13",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task5"
+              }
+            }
+          ]
+        },
+        "elaboration5_failTask5_01": {
+          "id": "frame_weapon_failure5",
+          "dialogue": "Я должен попробовать ещё раз!",
+          "nextFrame": "elaboration5_13"
+        },
+        "elaboration5_14": {
+          "id": "elaboration5_14",
+          "speaker": "steve",
+          "dialogue": "Подождите, это сработало?..",
+          "nextFrame": "elaboration5_15"
+        },
+        "elaboration5_15": {
+          "id": "elaboration5_15",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "ENDING",
+              "args": {
+                "endingId": "demoEnding"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "endings": {
+      "gameOver": {
+        "id": "gameOver",
+        "condition": {
+          "healthEquals": 0
+        },
+        "startFrame": "gameOver_1",
+        "frames": {
+          "gameOver_1": {
+            "id": "gameOver_1",
+            "location": "agentOffice",
+            "characters": [
+              {
+                "id": "steve",
+                "pose": "holdNotebook",
+                "position": "left",
+                "hidden": true
+              }
+            ],
+            "speaker": "steve",
+            "dialogue": "Чёрт возьми... Не надо было растрачивать все попытки."
+          }
+        }
+      },
+      "demoEnding": {
+        "id": "demoEnding",
+        "title": "Конец ознакомительного фрагмента",
+        "startFrame": "demoEnding_1",
+        "frames": {
+          "demoEnding_1": {
+            "id": "demoEnding_1",
+            "location": "mansionEntrance",
+            "characters": [
+              {
+                "id": "steve",
+                "pose": "holdNotebook",
+                "position": "left",
+                "hidden": true
+              },
+              {
+                "id": "robot",
+                "pose": "angry",
+                "position": "center"
+              }
+            ],
+            "speaker": "robot",
+            "dialogue": "Конец ознакомительного фрагмента.",
+            "nextFrame": "demoEnding_2"
+          },
+          "demoEnding_2": {
+            "id": "demoEnding_2",
+            "dialogue": "Чтобы поиграть в полную версию, купите её за $42,069.",
+            "nextFrame": "demoEnding_3"
+          },
+          "demoEnding_3": {
+            "id": "demoEnding_3",
+            "speaker": "steve",
+            "dialogue": "Что?",
+            "nextFrame": null
+          }
+        }
+      }
+    }
+  },
+  "tasks": {
+    "task0": {
+      "id": "task0",
+      "type": "SELECT_MANY",
+      "questionText": "Что из перечисленного является базовым элементом Пролога при работе с базами знаний?",
+      "options": [
+        "Массив",
+        "Список",
+        "Факты",
+        "Правила",
+        "Запросы"
+      ],
+      "correctAnswerIndices": [
+        2,
+        3,
+        4
+      ],
+      "nextFrameOnSuccess": "inception4_13",
+      "nextFrameOnFailure": "inception4_failTask0_01",
+      "failureScorePenalty": 2
+    },
+    "task1": {
+      "id": "task1",
+      "type": "SELECT_ONE",
+      "questionText": "Какую парадигму программирования реализовывает Prolog?",
+      "options": [
+        "Объектно-ориентированное",
+        "Реактивное",
+        "Императивное",
+        "Логическое"
+      ],
+      "correctAnswerIndex": 3,
+      "nextFrameOnSuccess": "elaboration1_13",
+      "nextFrameOnFailure": "elaboration1_failTask1_01",
+      "failureScorePenalty": 2
+    },
+    "task2": {
+      "id": "task2",
+      "type": "SELECT_ONE",
+      "questionText": "Можно ли использовать переменные (например, `X`) в правилах (см. ниже)? ```develop(X) :- work(X, virus).```",
+      "options": [
+        "Да",
+        "Нет"
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Вспомни, что означает переменная `Х`",
+      "nextFrameOnSuccess": "elaboration2_07",
+      "nextFrameOnFailure": "elaboration2_failTask2_01",
+      "failureScorePenalty": 1
+    },
+    "task3": {
+      "id": "task3",
+      "type": "SELECT_ONE",
+      "questionText": "Даны следующие факты:```character(professor).\ncharacter(steve).\ncharacter(mitnik).```Какой результат даст запрос `character(steve).`?",
+      "options": [
+        "`true`",
+        "`steve`",
+        "`false`",
+        "`X = steve`"
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Подумай, что такое факт.",
+      "nextFrameOnSuccess": "elaboration3_15",
+      "nextFrameOnFailure": "elaboration3_failTask3_01",
+      "failureScorePenalty": 1
+    },
+    "task4": {
+      "id": "task4",
+      "type": "SELECT_ONE",
+      "questionText": "Как можно найти длину списка `[a, b, c, d]` в Прологе?",
+      "options": [
+        "`Length := length([a, b, c, d]).`",
+        "`[a, b, c, d], Length.`",
+        "`length([a, b, c, d], Length).`",
+        "`length([a, b, c, d]).`"
+      ],
+      "correctAnswerIndex": 2,
+      "hint": "Вспомни про встроенные конструкции",
+      "nextFrameOnSuccess": "elaboration4_12",
+      "nextFrameOnFailure": "elaboration4_failTask4_01",
+      "failureScorePenalty": 1
+    },
+    "task5": {
+      "id": "task5",
+      "type": "COMPLETE_QUERY",
+      "knowledge": [],
+      "questionText": "Напиши запрос, который объединяет два списка в третий `Result = [1, 2, 3, 4]` с помощью стандартного предиката `append/3.`",
+      "expectedResults": [
+        {
+          "variables": {
+            "Result": "[1,2,3,4]"
+          }
+        }
+      ],
+      "hint": "У `append/3` первые 2 аргумента -- это массивы, которые нужно склеить, а 3-й -- переменная результата.",
+      "defaultValue": "append(\n\t% arg1, arg2, arg3\n).",
+      "nextFrameOnSuccess": "elaboration5_14",
+      "nextFrameOnFailure": "elaboration5_failTask5_01",
+      "failureScorePenalty": 2
+    }
+  },
+  "knowledge": {
+    "iAmSteve": {
+      "id": "iAmSteve",
+      "type": "fact",
+      "content": "fbi_agent(steve).",
+      "description": "Стив -- агент ФБР."
+    },
+    "mySuperior": {
+      "id": "mySuperior",
+      "type": "fact",
+      "content": "superior(director, steve).",
+      "description": "Директор ФБР -- руководитель Стива."
+    },
+    "ifAssistedKevinThenCreatedVirus": {
+      "id": "ifAssistedKevinThenHacked",
+      "type": "rule",
+      "content": "creates(X, virus) :-\n\t(assists(X, kevin); X = kevin),\n\thacker(X).",
+      "description": "Кэвин и все хакеры, помогавшие ему, участвовали в создании вируса."
+    }
+  }
+}
