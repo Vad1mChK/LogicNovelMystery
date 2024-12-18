@@ -1,7 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import gameStateReducer, {
-	GameState,
-} from './gameStateSlice.ts';
+import gameStateReducer, { GameState } from './gameStateSlice.ts';
 import languageReducer, { LanguageState } from './languageSlice.ts';
 
 const store = configureStore({
