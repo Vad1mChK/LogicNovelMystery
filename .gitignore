@@ -28,3 +28,5 @@ out
 docs/novel/images/sprite_origs
 
 lnm-frontend/package-lock.json
+
+.idea/
