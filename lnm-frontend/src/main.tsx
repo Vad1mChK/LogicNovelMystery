@@ -5,13 +5,13 @@ import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	// Strict:
-	<React.StrictMode>
-		<BrowserRouter basename="/LogicNovelMystery">
-			<App />
-		</BrowserRouter>
-	</React.StrictMode>
+	// <React.StrictMode>
+	// 	<BrowserRouter basename="/LogicNovelMystery">
+	// 		<App />
+	// 	</BrowserRouter>
+	// </React.StrictMode>
 	// Non-strict: Uncomment if you don't need the thing
-	// <BrowserRouter basename="/LogicNovelMystery">
-	// 	<App />
-	// </BrowserRouter>
+	<BrowserRouter basename="/LogicNovelMystery">
+		<App />
+	</BrowserRouter>
 );
