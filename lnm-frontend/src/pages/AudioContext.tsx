@@ -16,9 +16,9 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
 	const [isMusicPlaying, setMusicPlaying] = useState(false);
-	const [currentMusicFile, setCurrentMusicFile] = useState<string | null>(
-		null
-	);
+	// const [currentMusicFile, setCurrentMusicFile] = useState<string | null>(
+	// 	null
+	// ); TODO Find where to use it
 	const [volume, setVolumeState] = useState(50);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [userInteracted, setUserInteracted] = useState(false); // Новый флаг для отслеживания взаимодействия пользователя
