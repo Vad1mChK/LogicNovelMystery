@@ -552,12 +552,12 @@
         "inception3_01": {
           "id": "inception3_01",
           "speaker": "anonymous",
-          "dialogue": "Стой! Кто идёт?! Остановись, живое существо!",
+          "dialogue": "Freeze! No move, living being!",
           "nextFrame": "inception3_02"
         },
         "inception3_02": {
           "id": "inception3_02",
-          "dialogue": "В этих местах ты бродишь напрасно! Здесь таким существам ходить запрещено!",
+          "dialogue": "You shouldn't have come here! Beings like you are not allowed here!",
           "nextFrame": "inception3_03"
         },
         "inception3_03": {
@@ -576,24 +576,24 @@
         },
         "inception3_04": {
           "id": "inception3_04",
-          "dialogue": "Оружие! У него оружие!",
+          "dialogue": "A weapon! He has a weapon!",
           "nextFrame": "inception3_05"
         },
         "inception3_05": {
           "id": "inception3_05",
-          "dialogue": "Я вызываю полицию, здесь бандиты, помогите!",
+          "dialogue": "I'm calling the police! There are burglars here!",
           "nextFrame": "inception3_06"
         },
         "inception3_06": {
           "id": "inception3_06",
           "speaker": "steve",
-          "dialogue": "Я и есть полиция! Агент ФБР Стив Хэриссон.",
+          "dialogue": "I am the police. Steve Harrison, FBI agent.",
           "nextFrame": "inception3_07"
         },
         "inception3_07": {
           "id": "inception3_07",
           "speaker": "robot",
-          "dialogue": "Ох, здравствуйте, агент Стив Хэриссон. Вы бы оружие-то убрали.",
+          "dialogue": "Oh, greetings, agent Steve Harrison. But please put your weapon down...",
           "nextFrame": "inception3_08",
           "effects": [
             {
@@ -607,12 +607,12 @@
         },
         "inception3_08": {
           "id": "inception3_08",
-          "dialogue": "Я ведь просто решил, что мародёры пришли, думал, опять будут пытаться взломать дверь. Ведь никто не может ввести правильный код.",
+          "dialogue": "I thought marauders have come again, I thought they'll be trying to hack the door again. No one can enter the correct code...",
           "nextFrame": "inception3_10"
         },
         "inception3_10": {
           "id": "inception3_10",
-          "dialogue": "А я всего лишь робот третьего поколения, модель R3.",
+          "dialogue": "And I'm just a 3rd generation robot, R3 unit.",
           "nextFrame": "inception3_11",
           "effects": [
             {
@@ -626,12 +626,12 @@
         },
         "inception3_11": {
           "id": "inception3_11",
-          "dialogue": "Я не должен пускать сюда никого живого, ведь никто не знает о смертельных ловушках.",
+          "dialogue": "I shouldn't let any lifeform in because nobody knows of the deadly traps.",
           "nextFrame": "inception3_12"
         },
         "inception3_12": {
           "id": "inception3_12",
-          "dialogue": "Зачем вы здесь, агент Хэриссон?",
+          "dialogue": "Why are you here, Agent?",
           "nextFrame": "inception3_13",
           "effects": [
             {
@@ -646,22 +646,22 @@
         "inception3_13": {
           "id": "inception3_13",
           "speaker": "steve",
-          "dialogue": "У меня спецзадание...",
+          "dialogue": "I haev a special task...",
           "nextFrame": "inception3_14"
         },
         "inception3_14": {
           "id": "inception3_14",
-          "dialogue": "А ты, значит, робот модель R3, это робот -- помощник человека.",
+          "dialogue": "So you're an R3 model, assisting humans.",
           "nextFrame": "inception3_15"
         },
         "inception3_15": {
           "id": "inception3_15",
-          "dialogue": "Соблюдаешь строго три закона.",
+          "dialogue": "You abide by the Three Laws of Robotics.",
           "nextFrame": "inception3_16"
         },
         "inception3_16": {
           "id": "inception3_16",
-          "dialogue": "В твои обязанности входит слушать и помогать любому человеку. Так ведь?",
+          "dialogue": "Your responsibilities include listening to and helping any human, right?",
           "nextFrame": "inception3_17",
           "effects": [
             {
@@ -676,7 +676,7 @@
         "inception3_17": {
           "id": "inception3_17",
           "speaker": "robot",
-          "dialogue": "Да, абсолютно верно, сэр.",
+          "dialogue": "You're absolutely right, Sir.",
           "nextFrame": "inception3_18"
         },
         "inception3_18": {
