@@ -119,42 +119,6 @@ body {
 	height: 50%;
 }
 
-/* Таблица */
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 10px;
-
-	/* Стили для заголовка таблицы */
-	th {
-		background-color: colors.$WHITE;
-		color: colors.$BLUE;
-		font-weight: bold;
-	}
-
-	th,
-	td {
-		border: 1px solid colors.$STONE-MOON;
-		padding: 8px;
-		text-align: center;
-	}
-
-	/* Затенение для кнопок в таблице */
-	button {
-		background-color: colors.$BLUE;
-		color: colors.$WHITE;
-		border: none;
-		border-radius: 5px;
-		padding: 5px 10px;
-		cursor: pointer;
-		transition: background-color 0.3s;
-
-		&:hover {
-			background-color: colors.$DARK-AZUR;
-		}
-	}
-}
-
 /* Стили для всех кнопок в модальных окнах */
 .modal-button {
 	display: block;
