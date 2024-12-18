@@ -9,8 +9,6 @@ import MainPage from './pages/MainPage';
 import SelectMode from './pages/SelectMode';
 import GamePage from './pages/GamePage';
 
-import { AudioProvider /*AudioContext*/ } from './pages/AudioContext';
-
 import SecretPage from './pages/SecretPage.tsx';
 
 import TagManager from 'react-gtm-module';
@@ -29,17 +27,15 @@ const App: React.FC = () => {
 	}, []);
 
 	return (
-		<AudioProvider>
-			<Routes>
-				<Route path="/auth/login" element={<Login />} />
-				<Route path="/auth/register" element={<Register />} />
-				<Route path="/main" element={<MainPage />} />
-				<Route path="/select" element={<SelectMode />} />
-				<Route path="/single-player" element={<GamePage />} />
-				<Route path="/secret" element={<SecretPage />} />
-				<Route path="/" element={<Navigate to="/auth/login" />} />
-			</Routes>
-		</AudioProvider>
+		<Routes>
+			<Route path="/auth/login" element={<Login />} />
+			<Route path="/auth/register" element={<Register />} />
+			<Route path="/main" element={<MainPage />} />
+			<Route path="/select" element={<SelectMode />} />
+			<Route path="/single-player" element={<GamePage />} />
+			<Route path="/secret" element={<SecretPage />} />
+			<Route path="/" element={<Navigate to="/auth/login" />} />
+		</Routes>
 	);
 };
 
