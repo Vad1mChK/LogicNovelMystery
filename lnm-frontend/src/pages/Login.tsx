@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 			);
 
 			// Сохраняем токен в localStorage
-			localStorage.setItem('AuthToken', response.data.token);
+			localStorage.setItem('AuthToken', `Bearer ${response.data.token}`);
 
 			// Перенаправляем пользователя на защищённую страницу (например, /dashboard)
 			navigate('/main');
