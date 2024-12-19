@@ -5,6 +5,7 @@ import '../css/SelectMode.scss';
 import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
@@ -15,6 +16,8 @@ const GameSelection: React.FC = () => {
 	);
 	const navigate = useNavigate();
 	const { t } = useTranslation(); // Подключаем локализацию
+	const [error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState(false);
 
 	// Load selected character from localStorage on component mount
 	useEffect(() => {
@@ -30,13 +33,62 @@ const GameSelection: React.FC = () => {
 		localStorage.setItem('selectedCharacter', character);
 	};
 
+	// Generate a random session token
+	const generateToken = () => {
+		const array = new Uint8Array(24); // 24 байта -> ~32 символа в Base64
+		window.crypto.getRandomValues(array);
+		return btoa(String.fromCharCode(...array))
+			.replace(/\+/g, '-')
+			.replace(/\//g, '_')
+			.replace(/=+$/, ''); // Убираем '=' в конце
+	};
+
+	// Send session token request to the server
+	const sendRequest = async () => {
+		const sessionToken = generateToken();
+		try {
+			/*const result = */ await axios.post(
+				'http://localhost:8080/session', // Замените на ваш API-эндпоинт
+				{ sessionToken }, // Токен передается в теле запроса
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: localStorage.getItem('AuthToken'),
+					},
+				}
+			);
+			// Сохраняем токен JWT в localStorage
+			localStorage.setItem('sessionToken', sessionToken);
+		} catch (err) {
+			// Устанавливаем сообщение об ошибке
+			throw new Error(
+				err instanceof Error ? err.message : 'An unknown error occurred'
+			);
+		}
+	};
+
 	// Start the game (add your game start logic here)
-	const startGame = () => {
-		// Redirect based on selected character
-		if (selectedCharacter === 'Game for one') {
-			navigate('/single-player');
-		} else if (selectedCharacter === 'Game for two') {
-			navigate('/multi-player');
+	const startGame = async () => {
+		setLoading(true);
+		setError(null);
+
+		try {
+			await sendRequest(); // Отправляем запрос на сервер
+			// Redirect based on selected character
+			if (selectedCharacter === 'Game for one') {
+				navigate('/single-player');
+			} else if (selectedCharacter === 'Game for two') {
+				navigate('/multi-player');
+			}
+		} catch (err) {
+			// Показываем сообщение об ошибке
+			setError(
+				err instanceof Error
+					? err.message
+					: 'Error occurred during "sendRequest"'
+			);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -91,10 +143,15 @@ const GameSelection: React.FC = () => {
 				<button
 					className="start-game-button"
 					onClick={startGame}
-					disabled={!selectedCharacter} // Disable button if no character selected
+					disabled={!selectedCharacter || loading} // Disable button if no character selected or loading
 				>
-					{t('Start Game')}
+					{loading ? t('Loading...') : t('Start Game')}
 				</button>
+				{error && (
+					<p className="error-message">
+						{t('Error')}: {error}
+					</p>
+				)}
 			</div>
 		</div>
 	);

@@ -21,11 +21,16 @@ i18n.use(initReactI18next).init({
 				Name: 'Name',
 				Score: 'Score',
 				GameMode: 'Game Mode',
+				'Refresh in': 'Refresh in',
+				Refresh: 'Refresh',
+				'sec.': 'sec.',
 				Back: 'Back',
 				'Select game mode': 'Select game mode',
 				'Game for one': 'Game for one',
 				'Game for two': 'Game for two',
 				'Start Game': 'Start Game',
+				'Loading...': 'Loading...',
+				Error: 'Error',
 				Character1: 'Character 1',
 				Character2: 'Character 2',
 				login: {
@@ -55,6 +60,7 @@ i18n.use(initReactI18next).init({
 				game: {
 					knowledgeButton: 'Knowledge',
 					giveUpButton: 'Give up',
+					homeButton: 'Home',
 					knowledgeWindow: {
 						facts: 'Facts',
 						rules: 'Rules',
@@ -96,11 +102,16 @@ i18n.use(initReactI18next).init({
 				Name: 'Имя',
 				Score: 'Итоговый счёт',
 				GameMode: 'Режим игры',
+				'Refresh in': 'Обновление через',
+				Refresh: 'Обновить',
+				'sec.': 'сек.',
 				Back: 'Назад',
 				'Select game mode': 'Выберите режим игры',
 				'Game for one': 'Игра для одного',
 				'Game for two': 'Игра для двоих',
 				'Start Game': 'Начать игру',
+				'Loading...': 'Загрузка...',
+				Error: 'Ошибка',
 				Character1: 'Персонаж 1',
 				Character2: 'Персонаж 2',
 				login: {
@@ -131,6 +142,7 @@ i18n.use(initReactI18next).init({
 				game: {
 					knowledgeButton: 'Знания',
 					giveUpButton: 'Сдаться',
+					homeButton: 'Домой',
 					knowledgeWindow: {
 						facts: 'Факты',
 						rules: 'Правила',
