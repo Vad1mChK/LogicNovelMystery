@@ -60,6 +60,7 @@ i18n.use(initReactI18next).init({
 				game: {
 					knowledgeButton: 'Knowledge',
 					giveUpButton: 'Give up',
+					homeButton: 'Home',
 					knowledgeWindow: {
 						facts: 'Facts',
 						rules: 'Rules',
@@ -141,6 +142,7 @@ i18n.use(initReactI18next).init({
 				game: {
 					knowledgeButton: 'Знания',
 					giveUpButton: 'Сдаться',
+					homeButton: 'Домой',
 					knowledgeWindow: {
 						facts: 'Факты',
 						rules: 'Правила',
