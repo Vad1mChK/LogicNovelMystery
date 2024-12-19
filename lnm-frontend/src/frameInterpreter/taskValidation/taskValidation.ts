@@ -50,7 +50,7 @@ const validateWriteKnowledge = async (
 	}
 	try {
 		const response = await axios.post(
-			'https://localhost:8080/task/write-knowledge',
+			'http://localhost:8080/task/write-knowledge',
 			{
 				taskId: task.id,
 				taskType: task.type,
@@ -58,7 +58,13 @@ const validateWriteKnowledge = async (
 				sessionToken: localStorage.getItem('sessionToken') || '',
 				testCases: task.testCases,
 			},
-			{ timeout: API_TIMEOUT } // Set timeout inline
+			{
+				timeout: API_TIMEOUT,
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: localStorage.getItem('AuthToken'),
+				},
+			} // Set timeout inline
 		);
 		return response.data.isValid;
 	} catch (error) {
@@ -77,7 +83,7 @@ const validateCompleteQuery = async (
 	}
 	try {
 		const response = await axios.post(
-			'https://localhost:8080/task/complete-query', // Replace with your actual endpoint
+			'http://localhost:8080/task/complete-query', // Replace with your actual endpoint
 			{
 				taskId: task.id,
 				taskType: task.type,
@@ -86,7 +92,13 @@ const validateCompleteQuery = async (
 				query: userInput,
 				expectedResults: task.expectedResults,
 			},
-			{ timeout: API_TIMEOUT } // Set timeout inline
+			{
+				timeout: API_TIMEOUT,
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: localStorage.getItem('AuthToken'),
+				},
+			} // Set timeout inline
 		);
 		return response.data.isValid;
 	} catch (error) {
