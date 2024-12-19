@@ -66,7 +66,7 @@ const validateWriteKnowledge = async (
 				},
 			} // Set timeout inline
 		);
-		return response.data.isValid;
+		return response.data.correct;
 	} catch (error) {
 		console.error('Error validating WRITE_KNOWLEDGE task:', error);
 		return false; // Assume failure on timeout or server error
@@ -82,6 +82,8 @@ const validateCompleteQuery = async (
 		return false;
 	}
 	try {
+		console.log(task.knowledge);
+		console.log(userInput);
 		const response = await axios.post(
 			'http://localhost:8080/task/complete-query', // Replace with your actual endpoint
 			{
@@ -90,7 +92,9 @@ const validateCompleteQuery = async (
 				knowledge: task.knowledge,
 				sessionToken: localStorage.getItem('sessionToken') || '',
 				query: userInput,
-				expectedResults: task.expectedResults,
+				expectedResults: task.expectedResults.map(
+					(entry) => entry.variables
+				),
 			},
 			{
 				timeout: API_TIMEOUT,
@@ -100,7 +104,7 @@ const validateCompleteQuery = async (
 				},
 			} // Set timeout inline
 		);
-		return response.data.isValid;
+		return response.data.correct;
 	} catch (error) {
 		console.error('Error validating COMPLETE_QUERY task:', error);
 		return false; // Assume failure on timeout or server error
