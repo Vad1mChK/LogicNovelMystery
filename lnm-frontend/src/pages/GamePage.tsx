@@ -14,7 +14,9 @@ const GamePage: React.FC = () => {
 	// 		? '/assets/plot/single_game_ru.json' // Path for `npm run dev`
 	// 		: './assets/plot/single_game_ru.json'; // Path for `npm run build`
 	// // TODO Replace it with a better solution
-	const storedLanguage = useSelector((state: RootState) => state.languageState.currentLanguage);
+	const storedLanguage = useSelector(
+		(state: RootState) => state.languageState.currentLanguage
+	);
 
 	console.log(import.meta.env.BASE_URL);
 	const plotUrl = `${import.meta.env.BASE_URL}assets/plot/single_game_${storedLanguage}.json`;
