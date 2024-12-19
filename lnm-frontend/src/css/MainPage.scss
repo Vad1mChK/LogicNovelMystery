@@ -144,11 +144,13 @@ body {
 		cursor: not-allowed;
 
 		&:hover {
-			background-color: color.adjust(colors.$BLUE, $lightness: 40%); /* Не изменяется при наведении */
+			background-color: color.adjust(
+				colors.$BLUE,
+				$lightness: 40%
+			); /* Не изменяется при наведении */
 		}
 	}
 }
-
 
 /* Ползунок звука */
 .volume-control {
@@ -201,7 +203,10 @@ table {
 	/* Стили для строк */
 	tr {
 		&:nth-child(odd) {
-			background-color: color.adjust(colors.$STONE-MOON, $lightness: 90%); /* Чередование цвета строк */
+			background-color: color.adjust(
+				colors.$STONE-MOON,
+				$lightness: 90%
+			); /* Чередование цвета строк */
 		}
 
 		&:nth-child(even) {
@@ -209,7 +214,11 @@ table {
 		}
 
 		&:hover {
-			background-color: color.scale(colors.$BLUE, $lightness: 80%); /* Подсветка строки при наведении */
+			background-color: color.scale(
+				colors.$BLUE,
+				$lightness: 80%
+			); /* Подсветка строки при наведении */
+
 			cursor: pointer;
 		}
 	}

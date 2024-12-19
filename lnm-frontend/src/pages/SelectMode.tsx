@@ -47,8 +47,8 @@ const GameSelection: React.FC = () => {
 	const sendRequest = async () => {
 		const sessionToken = generateToken();
 		try {
-			const result = await axios.post(
-				'http://localhost:8080/session',
+			/*const result = */ await axios.post(
+				'http://localhost:8080/session', // Замените на ваш API-эндпоинт
 				{ sessionToken }, // Токен передается в теле запроса
 				{
 					headers: {

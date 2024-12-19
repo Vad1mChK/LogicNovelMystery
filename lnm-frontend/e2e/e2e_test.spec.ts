@@ -27,6 +27,45 @@ test.describe('Example e2e Test Suite', () => {
 			'http://localhost:5173/LogicNovelMystery/auth/login'
 		);
 	});
+	test('Language change should change text', async ({ page }) => {
+		await page.goto('http://localhost:5173/LogicNovelMystery/main');
+
+		// Open settings modal
+		const settingsButton = page.locator('.settings-button');
+		await settingsButton.click();
+
+		// Ensure settings modal is visible
+		const settingsModal = page.locator('#settings-modal');
+		await expect(settingsModal).toBeVisible();
+
+		// Locate the language select dropdown
+		const languageSelect = settingsModal.locator('#language-select');
+
+		// Select English and check the button text
+		await languageSelect.selectOption('en');
+		const buttonTextInEnglish = await settingsButton.innerText(); // Await the innerText() call
+		expect(buttonTextInEnglish).toBe('Settings'); // Compare the string
+
+		// Select Russian and check the button text
+		await languageSelect.selectOption('ru');
+		const buttonTextInRussian = await settingsButton.innerText(); // Await the innerText() call
+		expect(buttonTextInRussian).toBe('Настройки'); // Compare the string
+	});
+	test('Selected language should persist across reloads', async ({
+		page,
+	}) => {
+		await page.goto('http://localhost:5173/LogicNovelMystery/main');
+
+		// Open settings and select Russian
+		const settingsButton = page.locator('.settings-button');
+		await settingsButton.click();
+		const languageSelect = page.locator('#language-select');
+		await languageSelect.selectOption('ru');
+
+		// Reload the page
+		await page.reload();
+		await expect(page.locator('.settings-button')).toHaveText('Настройки'); // Verify persistence
+	});
 	test('Single game page should have background of 100vh 100vw', async ({
 		page,
 	}) => {

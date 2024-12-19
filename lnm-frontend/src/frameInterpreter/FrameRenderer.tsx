@@ -11,11 +11,12 @@ import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { RootState } from '../state/store';
 import KnowledgeWindow from './KnowledgeWindow.tsx';
 import HealthBar from './HealthBar.tsx';
 import TaskWindow from './TaskWindow';
 import { t } from 'i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface FrameRendererProps {
 	isEnding: boolean;
@@ -44,6 +45,7 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 	onGiveUp,
 	onTaskSubmit,
 }) => {
+	const navigate = useNavigate();
 	const handleChoiceSelect = (nextFrameId: string) => {
 		onNextFrame(nextFrameId);
 	};
@@ -117,6 +119,12 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 								{t('game.giveUpButton')}
 							</button>
 						)}
+						<button
+							className="game-button"
+							onClick={() => navigate('/main')}
+						>
+							{t('game.homeButton')}
+						</button>
 					</div>
 
 					{isKnowledgeOpen && (

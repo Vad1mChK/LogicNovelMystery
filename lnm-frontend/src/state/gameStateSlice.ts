@@ -20,10 +20,23 @@ const initialState: GameState = {
 	errorCount: 0,
 };
 
+const loadGameState = (): GameState => {
+	try {
+		const storedState = localStorage.getItem('gameState');
+		if (storedState) {
+			return JSON.parse(storedState);
+		}
+		return initialState; // No state found in localStorage
+	} catch (error) {
+		console.error('Failed to load game state from localStorage:', error);
+		return initialState;
+	}
+};
+
 // Create the slice
 const gameStateSlice = createSlice({
 	name: 'gameState',
-	initialState,
+	initialState: loadGameState() as GameState,
 	reducers: {
 		increaseHealth(state, action: PayloadAction<number | 'full'>) {
 			if (action.payload === 'full') {

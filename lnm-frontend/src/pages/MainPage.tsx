@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../css/MainPage.scss';
 import { useNavigate } from 'react-router-dom';
-import { AudioContext } from '../pages/AudioContext';
+import { AudioContext } from './AudioContext';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 import defaultMusic from '../assets/music/fon.mp3';
 import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setLanguage } from '../state/languageSlice';
 
 interface LeaderboardEntry {
 	score: number;
@@ -24,10 +26,11 @@ const MainMenu: React.FC = () => {
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
 	const [isAboutOpen, setAboutOpen] = useState(false);
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
-	const [volume, setVolume] = useState(50);
 	const navigate = useNavigate();
 
-	const { isMusicPlaying, toggleMusic, setMusicFile } =
+	const dispatch = useDispatch();
+
+	const { isMusicPlaying, toggleMusic, setMusicFile, volume, setVolume } =
 		useContext(AudioContext)!;
 	const { t, i18n } = useTranslation(); // Используем локализацию
 
@@ -45,6 +48,11 @@ const MainMenu: React.FC = () => {
 		if (!isMusicPlaying) {
 			toggleMusic(); // Запускаем музыку, если она не играет
 		}
+	}, []);
+
+	useEffect(() => {
+		console.log('Mounted: MainMenu');
+		return () => console.log('Unmounted: MainMenu');
 	}, []);
 
 	// Запрос данных с сервера
@@ -100,6 +108,7 @@ const MainMenu: React.FC = () => {
 
 	const changeLanguage = (selectedLanguage: string) => {
 		i18n.changeLanguage(selectedLanguage); // Меняем язык
+		dispatch(setLanguage(selectedLanguage));
 	};
 
 	return (
@@ -118,19 +127,19 @@ const MainMenu: React.FC = () => {
 				{/* Блок с дополнительными кнопками */}
 				<div className="side-buttons">
 					<button
-						className="button"
+						className="button leaderboard-button"
 						onClick={() => setLeaderboardOpen(true)}
 					>
 						{t('Leaderboard')}
 					</button>
 					<button
-						className="button"
+						className="button settings-button"
 						onClick={() => setSettingsOpen(true)}
 					>
 						{t('Settings')}
 					</button>
 					<button
-						className="button"
+						className="button about-button"
 						onClick={() => setAboutOpen(true)}
 					>
 						{t('About')}

@@ -50,9 +50,12 @@ const validateWriteKnowledge = async (
 	}
 	try {
 		const response = await axios.post(
-			'https://your-backend-url.com/api/validate-write-knowledge', // Replace with your actual endpoint
+			'https://localhost:8080/task/write-knowledge',
 			{
-				userInput,
+				taskId: task.id,
+				taskType: task.type,
+				knowledge: [...task.knowledge, userInput],
+				sessionToken: localStorage.getItem('sessionToken') || '',
 				testCases: task.testCases,
 			},
 			{ timeout: API_TIMEOUT } // Set timeout inline
@@ -74,10 +77,14 @@ const validateCompleteQuery = async (
 	}
 	try {
 		const response = await axios.post(
-			'https://your-backend-url.com/api/validate-complete-query', // Replace with your actual endpoint
+			'https://localhost:8080/task/complete-query', // Replace with your actual endpoint
 			{
-				userInput,
-				expectedResult: task.expectedResults,
+				taskId: task.id,
+				taskType: task.type,
+				knowledge: task.knowledge,
+				sessionToken: localStorage.getItem('sessionToken') || '',
+				query: userInput,
+				expectedResults: task.expectedResults,
 			},
 			{ timeout: API_TIMEOUT } // Set timeout inline
 		);

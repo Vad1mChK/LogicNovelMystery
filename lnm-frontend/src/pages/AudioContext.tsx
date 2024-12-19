@@ -16,9 +16,9 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
 	const [isMusicPlaying, setMusicPlaying] = useState(false);
-	// const [currentMusicFile, setCurrentMusicFile] = useState<string | null>(
-	// 	null
-	// ); TODO Find where to use it
+	const [currentMusicFile, setCurrentMusicFile] = useState<string | null>(
+		null
+	); // TODO Find where to use it
 	const [volume, setVolumeState] = useState(50);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const [userInteracted, setUserInteracted] = useState(false); // Новый флаг для отслеживания взаимодействия пользователя
@@ -29,6 +29,11 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({
 			audioRef.current = new Audio();
 			audioRef.current.loop = true;
 		}
+	}, []);
+
+	useEffect(() => {
+		console.log('Mounted: AudioProvider');
+		return () => console.log('Unmounted: AudioProvider');
 	}, []);
 
 	// Обработчик для отслеживания взаимодействия пользователя
@@ -49,8 +54,12 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({
 	// Устанавливаем файл музыки
 	const setMusicFile = (file: string) => {
 		if (audioRef.current) {
-			audioRef.current.src = file;
-			audioRef.current.load();
+			// Only set a new file if it's different from the current one
+			if (currentMusicFile !== file) {
+				audioRef.current.src = file;
+				audioRef.current.load();
+				setCurrentMusicFile(file); // Update the current music file state
+			}
 		}
 	};
 
@@ -59,10 +68,14 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({
 		if (audioRef.current && userInteracted) {
 			if (isMusicPlaying) {
 				audioRef.current.pause();
+				console.log('Pausing music');
 			} else {
-				audioRef.current.play().catch((error) => {
-					console.error('Audio playback failed:', error);
-				});
+				audioRef.current
+					.play()
+					.then(() => console.log('Playing music'))
+					.catch((error) => {
+						console.error('Audio playback failed:', error);
+					});
 			}
 			setMusicPlaying(!isMusicPlaying);
 		} else if (!userInteracted) {
@@ -83,6 +96,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({
 		if (audioRef.current) {
 			audioRef.current.volume = volume / 100;
 		}
+		console.log(`Volume is now ${volume}`);
 	}, [volume]);
 
 	return (
