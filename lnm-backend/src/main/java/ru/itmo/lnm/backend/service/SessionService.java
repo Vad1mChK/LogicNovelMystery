@@ -36,7 +36,7 @@ public class SessionService {
         session.setUser(user);
         session.setSessionToken(sessionDto.getSessionToken());
         session.setCurrentScore(0);
-        session.setCurrentTask(0);
+        session.setCurrentTask(1);
         session.setUserHp(100);
         session.setGameStatus(true);
         sessionRepository.save(session);

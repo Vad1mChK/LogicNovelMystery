@@ -29,5 +29,5 @@ public class LnmCompleteQueryDto {
     private String query;
     @NotNull
     @NotBlank
-    private String  expectedResults;
+    private List<Map<String, String>>  expectedResults;
 }

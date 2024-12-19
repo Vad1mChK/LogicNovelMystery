@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.lnm.backend.dto.LnmCompleteQueryDto;
+import ru.itmo.lnm.backend.dto.LnmWriteKnowledgeDto;
 import ru.itmo.lnm.backend.messages.LnmTaskResponse;
+import ru.itmo.lnm.backend.messages.LnmWriteKnowledgeResponse;
 import ru.itmo.lnm.backend.service.LnmTaskService;
 
 @RestController
@@ -19,15 +21,15 @@ public class LnmTaskController {
     @PostMapping("/complete-query")
     public ResponseEntity<LnmTaskResponse> handleCompleteQueryTask(
             @RequestBody LnmCompleteQueryDto request,
-            @RequestAttribute Authentication authorization) {
+             Authentication authorization) {
         LnmTaskResponse response = lnmTaskService.processCompleteQueryTask(request, authorization.getName());
         return ResponseEntity.ok(response);
     }
 
-//    @PostMapping("/write-knowledge")
-//    public ResponseEntity<LnmWriteKnowledgeResponse> handleWriteKnowledgeTask(
-//            @RequestBody LnmWriteKnowledgeDto request) {
-//        LnmWriteKnowledgeResponse response = lnmTaskService.processWriteKnowledgeTask(request);
-//        return ResponseEntity.ok(response);
-//    }
+    @PostMapping("/write-knowledge")
+    public ResponseEntity<LnmTaskResponse> handleWriteKnowledgeTask(
+            @RequestBody LnmWriteKnowledgeDto request, Authentication authentication) {
+        LnmTaskResponse response = lnmTaskService.processWriteKnowledgeTask(request, authentication.getName());
+        return ResponseEntity.ok(response);
+    }
 }
