@@ -1,0 +1,731 @@
+{
+  "metadata": {
+    "name": "double_game",
+    "gamemode": "double",
+    "protagonist": "vicky",
+    "author": "Lizochkaaaa",
+    "version": "1.0",
+    "locale": "ru_RU"
+  },
+  "characters": {
+    "vicky": {
+      "id": "vicky",
+      "name": "Викки",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/vicky/idle.webp",
+        "hood": "assets/img/characters/vicky/hood.webp",
+        "adjustGlasses": "assets/img/characters/vicky/adjust_glasses.webp",
+        "think": "assets/img/characters/vicky/think.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Робот",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp",
+        "think": "assets/img/characters/robot/think.webp",
+        "angry": "assets/img/characters/robot/angry.webp"
+      }
+    }
+  },
+  "locations": {
+    "vickyRoom": {
+      "id": "vickyRoom",
+      "name": "Комната Викки",
+      "background": "assets/img/locations/VickyRoom.webp"
+    },
+    "backDoorWithScreen": {
+      "id": "backDoorWithScreen",
+      "name": "черный вход в особняк",
+      "background": "assets/img/locations/BackdoorWithScreen.webp"
+    },
+    "grimBackEntrance": {
+      "id": "grimBackEntrance",
+      "name": "Мрачный коридор",
+      "background": "assets/img/locations/GrimBackEntrance.webp"
+    },
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Кабинет",
+      "background": "assets/img/locations/StudyRoom.webp"
+    }
+  },
+  "music": {},
+  "tasks": {
+    "task1": {
+      "id": "task1",
+      "type": "SELECT_ONE",
+      "questionText": "Что обозначает оператор `:-` в Прологе?",
+      "options": [
+        "Разделение списка",
+        "Запрос к базе данных",
+        "Если (обратная импликация)",
+        "Конкатенация строк"
+      ],
+      "correctAnswerIndex": 2,
+      "nextFrameOnSuccess": "inception2_18",
+      "nextFrameOnFailure": "inception2_failTask1_01",
+      "failureScorePenalty": 1
+    },
+    "task2": {
+      "id": "task2",
+      "type": "SELECT_ONE",
+      "questionText": "Что означает `X \\= Y` в правиле?",
+      "options": [
+        "`X` не равно `Y`",
+        "`X` и `Y` - уникальные значения",
+        "`X` равно `Y`",
+        "Рандомное значение"
+      ],
+      "correctAnswerIndex": 0,
+      "nextFrameOnSuccess": "inception3_11",
+      "nextFrameOnFailure": "inception3_failTask2_01",
+      "failureScorePenalty": 1
+    },
+    "task3": {
+      "id": "task3",
+      "type": "SELECT_ONE",
+      "questionText": "Даны следующие факты:```character(professor).\ncharacter(vicky).\ncharacter(metnik).```Что вернет запрос `character(_)`?",
+      "options": [
+        "`true`",
+        "`false`",
+        "`true` трижды (один раз за каждый факт)",
+        "`professor`, `vicky`, `metnik`"
+      ],
+      "correctAnswerIndex": 2,
+      "nextFrameOnSuccess": "inception3_14",
+      "nextFrameOnFailure": "inception3_failTask3_01",
+      "failureScorePenalty": 1
+    },
+    "task4": {
+      "id": "task4",
+      "type": "SELECT_ONE",
+      "questionText": "Как разделить список `[1, 2, 3, 4]` на два списка: `[1, 2]` и `[3, 4]`?",
+      "options": [
+        "`append([1, 2], [3, 4], [1, 2, 3, 4])`",
+        "`[1, 2]` | `[3, 4]` = `[1, 2, 3, 4]`",
+        "`split([1, 2, 3, 4], [1, 2], [3, 4])`",
+        "`[Head, Tail]` = `[1, 2, 3, 4]`"
+      ],
+      "correctAnswerIndex": 2,
+      "hint": "Вспомни про встроенные конструкции",
+      "nextFrameOnSuccess": "inception4_11",
+      "nextFrameOnFailure": "inception4_failTask4_01",
+      "failureScorePenalty": 1
+    }
+  },
+  "startChapter": "inception1",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "Глава 1",
+      "startFrame": "inception1_start",
+      "knowledge": []
+    },
+    "inception2": {
+      "id": "inception2",
+      "title": "Глава 2",
+      "startFrame": "inception2_start",
+      "knowledge": []
+    },
+    "inception3": {
+      "id": "inception3",
+      "title": "Глава 3",
+      "startFrame": "inception3_start",
+      "knowledge": []
+    },
+    "inception4": {
+      "id": "inception4",
+      "title": "Глава 4",
+      "startFrame": "inception4_start",
+      "knowledge": []
+    }
+  },
+  "knowledge": {},
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "location": "vickyRoom",
+          "characters": [
+            {
+              "id": "vicky",
+              "pose": "hood"
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Есть! Хах... Ну и кто же из нас умнее? Не такая уж и страшная защита стоит у ФБР...",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "dialogue": "Так.., что у нас тут... Ого... Значит они хотят обратиться за помощью к моему отцу.",
+          "nextFrame": "inception1_03"
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "Группа хакеров во главе с Кевином Митником создала опасный вирус.",
+          "nextFrame": "inception1_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "adjustGlasses"
+              }
+            }
+          ]
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "Вирус способен стереть все данные с памяти компьютера, внести сбой в работу всемирной сети. Распространяется он через обычное сообщение.",
+          "nextFrame": "inception1_05"
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "Ночью компьютер специалиста по безопасности Сары Паркер взломали... с него вирус и был запущен в сеть. ",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "Если не создать антивирус за 20 часов, то начнётся всемирный хаос и ужасные катастрофы.",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "Сара Паркер была похищена накануне вечером из собственного дома. ФБР не знает, где она сейчас.",
+          "nextFrame": "inception1_08"
+        },
+        "inception1_08": {
+          "id": "inception1_08",
+          "dialogue": "Но они узнали, где компьютер, в который нужно ввести антивирус. В заброшенном особняке со смертельными ловушками...",
+          "nextFrame": "inception1_09"
+        },
+        "inception1_09": {
+          "id": "inception1_09",
+          "dialogue": "Ну и дела... Я уверена, что справлюсь быстрее моего отца... Ну-ка... Посмотрим, куда они направились...",
+          "nextFrame": "inception1_10",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception1_10": {
+          "id": "inception1_10",
+          "dialogue": "Угу, они пойдут к главному входу... Так, сейчас узнаем, есть ли там запасной вход.",
+          "speaker": "vicky",
+          "nextFrame": "inception1_11"
+        },
+        "inception1_11": {
+          "id": "inception1_11",
+          "dialogue": "Ага, имеется… Ну все, я зайду через него, и тогда посмотрим, кто быстрее справится с заданием и спасет мир!",
+          "speaker": "vicky",
+          "nextFrame": "inception1_12",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception1_12": {
+          "id": "inception1_12",
+          "dialogue": "Ну что ж, вперёд! Времени осталось мало. Я должна успеть добраться раньше моего отца. ",
+          "nextFrame": "inception1_13"
+        },
+        "inception1_13": {
+          "id": "inception1_13",
+          "dialogue": "Только сначала мне нужно такси... Алло, здравствуйте! Мне срочно нужна машина по адресу...",
+          "nextFrame": "inception1_14"
+        },
+        "inception1_14": {
+          "id": "inception1_14",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception2"
+              }
+            }
+          ]
+        }
+      },
+      "inception2": {
+        "inception2_start": {
+          "id": "inception2_start",
+          "location": "backDoorWithScreen",
+          "characters": [
+            {
+              "id": "vicky",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "hidden": true
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Боже, какие тут заросли. Давно тут никто не ходил... Что за странные механические звуки? Надо спрятаться.",
+          "nextFrame": "inception2_01"
+        },
+        "inception2_01": {
+          "id": "inception2_01",
+          "dialogue": "Аааааа. Отпусти меня, грязный извращенец! Вот тебе... аааа... ",
+          "nextFrame": "inception2_02"
+        },
+        "inception2_02": {
+          "id": "inception2_02",
+          "dialogue": "Уааа, ааааа... Зачем вы сразу драться, мисс?! Я всего лишь робот модели R3, помощник человека. А вы меня сразу бьете!",
+          "speaker": "robot",
+          "nextFrame": "inception2_03",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception2_03": {
+          "id": "inception2_03",
+          "dialogue": "С ума сойти! Офонареть можно! Этот робот такой эмоциональный! Ты прости, я не хотела. Зачем ты сам меня схватил за ногу?",
+          "speaker": "vicky",
+          "nextFrame": "inception2_04"
+        },
+        "inception2_04": {
+          "id": "inception2_04",
+          "dialogue": "Я лишь хотел уберечь вас мисс. В этих местах ходить запрещено!",
+          "speaker": "robot",
+          "nextFrame": "inception2_05"
+        },
+        "inception2_05": {
+          "id": "inception2_05",
+          "dialogue": "Ну ладно тебе, хватит плакать. Мне просто очень нужно попасть внутрь! Это вопрос жизни и смерти!",
+          "speaker": "vicky",
+          "nextFrame": "inception2_06"
+        },
+        "inception2_06": {
+          "id": "inception2_06",
+          "dialogue": "Я робот модели R3, я должен не пускать сюда никого живого. В доме смертельные ловушки, и просто так в него не попасть. Зачем вы пришли сюда, мисс? ",
+          "speaker": "robot",
+          "nextFrame": "inception2_07"
+        },
+        "inception2_07": {
+          "id": "inception2_07",
+          "dialogue": "Ты робот - помощник человека. Значит в твои обязанности входит слушать и помогать любому человеку. Так ведь? И хватит уже плакать!",
+          "speaker": "vicky",
+          "nextFrame": "inception2_08"
+        },
+        "inception2_08": {
+          "id": "inception2_08",
+          "dialogue": "Ей-богу, первый раз в жизни вижу, чтобы техника была такой эмоциональной!",
+          "nextFrame": "inception2_09"
+        },
+        "inception2_09": {
+          "id": "inception2_09",
+          "dialogue": "У меня дома робот-пылесос, просто представила, что он будет каждый раз плакать, когда в очередной раз увидит заваленный чипсами пол.",
+          "nextFrame": "inception2_10"
+        },
+        "inception2_10": {
+          "id": "inception2_10",
+          "dialogue": "Да, мисс, это действительно было бы странно...",
+          "speaker": "robot",
+          "nextFrame": "inception2_11"
+        },
+        "inception2_11": {
+          "id": "inception2_11",
+          "dialogue": "Ну так ты поможешь мне попасть в дом? Кэвин Митник создал вирус, который способен внести сбой в работу всемирной сети, и уже запустил его.",
+          "speaker": "vicky",
+          "nextFrame": "inception2_12"
+        },
+        "inception2_12": {
+          "id": "inception2_12",
+          "dialogue": "Осталось меньше 18 часов, чтобы создать антивирус на языке Prolog. Я очень надеюсь, что ты поможешь мне его изучить.",
+          "nextFrame": "inception2_13"
+        },
+        "inception2_13": {
+          "id": "inception2_13",
+          "dialogue": "Да, такая функция у меня запрограммирована. Все ловушки можно обойти, зная этот язык. Но чтобы изучать его, нужно отойти от привычных форм программирования...",
+          "speaker": "robot",
+          "nextFrame": "inception2_14"
+        },
+        "inception2_14": {
+          "id": "inception2_14",
+          "dialogue": "Поверьте, это достаточно красивый и логичный язык. Очень скоро вы оцените всю его красоту и возможности.",
+          "nextFrame": "inception2_15"
+        },
+        "inception2_15": {
+          "id": "inception2_15",
+          "dialogue": "Я в этом уверена. Может, уже перейдём к уроку?",
+          "speaker": "vicky",
+          "nextFrame": "inception2_16"
+        },
+        "inception2_16": {
+          "id": "inception2_16",
+          "dialogue": "Давайте приступим!",
+          "speaker": "robot",
+          "nextFrame": "inception2_17"
+        },
+        "inception2_17": {
+          "id": "inception2_17",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task1"
+              }
+            }
+          ]
+        },
+        "inception2_failTask1_01": {
+          "id": "inception2_failTask1_01",
+          "dialogue": "Попробуйте ещё раз, мисс...",
+          "nextFrame": "inception2_17"
+        },
+        "inception2_18": {
+          "id": "inception2_18",
+          "dialogue": "Хорошо, мисс. Я проведу вас дальше.",
+          "nextFrame": "inception2_19"
+        },
+        "inception2_19": {
+          "id": "inception2_19",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception3"
+              }
+            }
+          ]
+        }
+      },
+      "inception3": {
+        "inception3_start": {
+          "id": "inception3_start",
+          "location": "grimBackEntrance",
+          "characters": [
+            {
+              "id": "vicky",
+              "position": "left",
+              "pose": "hood"
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Фух... мы открыли эту тяжёлую дверь... как темно и сыро.. Аааапчхи!.. Ааапчхи!...",
+          "nextFrame": "inception3_01"
+        },
+        "inception3_01": {
+          "id": "inception3_01",
+          "dialogue": "Будьте здоровы, мисс! ",
+          "speaker": "robot",
+          "nextFrame": "inception3_02"
+        },
+        "inception3_02": {
+          "id": "inception3_02",
+          "dialogue": "Да здесь пыли больше, чем во всей Кагосиме на острове Кюсю! Как будто тысячу лет сюда никто не заходил!",
+          "speaker": "vicky",
+          "nextFrame": "inception3_03"
+        },
+        "inception3_03": {
+          "id": "inception3_03",
+          "dialogue": "Вы правы, черным ходом действительно уже очень давно не пользовались. О нем вообще мало кто знает.",
+          "speaker": "robot",
+          "nextFrame": "inception3_04"
+        },
+        "inception3_04": {
+          "id": "inception3_04",
+          "dialogue": "Он указан только в ранних чертежах, которые потом много раз переделывали, и чёрный ход как будто забыли указать. Откуда вы узнали о его существовании!?",
+          "speaker": "robot",
+          "nextFrame": "inception3_05"
+        },
+        "inception3_05": {
+          "id": "inception3_05",
+          "dialogue": "Я нашла упоминания о первой схеме дома. Там шла речь о черном ходе. Основу для его дизайна, видимо, брали из компьютерных игр 'метро 2033'",
+          "speaker": "vicky",
+          "nextFrame": "inception3_06"
+        },
+        "inception3_06": {
+          "id": "inception3_06",
+          "dialogue": "Ты только посмотри! С потолка свисают какие-то мутагены или минералы, повсюду плесень какая-то. Фу, ну и жуть!",
+          "nextFrame": "inception3_07"
+        },
+        "inception3_07": {
+          "id": "inception3_07",
+          "dialogue": "Выглядит это место жутковато и не очень приятно...",
+          "speaker": "robot",
+          "nextFrame": "inception3_08"
+        },
+        "inception3_08": {
+          "id": "inception3_08",
+          "dialogue": "О, смотри! Впереди лестница! ",
+          "speaker": "vicky",
+          "nextFrame": "inception3_09",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception3_09": {
+          "id": "inception3_09",
+          "dialogue": "Будьте осторожны, мисс! Некоторые ступени имеют ловушки!",
+          "speaker": "robot",
+          "nextFrame": "inception3_10"
+        },
+        "inception3_10": {
+          "id": "inception3_10",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task2"
+              }
+            }
+          ]
+        },
+        "inception3_failTask2_01": {
+          "id": "inception3_failTask2_01",
+          "dialogue": "О нет, придётся подумать снова...",
+          "speaker": "vicky",
+          "nextFrame": "inception3_10",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "adjustGlasses"
+              }
+            }
+          ]
+        },
+        "inception3_11": {
+          "id": "inception3_11",
+          "dialogue": "Хорошо, эту ловушку мы прошли...",
+          "speaker": "vicky",
+          "nextFrame": "inception3_12",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_12": {
+          "id": "inception3_12",
+          "dialogue": "Осторожно, мисс! Тут ещё одна.",
+          "speaker": "robot",
+          "nextFrame": "inception3_13"
+        },
+        "inception3_13": {
+          "id": "inception3_13",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task3"
+              }
+            }
+          ]
+        },
+        "inception3_failTask3_01": {
+          "id": "inception3_failTask3_01",
+          "dialogue": "О нет, придётся подумать снова...",
+          "speaker": "vicky",
+          "nextFrame": "inception3_13",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "adjustGlasses"
+              }
+            }
+          ]
+        },
+        "inception3_14": {
+          "id": "inception3_14",
+          "dialogue": "Так, если я правильно помню чертежи, отсюда будет несложно добраться до кабинета.",
+          "speaker": "vicky",
+          "nextFrame": "inception3_15",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_15": {
+          "id": "inception3_15",
+          "dialogue": "",
+          "nextFrame": "inception4",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception4"
+              }
+            }
+          ]
+        }
+      },
+      "inception4": {
+        "inception4_start": {
+          "id": "inception4_start",
+          "location": "grimBackEntrance",
+          "characters": [
+            {
+              "id": "vicky",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "think",
+              "position": "right"
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Опа! Ты только посмотри какая здоровенная дверь! Сделана как будто из титана. И опять открывается с помощью кода... ",
+          "nextFrame": "inception4_01"
+        },
+        "inception4_01": {
+          "id": "inception4_01",
+          "dialogue": "Вы уже справились с тремя заданиями, мисс! У вас все получится!",
+          "speaker": "robot",
+          "nextFrame": "inception4_02"
+        },
+        "inception4_02": {
+          "id": "inception4_02",
+          "dialogue": "Даже не сомневаюсь! Стой! Ты слышишь?!",
+          "speaker": "vicky",
+          "nextFrame": "inception4_03"
+        },
+        "inception4_03": {
+          "id": "inception4_03",
+          "dialogue": "За дверью точно кто-то есть!",
+          "speaker": "robot",
+          "nextFrame": "inception4_04"
+        },
+        "inception4_04": {
+          "id": "inception4_04",
+          "dialogue": "А если это Митник?! У тебя есть оружие?",
+          "speaker": "vicky",
+          "nextFrame": "inception4_05"
+        },
+        "inception4_05": {
+          "id": "inception4_05",
+          "dialogue": "Нет, мисс! Я не могу причинять вред человеку!",
+          "speaker": "robot",
+          "nextFrame": "inception4_06",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception4_06": {
+          "id": "inception4_06",
+          "dialogue": "Разные бывают люди, некоторым этот вред совсем не помешает. Достану-ка я свой нож. Это лучше, чем ничего! Попробуем застать Митника врасплох!",
+          "speaker": "vicky",
+          "nextFrame": "inception4_07"
+        },
+        "inception4_07": {
+          "id": "inception4_07",
+          "dialogue": "Мне кажется, что это не очень хорошая идея, мисс! Я бы на вашем месте был осторожнее! Мне страшно!",
+          "speaker": "robot",
+          "nextFrame": "inception4_08"
+        },
+        "inception4_08": {
+          "id": "inception4_08",
+          "dialogue": "Страшнее всего -- это не успеть за 6 часов выполнить все задания! Тогда всему человечеству придёт конец!",
+          "speaker": "vicky",
+          "nextFrame": "inception4_09"
+        },
+        "inception4_09": {
+          "id": "inception4_09",
+          "dialogue": "Да, лучше давайте приступим к следующему заданию!",
+          "speaker": "robot",
+          "nextFrame": "inception4_10"
+        },
+        "inception4_10": {
+          "id": "inception4_10",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task4"
+              }
+            }
+          ]
+        },
+        "inception4_failTask4_01": {
+          "id": "inception4_failTask4_01",
+          "dialogue": "Будьте внимательнее, мисс! Иначе дверь не разблокировать.",
+          "nextFrame": "inception4_10"
+        },
+        "inception4_11": {
+          "id": "inception4_11",
+          "dialogue": "Хорошо, мисс. Дверь разблокирована, теперь мы можем пройти в кабинет.",
+          "speaker": "robot",
+          "nextFrame": "inception4_12"
+        }
+      }
+    },
+    "endings": {
+      "gameOver": {
+        "id": "gameOver",
+        "condition": {
+          "healthEquals": 0
+        },
+        "startFrame": "gameOver_1",
+        "frames": {
+          "gameOver_1": {
+            "id": "gameOver_1",
+            "location": "vickyRoom",
+            "characters": [
+              {
+                "id": "vicky",
+                "pose": "adjustGlasses"
+              }
+            ],
+            "dialogue": "Не надо было растрачивать все попытки..."
+          }
+        }
+      }
+    }
+  }
+}

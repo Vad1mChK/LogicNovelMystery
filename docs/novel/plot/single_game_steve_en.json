@@ -1,0 +1,1758 @@
+{
+  "metadata": {
+    "name": "single_game",
+    "gamemode": "single",
+    "protagonist": "steve",
+    "author": "Vad1mChK, LizOchkaaaa",
+    "version": "1.0",
+    "locale": "en_US"
+  },
+  "characters": {
+    "steve": {
+      "id": "steve",
+      "name": "Steve",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/steve/idle.webp",
+        "think": "assets/img/characters/steve/think.webp",
+        "holdGlasses": "assets/img/characters/steve/hold_glasses.webp",
+        "holdNotebook": "assets/img/characters/steve/hold_notebook.webp"
+      }
+    },
+    "director": {
+      "id": "director",
+      "name": "Director",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/director/idle.webp",
+        "phone": "assets/img/characters/director/phone.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Robot",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp",
+        "think": "assets/img/characters/robot/think.webp",
+        "angry": "assets/img/characters/robot/angry.webp"
+      }
+    },
+    "anonymous": {
+      "id": "anonymous",
+      "name": "???",
+      "defaultPose": null,
+      "sprites": {}
+    },
+    "sarah": {
+      "id": "sarah",
+      "name": "Sarah",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/sarah/idle.webp",
+        "hostage": "assets/img/characters/sarah/hostage.webp"
+      }
+    }
+  },
+  "locations": {
+    "agentOffice": {
+      "id": "agentOffice",
+      "name": "Agent Office",
+      "background": "assets/img/locations/AgentOffice.webp"
+    },
+    "directorOffice": {
+      "id": "directorOffice",
+      "name": "Director Office",
+      "background": "assets/img/locations/DirectorOffice.webp"
+    },
+    "mansionEntrance": {
+      "id": "mansionEntrance",
+      "name": "Mansion Entrance",
+      "background": "assets/img/locations/MansionEntrance.webp"
+    },
+    "grandHall": {
+      "id": "grandHall",
+      "name": "Grand Hall",
+      "background": "assets/img/locations/GrandHall.webp"
+    },
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Study Room",
+      "background": "assets/img/locations/StudyRoom.webp"
+    },
+    "computerRoom": {
+      "id": "computerRoom",
+      "name": "Computer Room",
+      "background": "assets/img/locations/ComputerRoom.webp"
+    }
+  },
+  "music": {},
+  "startChapter": "inception4",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "Inception, Chapter 1",
+      "startFrame": "inception1_start",
+      "knowledge": [
+        "iAmSteve"
+      ]
+    },
+    "inception2": {
+      "id": "inception2",
+      "title": "Inception, Chapter 2",
+      "startFrame": "inception2_start",
+      "knowledge": [
+        "iAmSteve",
+        "mySuperior"
+      ]
+    },
+    "inception3": {
+      "id": "inception3",
+      "title": "Inception, Chapter 3",
+      "startFrame": "inception3_start",
+      "knowledge": [
+        "iAmSteve",
+        "mySuperior",
+        "ifAssistedKevinThenCreatedVirus"
+      ]
+    },
+    "inception4": {
+      "id": "inception4",
+      "title": "Inception, Chapter 4",
+      "startFrame": "inception4_start",
+      "knowledge": [
+        "iAmSteve",
+        "mySuperior",
+        "ifAssistedKevinThenCreatedVirus"
+      ]
+    },
+    "elaboration1": {
+      "id": "elaboration1",
+      "title": "Elaboration, Chapter 1",
+      "startFrame": "elaboration1_start",
+      "knowledge": []
+    },
+    "elaboration2": {
+      "id": "elaboration2",
+      "title": "Elaboration, Chapter 2",
+      "startFrame": "elaboration2_start",
+      "knowledge": []
+    },
+    "elaboration3": {
+      "id": "elaboration3",
+      "title": "Elaboration, Chapter 3",
+      "startFrame": "elaboration3_start",
+      "knowledge": []
+    },
+    "elaboration4": {
+      "id": "elaboration4",
+      "title": "Elaboration, Chapter 4",
+      "startFrame": "elaboration4_start",
+      "knowledge": []
+    },
+    "elaboration5": {
+      "id": "elaboration5",
+      "title": "Elaboration, Chapter 5",
+      "startFrame": "elaboration5_start",
+      "knowledge": []
+    }
+  },
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "location": "agentOffice",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdGlasses"
+            },
+            {
+              "id": "director",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "(Alright, it's 5 AM. Gotta get some coffee, my shift isn't gonna end soon...)",
+          "nextFrame": "inception1_01"
+        },
+        "inception1_01": {
+          "id": "inception1_01",
+          "dialogue": "Yes? FBI special agent Steve Harrison speaking.",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "dialogue": "Steve Harrison. This is FBI Director Edgar Hoover.",
+          "speaker": "director",
+          "nextFrame": "inception1_03",
+          "effects": [
+            {
+              "type": "OPEN_KNOWLEDGE",
+              "args": {
+                "knowledgeId": "mySuperior"
+              }
+            },
+            {
+              "type": "DECREASE_HEALTH",
+              "args": {
+                "amount": 40
+              }
+            }
+          ]
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "Listening, sir!",
+          "speaker": "steve",
+          "nextFrame": "inception1_04"
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "This shouldn't be discussed over the phone. Go to my office at once!",
+          "speaker": "director",
+          "nextFrame": "inception1_05",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "Yes, Sir!",
+          "speaker": "steve",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "*click*",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "*click*",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception2"
+              }
+            }
+          ]
+        }
+      },
+      "inception2": {
+        "inception2_start": {
+          "id": "inception2_start",
+          "location": "directorOffice",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "director",
+              "pose": "phone",
+              "position": "right"
+            }
+          ],
+          "speaker": "director",
+          "dialogue": "Come in, sit down.",
+          "nextFrame": "inception2_01"
+        },
+        "inception2_01": {
+          "id": "inception2_01",
+          "dialogue": "Good morning, Steve.",
+          "nextFrame": "inception2_02",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "steve"
+              }
+            },
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "director",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception2_02": {
+          "id": "inception2_02",
+          "dialogue": "Despite the early hour, I have an important task for you.",
+          "nextFrame": "inception2_03"
+        },
+        "inception2_03": {
+          "id": "inception2_03",
+          "dialogue": "Yes, Director, I'm all ears!",
+          "speaker": "steve",
+          "nextFrame": "inception2_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "holdNotebook"
+              }
+            }
+          ]
+        },
+        "inception2_04": {
+          "id": "inception2_04",
+          "dialogue": "You have to help your country! The entire planet's fate is at stake!",
+          "speaker": "director",
+          "nextFrame": "inception2_05"
+        },
+        "inception2_05": {
+          "id": "inception2_05",
+          "dialogue": "I'm always ready, Sir! What's the task?",
+          "speaker": "steve",
+          "nextFrame": "inception2_06"
+        },
+        "inception2_06": {
+          "id": "inception2_06",
+          "dialogue": "A group of hackers, led by Kevin Mitnik, has created a virus.",
+          "speaker": "director",
+          "nextFrame": "inception2_07",
+          "effects": [
+            {
+              "type": "OPEN_KNOWLEDGE",
+              "args": {
+                "knowledgeId": "ifAssistedKevinThenCreatedVirus"
+              }
+            },
+            {
+              "type": "INCREASE_HEALTH",
+              "args": {
+                "amount": "full"
+              }
+            }
+          ]
+        },
+        "inception2_07": {
+          "id": "inception2_07",
+          "dialogue": "It is capable of erasing all data from the memory... and causing errors in the World Wide Web.",
+          "nextFrame": "inception2_08"
+        },
+        "inception2_08": {
+          "id": "inception2_08",
+          "dialogue": "It's transferred over regular communications.",
+          "nextFrame": "inception2_09"
+        },
+        "inception2_09": {
+          "id": "inception2_09",
+          "dialogue": "Last night, the computer of Sarah Parker, a computer security expert, was hacked.",
+          "nextFrame": "inception2_10"
+        },
+        "inception2_10": {
+          "id": "inception2_10",
+          "dialogue": "Data was stolen from it, and the virus was launched into the Internet.",
+          "nextFrame": "inception2_11"
+        },
+        "inception2_11": {
+          "id": "inception2_11",
+          "dialogue": "We have less than 20 hours to create an antivirus.",
+          "nextFrame": "inception2_12"
+        },
+        "inception2_12": {
+          "id": "inception2_12",
+          "dialogue": "If we don't create an antivirus in Prolog, there will be chaos worldwide.",
+          "nextFrame": "inception2_13"
+        },
+        "inception2_13": {
+          "id": "inception2_13",
+          "dialogue": "Planets will crash, satellites will spiral out of control.",
+          "nextFrame": "inception2_14"
+        },
+        "inception2_14": {
+          "id": "inception2_14",
+          "dialogue": "We've also learned that Sarah Parker was kidnapped from her own house last night.",
+          "nextFrame": "inception2_15"
+        },
+        "inception2_15": {
+          "id": "inception2_15",
+          "dialogue": "We don't know her location yet...",
+          "nextFrame": "inception2_16"
+        },
+        "inception2_16": {
+          "id": "inception2_16",
+          "dialogue": "But we've located the computer where we should enter the antivirus.",
+          "nextFrame": "inception2_17"
+        },
+        "inception2_17": {
+          "id": "inception2_17",
+          "dialogue": "I understand, Sir. But there's a small problem...",
+          "speaker": "steve",
+          "nextFrame": "inception2_18"
+        },
+        "inception2_18": {
+          "id": "inception2_18",
+          "dialogue": "I'm not really familiar with Prolog...",
+          "nextFrame": "inception2_19"
+        },
+        "inception2_19": {
+          "id": "inception2_19",
+          "dialogue": "You're our best computer security expert, and our best agent.",
+          "speaker": "director",
+          "nextFrame": "inception2_20"
+        },
+        "inception2_20": {
+          "id": "inception2_20",
+          "dialogue": "You're the quickest learner among us. And you're capable of solving any riddle!",
+          "nextFrame": "inception2_21"
+        },
+        "inception2_21": {
+          "id": "inception2_21",
+          "dialogue": "We know of your achievements, Steve!",
+          "nextFrame": "inception2_22"
+        },
+        "inception2_22": {
+          "id": "inception2_21",
+          "dialogue": "Every operation you participated in, you finished successfully!",
+          "nextFrame": "inception2_23"
+        },
+        "inception2_23": {
+          "id": "inception2_23",
+          "dialogue": "I called you to my room personally because you're the only one I can delegate such a task to.",
+          "nextFrame": "inception2_25"
+        },
+        "inception2_25": {
+          "id": "inception2_25",
+          "dialogue": "The entire planet's existence is at stake!",
+          "nextFrame": "inception2_26"
+        },
+        "inception2_26": {
+          "id": "inception2_26",
+          "dialogue": "Thank you for your trust, Sir!",
+          "speaker": "steve",
+          "nextFrame": "inception2_27"
+        },
+        "inception2_27": {
+          "id": "inception2_27",
+          "dialogue": "I'll do my best to handle this. I won't fail you, Sir!",
+          "nextFrame": "inception2_28"
+        },
+        "inception2_28": {
+          "id": "inception2_28",
+          "dialogue": "Always stay a step ahead of your enemies...",
+          "speaker": "director",
+          "nextFrame": "inception2_29"
+        },
+        "inception2_29": {
+          "id": "inception2_29",
+          "dialogue": "A single mistake can cost us all we have been building for so long.",
+          "nextFrame": "inception2_30"
+        },
+        "inception2_30": {
+          "id": "inception2_30",
+          "dialogue": "The car that will deliver you to the mansion is waiting outside.",
+          "nextFrame": "inception2_31"
+        },
+        "inception2_31": {
+          "id": "inception2_31",
+          "dialogue": "We can't idle about anymore!",
+          "nextFrame": "inception2_32",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "holdGlasses"
+              }
+            }
+          ]
+        },
+        "inception2_32": {
+          "id": "inception2_32",
+          "dialogue": "Yes, Sir!",
+          "speaker": "steve",
+          "nextFrame": "inception2_33"
+        },
+        "inception2_33": {
+          "id": "inception2_33",
+          "dialogue": "Be careful, Agent Harrison.",
+          "speaker": "director",
+          "nextFrame": "inception2_34"
+        },
+        "inception2_34": {
+          "id": "inception2_34",
+          "dialogue": "In this mansion, there are many dangerous traps.",
+          "nextFrame": "inception2_35"
+        },
+        "inception2_35": {
+          "id": "inception2_35",
+          "dialogue": "To deactivate them, you should enter the correct code.",
+          "nextFrame": "inception2_36"
+        },
+        "inception2_36": {
+          "id": "inception2_36",
+          "dialogue": "I believe in you. You can call me anytime. Good luck!",
+          "nextFrame": "inception2_37",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "director",
+                "newPose": "phone"
+              }
+            }
+          ]
+        },
+        "inception2_37": {
+          "id": "inception2_37",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception3"
+              }
+            }
+          ]
+        }
+      },
+      "inception3": {
+        "inception3_start": {
+          "id": "inception3_start",
+          "location": "mansionEntrance",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "center",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Alright, let's get started!",
+          "nextFrame": "inception3_01"
+        },
+        "inception3_01": {
+          "id": "inception3_01",
+          "speaker": "anonymous",
+          "dialogue": "Freeze! No move, living being!",
+          "nextFrame": "inception3_02"
+        },
+        "inception3_02": {
+          "id": "inception3_02",
+          "dialogue": "You shouldn't have come here! Beings like you are not allowed here!",
+          "nextFrame": "inception3_03"
+        },
+        "inception3_03": {
+          "id": "inception3_03",
+          "dialogue": "...",
+          "speaker": "robot",
+          "nextFrame": "inception3_04",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception3_04": {
+          "id": "inception3_04",
+          "dialogue": "A weapon! He has a weapon!",
+          "nextFrame": "inception3_05"
+        },
+        "inception3_05": {
+          "id": "inception3_05",
+          "dialogue": "I'm calling the police! There are burglars here!",
+          "nextFrame": "inception3_06"
+        },
+        "inception3_06": {
+          "id": "inception3_06",
+          "speaker": "steve",
+          "dialogue": "I am the police. Steve Harrison, FBI agent.",
+          "nextFrame": "inception3_07"
+        },
+        "inception3_07": {
+          "id": "inception3_07",
+          "speaker": "robot",
+          "dialogue": "Oh, greetings, agent Steve Harrison. But please put your weapon down...",
+          "nextFrame": "inception3_08",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_08": {
+          "id": "inception3_08",
+          "dialogue": "I thought marauders have come again, I thought they'll be trying to hack the door again. No one can enter the correct code...",
+          "nextFrame": "inception3_10"
+        },
+        "inception3_10": {
+          "id": "inception3_10",
+          "dialogue": "And I'm just a 3rd generation robot, R3 unit.",
+          "nextFrame": "inception3_11",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception3_11": {
+          "id": "inception3_11",
+          "dialogue": "I shouldn't let any lifeform in because nobody knows of the deadly traps.",
+          "nextFrame": "inception3_12"
+        },
+        "inception3_12": {
+          "id": "inception3_12",
+          "dialogue": "Why are you here, Agent?",
+          "nextFrame": "inception3_13",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_13": {
+          "id": "inception3_13",
+          "speaker": "steve",
+          "dialogue": "I haev a special task...",
+          "nextFrame": "inception3_14"
+        },
+        "inception3_14": {
+          "id": "inception3_14",
+          "dialogue": "So you're an R3 model, assisting humans.",
+          "nextFrame": "inception3_15"
+        },
+        "inception3_15": {
+          "id": "inception3_15",
+          "dialogue": "You abide by the Three Laws of Robotics.",
+          "nextFrame": "inception3_16"
+        },
+        "inception3_16": {
+          "id": "inception3_16",
+          "dialogue": "Your responsibilities include listening to and helping any human, right?",
+          "nextFrame": "inception3_17",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception3_17": {
+          "id": "inception3_17",
+          "speaker": "robot",
+          "dialogue": "You're absolutely right, Sir.",
+          "nextFrame": "inception3_18"
+        },
+        "inception3_18": {
+          "id": "inception3_18",
+          "dialogue": "A robot may not injure a human being or, through inaction, allow a human being to come to harm.",
+          "nextFrame": "inception3_19"
+        },
+        "inception3_19": {
+          "id": "inception3_19",
+          "dialogue": "A robot must obey the orders given it by human beings except where such orders would conflict with the First Law. And so on.",
+          "nextFrame": "inception3_20"
+        },
+        "inception3_20": {
+          "id": "inception3_20",
+          "speaker": "steve",
+          "dialogue": "Excellent, so now you're gonna help me. Listen closely!",
+          "nextFrame": "inception3_21"
+        },
+        "inception3_21": {
+          "id": "inception3_21",
+          "dialogue": "Kevin Mitnik has created a virus capable of erasing all data from a computer and disrupt the worldwide web, and already launched it.",
+          "nextFrame": "inception3_23"
+        },
+        "inception3_23": {
+          "id": "inception3_23",
+          "dialogue": "We have less than 18 hours to create an antivirus in Prolog.",
+          "nextFrame": "inception3_24"
+        },
+        "inception3_24": {
+          "id": "inception3_24",
+          "dialogue": "Can you help me learn it?",
+          "nextFrame": "inception3_25"
+        },
+        "inception3_25": {
+          "id": "inception3_25",
+          "speaker": "robot",
+          "dialogue": "Yes, I have such functionality.",
+          "nextFrame": "inception3_26"
+        },
+        "inception3_26": {
+          "id": "inception3_26",
+          "dialogue": "But you have to know this: to learn Prolog, you must reconsider the very concept of programming.",
+          "nextFrame": "inception3_28"
+        },
+        "inception3_28": {
+          "id": "inception3_28",
+          "dialogue": "Try to understand the very logic of the language. It's a beautiful and logical language.",
+          "nextFrame": "inception3_29"
+        },
+        "inception3_29": {
+          "id": "inception3_29",
+          "dialogue": "Soon, you will understand its graciousness and capabilities.",
+          "nextFrame": "inception3_30"
+        },
+        "inception3_30": {
+          "id": "inception3_30",
+          "speaker": "steve",
+          "dialogue": "Indubitably. Maybe we should move on to the lesson?",
+          "nextFrame": "inception3_31"
+        },
+        "inception3_31": {
+          "id": "inception3_31",
+          "speaker": "robot",
+          "dialogue": "Let's get started.",
+          "nextFrame": "inception3_32"
+        },
+        "inception3_32": {
+          "id": "inception3_32",
+          "speaker": "robot",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception4"
+              }
+            }
+          ]
+        }
+      },
+      "inception4": {
+        "inception4_start": {
+          "id": "inception4_start",
+          "location": "mansionEntrance",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "pose": "think",
+              "position": "right"
+            }
+          ],
+          "speaker": "robot",
+          "dialogue": "Prolog is a logic programming language.",
+          "nextFrame": "inception4_01"
+        },
+        "inception4_01": {
+          "id": "inception4_01",
+          "dialogue": "It's based on Horn's disjunctive clause logic, which is a subset of first-order logic... ",
+          "nextFrame": "inception4_02"
+        },
+        "inception4_02": {
+          "id": "inception4_02",
+          "speaker": "steve",
+          "dialogue": "Sorry, I don't have all day... Just tell me where it is applied.",
+          "nextFrame": "inception4_03"
+        },
+        "inception4_03": {
+          "id": "inception4_03",
+          "speaker": "robot",
+          "dialogue": "Where is it applied? Well... It's commonly used when creating knowledge bases.",
+          "nextFrame": "inception4_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception4_04": {
+          "id": "inception4_04",
+          "speaker": "steve",
+          "dialogue": "Knowledge bases? I've worked with databases before, is this something similar?",
+          "nextFrame": "inception4_05"
+        },
+        "inception4_05": {
+          "id": "inception4_05",
+          "speaker": "robot",
+          "dialogue": "Yes. But data in databases can only define existing knowledge -- we call it \"facts\".",
+          "nextFrame": "inception4_06"
+        },
+        "inception4_06": {
+          "id": "inception4_06",
+          "dialogue": "But we also have \"rules\". These constructs can help us infer new facts.",
+          "nextFrame": "inception4_07"
+        },
+        "inception4_07": {
+          "id": "inception4_07",
+          "dialogue": "To fetch knowledge from the knowledge base, we use \"queries\", similar to database queries.",
+          "nextFrame": "inception4_08"
+        },
+        "inception4_08": {
+          "id": "inception4_08",
+          "dialogue": "To work with knowledge bases, one has to know these 3 key concepts of Prolog: facts, queries, and rules.",
+          "nextFrame": "inception4_09"
+        },
+        "inception4_09": {
+          "id": "inception4_09",
+          "dialogue": "But before we continue...",
+          "nextFrame": "inception4_10",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception4_10": {
+          "id": "inception4_10",
+          "dialogue": "Let's check how much attention you paid. Please answer a simple question.",
+          "nextFrame": "inception4_11"
+        },
+        "inception4_11": {
+          "id": "inception4_11",
+          "dialogue": "Be careful. If you make too many mistakes, you can't continue.",
+          "nextFrame": "inception4_12"
+        },
+        "inception4_12": {
+          "id": "inception4_12",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task0"
+              }
+            }
+          ]
+        },
+        "inception4_failTask0_01": {
+          "id": "inception4_failTask0_01",
+          "dialogue": "Please pay more attention. Think again.",
+          "nextFrame": "inception4_12",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "healthLess": 50
+              },
+              "args": {
+                "frameId": "inception4_failTask0_02"
+              }
+            }
+          ]
+        },
+        "inception4_failTask0_02": {
+          "id": "inception4_failTask0_02",
+          "dialogue": "Please be careful. And pay attention to your health. It seems you're getting nervous...",
+          "nextFrame": "inception4_12",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "not": {
+                  "healthMore": 10
+                }
+              },
+              "args": {
+                "frameId": "inception4_failTask0_03"
+              }
+            }
+          ]
+        },
+        "inception4_failTask0_03": {
+          "id": "inception4_failTask0_02",
+          "dialogue": "Focus, Agent! It's your last attempt...",
+          "nextFrame": "inception4_12"
+        },
+        "inception4_13": {
+          "id": "inception4_13",
+          "dialogue": "...Good. It seems it's time to continue our path... and your training.",
+          "nextFrame": "inception4_14"
+        },
+        "inception4_14": {
+          "id": "inception4_14",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration1"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration1": {
+        "elaboration1_start": {
+          "id": "elaboration1_start",
+          "location": "grandHall",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdGlasses",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "pose": "think",
+              "position": "right"
+            },
+            {
+              "id": "director",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "I completed the first task successfully! I didn't expect to do it so quickly!",
+          "nextFrame": "elaboration1_02"
+        },
+        "elaboration1_02": {
+          "id": "elaboration1_02",
+          "dialogue": "I must admit you're really smart and good and guessing. I'm happy for you.",
+          "speaker": "robot",
+          "nextFrame": "elaboration1_03"
+        },
+        "elaboration1_03": {
+          "id": "elaboration1_03",
+          "dialogue": "I've got a call from the Director. ...Yes Sir?",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_04"
+        },
+        "elaboration1_04": {
+          "id": "elaboration1_04",
+          "dialogue": "Special Agent Steve Harrison, this is the FBI Director. I have urgent news for you!",
+          "speaker": "director",
+          "nextFrame": "elaboration1_05",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "steve",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "elaboration1_05": {
+          "id": "elaboration1_05",
+          "dialogue": "We managed to track Kevin Mitnick's location. He's somewhere in the house. Be careful! He may have a weapon!",
+          "nextFrame": "elaboration1_06"
+        },
+        "elaboration1_06": {
+          "id": "elaboration1_06",
+          "dialogue": "Understood. Any new information on Sarah Parker?",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_07"
+        },
+        "elaboration1_07": {
+          "id": "elaboration1_07",
+          "dialogue": "We have questioned all the people involved, but unfortunately, we got no new clues. No one saw or heard anything. It's as if she vanished into thin air.",
+          "speaker": "director",
+          "nextFrame": "elaboration1_08"
+        },
+        "elaboration1_08": {
+          "id": "elaboration1_08",
+          "dialogue": "I have a feeling that Mitnick is keeping her somewhere nearby...",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_09"
+        },
+        "elaboration1_09": {
+          "id": "elaboration1_09",
+          "dialogue": "You will also need to consider this hypothesis. Good luck! You have an important mission ahead of you!",
+          "speaker": "director",
+          "nextFrame": "elaboration1_10"
+        },
+        "elaboration1_10": {
+          "id": "elaboration1_10",
+          "dialogue": "It's so dark and gloomy here! But we can't delay. If Mitnick is somewhere in the house, then Sara Parker must be nearby as well. Let's go upstairs!",
+          "speaker": "steve",
+          "nextFrame": "elaboration1_11"
+        },
+        "elaboration1_11": {
+          "id": "elaboration1_11",
+          "dialogue": "Be careful going up, sir! Some of the steps are rigged with traps. These are your next tasks...",
+          "speaker": "robot",
+          "nextFrame": "elaboration1_12"
+        },
+        "elaboration1_12": {
+          "id": "elaboration1_12",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task1"
+              }
+            }
+          ]
+        },
+        "elaboration1_failTask1_01": {
+          "id": "elaboration1_failTask1_01",
+          "dialogue": "Pay more attention, Agent! I told you that the tasks are the traps.",
+          "nextFrame": "elaboration1_12"
+        },
+        "elaboration1_13": {
+          "id": "elaboration1_13",
+          "dialogue": "Very well, agent. Let's proceed.",
+          "nextFrame": "elaboration1_13",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration2"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration2": {
+        "elaboration2_start": {
+          "id": "elaboration2_start",
+          "location": "grandHall",
+          "characters": [
+            {
+              "id": "steve",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Another trap! The door is locked again... We need to enter a code here as well.",
+          "nextFrame": "elaboration2_01"
+        },
+        "elaboration2_01": {
+          "id": "elaboration2_01",
+          "dialogue": "You've already completed two tasks! Don't lose hope, sir!",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_02"
+        },
+        "elaboration2_02": {
+          "id": "elaboration2_02",
+          "dialogue": "I think I hear some noises under this door! It feels like someone is there! I'll grab my gun...",
+          "speaker": "steve",
+          "nextFrame": "elaboration2_03"
+        },
+        "elaboration2_03": {
+          "id": "elaboration2_03",
+          "dialogue": "Please, no violence! I'm scared!!!",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_04"
+        },
+        "elaboration2_04": {
+          "id": "elaboration2_04",
+          "dialogue": "I'm scared too... But the scariest thing will happen if we don't complete all the tasks in 6 hours, and the whole world will end!",
+          "speaker": "steve",
+          "nextFrame": "elaboration2_05"
+        },
+        "elaboration2_05": {
+          "id": "elaboration2_05",
+          "dialogue": "Yes, let's move on to the next task!",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_06"
+        },
+        "elaboration2_06": {
+          "id": "elaboration2_06",
+          "dialogue": "",
+          "nextFrame": "elaboration2_06",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task2"
+              }
+            }
+          ]
+        },
+        "elaboration2_failTask2_01": {
+          "id": "elaboration2_failTask2_01",
+          "dialogue": "Try again!",
+          "nextFrame": "elaboration2_06"
+        },
+        "elaboration2_07": {
+          "id": "elaboration2_07",
+          "dialogue": "You're making good progress, Agent. Time to open the door...",
+          "nextFrame": "elaboration2_08"
+        },
+        "elaboration2_08": {
+          "id": "elaboration2_08",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration3"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration3": {
+        "elaboration3_start": {
+          "id": "elaboration3_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "steve",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "think"
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Well, who would've thought that such a cozy study room could be found in this house.",
+          "nextFrame": "elaboration3_01"
+        },
+        "elaboration3_01": {
+          "id": "elaboration3_01",
+          "dialogue": "I have a feeling that someone has been here recently, even left some papers on the desk.",
+          "nextFrame": "elaboration3_02"
+        },
+        "elaboration3_02": {
+          "id": "elaboration3_02",
+          "dialogue": "It's a very nice and cozy room.",
+          "speaker": "robot",
+          "nextFrame": "elaboration3_03"
+        },
+        "elaboration3_03": {
+          "id": "elaboration3_03",
+          "dialogue": "But there's no computer here, so we will have to keep looking. Mitnik has probably been here recently.",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_04"
+        },
+        "elaboration3_04": {
+          "id": "elaboration3_04",
+          "dialogue": "Do you hear those sounds?",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_05"
+        },
+        "elaboration3_05": {
+          "id": "elaboration3_05",
+          "dialogue": "Mmmm... Mmm... Mmm...",
+          "speaker": "anonymous",
+          "nextFrame": "elaboration3_06"
+        },
+        "elaboration3_06": {
+          "id": "elaboration3_06",
+          "dialogue": "Could it be mice?",
+          "speaker": "robot",
+          "nextFrame": "elaboration3_07"
+        },
+        "elaboration3_07": {
+          "id": "elaboration3_07",
+          "dialogue": "Could it be that Mitnik decided to return to his office?",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_08"
+        },
+        "elaboration3_08": {
+          "id": "elaboration3_08",
+          "dialogue": "I'll hide under the table so no one notices me. ...Ouch!... There's another hidden trap here.",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_09"
+        },
+        "elaboration3_09": {
+          "id": "elaboration3_09",
+          "dialogue": "I accidentally triggered some mechanism and got trapped. Metal bars have dropped around me...",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_10"
+        },
+        "elaboration3_10": {
+          "id": "elaboration3_10",
+          "dialogue": "Well, I really messed up!",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_11"
+        },
+        "elaboration3_11": {
+          "id": "elaboration3_11",
+          "dialogue": "You need to complete another task and enter a code. Only then will you be able to free yourself.",
+          "speaker": "robot",
+          "nextFrame": "elaboration3_12"
+        },
+        "elaboration3_12": {
+          "id": "elaboration3_12",
+          "dialogue": "I agree, the bars are too strong... There's little time left! We need to complete the task quickly and head to search for the computer.",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_13"
+        },
+        "elaboration3_13": {
+          "id": "elaboration3_13",
+          "dialogue": "Let's get to it!",
+          "speaker": "steve",
+          "nextFrame": "elaboration3_14"
+        },
+        "elaboration3_14": {
+          "id": "elaboration3_14",
+          "dialogue": "",
+          "nextFrame": "elaboration3_14",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task3"
+              }
+            }
+          ]
+        },
+        "elaboration3_failTask3_01": {
+          "id": "elaboration3_failTask3_01",
+          "dialogue": "Darn it... Let me try again...",
+          "nextFrame": "elaboration3_14"
+        },
+        "elaboration3_15": {
+          "id": "elaboration3_15",
+          "dialogue": "Okay... It seems I've deactivated this trap.",
+          "nextFrame": "elaboration3_16"
+        },
+        "elaboration3_16": {
+          "id": "elaboration3_16",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration4"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration4": {
+        "elaboration4_start": {
+          "id": "elaboration4_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "steve",
+              "pose": "holdNotebook",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "idle",
+              "position": "left"
+            },
+            {
+              "id": "sarah",
+              "pose": "hostage",
+              "position": "right",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Phew! It worked! I got out of the trap. Now we need to quickly head off to search for the computer!!",
+          "nextFrame": "elaboration4_01"
+        },
+        "elaboration4_01": {
+          "id": "elaboration4_01",
+          "dialogue": "Mmmm... Mmmm...",
+          "speaker": "anonymous",
+          "nextFrame": "elaboration4_02"
+        },
+        "elaboration4_02": {
+          "id": "elaboration4_02",
+          "dialogue": "Do you hear those strange sounds again? There’s definitely someone here!",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_03"
+        },
+        "elaboration4_03": {
+          "id": "elaboration4_03",
+          "dialogue": "Sounds like some mooing. The sounds are coming from that far corner.",
+          "speaker": "robot",
+          "nextFrame": "elaboration4_04"
+        },
+        "elaboration4_04": {
+          "id": "elaboration4_04",
+          "dialogue": "Let's go check it out. It seems like there is indeed someone there!",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_05"
+        },
+        "elaboration4_05": {
+          "id": "elaboration4_05",
+          "dialogue": "It’s the kidnapped information security specialist, Sarah Parker!",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_06",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "sarah"
+              }
+            }
+          ]
+        },
+        "elaboration4_06": {
+          "id": "elaboration4_06",
+          "dialogue": "I’m the FBI special agent Steve Harrison. Tell me, what happened to you?",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_07"
+        },
+        "elaboration4_07": {
+          "id": "elaboration4_07",
+          "dialogue": "Kevin Mitnik kidnapped me last night from my own home! He has lost it, he must be stopped immediately!",
+          "speaker": "sarah",
+          "nextFrame": "elaboration4_08"
+        },
+        "elaboration4_08": {
+          "id": "elaboration4_08",
+          "dialogue": "Help me free myself please! I know where the main computer is! We better hurry, there’s little time left!",
+          "nextFrame": "elaboration4_09"
+        },
+        "elaboration4_09": {
+          "id": "elaboration4_09",
+          "dialogue": "You are a brave girl! I will complete the task, enter the code, and we’ll free you, don'’'t worry!",
+          "speaker": "steve",
+          "nextFrame": "elaboration4_10"
+        },
+        "elaboration4_10": {
+          "id": "elaboration4_10",
+          "dialogue": "Robot, what's the next task?",
+          "nextFrame": "elaboration4_11"
+        },
+        "elaboration4_11": {
+          "id": "elaboration4_11",
+          "dialogue": "",
+          "nextFrame": "elaboration4_11",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task4"
+              }
+            }
+          ]
+        },
+        "elaboration4_failTask4_01": {
+          "id": "elaboration4_failTask4_01",
+          "dialogue": "Try again!",
+          "nextFrame": "elaboration4_11"
+        },
+        "elaboration4_12": {
+          "id": "elaboration4_12",
+          "speaker": "steve",
+          "dialogue": "Almost there...",
+          "nextFrame": "elaboration4_13"
+        },
+        "elaboration4_13": {
+          "id": "elaboration4_13",
+          "dialogue": "Yes, I've set you free!",
+          "nextFrame": "elaboration4_14",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "sarah",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "elaboration4_14": {
+          "id": "elaboration4_14",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration5"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration5": {
+        "elaboration5_start": {
+          "id": "elaboration5_start",
+          "location": "computerRoom",
+          "characters": [
+            {
+              "id": "steve",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "sarah",
+              "position": "right",
+              "hidden": true
+            }
+          ],
+          "speaker": "steve",
+          "dialogue": "Yes! We are almost there! Here’s the computer... Though it’s not a supercomputer, it’s still a powerful machine!",
+          "nextFrame": "elaboration5_01"
+        },
+        "elaboration5_01": {
+          "id": "elaboration5_01",
+          "dialogue": "Look, the computer is on and loading some files. Let’s see what’s there?",
+          "speaker": "sarah",
+          "nextFrame": "elaboration5_02",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "sarah"
+              }
+            }
+          ]
+        },
+        "elaboration5_02": {
+          "id": "elaboration5_02",
+          "dialogue": "There’s a whole list of encrypted personal data of the employees at the US Mint. As far as I know, only 10 of them have access to the Fort Knox vault.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_03"
+        },
+        "elaboration5_03": {
+          "id": "elaboration5_03",
+          "dialogue": "To enter the vault, each of them must enter their part of the code, and then ‘Open Sesame’ will open the doors.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_04"
+        },
+        "elaboration5_04": {
+          "id": "elaboration5_04",
+          "dialogue": "And it happens very rarely. In the entire history of Fort Knox, only three times have outsiders managed to enter.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_05"
+        },
+        "elaboration5_05": {
+          "id": "elaboration5_05",
+          "dialogue": "Who got such a chance? How did they get in?",
+          "speaker": "sarah",
+          "nextFrame": "elaboration5_06"
+        },
+        "elaboration5_06": {
+          "id": "elaboration5_06",
+          "dialogue": "The first to enter was President Roosevelt in 1943. The second time the reserves were checked was only 31 years later.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_07"
+        },
+        "elaboration5_07": {
+          "id": "elaboration5_07",
+          "dialogue": "And the third inspection occurred in 2018, as rumors spread that there was no gold in the vault.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_08"
+        },
+        "elaboration5_08": {
+          "id": "elaboration5_08",
+          "dialogue": "However, it turned out to be just rumors, all the gold was in place.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_09"
+        },
+        "elaboration5_09": {
+          "id": "elaboration5_09",
+          "dialogue": "I wonder, are the Mint employees also in the house with Mitnick, or does he want to use them secretly?",
+          "speaker": "sarah",
+          "nextFrame": "elaboration5_10"
+        },
+        "elaboration5_10": {
+          "id": "elaboration5_10",
+          "dialogue": "We’ll find that out later, but right now we need to stop the virus and enter the code before anyone interrupts us.",
+          "speaker": "steve",
+          "nextFrame": "elaboration5_11"
+        },
+        "elaboration5_11": {
+          "id": "elaboration5_11",
+          "dialogue": "Yes, let’s get started. I’m ready!",
+          "speaker": "robot",
+          "nextFrame": "elaboration5_12",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "elaboration5_12": {
+          "id": "elaboration5_12",
+          "dialogue": "Opening a terminal... or will a code editor do better?",
+          "nextFrame": "elaboration5_13"
+        },
+        "elaboration5_13": {
+          "id": "elaboration5_13",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task5"
+              }
+            }
+          ]
+        },
+        "elaboration5_failTask5_01": {
+          "id": "frame_weapon_failure5",
+          "dialogue": "Try again!",
+          "nextFrame": "elaboration5_13"
+        },
+        "elaboration5_14": {
+          "id": "elaboration5_14",
+          "speaker": "steve",
+          "dialogue": "Wait. It worked?..",
+          "nextFrame": "elaboration5_15"
+        },
+        "elaboration5_15": {
+          "id": "elaboration5_15",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "ENDING",
+              "args": {
+                "endingId": "demoEnding"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "endings": {
+      "gameOver": {
+        "id": "gameOver",
+        "condition": {
+          "healthEquals": 0
+        },
+        "startFrame": "gameOver_1",
+        "frames": {
+          "gameOver_1": {
+            "id": "gameOver_1",
+            "location": "agentOffice",
+            "characters": [
+              {
+                "id": "steve",
+                "pose": "holdNotebook",
+                "position": "left",
+                "hidden": true
+              }
+            ],
+            "speaker": "steve",
+            "dialogue": "Darn it... I shouldn't have wasted all my tries."
+          }
+        }
+      },
+      "demoEnding": {
+        "id": "demoEnding",
+        "title": "End of Demo",
+        "startFrame": "demoEnding_1",
+        "frames": {
+          "demoEnding_1": {
+            "id": "demoEnding_1",
+            "location": "mansionEntrance",
+            "characters": [
+              {
+                "id": "steve",
+                "pose": "holdNotebook",
+                "position": "left",
+                "hidden": true
+              },
+              {
+                "id": "robot",
+                "pose": "angry",
+                "position": "center"
+              }
+            ],
+            "speaker": "robot",
+            "dialogue": "Your trial of the game has ended.",
+            "nextFrame": "demoEnding_2"
+          },
+          "demoEnding_2": {
+            "id": "demoEnding_2",
+            "dialogue": "Please purchase the full version for $42,069 to continue.",
+            "nextFrame": "demoEnding_3"
+          },
+          "demoEnding_3": {
+            "id": "demoEnding_3",
+            "speaker": "steve",
+            "dialogue": "What?",
+            "nextFrame": null
+          }
+        }
+      }
+    }
+  },
+  "tasks": {
+    "task0": {
+      "id": "task0",
+      "type": "SELECT_MANY",
+      "questionText": "Which of the elements below are Prolog's base elements when working with knowledge bases?",
+      "options": [
+        "Arrays",
+        "Lists",
+        "Facts",
+        "Rules",
+        "Queries"
+      ],
+      "correctAnswerIndices": [
+        2,
+        3,
+        4
+      ],
+      "nextFrameOnSuccess": "inception4_13",
+      "nextFrameOnFailure": "inception4_failTask0_01",
+      "failureScorePenalty": 2
+    },
+    "task1": {
+      "id": "task1",
+      "type": "SELECT_ONE",
+      "questionText": "What programming paradigm does Prolog implement?",
+      "options": [
+        "Object-oriented",
+        "Reactive",
+        "Imperative",
+        "Logic"
+      ],
+      "correctAnswerIndex": 3,
+      "nextFrameOnSuccess": "elaboration1_13",
+      "nextFrameOnFailure": "elaboration1_failTask1_01",
+      "failureScorePenalty": 2
+    },
+    "task2": {
+      "id": "task2",
+      "type": "SELECT_ONE",
+      "questionText": "Can one use variables (e.g. `X`) in rules (see below)? ```develop(X) :- work(X, virus).```",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Remember what the variable `Х` is.",
+      "nextFrameOnSuccess": "elaboration2_07",
+      "nextFrameOnFailure": "elaboration2_failTask2_01",
+      "failureScorePenalty": 1
+    },
+    "task3": {
+      "id": "task3",
+      "type": "SELECT_ONE",
+      "questionText": "Given the facts:```character(professor).\ncharacter(steve).\ncharacter(mitnik).```What result will `character(steve).` give?",
+      "options": [
+        "`true`",
+        "`steve`",
+        "`false`",
+        "`X = steve`"
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Think what a fact is.",
+      "nextFrameOnSuccess": "elaboration3_15",
+      "nextFrameOnFailure": "elaboration3_failTask3_01",
+      "failureScorePenalty": 1
+    },
+    "task4": {
+      "id": "task4",
+      "type": "SELECT_ONE",
+      "questionText": "How to find the length of the list `[a, b, c, d]` in Prolog?",
+      "options": [
+        "`Length := length([a, b, c, d]).`",
+        "`[a, b, c, d], Length.`",
+        "`length([a, b, c, d], Length).`",
+        "`length([a, b, c, d]).`"
+      ],
+      "correctAnswerIndex": 2,
+      "hint": "Use a built-in predicate.",
+      "nextFrameOnSuccess": "elaboration4_12",
+      "nextFrameOnFailure": "elaboration4_failTask4_01",
+      "failureScorePenalty": 1
+    },
+    "task5": {
+      "id": "task5",
+      "type": "COMPLETE_QUERY",
+      "knowledge": [],
+      "questionText": "Write a query that joins two lists into the list `Result = [1, 2, 3, 4]` using the standard `append/3` predicate",
+      "expectedResults": [
+        {
+          "variables": {
+            "Result": "[1,2,3,4]"
+          }
+        }
+      ],
+      "hint": "`append/3` has 3 arguments. The first two are lists to join, and the third is the result.",
+      "defaultValue": "append(\n\t% arg1, arg2, arg3\n).",
+      "nextFrameOnSuccess": "elaboration5_14",
+      "nextFrameOnFailure": "elaboration5_failTask5_01",
+      "failureScorePenalty": 2
+    }
+  },
+  "knowledge": {
+    "iAmSteve": {
+      "id": "iAmSteve",
+      "type": "fact",
+      "content": "fbi_agent(steve).",
+      "description": "Steve is an FBI agent."
+    },
+    "mySuperior": {
+      "id": "mySuperior",
+      "type": "fact",
+      "content": "superior(director, steve).",
+      "description": "The FBI director is Steve's Superior."
+    },
+    "ifAssistedKevinThenCreatedVirus": {
+      "id": "ifAssistedKevinThenHacked",
+      "type": "rule",
+      "content": "creates(X, virus) :-\n\t(assists(X, kevin); X = kevin),\n\thacker(X).",
+      "description": "Kevin and all hackers who helped him were involved in the creation of the virus."
+    }
+  }
+}

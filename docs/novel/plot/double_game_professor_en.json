@@ -1,0 +1,1282 @@
+{
+  "metadata": {
+    "name": "double_game",
+    "gamemode": "double",
+    "protagonist": "professor",
+    "author": "Lizochkaaaa",
+    "version": "1.0",
+    "locale": "en_US"
+  },
+  "characters": {
+    "professor": {
+      "id": "professor",
+      "name": "Professor",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/professor/idle.webp"
+      }
+    },
+    "director": {
+      "id": "director",
+      "name": "Director",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/director/idle.webp",
+        "phone": "assets/img/characters/director/phone.webp"
+      }
+    },
+    "vicky": {
+      "id": "vicky",
+      "name": "Vicky",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/vicky/idle.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Robot",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp",
+        "think": "assets/img/characters/robot/think.webp",
+        "angry": "assets/img/characters/robot/angry.webp"
+      }
+    },
+    "anonymous": {
+      "id": "anonymous",
+      "name": "???",
+      "defaultPose": null,
+      "sprites": {}
+    },
+    "sarah": {
+      "id": "sarah",
+      "name": "Sarah",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/sarah/idle.webp",
+        "hostage": "assets/img/characters/sarah/hostage.webp"
+      }
+    }
+  },
+  "locations": {
+    "professorBedroom": {
+      "id": "professorBedroom",
+      "name": "Professor Bedroom",
+      "background": "assets/img/locations/ProfessorBedroom.webp"
+    },
+    "mansion": {
+      "id": "mansion",
+      "name": "Mansion",
+      "background": "assets/img/locations/MansionEntrance.webp"
+    },
+    "grandHall": {
+      "id": "grandHall",
+      "name": "Grand Hall",
+      "background": "assets/img/locations/GrandHall.webp"
+    },
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Study Room",
+      "background": "assets/img/locations/StudyRoom.webp"
+    },
+    "computerRoom": {
+      "id": "computerRoom",
+      "name": "Computer Room",
+      "background": "assets/img/locations/ComputerRoom.webp"
+    }
+  },
+  "music": {},
+  "tasks": {
+    "task1": {
+      "id": "task1",
+      "type": "SELECT_ONE",
+      "questionText": "How is the end of a statement marked in Prolog?",
+      "options": [
+        "`.` (dot)",
+        "`_` (underscore)",
+        "`-` (hyphen)",
+        "`X`"
+      ],
+      "correctAnswerIndex": 0,
+      "nextFrameOnSuccess": "inception2_14",
+      "nextFrameOnFailure": "inception2_failTask1_01",
+      "failureScorePenalty": 1
+    },
+    "task2": {
+      "id": "task2",
+      "type": "SELECT_ONE",
+      "questionText": "When the value of a variable doesn't matter, and we want to indicate that any suitable information is acceptable in its place, what should we write?",
+      "options": [
+        "`.` (dot)",
+        "`_` (underscore)",
+        "`-` (hyphen)",
+        "`X`"
+      ],
+      "correctAnswerIndex": 1,
+      "nextFrameOnSuccess": "inception3_12",
+      "nextFrameOnFailure": "inception3_failTask2_01",
+      "failureScorePenalty": 1
+    },
+    "task3": {
+      "id": "task3",
+      "type": "SELECT_ONE",
+      "questionText": "Given the following facts:```character(professor).\ncharacter(vicky).\ncharacter(mitnik).```Which query will return all characters?",
+      "options": [
+        "`character(X).`",
+        "`character(professor, vicky, mitnik).`",
+        "`character(_).`",
+        "Neither"
+      ],
+      "correctAnswerIndex": 0,
+      "nextFrameOnSuccess": "inception4_08",
+      "nextFrameOnFailure": "inception4_failTask3_01",
+      "failureScorePenalty": 1
+    },
+    "task4": {
+      "id": "task4",
+      "type": "SELECT_ONE",
+      "questionText": "How to check if the element `3` is in the list `[1, 2, 3, 4]`?",
+      "options": [
+        "`contains(3, [1, 2, 3, 4])`",
+        "`exists(3, [1, 2, 3, 4])`",
+        "`in_list(3, [1, 2, 3, 4]`",
+        "`member(3, [1, 2, 3, 4])`"
+      ],
+      "correctAnswerIndex": 3,
+      "hint": "Remember the built-in constructs",
+      "nextFrameOnSuccess": "inception5_21",
+      "nextFrameOnFailure": "inception5_failTask4_01",
+      "failureScorePenalty": 1
+    },
+    "task5": {
+      "id": "task5",
+      "type": "WRITE_KNOWLEDGE",
+      "questionText": "Given the knowledge:```character(steve).\ncharacter(mitnik).\ndevelop(mitnik, virus).```Write the rule `involved(X)` that will check if `mitnik` is involved in the case (i. e. if he developed the virus).",
+      "knowledge": [
+        "character(steve).",
+        "character(mitnik).",
+        "develop(mitnik, virus)."
+      ],
+      "testCases": [
+        {
+          "input": "involved(Who).",
+          "expectedResults": [
+            {
+              "variables": {
+                "Who": "mitnik"
+              }
+            }
+          ]
+        }
+      ],
+      "defaultValue": "involved(X) :-",
+      "nextFrameOnSuccess": "inception6_14",
+      "nextFrameOnFailure": "inception6_failTask5_01",
+      "failureScorePenalty": 2
+    },
+    "task6": {
+      "id": "task6",
+      "type": "WRITE_KNOWLEDGE",
+      "knowledge": [
+        "friend(steve, robot).",
+        "friend(robot, sarah).",
+        "friend(robot, professor).",
+        "friends(X, Y) :- (friend(X, Y); friend(Y, X)), X \\= Y)."
+      ],
+      "questionText": "Given the knowledge:```friend(steve, robot).\nfriend(robot, professor).\nfriend(robot, sarah).\nfriends(X, Y) :-\n\t(friend(X, Y); friend(Y, X)), X \\= Y.```Write a rule `second_friends(X, Y)` that checks if `X` and `Y` aren't friends but have common friends.",
+      "hint": "In your rule, use the predicate `friends(X, Y)`, not `friend(X, Y)`.",
+      "testCases": [
+        {
+          "input": "second_friends(Who, robot).",
+          "expectedResults": []
+        },
+        {
+          "input": "second_friends(Who, professor).",
+          "expectedResults": [
+            {
+              "variables": {
+                "Who": "steve"
+              }
+            },
+            {
+              "variables": {
+                "Who": "sarah"
+              }
+            }
+          ]
+        }
+      ],
+      "nextFrameOnSuccess": "inception7_13",
+      "nextFrameOnFailure": "inception7_failTask6_01",
+      "defaultValue": "second_friends(X, Y) :- \n",
+      "failureScorePenalty": 2
+    }
+  },
+  "knowledge": {
+  },
+  "startChapter": "inception1",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "Глава 1",
+      "startFrame": "inception1_start",
+      "knowledge": []
+    },
+    "inception2": {
+      "id": "inception2",
+      "title": "Глава 2",
+      "startFrame": "inception2_start",
+      "knowledge": []
+    },
+    "inception3": {
+      "id": "inception3",
+      "title": "Глава 3",
+      "startFrame": "inception3_start",
+      "knowledge": []
+    },
+    "inception4": {
+      "id": "inception4",
+      "title": "Глава 4",
+      "startFrame": "inception4_start",
+      "knowledge": []
+    },
+    "inception5": {
+      "id": "inception5",
+      "title": "Глава 5",
+      "startFrame": "inception5_start",
+      "knowledge": []
+    },
+    "inception6": {
+      "id": "inception6",
+      "title": "Глава 6",
+      "startFrame": "inception6_start",
+      "knowledge": []
+    },
+    "inception7": {
+      "id": "inception7",
+      "title": "Глава 7",
+      "startFrame": "inception7_start",
+      "knowledge": []
+    }
+  },
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "location": "professorBedroom",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "director"
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "It's 5:00 AM! Who could have come at this early hour... Who are you?",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "dialogue": "I need Robert Langdon. This is FBI Director Edgar Hoover speaking.",
+          "speaker": "director",
+          "nextFrame": "inception1_03"
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "Who?! Are you sure you need me specifically?!",
+          "speaker": "professor",
+          "nextFrame": "inception1_04"
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "Yes, I'm sure.",
+          "speaker": "director",
+          "nextFrame": "inception1_05"
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "Do you know what time it is?!",
+          "speaker": "professor",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "I apologize, but this matter cannot wait.",
+          "speaker": "director",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "It's 5 AM!",
+          "speaker": "professor",
+          "nextFrame": "inception1_08"
+        },
+        "inception1_08": {
+          "id": "inception1_08",
+          "dialogue": "Professor Langdon, this is a matter of life and death! I ask you to help your country! The survival of the planet depends on your assistance!",
+          "speaker": "director",
+          "nextFrame": "inception1_09"
+        },
+        "inception1_09": {
+          "id": "inception1_09",
+          "dialogue": "You have intrigued me. What about my humble self has so fascinated the FBI that Director Hoover himself came to see me?",
+          "speaker": "professor",
+          "nextFrame": "inception1_10"
+        },
+        "inception1_10": {
+          "id": "inception1_10",
+          "dialogue": "I’m not joking, Professor Langdon. Listen carefully! A group of hackers led by Kevin Mitnick has created a dangerous virus.",
+          "speaker": "director",
+          "nextFrame": "inception1_11"
+        },
+        "inception1_11": {
+          "id": "inception1_11",
+          "dialogue": "It is capable of wiping all data from computer memory, disrupting the operation of the global network, and it spreads through simple communications.",
+          "nextFrame": "inception1_12"
+        },
+        "inception1_12": {
+          "id": "inception1_12",
+          "dialogue": "Last night, the computer of cybersecurity expert Sara Parker was hacked.",
+          "nextFrame": "inception1_13"
+        },
+        "inception1_13": {
+          "id": "inception1_13",
+          "dialogue": "Files were stolen, and this virus was released into the network. We have less than 20 hours left to create an antivirus.",
+          "nextFrame": "inception1_14"
+        },
+        "inception1_14": {
+          "id": "inception1_14",
+          "dialogue": "If we don’t create an antivirus in 'Prolog', the world will descend into chaos.",
+          "nextFrame": "inception1_15"
+        },
+        "inception1_15": {
+          "id": "inception1_15",
+          "dialogue": "There will be airplane crashes, spacecraft falling from orbit. Do you understand the scale of the disaster?!",
+          "nextFrame": "inception1_16"
+        },
+        "inception1_16": {
+          "id": "inception1_16",
+          "dialogue": "I understand, Mr. Hoover, but I'm not very familiar with 'Prolog'...",
+          "speaker": "professor",
+          "nextFrame": "inception1_17"
+        },
+        "inception1_17": {
+          "id": "inception1_17",
+          "dialogue": "You are the best information security expert in the world. You learn new programming languages faster than anyone else. The fate of the entire planet is at stake!",
+          "speaker": "director",
+          "nextFrame": "inception1_18"
+        },
+        "inception1_18": {
+          "id": "inception1_18",
+          "dialogue": "Alright, I will try to figure it out!",
+          "speaker": "professor",
+          "nextFrame": "inception1_19"
+        },
+        "inception1_19": {
+          "id": "inception1_19",
+          "dialogue": "I should also inform you that Sarah Parker was abducted from her home last night.",
+          "speaker": "director",
+          "nextFrame": "inception1_20"
+        },
+        "inception1_20": {
+          "id": "inception1_20",
+          "dialogue": "Her whereabouts are still unknown, but we managed to locate the very computer where the antivirus needs to be entered.",
+          "nextFrame": "inception1_21"
+        },
+        "inception1_21": {
+          "id": "inception1_21",
+          "dialogue": "I assume we're going there now?",
+          "speaker": "professor",
+          "nextFrame": "inception1_22"
+        },
+        "inception1_22": {
+          "id": "inception1_22",
+          "dialogue": "Yes. The car is waiting downstairs. But be careful, in this abandoned mansion, there are traps everywhere that can be deadly.",
+          "speaker": "director",
+          "nextFrame": "inception1_23"
+        },
+        "inception1_23": {
+          "id": "inception1_20",
+          "dialogue": "To disarm them, you need to enter the correct code. I believe in you, Professor Langdon! Call me anytime! Good luck!",
+          "speaker": "director",
+          "nextFrame": "inception1_24"
+        },
+        "inception1_24": {
+          "id": "inception1_24",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception2"
+              }
+            }
+          ]
+        }
+      },
+      "inception2": {
+        "inception2_start": {
+          "id": "inception2_start",
+          "location": "mansion",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "hidden": true
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "Well, these overgrown plants... everything has grown wild. Oh, a lock. What could be encrypted here?",
+          "nextFrame": "inception2_01"
+        },
+        "inception2_01": {
+          "id": "inception2_01",
+          "dialogue": "Freeze! Stop, living creature! You wander in vain in these parts! No such creatures are allowed here!",
+          "speaker": "robot",
+          "nextFrame": "inception2_02",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception2_02": {
+          "id": "inception2_02",
+          "dialogue": "Hello! My name is Professor Robert Langdon! What's your name?",
+          "speaker": "professor",
+          "nextFrame": "inception2_03"
+        },
+        "inception2_03": {
+          "id": "inception2_03",
+          "dialogue": "Ah, you’re the professor, the best security expert. At first, I thought that it was the marauders again and that they would try to pick the lock. No one can enter the correct code.",
+          "speaker": "robot",
+          "nextFrame": "inception2_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception2_04": {
+          "id": "inception2_04",
+          "dialogue": "And I am a third-generation robot model R3. I am not allowed to let any living beings through because no one knows about the deadly traps. ",
+          "nextFrame": "inception2_05"
+        },
+        "inception2_05": {
+          "id": "inception2_05",
+          "dialogue": "Why have you come here, Professor Langdon?",
+          "nextFrame": "inception2_06"
+        },
+        "inception2_06": {
+          "id": "inception2_05",
+          "dialogue": "You are a model R3 robot, an assistant to humans. Your duty is to listen to and help any human. Isn't that right?",
+          "speaker": "professor",
+          "nextFrame": "inception2_07"
+        },
+        "inception2_07": {
+          "id": "inception2_07",
+          "dialogue": "Kevin Mitnick created a virus that can cause a global network failure. He has already released it.",
+          "nextFrame": "inception2_08"
+        },
+        "inception2_08": {
+          "id": "inception2_08",
+          "dialogue": "We have less than 18 hours to create an antivirus in 'Prolog'. Will you help me learn it?",
+          "speaker": "professor",
+          "nextFrame": "inception2_09"
+        },
+        "inception2_09": {
+          "id": "inception2_09",
+          "dialogue": "Yes, I have this functionality. But to study this language, you need to step away from conventional programming forms and comprehend the logic of Prolog itself.",
+          "speaker": "robot",
+          "nextFrame": "inception2_10",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception2_10": {
+          "id": "inception2_10",
+          "dialogue": "Trust me, it is a very beautiful and logical programming language. Soon you will appreciate its beauty and potential.",
+          "speaker": "robot",
+          "nextFrame": "inception2_11"
+        },
+        "inception2_11": {
+          "id": "inception2_11",
+          "dialogue": "I have no doubt about that. Shall we start the lesson now?",
+          "speaker": "professor",
+          "nextFrame": "inception2_12"
+        },
+        "inception2_12": {
+          "id": "inception2_12",
+          "dialogue": "Let's get started!",
+          "speaker": "robot",
+          "nextFrame": "inception2_13"
+        },
+        "inception2_13": {
+          "id": "inception2_13",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task1"
+              }
+            }
+          ]
+        },
+        "inception2_failTask1_01": {
+          "id": "inception2_failTask1_01",
+          "dialogue": "Be careful, Professor!",
+          "nextFrame": "inception2_13"
+        },
+        "inception2_14": {
+          "id": "inception2_13",
+          "dialogue": "Very good. We've opened the lock and can now enter.",
+          "nextFrame": "inception2_15"
+        },
+        "inception2_15": {
+          "id": "inception2_13",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception3"
+              }
+            }
+          ]
+        }
+      },
+      "inception3": {
+        "inception3_start": {
+          "id": "inception3_start",
+          "location": "grandHall",
+          "characters": [
+            {
+              "id": "professor",
+              "position": "left"
+            },
+            {
+              "id": "director",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "We’ve successfully completed the first task! I didn’t expect it to be done so quickly!",
+          "nextFrame": "inception3_01"
+        },
+        "inception3_01": {
+          "id": "inception3_01",
+          "dialogue": "Yes, you are very smart and perceptive, professor. I’m very happy for you!",
+          "speaker": "robot",
+          "nextFrame": "inception3_02"
+        },
+        "inception3_02": {
+          "id": "inception3_02",
+          "dialogue": "Someone’s calling… I’ll answer.",
+          "speaker": "professor",
+          "nextFrame": "inception3_03"
+        },
+        "inception3_03": {
+          "id": "inception3_03",
+          "dialogue": "Professor Langdon, this is FBI Director Edgar Hoover. I have urgent news for you!",
+          "speaker": "director",
+          "nextFrame": "inception3_04"
+        },
+        "inception3_04": {
+          "id": "inception3_04",
+          "dialogue": "I'm listening, Director!",
+          "speaker": "professor",
+          "nextFrame": "inception3_05"
+        },
+        "inception3_05": {
+          "id": "inception3_05",
+          "dialogue": "We managed to track Kevin Mitnick's location. He’s somewhere in the house. Be careful, professor! He might be armed!",
+          "speaker": "director",
+          "nextFrame": "inception3_06"
+        },
+        "inception3_06": {
+          "id": "inception3_06",
+          "dialogue": "I understand, I have a weapon too, though I still don’t know how to shoot. Let’s hope we don’t need it.",
+          "speaker": "professor",
+          "nextFrame": "inception3_07"
+        },
+        "inception3_07": {
+          "id": "inception3_07",
+          "dialogue": "Take care, professor, you have an important mission ahead! Goodbye!",
+          "speaker": "director",
+          "nextFrame": "inception3_08"
+        },
+        "inception3_08": {
+          "id": "inception3_08",
+          "dialogue": "It's so dark and gloomy here! But I can’t delay. If Mitnick is somewhere in the house, I’d rather not run into him.",
+          "speaker": "professor",
+          "nextFrame": "inception3_09"
+        },
+        "inception3_09": {
+          "id": "inception3_09",
+          "dialogue": "Let the FBI agents handle him. Let’s go upstairs!",
+          "nextFrame": "inception3_10"
+        },
+        "inception3_10": {
+          "id": "inception3_10",
+          "dialogue": "Be careful climbing, professor! Some steps on the staircase are traps. These are the next tasks.",
+          "speaker": "robot",
+          "nextFrame": "inception3_11"
+        },
+        "inception3_11": {
+          "id": "inception3_11",
+          "dialogue": "",
+          "nextFrame": "inception3_12",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task2"
+              }
+            }
+          ]
+        },
+        "inception3_failTask2_01": {
+          "id": "inception3_failTask2_01",
+          "dialogue": "Be careful, Professor. I warned you that the tasks are the traps.",
+          "speaker": "robot",
+          "nextFrame": "inception3_11"
+        },
+        "inception3_12": {
+          "id": "inception3_12",
+          "dialogue": "Good, we can continue our path.",
+          "speaker": "robot",
+          "nextFrame": "inception3_13"
+        },
+        "inception3_13": {
+          "id": "inception3_13",
+          "dialogue": "",
+          "nextFrame": "inception4",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception4"
+              }
+            }
+          ]
+        }
+      },
+      "inception4": {
+        "inception4_start": {
+          "id": "inception4_start",
+          "characters": [
+            {
+              "id": "professor",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "location": "grandHall",
+          "speaker": "professor",
+          "dialogue": "Excellent, we're doing well! Let's move on! Oh, here we are again at a locked door. Another code needs to be entered...",
+          "nextFrame": "inception4_01"
+        },
+        "inception4_01": {
+          "id": "inception4_01",
+          "dialogue": "You’ve already completed 2 tasks! Don’t give up, professor!",
+          "speaker": "robot",
+          "nextFrame": "inception4_02"
+        },
+        "inception4_02": {
+          "id": "inception4_02",
+          "dialogue": "Do you know that artificial intelligence has the potential to wipe out humanity?",
+          "speaker": "professor",
+          "nextFrame": "inception4_03"
+        },
+        "inception4_03": {
+          "id": "inception4_03",
+          "dialogue": "Artificial intelligence was created to improve human life.",
+          "speaker": "robot",
+          "nextFrame": "inception4_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception4_04": {
+          "id": "inception4_04",
+          "dialogue": "Everything requires human control. And until we learn to fully control artificial intelligence, we put ourselves at great risk.",
+          "speaker": "professor",
+          "nextFrame": "inception4_05"
+        },
+        "inception4_05": {
+          "id": "inception4_05",
+          "dialogue": "Right now, our biggest danger is not finishing all the tasks in time – 6 hours left.",
+          "speaker": "robot",
+          "nextFrame": "inception4_06"
+        },
+        "inception4_06": {
+          "id": "inception4_06",
+          "dialogue": "That's right, my friend! Let’s get to work!",
+          "speaker": "professor",
+          "nextFrame": "inception4_07"
+        },
+        "inception4_07": {
+          "id": "inception4_07",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task3"
+              }
+            }
+          ]
+        },
+        "inception4_failTask3_01": {
+          "id": "inception4_failTask3_01",
+          "dialogue": "It seems we'll have to try again.",
+          "nextFrame": "inception4_07"
+        },
+        "inception4_08": {
+          "id": "inception4_08",
+          "dialogue": "Good, now we can enter the room.",
+          "nextFrame": "inception4_09"
+        },
+        "inception4_09": {
+          "id": "inception4_09",
+          "dialogue": "",
+          "nextFrame": "inception4",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception5"
+              }
+            }
+          ]
+        }
+      },
+      "inception5": {
+        "inception5_start": {
+          "id": "inception5_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "position": "left"
+            },
+            {
+              "id": "vicky",
+              "position": "right",
+              "hidden": true
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "I never imagined that such a cozy study would be hidden in this creepy house. It looks like someone was just here and left papers on the desk...",
+          "nextFrame": "inception5_01"
+        },
+        "inception5_01": {
+          "id": "inception5_01",
+          "dialogue": "A very cute and charming room.",
+          "speaker": "robot",
+          "nextFrame": "inception5_02"
+        },
+        "inception5_02": {
+          "id": "inception5_02",
+          "dialogue": "There’s no computer here, so we’ll have to keep looking... Do you see this? The wall is moving aside...",
+          "speaker": "professor",
+          "nextFrame": "inception5_03"
+        },
+        "inception5_03": {
+          "id": "inception5_03",
+          "dialogue": "Wow! Maybe Mitnick decided to return to his office?",
+          "speaker": "robot",
+          "nextFrame": "inception5_04"
+        },
+        "inception5_04": {
+          "id": "inception5_04",
+          "dialogue": "I’ll hide under the table so no one sees me. Oh no...",
+          "speaker": "professor",
+          "nextFrame": "inception5_05"
+        },
+        "inception5_05": {
+          "id": "inception5_05",
+          "dialogue": "There’s another hidden trap here. I accidentally triggered some mechanism and got stuck. Metal rods have come down around the table.",
+          "nextFrame": "inception5_06"
+        },
+        "inception5_06": {
+          "id": "inception5_06",
+          "dialogue": "Do you hear that? That’s the voice of my daughter...",
+          "nextFrame": "inception5_07"
+        },
+        "inception5_07": {
+          "id": "inception5_07",
+          "dialogue": "Wow! Look at this! It’s like entering another world from a dungeon. How cozy!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_08",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "vicky"
+              }
+            }
+          ]
+        },
+        "inception5_08": {
+          "id": "inception5_08",
+          "dialogue": "Dad?! What are you doing here?!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_09"
+        },
+        "inception5_09": {
+          "id": "inception5_09",
+          "dialogue": "I was about to ask you the same question! I expected to find anyone here, but not you! How did you get here?!",
+          "speaker": "professor",
+          "nextFrame": "inception5_10"
+        },
+        "inception5_10": {
+          "id": "inception5_10",
+          "dialogue": "I just knew you couldn’t do this without me! And you’d never have called me!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_11"
+        },
+        "inception5_11": {
+          "id": "inception5_11",
+          "dialogue": "Do you even realize how dangerous it is here?! How did you get in?",
+          "speaker": "professor",
+          "nextFrame": "inception5_12"
+        },
+        "inception5_12": {
+          "id": "inception5_12",
+          "dialogue": "Sleight of hand, no trickery!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_13"
+        },
+        "inception5_13": {
+          "id": "inception5_13",
+          "dialogue": "You hacked the FBI site again?!",
+          "speaker": "professor",
+          "nextFrame": "inception5_14"
+        },
+        "inception5_14": {
+          "id": "inception5_14",
+          "dialogue": "Oh, dad, stop scolding me! Just admit it – you were waiting for me and you’re happy I showed up!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_15"
+        },
+        "inception5_15": {
+          "id": "inception5_15",
+          "dialogue": "You’re stuck under a table, how were you going to get out without me?",
+          "speaker": "vicky",
+          "nextFrame": "inception5_16"
+        },
+        "inception5_16": {
+          "id": "inception5_16",
+          "dialogue": "We just need to complete the next task and enter the code.",
+          "speaker": "professor",
+          "nextFrame": "inception5_17"
+        },
+        "inception5_17": {
+          "id": "inception5_17",
+          "dialogue": "With me, it’ll be faster! Just admit it!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_18"
+        },
+        "inception5_18": {
+          "id": "inception5_18",
+          "dialogue": "I’m sorry to interrupt your conversation, but time is running out. And anyone could walk in here!",
+          "speaker": "robot",
+          "nextFrame": "inception5_19"
+        },
+        "inception5_19": {
+          "id": "inception5_19",
+          "dialogue": "Yes, you're right, we need to free my father and start searching for the computer!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_20"
+        },
+        "inception5_20": {
+          "id": "inception5_20",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task4"
+              }
+            }
+          ]
+        },
+        "inception5_failTask4_01": {
+          "id": "inception5_failTask4_01",
+          "dialogue": "Alright... Let's try again...",
+          "speaker": "vicky",
+          "nextFrame": "inception5_20"
+        },
+        "inception5_21": {
+          "id": "inception5_21",
+          "dialogue": "Excellent, the trap is deactivated!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_22"
+        },
+        "inception5_22": {
+          "id": "inception5_22",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception6"
+              }
+            }
+          ]
+        }
+      },
+      "inception6": {
+        "inception6_start": {
+          "id": "inception6_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "position": "left",
+              "hidden": false
+            },
+            {
+              "id": "vicky",
+              "position": "right",
+              "hidden": false
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            },
+            {
+              "id": "sarah",
+              "position": "left",
+              "pose": "hostage",
+              "hidden": true
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Finally! Dad is free.",
+          "nextFrame": "inception6_01"
+        },
+        "inception6_01": {
+          "id": "inception6_01",
+          "dialogue": "Let me help you get out, professor?",
+          "speaker": "robot",
+          "nextFrame": "inception6_02"
+        },
+        "inception6_02": {
+          "id": "inception6_02",
+          "dialogue": "I can still manage to crawl out from under the table. Thank you! Quiet! Do you hear those sounds?",
+          "speaker": "professor",
+          "nextFrame": "inception6_03"
+        },
+        "inception6_03": {
+          "id": "inception6_03",
+          "dialogue": "Mmm... Mmm... Mmmmm...",
+          "speaker": "anonymous",
+          "nextFrame": "inception6_04"
+        },
+        "inception6_04": {
+          "id": "inception6_04",
+          "dialogue": "There's someone here!",
+          "speaker": "vicky",
+          "nextFrame": "inception6_05"
+        },
+        "inception6_05": {
+          "id": "inception6_05",
+          "dialogue": "Sounds like some sort of mooing. The sounds are coming from that far corner of the room...",
+          "speaker": "professor",
+          "nextFrame": "inception6_06",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception6_06": {
+          "id": "inception6_06",
+          "dialogue": "Let's go see who's there! We need to shine a flashlight...",
+          "speaker": "vicky",
+          "nextFrame": "inception6_07"
+        },
+        "inception6_07": {
+          "id": "inception6_07",
+          "dialogue": "It's the kidnapped information security specialist, Sarah Parker! I’ll help you now!",
+          "speaker": "vicky",
+          "nextFrame": "inception6_08",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "sarah"
+              }
+            }
+          ]
+        },
+        "inception6_08": {
+          "id": "inception6_08",
+          "dialogue": "Are you Professor Langdon? My name is Sarah Parker! Kevin Mitnick kidnapped me last night! He's gone mad and must be stopped immediately!",
+          "speaker": "sarah",
+          "nextFrame": "inception6_09"
+        },
+        "inception6_09": {
+          "id": "inception6_09",
+          "dialogue": "I knew the director would turn to you for help!",
+          "nextFrame": "inception6_10"
+        },
+        "inception6_10": {
+          "id": "inception6_10",
+          "dialogue": "Pleased to meet you, miss, I must admit I didn't expect to see you here!",
+          "speaker": "professor",
+          "nextFrame": "inception6_11"
+        },
+        "inception6_11": {
+          "id": "inception6_11",
+          "dialogue": "Please help me get free! I know where the main computer is! We must hurry, time is running out!",
+          "speaker": "sarah",
+          "nextFrame": "inception6_12"
+        },
+        "inception6_12": {
+          "id": "inception6_12",
+          "dialogue": "Let me introduce you to my daughter Vicky. We will complete the task together and enter the correct code to free you, miss.",
+          "speaker": "professor",
+          "nextFrame": "inception6_13"
+        },
+        "inception6_13": {
+          "id": "inception6_13",
+          "dialogue": "I've heard so much about you, miss, no less than about your outstanding father. I believe in you, you'll succeed!",
+          "speaker": "sarah",
+          "nextFrame": "inception6_14"
+        },
+        "inception6_14": {
+          "id": "inception6_14",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task5"
+              }
+            }
+          ]
+        },
+        "inception6_failTask5_01": {
+          "id": "inception6_failTask5_01",
+          "dialogue": "Calm down, Professor. Try again.",
+          "nextFrame": "inception6_14"
+        },
+        "inception6_15": {
+          "id": "inception6_15",
+          "dialogue": "Very well. Time to get to the computer room.",
+          "speaker": "professor",
+          "nextFrame": "inception6_16"
+        },
+        "inception6_16": {
+          "id": "inception6_16",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception7"
+              }
+            }
+          ]
+        }
+      },
+      "inception7": {
+        "inception7_start": {
+          "id": "inception7_start",
+          "location": "computerRoom",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "position": "left"
+            },
+            {
+              "id": "sarah",
+              "position": "right"
+            }
+          ],
+          "speaker": "sarah",
+          "dialogue": "Thank you for helping me get free! Now we can't waste any time, let's move on!",
+          "nextFrame": "inception7_01"
+        },
+        "inception7_01": {
+          "id": "inception7_01",
+          "dialogue": "I agree, let's go. Look! This is the machine!",
+          "speaker": "vicky",
+          "nextFrame": "inception7_02"
+        },
+        "inception7_02": {
+          "id": "inception7_02",
+          "dialogue": "It's not a supercomputer, but it's still powerful enough...",
+          "speaker": "professor",
+          "nextFrame": "inception7_03"
+        },
+        "inception7_03": {
+          "id": "inception7_03",
+          "dialogue": "Look, the computer is on and it's loading some files. Let's see what's there?",
+          "speaker": "sarah",
+          "nextFrame": "inception7_04"
+        },
+        "inception7_04": {
+          "id": "inception7_04",
+          "dialogue": "Here's a whole list of encrypted personal data of the US Mint employees. As far as I know, only 10 of them have access to the Fort Knox vault.",
+          "speaker": "professor",
+          "nextFrame": "inception7_05"
+        },
+        "inception7_05": {
+          "id": "inception7_05",
+          "dialogue": "To access the vault, each of them must enter their part of the code, and then 'open sesame' will unlock the doors. In the entire history of Fort Knox, only three times have outsiders gained access.",
+          "nextFrame": "inception7_06"
+        },
+        "inception7_06": {
+          "id": "inception7_06",
+          "dialogue": "Who was lucky enough to gain such access? Why were they able to enter?",
+          "speaker": "vicky",
+          "nextFrame": "inception7_07"
+        },
+        "inception7_07": {
+          "id": "inception7_07",
+          "dialogue": "The first to enter was US President Roosevelt in 1943. The second inspection only happened 31 years later.",
+          "speaker": "professor",
+          "nextFrame": "inception7_08"
+        },
+        "inception7_08": {
+          "id": "inception7_08",
+          "dialogue": "The third inspection occurred in 2018 when rumors spread that there was no gold in the vault. But it turned out that all the gold was still there.",
+          "nextFrame": "inception7_09"
+        },
+        "inception7_09": {
+          "id": "inception7_09",
+          "dialogue": "I wonder, are the US Mint employees in on it with Mitnick, or does he plan to use them without their knowledge?",
+          "speaker": "sarah",
+          "nextFrame": "inception7_10"
+        },
+        "inception7_10": {
+          "id": "inception7_10",
+          "dialogue": "We'll definitely find out later. Right now we need to stop the virus and enter the code before anyone interrupts us.",
+          "speaker": "vicky",
+          "nextFrame": "inception7_11"
+        },
+        "inception7_11": {
+          "id": "inception7_11",
+          "dialogue": "Yes, let's get started. I'm ready.",
+          "speaker": "robot",
+          "nextFrame": "inception7_12",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception7_12": {
+          "id": "inception7_12",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task6"
+              }
+            }
+          ]
+        },
+        "inception7_failTask6_01": {
+          "id": "inception7_failTask6_01",
+          "dialogue": "Try again, Professor!",
+          "nextFrame": "inception7_12"
+        },
+        "inception7_13": {
+          "id": "inception7_13",
+          "dialogue": "...Amusing... It seems it works.",
+          "speaker": "professor",
+          "nextFrame": "inception7_14"
+        },
+        "inception7_14": {
+          "id": "inception7_14",
+          "dialogue": ""
+        }
+      }
+    },
+    "endings": {
+      "gameOver": {
+        "id": "gameOver",
+        "condition": {
+          "healthEquals": 0
+        },
+        "startFrame": "gameOver_1",
+        "frames": {
+          "gameOver_1": {
+            "id": "gameOver_1",
+            "location": "professorBedroom",
+            "characters": [
+              {
+                "id": "professor",
+                "hidden": false
+              }
+            ],
+            "dialogue": "I shouldn't have wasted all my tries..."
+          }
+        }
+      }
+    }
+  }
+}

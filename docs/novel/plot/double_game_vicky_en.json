@@ -1,0 +1,731 @@
+{
+  "metadata": {
+    "name": "double_game",
+    "gamemode": "double",
+    "protagonist": "vicky",
+    "author": "Lizochkaaaa",
+    "version": "1.0",
+    "locale": "en_US"
+  },
+  "characters": {
+    "vicky": {
+      "id": "vicky",
+      "name": "Vicky",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/vicky/idle.webp",
+        "hood": "assets/img/characters/vicky/hood.webp",
+        "adjustGlasses": "assets/img/characters/vicky/adjust_glasses.webp",
+        "think": "assets/img/characters/vicky/think.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Robot",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp",
+        "think": "assets/img/characters/robot/think.webp",
+        "angry": "assets/img/characters/robot/angry.webp"
+      }
+    }
+  },
+  "locations": {
+    "vickyRoom": {
+      "id": "vickyRoom",
+      "name": "Vicky's Room",
+      "background": "assets/img/locations/VickyRoom.webp"
+    },
+    "backDoorWithScreen": {
+      "id": "backDoorWithScreen",
+      "name": "Mansion Backdoor",
+      "background": "assets/img/locations/BackdoorWithScreen.webp"
+    },
+    "grimBackEntrance": {
+      "id": "grimBackEntrance",
+      "name": "Grim Corridor",
+      "background": "assets/img/locations/GrimBackEntrance.webp"
+    },
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Study Room",
+      "background": "assets/img/locations/StudyRoom.webp"
+    }
+  },
+  "music": {},
+  "tasks": {
+    "task1": {
+      "id": "task1",
+      "type": "SELECT_ONE",
+      "questionText": "What does the operator `:-` mean Prolog?",
+      "options": [
+        "List separation",
+        "Database query",
+        "If (Reverse implication)",
+        "String concatenation"
+      ],
+      "correctAnswerIndex": 2,
+      "nextFrameOnSuccess": "inception2_18",
+      "nextFrameOnFailure": "inception2_failTask1_01",
+      "failureScorePenalty": 1
+    },
+    "task2": {
+      "id": "task2",
+      "type": "SELECT_ONE",
+      "questionText": "What does `X \\= Y` mean in a rule?",
+      "options": [
+        "`X` is not equal to `Y`",
+        "`X` and `Y` are unique",
+        "`X` is equal to `Y`",
+        "Random value"
+      ],
+      "correctAnswerIndex": 0,
+      "nextFrameOnSuccess": "inception3_11",
+      "nextFrameOnFailure": "inception3_failTask2_01",
+      "failureScorePenalty": 1
+    },
+    "task3": {
+      "id": "task3",
+      "type": "SELECT_ONE",
+      "questionText": "Given the following facts:```character(professor).\ncharacter(vicky).\ncharacter(metnik).```What will the query `character(_)` output?",
+      "options": [
+        "`true`",
+        "`false`",
+        "`true` 3 times (once per fact)",
+        "`professor`, `vicky`, `metnik`"
+      ],
+      "correctAnswerIndex": 2,
+      "nextFrameOnSuccess": "inception3_14",
+      "nextFrameOnFailure": "inception3_failTask3_01",
+      "failureScorePenalty": 1
+    },
+    "task4": {
+      "id": "task4",
+      "type": "SELECT_ONE",
+      "questionText": "How do you split the list `[1, 2, 3, 4]` into two lists: `[1, 2]` and `[3, 4]`?",
+      "options": [
+        "`append([1, 2], [3, 4], [1, 2, 3, 4])`",
+        "`[1, 2]` | `[3, 4]` = `[1, 2, 3, 4]`",
+        "`split([1, 2, 3, 4], [1, 2], [3, 4])`",
+        "`[Head, Tail]` = `[1, 2, 3, 4]`"
+      ],
+      "correctAnswerIndex": 2,
+      "hint": "Remember the built-in constructs",
+      "nextFrameOnSuccess": "inception4_11",
+      "nextFrameOnFailure": "inception4_failTask4_01",
+      "failureScorePenalty": 1
+    }
+  },
+  "startChapter": "inception1",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "Chapter 1",
+      "startFrame": "inception1_start",
+      "knowledge": []
+    },
+    "inception2": {
+      "id": "inception2",
+      "title": "Chapter 2",
+      "startFrame": "inception2_start",
+      "knowledge": []
+    },
+    "inception3": {
+      "id": "inception3",
+      "title": "Chapter 3",
+      "startFrame": "inception3_start",
+      "knowledge": []
+    },
+    "inception4": {
+      "id": "inception4",
+      "title": "Chapter 4",
+      "startFrame": "inception4_start",
+      "knowledge": []
+    }
+  },
+  "knowledge": {},
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "location": "vickyRoom",
+          "characters": [
+            {
+              "id": "vicky",
+              "pose": "hood"
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Yes! Haha... So, who’s smarter now? The FBI’s protection isn’t that scary after all...",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "dialogue": "Alright, what do we have here... Wow... So, they want to ask my father for help.",
+          "nextFrame": "inception1_03"
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "A group of hackers led by Kevin Mitnick created a dangerous virus.",
+          "nextFrame": "inception1_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "adjustGlasses"
+              }
+            }
+          ]
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "It's capable of erasing all data from computer memory, disrupting the global network, and spreading through simple communications.",
+          "nextFrame": "inception1_05"
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "The computer of cybersecurity specialist Sarah Parker was hacked, and this virus was launched into the network.",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "If we don't create the antivirus in the Prolog language, global chaos and disasters will ensue.",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "Sarah Parker was kidnapped from her own home last night. The FBI doesn't know her whereabouts.",
+          "nextFrame": "inception1_08"
+        },
+        "inception1_08": {
+          "id": "inception1_08",
+          "dialogue": "But they managed to locate the computer where the antivirus needs to be entered. In a mansion with deadly traps...",
+          "nextFrame": "inception1_09"
+        },
+        "inception1_09": {
+          "id": "inception1_09",
+          "dialogue": "What a situation... I'm sure I'll handle this faster than my father... Let's see where they are headed...",
+          "nextFrame": "inception1_10",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "inception1_10": {
+          "id": "inception1_10",
+          "dialogue": "Got it, they’ll go to the main entrance... Alright, let’s see if there’s a back entrance.",
+          "speaker": "vicky",
+          "nextFrame": "inception1_11"
+        },
+        "inception1_11": {
+          "id": "inception1_11",
+          "dialogue": "Aha, there is… Alright, I’ll go through it, and then we’ll see who completes the task faster and saves the world!",
+          "speaker": "vicky",
+          "nextFrame": "inception1_12",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception1_12": {
+          "id": "inception1_12",
+          "dialogue": "Well then, let’s go! Time is running out. I have to get there before my father does.",
+          "nextFrame": "inception1_13"
+        },
+        "inception1_13": {
+          "id": "inception1_13",
+          "dialogue": "But first I need a taxi... Hello, good evening! I urgently need a lift to...",
+          "nextFrame": "inception1_14"
+        },
+        "inception1_14": {
+          "id": "inception1_14",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception2"
+              }
+            }
+          ]
+        }
+      },
+      "inception2": {
+        "inception2_start": {
+          "id": "inception2_start",
+          "location": "backDoorWithScreen",
+          "characters": [
+            {
+              "id": "vicky",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "hidden": true
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Wow, it's so overgrown here. Nobody has been here in a long time... What are these strange mechanical sounds? I need to hide.",
+          "nextFrame": "inception2_01"
+        },
+        "inception2_01": {
+          "id": "inception2_01",
+          "dialogue": "Aaaaaa. Let me go, you filthy pervert! Take this... aaaah...",
+          "nextFrame": "inception2_02"
+        },
+        "inception2_02": {
+          "id": "inception2_02",
+          "dialogue": "Waaah, aaaah... Why are you attacking me right away, miss?! I’m just an R3 model robot, assistant to humans. And you immediately hit me!",
+          "speaker": "robot",
+          "nextFrame": "inception2_03",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception2_03": {
+          "id": "inception2_03",
+          "dialogue": "Unbelievable! This robot is so emotional! Sorry, I didn’t mean to. Why did you grab my leg in the first place?",
+          "speaker": "vicky",
+          "nextFrame": "inception2_04"
+        },
+        "inception2_04": {
+          "id": "inception2_04",
+          "dialogue": "I only wanted to protect you, miss. It’s forbidden to walk in these places!",
+          "speaker": "robot",
+          "nextFrame": "inception2_05"
+        },
+        "inception2_05": {
+          "id": "inception2_05",
+          "dialogue": "Alright, stop crying already. I just really need to get inside! It’s a matter of life and death!",
+          "speaker": "vicky",
+          "nextFrame": "inception2_06"
+        },
+        "inception2_06": {
+          "id": "inception2_06",
+          "dialogue": "I am a third-generation robot, model R3. I must not let a living being enter here. There are deadly traps in the mansion. Why did you come here, miss?",
+          "speaker": "robot",
+          "nextFrame": "inception2_07"
+        },
+        "inception2_07": {
+          "id": "inception2_07",
+          "dialogue": "You’re a human-assistant robot. That means it’s your duty to listen and help any human. Isn’t that right? And stop crying already!",
+          "speaker": "vicky",
+          "nextFrame": "inception2_08"
+        },
+        "inception2_08": {
+          "id": "inception2_08",
+          "dialogue": "Honestly, this is the first time I’ve seen a machine so emotional!",
+          "nextFrame": "inception2_09"
+        },
+        "inception2_09": {
+          "id": "inception2_09",
+          "dialogue": "I have a robot vacuum at home, and I just imagined it crying every time it sees a floor littered with chips.",
+          "nextFrame": "inception2_10"
+        },
+        "inception2_10": {
+          "id": "inception2_10",
+          "dialogue": "Yes, miss, that would indeed be strange...",
+          "speaker": "robot",
+          "nextFrame": "inception2_11"
+        },
+        "inception2_11": {
+          "id": "inception2_11",
+          "dialogue": "So will you help me get into the house? Kevin Mitnick created a virus capable of disrupting the entire global network. He has already launched it.",
+          "speaker": "vicky",
+          "nextFrame": "inception2_12"
+        },
+        "inception2_12": {
+          "id": "inception2_12",
+          "dialogue": "There are less than 18 hours left to create an antivirus in the Prolog language. I really hope you’ll help me learn it.",
+          "nextFrame": "inception2_13"
+        },
+        "inception2_13": {
+          "id": "inception2_13",
+          "dialogue": "Yes, I have such functionality. All the traps can be bypassed if you know this language. But to study Prolog, you need to step away from traditional programming paradigms...",
+          "speaker": "robot",
+          "nextFrame": "inception2_14"
+        },
+        "inception2_14": {
+          "id": "inception2_14",
+          "dialogue": "Believe me, it’s a very elegant and logical language. You’ll soon appreciate its beauty and possibilities.",
+          "nextFrame": "inception2_15"
+        },
+        "inception2_15": {
+          "id": "inception2_15",
+          "dialogue": "I’m sure I will. Can we get started with the lesson?",
+          "speaker": "vicky",
+          "nextFrame": "inception2_16"
+        },
+        "inception2_16": {
+          "id": "inception2_16",
+          "dialogue": "Let's get started!",
+          "speaker": "robot",
+          "nextFrame": "inception2_17"
+        },
+        "inception2_17": {
+          "id": "inception2_17",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task1"
+              }
+            }
+          ]
+        },
+        "inception2_failTask1_01": {
+          "id": "inception2_failTask1_01",
+          "dialogue": "Try again, miss...",
+          "nextFrame": "inception2_17"
+        },
+        "inception2_18": {
+          "id": "inception2_18",
+          "dialogue": "Alright, miss. I'll lead the way.",
+          "nextFrame": "inception2_19"
+        },
+        "inception2_19": {
+          "id": "inception2_19",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception3"
+              }
+            }
+          ]
+        }
+      },
+      "inception3": {
+        "inception3_start": {
+          "id": "inception3_start",
+          "location": "grimBackEntrance",
+          "characters": [
+            {
+              "id": "vicky",
+              "position": "left",
+              "pose": "hood"
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Phew... we opened this heavy door... it's so dark and damp.. Ah-choo!.. Ah-choo!...",
+          "nextFrame": "inception3_01"
+        },
+        "inception3_01": {
+          "id": "inception3_01",
+          "dialogue": "Bless you, miss!",
+          "speaker": "robot",
+          "nextFrame": "inception3_02"
+        },
+        "inception3_02": {
+          "id": "inception3_02",
+          "dialogue": "There’s more dust here than in all of Kagoshima on Kyushu Island! It's like no one has been here for ages!",
+          "speaker": "vicky",
+          "nextFrame": "inception3_03"
+        },
+        "inception3_03": {
+          "id": "inception3_03",
+          "dialogue": "You're right, the back door really hasn’t been used in a very long time. Almost no one knows about it.",
+          "speaker": "robot",
+          "nextFrame": "inception3_04"
+        },
+        "inception3_04": {
+          "id": "inception3_04",
+          "dialogue": "Information about it is only in the earliest blueprints, which were redone many times, and the back door was seemingly forgotten. I'm amazed that you knew it existed!",
+          "speaker": "robot",
+          "nextFrame": "inception3_05"
+        },
+        "inception3_05": {
+          "id": "inception3_05",
+          "dialogue": "I found mentions of the very first design of the house. It talked about the back door. Its design was probably inspired by those in the video game 'Metro 2033.'",
+          "speaker": "vicky",
+          "nextFrame": "inception3_06"
+        },
+        "inception3_06": {
+          "id": "inception3_06",
+          "dialogue": "Just look at this! There are some sort of mutagens or minerals hanging from the ceiling, and mold is everywhere. Ew, what a nightmare!",
+          "nextFrame": "inception3_07"
+        },
+        "inception3_07": {
+          "id": "inception3_07",
+          "dialogue": "This place looks creepy and very unpleasant...",
+          "speaker": "robot",
+          "nextFrame": "inception3_08"
+        },
+        "inception3_08": {
+          "id": "inception3_08",
+          "dialogue": "Oh, look! There’s a staircase ahead!",
+          "speaker": "vicky",
+          "nextFrame": "inception3_09",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception3_09": {
+          "id": "inception3_09",
+          "dialogue": "Be careful, miss! Some steps have traps!",
+          "speaker": "robot",
+          "nextFrame": "inception3_10"
+        },
+        "inception3_10": {
+          "id": "inception3_10",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task2"
+              }
+            }
+          ]
+        },
+        "inception3_failTask2_01": {
+          "id": "inception3_failTask2_01",
+          "dialogue": "Oh no, I have to think again...",
+          "speaker": "vicky",
+          "nextFrame": "inception3_10",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "adjustGlasses"
+              }
+            }
+          ]
+        },
+        "inception3_11": {
+          "id": "inception3_11",
+          "dialogue": "Okay, we got past this trap...",
+          "speaker": "vicky",
+          "nextFrame": "inception3_12",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_12": {
+          "id": "inception3_12",
+          "dialogue": "Careful, miss! There is another here.",
+          "speaker": "robot",
+          "nextFrame": "inception3_13"
+        },
+        "inception3_13": {
+          "id": "inception3_13",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task3"
+              }
+            }
+          ]
+        },
+        "inception3_failTask3_01": {
+          "id": "inception3_failTask3_01",
+          "dialogue": "Oh no... Time to try again.",
+          "speaker": "vicky",
+          "nextFrame": "inception3_13",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "adjustGlasses"
+              }
+            }
+          ]
+        },
+        "inception3_14": {
+          "id": "inception3_14",
+          "dialogue": "So, If I remember the plans correctly, it will be easy to get to the study room from here.",
+          "speaker": "vicky",
+          "nextFrame": "inception3_15",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception3_15": {
+          "id": "inception3_15",
+          "dialogue": "",
+          "nextFrame": "inception4",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception4"
+              }
+            }
+          ]
+        }
+      },
+      "inception4": {
+        "inception4_start": {
+          "id": "inception4_start",
+          "location": "grimBackEntrance",
+          "characters": [
+            {
+              "id": "vicky",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "think",
+              "position": "right"
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Whoa! Look at this massive door! It looks like it's made of titanium. And again, it opens with a code...",
+          "nextFrame": "inception4_01"
+        },
+        "inception4_01": {
+          "id": "inception4_01",
+          "dialogue": "You’ve already completed two tasks, miss! You can do it!",
+          "speaker": "robot",
+          "nextFrame": "inception4_02"
+        },
+        "inception4_02": {
+          "id": "inception4_02",
+          "dialogue": "I have no doubt! Wait! Do you hear that?!",
+          "speaker": "vicky",
+          "nextFrame": "inception4_03"
+        },
+        "inception4_03": {
+          "id": "inception4_03",
+          "dialogue": "There's definitely someone behind the door!",
+          "speaker": "robot",
+          "nextFrame": "inception4_04"
+        },
+        "inception4_04": {
+          "id": "inception4_04",
+          "dialogue": "What if it’s Mitnik?! Do you have a weapon?",
+          "speaker": "vicky",
+          "nextFrame": "inception4_05"
+        },
+        "inception4_05": {
+          "id": "inception4_05",
+          "dialogue": "No, miss! I cannot harm a human!",
+          "speaker": "robot",
+          "nextFrame": "inception4_06",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception4_06": {
+          "id": "inception4_06",
+          "dialogue": "People are different, and some could really use a little harm. I’ll grab my knife. It’s better than nothing! Let’s try to catch Mitnik off guard!",
+          "speaker": "vicky",
+          "nextFrame": "inception4_07"
+        },
+        "inception4_07": {
+          "id": "inception4_07",
+          "dialogue": "I don’t think that’s a very good idea, miss! If I were you, I’d be more cautious! I’m scared!",
+          "speaker": "robot",
+          "nextFrame": "inception4_08"
+        },
+        "inception4_08": {
+          "id": "inception4_08",
+          "dialogue": "The scariest thing will happen if we don't finish all tasks within six hours! Then humanity is doomed!",
+          "speaker": "vicky",
+          "nextFrame": "inception4_09"
+        },
+        "inception4_09": {
+          "id": "inception4_09",
+          "dialogue": "Yes, let’s move on to the next task!",
+          "speaker": "robot",
+          "nextFrame": "inception4_10"
+        },
+        "inception4_10": {
+          "id": "inception4_10",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task4"
+              }
+            }
+          ]
+        },
+        "inception4_failTask4_01": {
+          "id": "inception4_failTask4_01",
+          "dialogue": "Be careful, miss! Or else we won't be able to unlock the door.",
+          "nextFrame": "inception4_10"
+        },
+        "inception4_11": {
+          "id": "inception4_11",
+          "dialogue": "Okay miss, the door is unlocked, now we can proceed to the study room.",
+          "speaker": "robot",
+          "nextFrame": "inception4_12"
+        }
+      }
+    },
+    "endings": {
+      "gameOver": {
+        "id": "gameOver",
+        "condition": {
+          "healthEquals": 0
+        },
+        "startFrame": "gameOver_1",
+        "frames": {
+          "gameOver_1": {
+            "id": "gameOver_1",
+            "location": "vickyRoom",
+            "characters": [
+              {
+                "id": "vicky",
+                "pose": "adjustGlasses"
+              }
+            ],
+            "dialogue": "I shouldn't have wasted all my tries..."
+          }
+        }
+      }
+    }
+  }
+}
