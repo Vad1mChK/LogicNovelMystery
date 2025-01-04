@@ -99,7 +99,7 @@
         "`X`"
       ],
       "correctAnswerIndex": 0,
-      "nextFrameOnSuccess": "inception2_14",
+      "nextFrameOnSuccess": "inception2_24",
       "nextFrameOnFailure": "inception2_failTask1_01",
       "failureScorePenalty": 1
     },
@@ -114,7 +114,7 @@
         "`X`"
       ],
       "correctAnswerIndex": 1,
-      "nextFrameOnSuccess": "inception3_12",
+      "nextFrameOnSuccess": "inception3_21",
       "nextFrameOnFailure": "inception3_failTask2_01",
       "failureScorePenalty": 1
     },
@@ -129,7 +129,7 @@
         "Ни один"
       ],
       "correctAnswerIndex": 0,
-      "nextFrameOnSuccess": "inception4_08",
+      "nextFrameOnSuccess": "inception4_18",
       "nextFrameOnFailure": "inception4_failTask3_01",
       "failureScorePenalty": 1
     },
@@ -145,33 +145,22 @@
       ],
       "correctAnswerIndex": 3,
       "hint": "Вспомни про встроенные конструкции",
-      "nextFrameOnSuccess": "inception5_21",
+      "nextFrameOnSuccess": "inception5_25",
       "nextFrameOnFailure": "inception5_failTask4_01",
       "failureScorePenalty": 1
     },
     "task5": {
       "id": "task5",
       "type": "WRITE_KNOWLEDGE",
-      "questionText": "Даны знания: ```character(steve).\ncharacter(mitnik).\ndevelop(mitnik, virus).```Напишите правило `involved(X)`, чтобы проверить, связан ли `mitnik` с делом (т. е. разрабатывал ли он вирус).",
+      "questionText": "Допиши запрос, чтобы ответ был: Х = virus.",
       "knowledge": [
-        "character(steve).",
-        "character(mitnik).",
-        "develop(mitnik, virus)."
+        "steal(sara, mitnik).",
+        "work(sara, fbi).",
+        "destroy(mitnik, virus)." ,
+        "find(Target) :- steal(sara, mitnik), destroy(mitnik, Target)."
       ],
-      "testCases": [
-        {
-          "input": "involved(Who).",
-          "expectedResults": [
-            {
-              "variables": {
-                "Who": "mitnik"
-              }
-            }
-          ]
-        }
-      ],
-      "defaultValue": "involved(X) :-",
-      "nextFrameOnSuccess": "inception6_14",
+      "defaultValue": "find(X)",
+      "nextFrameOnSuccess": "inception6_18",
       "nextFrameOnFailure": "inception6_failTask5_01",
       "failureScorePenalty": 2
     },
@@ -207,7 +196,7 @@
           ]
         }
       ],
-      "nextFrameOnSuccess": "inception7_13",
+      "nextFrameOnSuccess": "inception7_18",
       "nextFrameOnFailure": "inception7_failTask6_01",
       "defaultValue": "second_friends(X, Y) :- \n",
       "failureScorePenalty": 2
@@ -528,12 +517,72 @@
         },
         "inception2_12": {
           "id": "inception2_12",
-          "dialogue": "Давайте приступим!",
+          "dialogue": "Давайте приступим! У меня есть планшет, с помощью него вы можете узнать подробнее о языке Prolog. Он может помочь проходить вам задания.",
           "speaker": "robot",
           "nextFrame": "inception2_13"
         },
         "inception2_13": {
           "id": "inception2_13",
+          "dialogue": "Очень полезная вещь. Дайка мне его...Посмотрим, что тут у нас...",
+          "speaker": "professor",
+          "nextFrame": "inception2_14"
+        },
+         "inception2_14": {
+          "id": "inception2_14",
+          "dialogue": "Теоретической основой Prolog является раздел символьной логики, называемый исчислением предикатов. ",
+          "speaker": "professor",
+          "nextFrame": "inception2_15"
+        },
+        "inception2_15": {
+          "id": "inception2_15",
+          "dialogue": "Предикат — это логическая функция, которая выражает некоторое отношение между своими аргументами и принимает значение \"истина\", если это отношение имеется, или \"ложь\", если оно отсутствует. ",
+          "speaker": "professor",
+          "nextFrame": "inception2_16"
+        },
+          "inception2_16": {
+          "id": "inception2_16",
+          "dialogue": "В языке Prolog разные символы имеют свои специфические значения, которые используются для обозначения фактов, переменных, предикатов и других элементов синтаксиса. ",
+          "speaker": "professor",
+          "nextFrame": "inception2_17"
+        },
+          "inception2_17": {
+          "id": "inception2_17",
+          "dialogue": "Точка используется для завершения предложения. Это обязательный символ, который указывает, что запись завершена. человек(профессор). Факт: Профессор - это человек",
+          "speaker": "professor",
+          "nextFrame": "inception2_18"
+        },
+          "inception2_18": {
+          "id": "inception2_18",
+          "dialogue": "Подчёркивание (_) используется для обозначения анонимной переменной. Такая переменная может принимать любое значение, но её значение не используется. Анонимные переменные не связываются с каким-либо значением и не участвуют в последующих вычислениях.",
+          "speaker": "professor",
+          "nextFrame": "inception2_19"
+        },
+        "inception2_19": {
+          "id": "inception2_19",
+          "dialogue": "Тире (-) используется как часть различных конструкций. В правилах для обозначения разделителя между условием и заключением (:-).",
+          "speaker": "professor",
+          "nextFrame": "inception2_20"
+        },
+         "inception2_20": {
+          "id": "inception2_20",
+          "dialogue": "Переменная в Прологе обозначается именем, начинающимся с заглавной буквы или подчёркивания. Переменные используются для хранения значений во время вычислений. ",
+          "speaker": "professor",
+          "nextFrame": "inception2_21"
+        },
+         "inception2_21": {
+          "id": "inception2_21",
+          "dialogue": "Переменные могут связываться с разными значениями в процессе подстановки. ?- человек(X).  % Найти значение X, которое делает утверждение истинным.",
+          "speaker": "professor",
+          "nextFrame": "inception2_22"
+        },
+        "inception2_22": {
+          "id": "inception2_22",
+          "dialogue": "Столько полезной информации для себя узнал, чтож попробуем пройти задание...",
+          "speaker": "professor",
+          "nextFrame": "inception2_23"
+        },
+        "inception2_23": {
+          "id": "inception2_23",
           "dialogue": "",
           "effects": [
             {
@@ -547,15 +596,15 @@
         "inception2_failTask1_01": {
           "id": "inception2_failTask1_01",
           "dialogue": "Будьте внимательнее, профессор!",
-          "nextFrame": "inception2_13"
+          "nextFrame": "inception2_23"
         },
-        "inception2_14": {
-          "id": "inception2_13",
+        "inception2_24": {
+          "id": "inception2_24",
           "dialogue": "Хорошо, профессор. Мы успешно открыли замок и можем пройти внутрь.",
-          "nextFrame": "inception2_15"
+          "nextFrame": "inception2_25"
         },
-        "inception2_15": {
-          "id": "inception2_13",
+        "inception2_25": {
+          "id": "inception2_25",
           "dialogue": "",
           "effects": [
             {
@@ -650,8 +699,62 @@
         },
         "inception3_11": {
           "id": "inception3_11",
+          "dialogue": "Я не боюсь! У меня есть планшет, посмотрим в него...",
+          "speaker": "professor",
+          "nextFrame": "inception3_12"
+        },
+        "inception3_12": {
+          "id": "inception3_12",
+          "dialogue": "Понятие переменной в логическом программировании отличается от принятого в традиционных языках программирования. В частности, переменная не рассматривается как выделенный участок памяти, которому присвоено имя. ",
+          "speaker": "professor",
+          "nextFrame": "inception3_13"
+        },
+        "inception3_13": {
+          "id": "inception3_13",
+          "dialogue": "В программе переменная обозначается последовательностью символов, которая начинается с прописной буквы. ",
+          "speaker": "professor",
+          "nextFrame": "inception3_14"
+        },
+        "inception3_14": {
+          "id": "inception3_14",
+          "dialogue": "Переменная обозначает неопределённый (но единственный объект) и служит для обозначения объекта, на который нельзя сослаться по имени. Переменная может быть свободной, связанной и анонимной. ",
+          "speaker": "professor",
+          "nextFrame": "inception3_15"
+        },
+        "inception3_15": {
+          "id": "inception3_15",
+          "dialogue": "Свободная переменная – это переменная, значение которой не известно. Связанная переменная – это переменная, получившая значение в процессе логического вывода. ",
+          "speaker": "professor",
+          "nextFrame": "inception3_16"
+        },
+        "inception3_16": {
+          "id": "inception3_16",
+          "dialogue": "Процесс получения значения переменной называется конкретизацией. Анонимная переменная – это переменная, используемая для игнорирования значения, в котором нет нужды. ",
+          "speaker": "professor",
+          "nextFrame": "inception3_17"
+        },
+         "inception3_17": {
+          "id": "inception3_17",
+          "dialogue": "Анонимная переменная может использоваться вместо любой другой переменной. Она соответствует чему-нибудь.",
+          "speaker": "professor",
+          "nextFrame": "inception3_18"
+        },
+        "inception3_18": {
+          "id": "inception3_18",
+          "dialogue": "Анонимная переменная никогда не будет связываться с конкретным значением. В программе такая переменная обозначается символом подчѐркивания (_).",
+          "speaker": "professor",
+          "nextFrame": "inception3_19"
+        },
+        "inception3_19": {
+          "id": "inception3_19",
+          "dialogue": "Как интересно! Чтож попробуем решить задание.",
+          "speaker": "professor",
+          "nextFrame": "inception3_20"
+        },
+        "inception3_20": {
+          "id": "inception3_20",
           "dialogue": "",
-          "nextFrame": "inception3_12",
+          "nextFrame": "inception3_21",
           "effects": [
             {
               "type": "START_TASK",
@@ -665,16 +768,16 @@
           "id": "inception3_failTask2_01",
           "dialogue": "Аккуратнее, профессор! Я же говорил: задания -- это ловушки.",
           "speaker": "robot",
-          "nextFrame": "inception3_11"
+          "nextFrame": "inception3_20"
         },
-        "inception3_12": {
-          "id": "inception3_12",
+        "inception3_21": {
+          "id": "inception3_21",
           "dialogue": "Хорошо, давайте продолжим путь, профессор.",
           "speaker": "robot",
-          "nextFrame": "inception3_13"
+          "nextFrame": "inception3_22"
         },
-        "inception3_13": {
-          "id": "inception3_13",
+        "inception3_22": {
+          "id": "inception3_22",
           "dialogue": "",
           "nextFrame": "inception4",
           "effects": [
@@ -752,6 +855,54 @@
         },
         "inception4_07": {
           "id": "inception4_07",
+          "dialogue": "Пролог является декларативным языком. Программист задаѐт необходимые факты и правила, а Пролог использует дедуктивный вывод для решения задачи.",
+          "speaker": "professor",
+          "nextFrame": "inception4_08"
+        },
+        "inception4_08": {
+          "id": "inception4_08",
+          "dialogue": "Программист имеет возможность заниматься непосредственно задачей, а не поиском способа разделения еѐ решения на небольшие шаги.",
+          "speaker": "professor",
+          "nextFrame": "inception4_09"
+        },
+         "inception4_09": {
+          "id": "inception4_09",
+          "dialogue": "Факт – это утверждение, которое всегда является истинным без всякого условия. В фактах используются только объекты–константы. ",
+          "speaker": "professor",
+          "nextFrame": "inception4_10"
+        },
+         "inception4_10": {
+          "id": "inception4_10",
+          "dialogue": "Правило – это утверждение, истинность которого доказывается в зависимости от заданного условия. ",
+          "speaker": "professor",
+          "nextFrame": "inception4_11"
+        },
+        "inception4_11": {
+          "id": "inception4_11",
+          "dialogue": "Правило позволяет выводить один элемент информации из другого благодаря наличию в нѐм переменных. ",
+          "speaker": "professor",
+          "nextFrame": "inception4_12"
+        },
+        "inception4_12": {
+          "id": "inception4_12",
+          "dialogue": "Правило успешно, только если достижимы заданные в теле правила цели, иначе правило терпит неудачу. Цель – это утверждение, которое задают как вопрос относительно фактов и правил. ",
+          "speaker": "professor",
+          "nextFrame": "inception4_13"
+        },
+        "inception4_13": {
+          "id": "inception4_13",
+          "dialogue": "Пример запроса: даны факты likes(professor, book). , likes(vikky ,  dad). Запишем запрос: ?- likes(X,  book)., где значение для X, чтобы правило или факт совпадали. Ответ: X = professor",
+          "speaker": "professor",
+          "nextFrame": "inception4_14"
+        },
+        "inception4_14": {
+          "id": "inception4_14",
+          "dialogue": "Столько новой информации для себя открыл, теперь перейду к заданию...",
+          "speaker": "professor",
+          "nextFrame": "inception4_15"
+        },
+        "inception4_15": {
+          "id": "inception4_15",
           "dialogue": "",
           "effects": [
             {
@@ -765,15 +916,15 @@
         "inception4_failTask3_01": {
           "id": "inception4_failTask3_01",
           "dialogue": "Похоже, придётся попробовать снова.",
-          "nextFrame": "inception4_07"
+          "nextFrame": "inception4_15"
         },
-        "inception4_08": {
-          "id": "inception4_08",
+        "inception4_16": {
+          "id": "inception4_16",
           "dialogue": "Хорошо, теперь мы можем войти в комнату.",
-          "nextFrame": "inception4_09"
+          "nextFrame": "inception4_17"
         },
-        "inception4_09": {
-          "id": "inception4_09",
+        "inception4_17": {
+          "id": "inception4_17",
           "dialogue": "",
           "nextFrame": "inception4",
           "effects": [
@@ -929,8 +1080,32 @@
           "speaker": "vicky",
           "nextFrame": "inception5_20"
         },
-        "inception5_20": {
+         "inception5_20": {
           "id": "inception5_20",
+          "dialogue": "Узел содержит данные и ссылку (указатель, связку) на один или два соседних узла. Списки языка Prolog являются односвязными, т.е. каждый узел содержит лишь одну ссылку.",
+          "speaker": "vicky",
+          "nextFrame": "inception5_21"
+        },
+         "inception5_21": {
+          "id": "inception5_21",
+          "dialogue": "Для работы со списками существуют встроенные функции, рассмотрим некоторые из них: sum_list(List, Sum) — вычисление суммы элементов списка , member(Elem, List) — выполняет поиск значения в списке. Завершается удачей если элемент найден.",
+          "speaker": "vicky",
+          "nextFrame": "inception5_22"
+        },
+        "inception5_22": {
+          "id": "inception5_22",
+          "dialogue": "reverse(List, ReverseList) — функция переворота списка, length(List, Length) — вычисляет длину списка, append(List1, List2, List1AndList2)— функция объединения двух списков и delete(InputList, Elem, ResultList) — функция удаления всех элементов с заданным значением из списка.",
+          "speaker": "vicky",
+          "nextFrame": "inception5_23"
+        },
+        "inception5_23": {
+          "id": "inception5_23",
+          "dialogue": "Легкотня!",
+          "speaker": "vicky",
+          "nextFrame": "inception5_24"
+        },
+        "inception5_24": {
+          "id": "inception5_24",
           "dialogue": "",
           "effects": [
             {
@@ -945,16 +1120,16 @@
           "id": "inception5_failTask4_01",
           "dialogue": "Так... Надо попробовать ещё раз...",
           "speaker": "vicky",
-          "nextFrame": "inception5_20"
+          "nextFrame": "inception5_24"
         },
-        "inception5_21": {
-          "id": "inception5_21",
+        "inception5_25": {
+          "id": "inception5_25",
           "dialogue": "Отлично, ловушка деактивирована!",
           "speaker": "vicky",
-          "nextFrame": "inception5_22"
+          "nextFrame": "inception5_26"
         },
-        "inception5_22": {
-          "id": "inception5_22",
+        "inception5_26": {
+          "id": "inception5_26",
           "dialogue": "",
           "effects": [
             {
@@ -1093,8 +1268,32 @@
           "speaker": "sarah",
           "nextFrame": "inception6_14"
         },
+         "inception6_13": {
+          "id": "inception6_13",
+          "dialogue": "Рассмотрим пример, когда факты связаны условным отношением с другими уже известными фактами, в таком случае они могут называться правилами: likes(professor, X):- likes(vicky, X). /* Профессор любит все, что любит Викки */",
+          "speaker": "professor",
+          "nextFrame": "inception6_14"
+        },
         "inception6_14": {
           "id": "inception6_14",
+          "dialogue": "likes(professor, X) является заголовком правила. likes(vicky, X) является телом правила или его хвостовой целью. Чтобы правило стало истинным, необходимо чтобы его хвостовая цель/цели была/были истинными.",
+          "speaker": "professor",
+          "nextFrame": "inception6_15"
+        },
+        "inception6_15": {
+          "id": "inception6_15",
+          "dialogue": "Символ :- имеет смысл «если», и служит для разделения двух частей правила: заголовка и тела. Можно вместо него использовать if.",
+          "speaker": "professor",
+          "nextFrame": "inception6_16"
+        },
+        "inception6_16": {
+          "id": "inception6_16",
+          "dialogue": "Теперь мы знаем теорию, сейчас освободим вас.",
+          "speaker": "professor",
+          "nextFrame": "inception6_17"
+        },
+        "inception6_17": {
+          "id": "inception6_17",
           "dialogue": "",
           "effects": [
             {
@@ -1108,16 +1307,16 @@
         "inception6_failTask5_01": {
           "id": "inception6_failTask5_01",
           "dialogue": "Не нервничайте, профессор. Попробуйте снова.",
-          "nextFrame": "inception6_14"
+          "nextFrame": "inception6_17"
         },
-        "inception6_15": {
-          "id": "inception6_15",
+        "inception6_18": {
+          "id": "inception6_18",
           "dialogue": "Так, хорошо. Теперь время добраться до компьютерной комнаты.",
           "speaker": "professor",
-          "nextFrame": "inception6_16"
+          "nextFrame": "inception6_19"
         },
-        "inception6_16": {
-          "id": "inception6_16",
+        "inception6_19": {
+          "id": "inception6_19",
           "dialogue": "",
           "effects": [
             {
@@ -1227,8 +1426,38 @@
             }
           ]
         },
-        "inception7_12": {
+         "inception7_12": {
           "id": "inception7_12",
+          "dialogue": "Когда в ходе резолюции цели Пролог встречает не факт, а правило, то вначале унифицирует заголовок правила, т.е. сравнивает связанные переменные и присваивает значения свободным переменным. ",
+          "speaker": "vicky",
+          "nextFrame": "inception7_13"
+        },
+         "inception7_13": {
+          "id": "inception7_13",
+          "dialogue": "В случае успешной унификации аргументов Пролог подставляет значения аргументов из заголовка в первый предикат в теле правила и ставит этот предикат себе в качестве подцели, которую начинает унифицировать с базой знаний. ",
+          "speaker": "vicky",
+          "nextFrame": "inception7_14"
+        },
+         "inception7_14": {
+          "id": "inception7_14",
+          "dialogue": "В случае успешной резолюции данной подцели Пролог переходит к следующему условию правила. Если унификация этого предиката условия приводит к неудаче, то Пролог выполняет откат к предыдущему условию правила. ",
+          "speaker": "vicky",
+          "nextFrame": "inception7_15"
+        },
+        "inception7_15": {
+          "id": "inception7_15",
+          "dialogue": "Этот откат происходит только в том случае, если этот предыдущий предикат является неоднозначным. Поясним это на примере. Зададимся целью найти, кто является родителем Викки:parent (Who, Vicky)",
+          "speaker": "vicky",
+          "nextFrame": "inception7_16"
+        },
+        "inception7_16": {
+          "id": "inception7_16",
+          "dialogue": "Переменная Who в предикате цели является свободной переменной. Мы могли бы использовать X вместо Who, и это были бы разные переменные, которые бы унифицировались точно так же.",
+          "speaker": "vicky",
+          "nextFrame": "inception7_17"
+        },
+        "inception7_17": {
+          "id": "inception7_17",
           "dialogue": "",
           "effects": [
             {
@@ -1242,16 +1471,16 @@
         "inception7_failTask6_01": {
           "id": "inception7_failTask6_01",
           "dialogue": "Попробуйте ещё раз, профессор!",
-          "nextFrame": "inception7_12"
+          "nextFrame": "inception7_17"
         },
-        "inception7_13": {
-          "id": "inception7_13",
+        "inception7_18": {
+          "id": "inception7_18",
           "dialogue": "...Интересно. По-видимому, это работает.",
           "speaker": "professor",
-          "nextFrame": "inception7_14"
+          "nextFrame": "inception7_19"
         },
-        "inception7_14": {
-          "id": "inception7_14",
+        "inception7_19": {
+          "id": "inception7_19",
           "dialogue": ""
         }
       }
