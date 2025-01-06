@@ -420,7 +420,7 @@
     "Копье",
     "Магический жезл"
   ],
-  "correctAnswerIndices": 3,  // Индекс правильного варианта (начиная с 0)
+  "correctAnswerIndex": 3,  // Индекс правильного варианта (начиная с 0)
   "hint": "Драконы уязвимы к магии.",
   "nextFrameOnSuccess": "frame_weapon_success",
   "nextFrameOnFailure": "frame_weapon_failure",
