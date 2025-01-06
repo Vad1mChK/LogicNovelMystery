@@ -54,9 +54,6 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	const [_, setTaskOpen] = useState(false);
 
 	const dispatch = useDispatch();
-	const knowledge = useSelector(
-		(state: RootState) => state.gameState.knowledge
-	);
 	const health = useSelector((state: RootState) => state.gameState.health);
 	const currentFrameId = useSelector(
 		(state: RootState) => state.gameState.currentFrameId
@@ -318,7 +315,6 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 			onNextFrame={handleNextFrame}
 			onGiveUp={giveUp}
 			onTaskSubmit={handleTaskSubmit}
-			knowledge={knowledge}
 			plot={plot}
 		/>
 	) : (

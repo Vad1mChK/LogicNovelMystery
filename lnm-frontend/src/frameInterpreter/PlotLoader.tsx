@@ -15,7 +15,6 @@ import {
 	LnmFrameCondition,
 	LnmFrameEffect,
 	LnmFrameEffectType,
-	LnmKnowledge,
 	LnmLocation,
 	LnmMetadata,
 	LnmMusic,
@@ -144,7 +143,6 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 			convertAndCreateTask(taskData, signal),
 		])
 	);
-	const knowledge = objectToMap<LnmKnowledge>(plotObject.knowledge);
 
 	return {
 		metadata,
@@ -158,7 +156,6 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 			endings: framesEndings,
 		},
 		tasks,
-		knowledge,
 	};
 }
 
