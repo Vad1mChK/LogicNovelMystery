@@ -17,7 +17,6 @@ export type EffectHandler = (
 		setCurrentCharacters: React.Dispatch<
 			React.SetStateAction<LnmFrameCharacterData[] | null>
 		>;
-		addKnowledge: (knowledgeId: string) => void;
 		decreaseHealth: (amount: number | 'kill') => void;
 		increaseHealth: (amount: number | 'full') => void;
 		openTaskWindow: (task: LnmTask) => void;
@@ -111,15 +110,6 @@ export const effectHandlers: Partial<
 				c.id === args.characterId ? { ...c, hidden: true } : c
 			);
 		});
-	},
-
-	[LnmFrameEffectType.OPEN_KNOWLEDGE]: (effect, { addKnowledge }) => {
-		const args =
-			effect.args as LnmEffectArgsMap[LnmFrameEffectType.OPEN_KNOWLEDGE];
-		console.log('Processing OPEN_KNOWLEDGE effect:', args);
-		if (args.knowledgeId) {
-			addKnowledge(args.knowledgeId);
-		}
 	},
 
 	[LnmFrameEffectType.DECREASE_HEALTH]: (effect, { decreaseHealth }) => {
