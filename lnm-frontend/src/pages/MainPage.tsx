@@ -176,8 +176,8 @@ const MainMenu: React.FC = () => {
 							value={i18n.language} // Устанавливаем текущее значение языка
 							onChange={(e) => changeLanguage(e.target.value)} // Слушаем изменения
 						>
-							<option value="ru">{t('Russian')}</option>
-							<option value="en">{t('English')}</option>
+							<option value="ru_RU">{t('Russian')}</option>
+							<option value="en_US">{t('English')}</option>
 						</select>
 					</div>
 					<button className="modal-button" onClick={closeAllModals}>
