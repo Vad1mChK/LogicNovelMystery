@@ -2,10 +2,10 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 i18n.use(initReactI18next).init({
-	fallbackLng: 'en_US',
-	lng: 'en_US',
+	fallbackLng: 'en',
+	lng: 'en',
 	resources: {
-		en_US: {
+		en: {
 			translation: {
 				'Start game': 'Start game',
 				Settings: 'Settings',
@@ -86,7 +86,7 @@ i18n.use(initReactI18next).init({
 				},
 			},
 		},
-		ru_RU: {
+		ru: {
 			translation: {
 				'Start game': 'Начать игру',
 				Settings: 'Настройки',
