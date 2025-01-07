@@ -18,7 +18,7 @@ const GamePage: React.FC = () => {
 		(state: RootState) => state.languageState.currentLanguage
 	);
 
-	const plotUrl = `${import.meta.env.BASE_URL}assets/plot/double_game_vicky_${storedLanguage}.json`;
+	const plotUrl = `${import.meta.env.BASE_URL}assets/plot/single_game_${storedLanguage}.json`;
 	console.log(plotUrl);
 	const storedCurrentChapter = useSelector(
 		(state: RootState) => state.gameState.currentChapterId
