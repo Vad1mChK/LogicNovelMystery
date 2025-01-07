@@ -15,14 +15,12 @@ body {
 	overflow: hidden;
 }
 
-.frame-renderer .game-knowledge-window {
-	backdrop-filter: blur(10px); /* Для Safari */
+.frame-renderer .game-knowledge-window { /* Для Safari */
 	backdrop-filter: blur(10px); /* Для других браузеров */
 	background-color: rgb(
 		255
 		255
-		255 /
-		50%
+		255 / 50%
 	); /* Полупрозрачный фон для поддержки */
 }
 
@@ -40,7 +38,7 @@ body {
 }
 
 .content-container {
-	background-color: #fff; /* Белый фон */
+	background-color: #ffffff; /* Белый фон */
 	padding: 40px; /* Отступы */
 	border-radius: 10px; /* Скругленные углы */
 	box-shadow: 0 4px 10px rgb(0 0 0 / 30%); /* Тень */
@@ -57,7 +55,7 @@ body {
 h1 {
 	font-size: 28px;
 	margin: 0;
-	color: #000;
+	color: #000000;
 	font-family: 'JetBrains Mono', monospace;
 }
 
@@ -67,7 +65,7 @@ p {
 	display: flex; /* Flexbox для текста и счёта */
 	justify-content: space-between; /* Распределение по краям */
 	width: 100%; /* Полная ширина */
-	color: #000;
+	color: #000000;
 	font-family: 'JetBrains Mono', monospace;
 }
 
@@ -75,7 +73,7 @@ p {
 	padding: 12px 25px;
 	background-color: #1a237e;
 	border: none;
-	color: #fff;
+	color: #ffffff;
 	font-size: 18px;
 	cursor: pointer;
 	border-radius: 5px;
