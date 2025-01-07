@@ -345,9 +345,7 @@ function convertAndCreateTask(taskObject: any, signal?: AbortSignal): LnmTask {
 			const testCases = testCasesObject.map((testCase: any) => ({
 				input: testCase.input,
 				expectedResults: testCase.expectedResults.map(
-					(result: any) => ({
-						variables: result.variables,
-					})
+					(result: any) => result.variables
 				),
 			}));
 			return {
@@ -367,9 +365,7 @@ function convertAndCreateTask(taskObject: any, signal?: AbortSignal): LnmTask {
 			const { knowledge, defaultValue } = taskObject;
 			const expectedResultsObject = taskObject.expectedResults;
 			const expectedResults = expectedResultsObject.map(
-				(result: any) => ({
-					variables: result.variables,
-				})
+				(result: any) => result.variables
 			);
 
 			return {
