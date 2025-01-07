@@ -9,12 +9,7 @@ import {
 	_convertAndCreatePlot,
 	_convertAndCreateTask,
 } from './PlotLoader';
-import {
-	LnmEffectArgsMap,
-	LnmFrameEffectType,
-	LnmKnowledgeType,
-	LnmTaskType,
-} from './types';
+import { LnmEffectArgsMap, LnmFrameEffectType, LnmTaskType } from './types';
 
 describe('Test plot loading', () => {
 	test('condition object should be converted to condition correctly', () => {
@@ -186,12 +181,6 @@ describe('Test plot loading', () => {
 		expect(plot.chapters).toBeInstanceOf(Map);
 		expect(plot.tasks.size).not.toBe(0);
 		expect(plot.tasks.get('task1')?.type).toBe(LnmTaskType.SELECT_ONE);
-		expect(plot.knowledge.get('village_mystery')?.type).not.toBe(
-			LnmKnowledgeType.RULE
-		);
-		expect(plot.knowledge.get('village_mystery')?.content).toBe(
-			'holds(village, secrets).'
-		);
 	});
 	test('ending should be created correctly', () => {
 		const endingObject = {

@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // Define the shape of your game state
 export interface GameState {
 	health: number;
-	knowledge: string[]; // Example: List of known facts
 	currentChapterId: string;
 	currentFrameId: string;
 	errorSum: number;
@@ -13,7 +12,6 @@ export interface GameState {
 // Define the initial state
 const initialState: GameState = {
 	health: 100,
-	knowledge: [],
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
 	errorSum: 0,
@@ -52,15 +50,6 @@ const gameStateSlice = createSlice({
 				state.health = Math.max(0, state.health - action.payload);
 			}
 		},
-		addKnowledge(state, action: PayloadAction<string>) {
-			state.knowledge.push(action.payload);
-		},
-		clearKnowledge(state) {
-			state.knowledge = [];
-		},
-		setKnowledge(state, action: PayloadAction<string[]>) {
-			state.knowledge = [...action.payload];
-		},
 		setCurrentChapter(state, action: PayloadAction<string>) {
 			state.currentChapterId = action.payload;
 		},
@@ -87,9 +76,6 @@ const gameStateSlice = createSlice({
 export const {
 	increaseHealth,
 	decreaseHealth,
-	addKnowledge,
-	clearKnowledge,
-	setKnowledge,
 	setCurrentChapter,
 	setCurrentFrame,
 	incrementErrorSum,

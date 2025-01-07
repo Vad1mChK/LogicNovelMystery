@@ -1,9 +1,6 @@
 import gameStateReducer, {
 	increaseHealth,
 	decreaseHealth,
-	addKnowledge,
-	clearKnowledge,
-	setKnowledge,
 	setCurrentChapter,
 	setCurrentFrame,
 	incrementErrorSum,
@@ -15,7 +12,6 @@ import gameStateReducer, {
 // Initial state for testing
 const initialState = {
 	health: 100,
-	knowledge: [],
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
 	errorSum: 0,
@@ -68,30 +64,6 @@ describe('gameStateSlice', () => {
 			decreaseHealth(20)
 		);
 		expect(state.health).toBe(30);
-	});
-
-	// Test addKnowledge
-	it('should add a new knowledge item to the state', () => {
-		const state = gameStateReducer(initialState, addKnowledge('fact1'));
-		expect(state.knowledge).toContain('fact1');
-	});
-
-	// Test clearKnowledge
-	it('should clear all knowledge items', () => {
-		const state = gameStateReducer(
-			{ ...initialState, knowledge: ['fact1', 'fact2'] },
-			clearKnowledge()
-		);
-		expect(state.knowledge).toEqual([]);
-	});
-
-	// Test setKnowledge
-	it('should set knowledge to a new array', () => {
-		const state = gameStateReducer(
-			initialState,
-			setKnowledge(['fact1', 'fact2'])
-		);
-		expect(state.knowledge).toEqual(['fact1', 'fact2']);
 	});
 
 	// Test setCurrentChapter

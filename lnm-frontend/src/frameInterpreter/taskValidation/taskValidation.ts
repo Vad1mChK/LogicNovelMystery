@@ -92,9 +92,7 @@ const validateCompleteQuery = async (
 				knowledge: task.knowledge,
 				sessionToken: localStorage.getItem('sessionToken') || '',
 				query: userInput,
-				expectedResults: task.expectedResults.map(
-					(entry) => entry.variables
-				),
+				expectedResults: task.expectedResults,
 			},
 			{
 				timeout: API_TIMEOUT,

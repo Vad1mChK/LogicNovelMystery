@@ -13,9 +13,6 @@ import { effectHandlers } from './effectHandlers';
 import { RootState } from '../state/store';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	clearKnowledge,
-	setKnowledge,
-	addKnowledge,
 	decreaseHealth,
 	increaseHealth,
 	setCurrentFrame,
@@ -54,9 +51,6 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	const [_, setTaskOpen] = useState(false);
 
 	const dispatch = useDispatch();
-	const knowledge = useSelector(
-		(state: RootState) => state.gameState.knowledge
-	);
 	const health = useSelector((state: RootState) => state.gameState.health);
 	const currentFrameId = useSelector(
 		(state: RootState) => state.gameState.currentFrameId
@@ -101,11 +95,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	useEffect(() => {
 		console.log(`Load from initial chapter: ${initialChapterId}`);
 		// Load knowledge for the initial chapter
-		const initialChapter = plot.chapters.get(initialChapterId);
-		if (initialChapter) {
-			dispatch(clearKnowledge());
-			dispatch(setKnowledge(initialChapter.knowledge));
-		}
+		// const initialChapter = plot.chapters.get(initialChapterId);
 	}, [initialChapterId, plot, dispatch]);
 
 	useEffect(() => {
@@ -174,8 +164,6 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 							setCurrentEndingId,
 							setIsEnding,
 							setCurrentCharacters,
-							addKnowledge: (knowledgeId: string) =>
-								dispatch(addKnowledge(knowledgeId)),
 							plot,
 							decreaseHealth: (amount: number | 'kill') =>
 								dispatch(decreaseHealth(amount)),
@@ -318,7 +306,6 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 			onNextFrame={handleNextFrame}
 			onGiveUp={giveUp}
 			onTaskSubmit={handleTaskSubmit}
-			knowledge={knowledge}
 			plot={plot}
 		/>
 	) : (
