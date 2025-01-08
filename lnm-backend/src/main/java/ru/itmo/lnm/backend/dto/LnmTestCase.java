@@ -7,6 +7,6 @@ import java.util.Map;
 
 @Data
 public class LnmTestCase {
-    private String query;
+    private String input;
     private List<Map<String, String>> expectedResults;
 }
