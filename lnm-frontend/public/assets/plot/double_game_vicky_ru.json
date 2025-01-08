@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "name": "pair_game",
+    "gamemode": "pair",
+    "protagonist": "vicky",
+    "author": "Vad1mChK, LizOchkaaaa",
+    "version": "1.0",
+    "locale": "ru_RU"
+  },
+  "characters": {
+    "professor": {
+      "id": "professor",
+      "name": "Профессор",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/professor/professor_idle.webp",
+        "hold": "assets/img/characters/professor/professor_hold_cane.webp"
+      }
+    },
+    "director": {
+      "id": "director",
+      "name": "Директор",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/director/idle.webp",
+        "phone": "assets/img/characters/director/phone.webp"
+      }
+    },
+    "vicky": {
+      "id": "vicky",
+      "name": "Викки",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/sprites/vicky_idle.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Робот",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp",
+        "think": "assets/img/characters/robot/think.webp",
+        "angry": "assets/img/characters/robot/angry.webp"
+      }
+    },
+    "anonymous": {
+      "id": "anonymous",
+      "name": "???",
+      "defaultPose": "angry",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp"
+      }
+    },
+    "sarah": {
+      "id": "sarah",
+      "name": "Сара",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/sarah/idle.webp",
+        "hostage": "assets/img/characters/sarah/hostage.webp"
+      }
+    }
+  },
+  "locations": {
+    "vickyRoom": {
+      "id": "vickyRoom",
+      "name": "Комната Викки",
+      "background": "asserts/img/locations/VickyRoom.webp"
+    },
+    "mansionEntrance": {
+      "id": "backDoor",
+      "name": "Задний двор особняка",
+      "background": "assets/img/locations/BackdoorWithScreen.webp"
+    },
+    "grandHall": {
+      "id": "grandHall",
+      "name": "Холл",
+      "background": "assets/img/locations/GrimBackEntrance.webp"
+    },
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Кабинет",
+      "background": "assets/img/locations/StudyRoom.webp"
+    },
+    "computerRoom": {
+      "id": "computerRoom",
+      "name": "Комната с компьютером",
+      "background": "assets/img/locations/ComputerRoom.webp"
+    }
+  },
+  "music": {},
+  "startChapter": "inception1",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "Начало, Глава 1",
+      "startFrame": "inception1_start",
+      "knowledge": []
+    }
+  },
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "location": "vickyRoom",
+          "characters": [{
+            "id": "vicky",
+            "hidden": false,
+            "position": "center"
+          },
+            {
+              "id": "director",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "hidden": true
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Есть! Хах... Ну и кто же из нас умнее? Не такая уж и страшная защита стоит у ФБР...",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "dialogue": "Так.., что у нас тут... Ого... Значит они хотят обратиться за помощью к моему отцу.",
+          "speaker": "vicky",
+          "nextFrame": "inception1_03"
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "Группа хакеров во главе с Кевином Митником создала вирус, который способен стереть все данные с памяти компьютера, внести сбой в работу всемирной сети, распространяется он через обычное сообщение.",
+          "speaker": "vicky",
+          "nextFrame": "inception1_04"
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "Сегодня ночью был взломан компьютер специалиста по информационной безопасности Сары Паркер, с него были украдены файлы и этот вирус был запущен в сеть. ",
+          "speaker": "vicky",
+          "nextFrame": "inception1_05"
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "Для создания антивируса осталось меньше 20 часов. Если не создать антивирус на языке 'Prolog', то начнётся всемирный хаос.",
+          "speaker": "vicky",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "Будет и падение самолётов, и сход космических кораблей с орбит. Сара Паркер была похищена накануне вечером из собственного дома. Её местонахождение ФБР пока неизвестно.",
+          "speaker": "vicky",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "Но они смогли установить местонахождение того самого компьютера, в который нужно ввести антивирус. В заброшенном особняке повсюду стоят ловушки опасные для жизни, чтобы их обезопасить нужно ввести верный код…",
+          "speaker": "vicky",
+          "nextFrame": "inception1_08"
+        },
+        "inception1_08": {
+          "id": "inception1_08",
+          "dialogue": "Ну и дела... Я уверена, что справлюсь быстрее моего отца... Ну-ка.. Посмотрим куда они направились....",
+          "speaker": "vicky",
+          "nextFrame": "inception1_09"
+        },
+        "inception1_09": {
+          "id": "inception1_09",
+          "dialogue": "Угу, они пойдут к главному входу... Так, сейчас узнаем, есть ли там запасной вход. Ага, имеется… Ну все, я зайду через него и тогда, посмотрим кто быстрее справится с заданием и спасет мир!",
+          "speaker": "vicky",
+          "nextFrame": "inception1_10"
+        },
+        "inception1_10": {
+          "id": "inception1_10",
+          "dialogue": "Ну чтож вперёд! Времени осталось мало. Я должна успеть добраться раньше моего отца. ",
+          "speaker": "vicky",
+          "nextFrame": "inception1_11"
+        },
+        "inception1_11": {
+          "id": "inception1_11",
+          "dialogue": "Только сначала мне нужно такси... Ало, здравствуйте! Мне срочно нужна машина по адресу...",
+          "speaker": "director",
+          "nextFrame": "inception1_12"
+        },
+        "inception1_12": {
+          "id": "inception1_12",
+          "dialogue": "",
+          "nextFrame": "inception2",
+          "effects": [{
+            "type": "JUMP_CHAPTER",
+            "args": {
+              "chapterId": "inception2"
+            }
+          }]
+        }
+      }
+    },
+    "endings": {
+      "gameOver": {
+        "id": "gameOver",
+        "condition": {
+          "healthEquals": 0
+        },
+        "startFrame": "gameOver_1",
+        "frames": {
+          "gameOver_1": {
+            "id": "gameOver_1",
+            "location": "mansion",
+            "characters": [{
+              "id": "professor",
+              "pose": "holdNotebook",
+              "position": "left",
+              "hidden": true
+            }],
+            "speaker": "professor",
+            "dialogue": "Чёрт возьми... Не надо было растрачивать все попытки."
+          }
+        }
+      },
+      "demoEnding": {
+        "id": "demoEnding",
+        "title": "Конец ознакомительного фрагмента",
+        "startFrame": "demoEnding_1",
+        "frames": {
+          "demoEnding_1": {
+            "id": "demoEnding_1",
+            "location": "mansionEntrance",
+            "characters": [{
+              "id": "steve",
+              "pose": "holdNotebook",
+              "position": "left",
+              "hidden": true
+            },
+              {
+                "id": "robot",
+                "pose": "angry",
+                "position": "center"
+              }
+            ],
+            "speaker": "robot",
+            "dialogue": "Конец ознакомительного фрагмента.",
+            "nextFrame": "demoEnding_2"
+          },
+          "demoEnding_2": {
+            "id": "demoEnding_2",
+            "dialogue": "Чтобы поиграть в полную версию, купите её за $42,069.",
+            "nextFrame": "demoEnding_3"
+          },
+          "demoEnding_3": {
+            "id": "demoEnding_3",
+            "speaker": "steve",
+            "dialogue": "Что?",
+            "nextFrame": null
+          }
+        }
+      }
+    }
+  },
+  "tasks": {
+    "task0": {
+      "id": "task0",
+      "type": "SELECT_ONE",
+      "questionText": "Как обозначается завершение предложения в Прологе?",
+      "options": [
+        "`.`",
+        "`_`",
+        "`-`",
+        "`X`"
+      ],
+      "correctAnswerIndices": 0,
+      "nextFrameOnSuccess": "inception2_23",
+      "nextFrameOnFailure": "inception2_failTask0_01",
+      "failureScorePenalty": 1
+    },
+    "task1": {
+      "id": "task1",
+      "type": "SELECT_ONE",
+      "questionText": "Когда значение переменной не важно, и мы хотим указать, что любая подходящая информация на её месте подходит, что нам необходимо прописать?",
+      "options": [
+        "`.`",
+        "`_`",
+        "`-`",
+        "`X`"
+      ],
+      "correctAnswerIndices": 1,
+      "nextFrameOnSuccess": "inception3_20",
+      "nextFrameOnFailure": "inception3_failTask3_01",
+      "failureScorePenalty": 1
+    },
+    "task2": {
+      "id": "task2",
+      "type": "SELECT_ONE",
+      "questionText": "Даны следующие факты: `character(professor).`\n`character(vicky).` \n`character(metnik).`. Какой запрос вернет всех героев?",
+      "options": [
+        "`character(X).`",
+        "`character(профессор, vicky, metnik).`",
+        "`character(_).`",
+        "`character(X, Y).`"
+      ],
+      "correctAnswerIndices": 0,
+      "nextFrameOnSuccess": "inception4_14",
+      "nextFrameOnFailure": "inception4_failTask4_01",
+      "failureScorePenalty": 1
+    },
+    "task3": {
+      "id": "task3",
+      "type": "SELECT_ONE",
+      "questionText": "Как проверить, содержится ли элемент 3 в списке `[1, 2, 3, 4]`?",
+      "options": [
+        "`contains(3, [1, 2, 3, 4])`",
+        "`exists(3, [1, 2, 3, 4])`",
+        "`in_list(3, [1, 2, 3, 4]`",
+        "`member(3, [1, 2, 3, 4])`"
+      ],
+      "correctAnswerIndices": 3,
+      "hint": "Вспомни про встроенные конструкции",
+      "nextFrameOnSuccess": "elaboration2_30",
+      "nextFrameOnFailure": "elaboration2_failTask2_01",
+      "failureScorePenalty": 1
+    }
+  },
+  "knowledge": {
+    "iAmSteve": {
+      "id": "iAmSteve",
+      "type": "fact",
+      "content": "fbi_agent(steve).",
+      "description": "Стив -- агент ФБР."
+    },
+    "mySuperior": {
+      "id": "mySuperior",
+      "type": "fact",
+      "content": "superior(director, steve).",
+      "description": "Директор ФБР -- руководитель Стива."
+    },
+    "ifAssistedKevinThenCreatedVirus": {
+      "id": "ifAssistedKevinThenHacked",
+      "type": "rule",
+      "content": "creates(X, virus) :-\n\t(assists(X, kevin); X = kevin),\n\thacker(X).",
+      "description": "Кэвин и все хакеры, помогавшие ему, участвовали в создании вируса."
+    }
+  }
+}
