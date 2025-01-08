@@ -10,12 +10,11 @@ export interface LnmPlot {
 		endings: Map<string, LnmEnding>;
 	};
 	tasks: Map<string, LnmTask>;
-	knowledge: Map<string, LnmKnowledge>;
 }
 
 export interface LnmMetadata {
 	name: string;
-	gamemode: 'single' | 'pair';
+	gamemode: 'single' | 'double';
 	protagonist: string;
 	author: string;
 	version: string;
@@ -251,15 +250,3 @@ export type LnmTask =
 	| LnmCompleteQueryTask
 	| LnmSelectOneTask
 	| LnmSelectManyTask;
-
-export enum LnmKnowledgeType {
-	FACT = 'fact',
-	RULE = 'rule',
-}
-
-export interface LnmKnowledge {
-	id: string;
-	type: LnmKnowledgeType;
-	content: string;
-	description?: string;
-}

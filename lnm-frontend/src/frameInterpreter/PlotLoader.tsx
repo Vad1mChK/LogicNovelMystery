@@ -15,7 +15,6 @@ import {
 	LnmFrameCondition,
 	LnmFrameEffect,
 	LnmFrameEffectType,
-	LnmKnowledge,
 	LnmLocation,
 	LnmMetadata,
 	LnmMusic,
@@ -144,7 +143,6 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 			convertAndCreateTask(taskData, signal),
 		])
 	);
-	const knowledge = objectToMap<LnmKnowledge>(plotObject.knowledge);
 
 	return {
 		metadata,
@@ -158,7 +156,6 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 			endings: framesEndings,
 		},
 		tasks,
-		knowledge,
 	};
 }
 
@@ -348,9 +345,7 @@ function convertAndCreateTask(taskObject: any, signal?: AbortSignal): LnmTask {
 			const testCases = testCasesObject.map((testCase: any) => ({
 				input: testCase.input,
 				expectedResults: testCase.expectedResults.map(
-					(result: any) => ({
-						variables: result.variables,
-					})
+					(result: any) => result.variables
 				),
 			}));
 			return {
@@ -370,9 +365,7 @@ function convertAndCreateTask(taskObject: any, signal?: AbortSignal): LnmTask {
 			const { knowledge, defaultValue } = taskObject;
 			const expectedResultsObject = taskObject.expectedResults;
 			const expectedResults = expectedResultsObject.map(
-				(result: any) => ({
-					variables: result.variables,
-				})
+				(result: any) => result.variables
 			);
 
 			return {

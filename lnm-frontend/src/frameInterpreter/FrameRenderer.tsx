@@ -1,5 +1,5 @@
 // FrameRenderer.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	LnmFrame,
 	LnmFrameCharacterData,
@@ -12,7 +12,6 @@ import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import KnowledgeWindow from './KnowledgeWindow.tsx';
 import HealthBar from './HealthBar.tsx';
 import TaskWindow from './TaskWindow';
 import { t } from 'i18next';
@@ -26,7 +25,6 @@ interface FrameRendererProps {
 	currentSpeaker: string | null;
 	currentLocation: LnmLocation | null;
 	currentTask: LnmTask | null;
-	knowledge: string[];
 	onNextFrame: (nextFrameId: string) => void;
 	onGiveUp: () => void;
 	onTaskSubmit: (result: boolean) => void;
@@ -40,7 +38,6 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 	currentSpeaker,
 	currentLocation,
 	currentTask,
-	knowledge,
 	onNextFrame,
 	onGiveUp,
 	onTaskSubmit,
@@ -49,12 +46,7 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 	const handleChoiceSelect = (nextFrameId: string) => {
 		onNextFrame(nextFrameId);
 	};
-	const [isKnowledgeOpen, setKnowledgeOpen] = useState(false);
 	const health = useSelector((state: RootState) => state.gameState.health);
-
-	const knowledgeDetails = knowledge
-		.map((id) => plot.knowledge.get(id))
-		.filter((knw) => !!knw);
 
 	return (
 		<div>
@@ -105,12 +97,6 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 						</button>
 					)}
 					<div className="top-button-bar">
-						<button
-							className="game-button"
-							onClick={() => setKnowledgeOpen(true)}
-						>
-							{t('game.knowledgeButton')}
-						</button>
 						{!isEnding && (
 							<button
 								className="game-button give-up-button"
@@ -126,13 +112,6 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 							{t('game.homeButton')}
 						</button>
 					</div>
-
-					{isKnowledgeOpen && (
-						<KnowledgeWindow
-							knowledge={knowledgeDetails}
-							onClose={() => setKnowledgeOpen(false)}
-						/>
-					)}
 				</>
 			)}
 			{currentTask && (
