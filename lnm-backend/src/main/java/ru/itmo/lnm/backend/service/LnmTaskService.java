@@ -66,7 +66,7 @@ public class LnmTaskService {
         int currentTask = session.getCurrentTask();
         boolean success = true;
         for (LnmTestCase testCase : request.getTestCases()) {
-            List<Map<String, String>> actualResults = prologService.executeProlog(request.getKnowledge(), testCase.getQuery());
+            List<Map<String, String>> actualResults = prologService.executeProlog(request.getKnowledge(), testCase.getInput());
             success = validateResults( actualResults, testCase.getExpectedResults());
             if (!success){
                 currentScore += ScoreService.scoreSolution(currentTask, 2);
@@ -98,7 +98,7 @@ public class LnmTaskService {
         List<Map<String, String>> sortedActualResults = actualResults.stream()
                 .sorted((map1, map2) -> map1.toString().compareTo(map2.toString())).toList();
 
-        // Посрочно сравниваем элементы списков
+        // Построчно сравниваем элементы списков
         for (int i = 0; i < sortedResults.size(); i++) {
             Map<String, String> map1 = sortedResults.get(i);
             Map<String, String> map2 = sortedActualResults.get(i);
