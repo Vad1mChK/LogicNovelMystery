@@ -3,9 +3,7 @@ package ru.itmo.lnm.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.itmo.lnm.backend.dto.LnmCompleteQueryDto;
-import ru.itmo.lnm.backend.dto.LnmTestCase;
-import ru.itmo.lnm.backend.dto.LnmWriteKnowledgeDto;
+import ru.itmo.lnm.backend.dto.*;
 import ru.itmo.lnm.backend.messages.*;
 import ru.itmo.lnm.backend.model.Session;
 import ru.itmo.lnm.backend.model.User;
@@ -25,6 +23,9 @@ public class LnmTaskService {
 
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
+    private final int COMPLETE_TASK = 0;
+    private final int ERROR_TASK = 19;
+    private final int UPDATE_HP = 10;
 
     @Autowired
     public LnmTaskService(SessionRepository sessionRepository,
@@ -46,12 +47,13 @@ public class LnmTaskService {
             session.setCurrentScore(currentScore);
         }
         else {
-            session.setUserHp(session.getUserHp() - 10);
+            session.setUserHp(session.getUserHp() - UPDATE_HP);
             if (session.getUserHp() <= 0){
                 session.setGameStatus(false);
             }
-           sessionRepository.save(session);
+
         }
+        sessionRepository.save(session);
         return LnmTaskResponse.builder()
                 .isCorrect(success)
                 .score(currentScore)
@@ -59,7 +61,6 @@ public class LnmTaskService {
     }
 
     public LnmTaskResponse processWriteKnowledgeTask(LnmWriteKnowledgeDto request, String username) {
-        List<LnmTestCaseResult> testCaseResults = new ArrayList<>();
         User user = userRepository.findByUsername(username);
         Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
         int currentScore = session.getCurrentScore();
@@ -69,12 +70,75 @@ public class LnmTaskService {
             List<Map<String, String>> actualResults = prologService.executeProlog(request.getKnowledge(), testCase.getInput());
             success = validateResults( actualResults, testCase.getExpectedResults());
             if (!success){
-                currentScore += ScoreService.scoreSolution(currentTask, 2);
-                session.setCurrentTask(session.getCurrentTask() + 1);
-                session.setCurrentScore(currentScore);
+                currentScore -= ScoreService.scoreSolution(currentTask, ERROR_TASK);
+                session.setUserHp(session.getUserHp() - UPDATE_HP);
+                if (session.getUserHp() <= 0){
+                    session.setGameStatus(false);
+                }
                 break;
             }
         }
+        if (success) {
+            currentScore += ScoreService.scoreSolution(currentTask, COMPLETE_TASK);
+            session.setCurrentTask(session.getCurrentTask() + 1);
+        }
+        session.setCurrentScore(currentScore);
+        sessionRepository.save(session);
+        return LnmTaskResponse.builder()
+                .isCorrect(success)
+                .score(currentScore)
+                .build();
+    }
+
+    public LnmTaskResponse processSelectOneTask(LnmSelectOneDto request, String username) {
+        User user = userRepository.findByUsername(username);
+        Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
+        int currentScore = session.getCurrentScore();
+        int currentTask = session.getCurrentTask();
+        boolean success = request.getActualChoice() == request.getExpectedChoice();
+        if (success){
+            currentScore += ScoreService.scoreSolution(currentTask, COMPLETE_TASK);
+            session.setCurrentTask(currentTask + 1);
+
+        }
+        else {
+            currentScore -= ScoreService.scoreSolution(currentTask, ERROR_TASK);
+            session.setUserHp(session.getUserHp() - UPDATE_HP);
+            if (session.getUserHp() <= 0){
+                session.setGameStatus(false);
+            }
+        }
+        session.setCurrentScore(currentScore);
+        sessionRepository.save(session);
+
+        return LnmTaskResponse.builder()
+                .isCorrect(success)
+                .score(currentScore)
+                .build();
+    }
+
+    public LnmTaskResponse processSelectManyTask(LnmSelectManyDto request, String username) {
+        User user = userRepository.findByUsername(username);
+        Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
+        int currentScore = session.getCurrentScore();
+        int currentTask = session.getCurrentTask();
+        List<Integer> actualResults = request.getActualChoices().stream().sorted().toList();
+        List<Integer> expectedResults = request.getExpectedChoices().stream().sorted().toList();
+        boolean success = actualResults.equals(expectedResults);
+        if (success){
+            currentScore += ScoreService.scoreSolution(currentTask, COMPLETE_TASK);
+            session.setCurrentTask(currentTask + 1);
+
+        }
+        else {
+            currentScore -= ScoreService.scoreSolution(currentTask, ERROR_TASK);
+            session.setUserHp(session.getUserHp() - UPDATE_HP);
+            if (session.getUserHp() <= 0){
+                session.setGameStatus(false);
+            }
+        }
+        session.setCurrentScore(currentScore);
+        sessionRepository.save(session);
 
         return LnmTaskResponse.builder()
                 .isCorrect(success)
@@ -110,5 +174,6 @@ public class LnmTaskService {
 
         return true;
     }
+
 
 }

@@ -14,7 +14,6 @@ public interface LeaderBoardRepository extends JpaRepository<LeaderBoard, UUID> 
 
     @Query("SELECT lb FROM LeaderBoard lb " +
             "WHERE lb.score = (SELECT MAX(lb2.score) FROM LeaderBoard lb2 " +
-            "WHERE lb2.sessionToken = lb.sessionToken AND lb2.gameMode = :gameMode) " +
-            "AND lb.gameMode = :gameMode")
+            "WHERE lb2.sessionToken = lb.sessionToken AND lb2.gameMode = :gameMode) ")
     List<LeaderBoard> findBestScoresForEachSessionToken(@Param("gameMode") boolean gameMode);
 }
