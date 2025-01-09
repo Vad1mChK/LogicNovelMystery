@@ -21,23 +21,76 @@ export const validateTask = async (
 	}
 };
 
-// Static validation for SELECT_ONE
-const validateSelectOne = (task: LnmTask, userInput: number): boolean => {
+const validateSelectOne = async (
+	task: LnmTask,
+	userInput: number
+): Promise<boolean> => {
 	if (task.type !== LnmTaskType.SELECT_ONE) {
 		return false;
 	}
-	return task.correctAnswerIndex === userInput;
+	try {
+		const response = await axios.post(
+			'http://localhost:8080/task/select-one',
+			{
+				taskId: task.id,
+				taskType: task.type,
+				actualChoice: userInput,
+				expectedChoice: task.correctAnswerIndex,
+				sessionToken: localStorage.getItem('sessionToken') || '',
+			},
+			{
+				timeout: API_TIMEOUT,
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: localStorage.getItem('AuthToken'),
+				},
+			}
+		);
+		return response.data.correct;
+	} catch (error) {
+		console.error('Error validating SELECT_MANY task:', error);
+		return false;
+	}
+	// Static validation without exchange with backend
+	// return task.correctAnswerIndex === userInput;
 };
 
-// Static validation for SELECT_MANY
-const validateSelectMany = (task: LnmTask, userInput: number[]): boolean => {
+const validateSelectMany = async (
+	task: LnmTask,
+	userInput: number[]
+): Promise<boolean> => {
 	if (task.type !== LnmTaskType.SELECT_MANY) {
 		return false;
 	}
-	return (
-		JSON.stringify(task.correctAnswerIndices.sort()) ===
-		JSON.stringify(userInput.sort())
-	);
+	try {
+		const response = await axios.post(
+			'http://localhost:8080/task/select-many',
+			{
+				taskId: task.id,
+				taskType: task.type,
+				actualChoices: userInput,
+				expectedChoices: task.correctAnswerIndices,
+				sessionToken: localStorage.getItem('sessionToken') || '',
+			},
+			{
+				timeout: API_TIMEOUT,
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: localStorage.getItem('AuthToken'),
+				},
+			}
+		);
+		return response.data.correct;
+	} catch (error) {
+		console.error('Error validating SELECT_MANY task:', error);
+		return false;
+	}
+
+	// Static validation without exchange with backend
+	// return (
+	// 	JSON.stringify(task.correctAnswerIndices.sort()) ===
+	// 	JSON.stringify(userInput.sort())
+	// );
 };
 
 // Dynamic validation for WRITE_KNOWLEDGE
@@ -64,7 +117,7 @@ const validateWriteKnowledge = async (
 					'Content-Type': 'application/json',
 					Authorization: localStorage.getItem('AuthToken'),
 				},
-			} // Set timeout inline
+			}
 		);
 		return response.data.correct;
 	} catch (error) {
@@ -100,7 +153,7 @@ const validateCompleteQuery = async (
 					'Content-Type': 'application/json',
 					Authorization: localStorage.getItem('AuthToken'),
 				},
-			} // Set timeout inline
+			}
 		);
 		return response.data.correct;
 	} catch (error) {
