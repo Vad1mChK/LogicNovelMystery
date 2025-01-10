@@ -83,6 +83,20 @@ i18n.use(initReactI18next).init({
 							toggle: 'Toggle hint',
 						},
 					},
+					resultScreen: {
+						result: {
+							SINGLE_BAD: 'You lost...',
+							SINGLE_GOOD: 'You won!',
+							DOUBLE_BAD: 'You both lost...',
+							DOUBLE_AVERAGE: 'You did part of the mission.',
+							DOUBLE_GOOD: 'You both won!',
+						},
+						yourPartner: 'Your partner:',
+						yourScore: 'Your score:',
+						yourHighScore: 'Your high score:',
+						newHighScore: 'New high score!',
+						toMain: 'Quit to Main',
+					}
 				},
 			},
 		},
@@ -165,6 +179,20 @@ i18n.use(initReactI18next).init({
 							toggle: 'Показать/скрыть',
 						},
 					},
+					resultScreen: {
+						result: {
+							SINGLE_BAD: 'Ты проиграл.',
+							SINGLE_GOOD: 'Ты выиграл!',
+							DOUBLE_BAD: 'Вы оба проиграли...',
+							DOUBLE_AVERAGE: 'Вы выполнили часть миссии.',
+							DOUBLE_GOOD: 'Вы оба победили!',
+						},
+						yourPartner: 'Твой партнёр:',
+						yourScore: 'Твой счёт:',
+						yourHighScore: 'Твой рекорд:',
+						newHighScore: 'Новый рекорд!',
+						toMain: 'На главную'
+					}
 				},
 			},
 		},

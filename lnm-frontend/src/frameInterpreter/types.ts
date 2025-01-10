@@ -52,7 +52,6 @@ export interface LnmChapter {
 	startFrame: string;
 	nextChapter: string;
 	waitForPartner?: boolean; // Default: false
-	knowledge: string[];
 }
 
 export const LNM_CHAPTER_DEFAULTS: Pick<LnmChapter, 'waitForPartner'> = {
