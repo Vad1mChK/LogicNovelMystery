@@ -1,7 +1,8 @@
 import React from 'react';
-import { LnmResult } from './types.ts';
+import { LnmResult } from './types';
 import { t } from 'i18next';
 import '../css/ResultsScreen.scss';
+import { BASE_URL } from '../metaEnv';
 
 interface ResultsScreenProps {
 	result: LnmResult;
@@ -30,7 +31,7 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
 		<div className="results-screen">
 			<div className="results-background">
 				<img
-					src={`${import.meta.env.BASE_URL}${resultImages[result]}`}
+					src={`${BASE_URL}${resultImages[result]}`}
 					alt={t(`game.resultScreen.result.${result}`)}
 				/>
 			</div>
@@ -52,7 +53,7 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
 							<b>{t('game.resultScreen.newHighScore')}</b>
 						) : (
 							<>
-								<b>{t('game.resultScreen.yourHighScore')}</b>
+								<b>{t('game.resultScreen.yourHighScore')} </b>
 								{highScore}
 							</>
 						))}
