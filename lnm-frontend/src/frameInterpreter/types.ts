@@ -250,3 +250,11 @@ export type LnmTask =
 	| LnmCompleteQueryTask
 	| LnmSelectOneTask
 	| LnmSelectManyTask;
+
+export enum LnmResult {
+	SINGLE_BAD = 'SINGLE_BAD',
+	SINGLE_GOOD = 'SINGLE_GOOD',
+	DOUBLE_BAD = 'DOUBLE_BAD',
+	DOUBLE_AVERAGE = 'DOUBLE_AVERAGE',
+	DOUBLE_GOOD = 'DOUBLE_GOOD',
+}
