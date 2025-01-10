@@ -5,67 +5,73 @@ import HealthBar from './HealthBar';
 jest.mock('../css/HealthBar.scss', () => ({}));
 
 describe('HealthBar Component', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
 
-  it('renders the health bar with correct width and tooltip', () => {
-    const currentHealth = 50;
-    const maxHealth = 100;
+	it('renders the health bar with correct width and tooltip', () => {
+		const currentHealth = 50;
+		const maxHealth = 100;
 
-    render(<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} />);
-    screen.debug();
+		render(
+			<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} />
+		);
+		screen.debug();
 
-    // Select the health bar fill element
-    const healthBarFill = screen.getByTestId('health-bar-fill');
+		// Select the health bar fill element
+		const healthBarFill = screen.getByTestId('health-bar-fill');
 
-    // Assert the width of the health bar fill is correct
-    expect(healthBarFill).toHaveStyle({ width: '50%' });
-  });
+		// Assert the width of the health bar fill is correct
+		expect(healthBarFill).toHaveStyle({ width: '50%' });
+	});
 
-  it('clamps health percentage at 100% when currentHealth exceeds maxHealth', () => {
-    const currentHealth = 120;
-    const maxHealth = 100;
+	it('clamps health percentage at 100% when currentHealth exceeds maxHealth', () => {
+		const currentHealth = 120;
+		const maxHealth = 100;
 
-    render(<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} />);
+		render(
+			<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} />
+		);
 
-    const healthBarFill = screen.getByTestId('health-bar-fill');
+		const healthBarFill = screen.getByTestId('health-bar-fill');
 
-    // Assert the width of the health bar fill is 100%
-    expect(healthBarFill).toHaveStyle({ width: '100%' });
-  });
+		// Assert the width of the health bar fill is 100%
+		expect(healthBarFill).toHaveStyle({ width: '100%' });
+	});
 
-  it('clamps health percentage at 0% when currentHealth is less than 0', () => {
-    const currentHealth = -10;
-    const maxHealth = 100;
+	it('clamps health percentage at 0% when currentHealth is less than 0', () => {
+		const currentHealth = -10;
+		const maxHealth = 100;
 
-    render(<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} />);
+		render(
+			<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} />
+		);
 
-    const healthBarFill = screen.getByTestId('health-bar-fill');
+		const healthBarFill = screen.getByTestId('health-bar-fill');
 
-    // Assert the width of the health bar fill is 0%
-    expect(healthBarFill).toHaveStyle({ width: '0%' });
-  });
+		// Assert the width of the health bar fill is 0%
+		expect(healthBarFill).toHaveStyle({ width: '0%' });
+	});
 
-  it('applies the correct class based on health percentage', () => {
-    const { rerender } = render(
-      <HealthBar currentHealth={80} maxHealth={100} />
-    );
+	it('applies the correct class based on health percentage', () => {
+		const { rerender } = render(
+			<HealthBar currentHealth={80} maxHealth={100} />
+		);
 
-    // Assert high health applies the correct class
-    let healthBarFill = screen.getByTestId('health-bar-fill');
-    expect(healthBarFill).toHaveClass('health-high');
+		// Assert high health applies the correct class
+		let healthBarFill = screen.getByTestId('health-bar-fill');
+		expect(healthBarFill).toHaveClass('health-high');
 
-    rerender(<HealthBar currentHealth={50} maxHealth={100} />);
-    healthBarFill = screen.getByTestId('health-bar-fill');
+		rerender(<HealthBar currentHealth={50} maxHealth={100} />);
+		healthBarFill = screen.getByTestId('health-bar-fill');
 
-    // Assert medium health applies the correct class
-    expect(healthBarFill).toHaveClass('health-medium');
+		// Assert medium health applies the correct class
+		expect(healthBarFill).toHaveClass('health-medium');
 
-    rerender(<HealthBar currentHealth={20} maxHealth={100} />);
-    healthBarFill = screen.getByTestId('health-bar-fill');
+		rerender(<HealthBar currentHealth={20} maxHealth={100} />);
+		healthBarFill = screen.getByTestId('health-bar-fill');
 
-    // Assert low health applies the correct class
-    expect(healthBarFill).toHaveClass('health-low');
-  });
+		// Assert low health applies the correct class
+		expect(healthBarFill).toHaveClass('health-low');
+	});
 });
