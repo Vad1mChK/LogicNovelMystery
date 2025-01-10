@@ -6,7 +6,10 @@ module.exports = {
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
     },
-    testMatch: ['**/?(*.)+(test).(js|ts)'],
+    testMatch: ['**/?(*.)+(test).(js|ts|jsx|tsx)'],
+    moduleNameMapper: {
+        "\\.(css|scss)$": "identity-obj-proxy"
+    },
 
     // Собираем покрытие тестами
     collectCoverage: false,

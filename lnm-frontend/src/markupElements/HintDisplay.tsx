@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/HintDisplay.scss';
 import { IconButton, Tooltip } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import TextSyntaxHighlighter from './TextSyntaxHighlighter.tsx';
+import TextSyntaxHighlighter from './TextSyntaxHighlighter';
 import { t } from 'i18next';
 
 interface HintDisplayProps {

@@ -119,6 +119,7 @@ export enum LnmFrameEffectType {
 	START_TASK = 'START_TASK',
 	OPEN_KNOWLEDGE = 'OPEN_KNOWLEDGE',
 	ENDING = 'ENDING',
+	RESULTS = 'RESULTS',
 }
 
 // Individual type of effect args
@@ -169,6 +170,7 @@ export type LnmEffectArgsMap = {
 	[LnmFrameEffectType.ENDING]: {
 		endingId: string;
 	};
+	[LnmFrameEffectType.RESULTS]: object;
 	// Add additional effect mappings as needed
 };
 
