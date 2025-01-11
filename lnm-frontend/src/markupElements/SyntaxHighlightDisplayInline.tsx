@@ -20,7 +20,8 @@ const SyntaxHighlightDisplayInline: React.FC<
 	useEffect(() => {
 		// Dynamically load Prolog syntax highlighting if not already loaded
 		if (!Prism.languages.prolog) {
-			// @ts-expect-error prism-prolog has an any type
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
 			import('prismjs/components/prism-prolog').catch((err) =>
 				console.error('Failed to load Prolog language syntax:', err)
 			);
@@ -49,14 +50,21 @@ const SyntaxHighlightDisplayInline: React.FC<
 	};
 
 	return (
-		<span className="syntax-highlight display-inline">
+		<span
+			className="syntax-highlight display-inline"
+			data-testid="syntax-highlight-inline"
+		>
 			<code
 				className="syntax-highlight-display-inline-code"
 				dangerouslySetInnerHTML={{ __html: highlightedContent }}
+				data-testid="syntax-highlight-display-inline-code"
 			/>
 			{copyable && (
 				<Tooltip title={t('game.taskWindow.syntaxHighlight.copy')}>
-					<IconButton onClick={copyCode}>
+					<IconButton
+						onClick={copyCode}
+						data-testid="syntax-highlight-copy-button"
+					>
 						<CopyIcon className="syntax-highlight-icon-button" />
 					</IconButton>
 				</Tooltip>
