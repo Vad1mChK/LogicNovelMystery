@@ -1,0 +1,66 @@
+@use 'colors';
+@use 'sass:color';
+@use 'sass:math';
+
+.results-screen {
+	.results-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		z-index: -2;
+
+		img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: auto; /* Default: stretch width */
+			height: 100%;
+
+			@media (aspect-ratio >= 16/9) {
+				/* Wider aspect ratios */
+				height: auto;
+				width: 100%;
+			}
+		}
+	}
+
+	.results-bar {
+		position: absolute;
+		left: calc((1 + math.sqrt(5)) / 2 - 1) * 100%;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 30%;
+		min-height: 50%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+		padding: 32px;
+		border-radius: 32px;
+		background-color: color.adjust(colors.$BLACK, $alpha: -0.25);
+
+		h1 {
+			text-align: center;
+		}
+
+		button {
+			transition: 0.3s ease-in-out;
+			padding: 16px;
+			border-radius: 16px;
+			border: none;
+			font-weight: bold;
+			background-color: colors.$BLUE;
+			color: inherit;
+			font-size: inherit;
+
+			&:hover {
+				background-color: colors.$DARK-AZUR;
+			}
+		}
+	}
+}

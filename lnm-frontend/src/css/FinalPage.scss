@@ -15,12 +15,11 @@ body {
 	overflow: hidden;
 }
 
-.frame-renderer .game-knowledge-window { /* Для Safari */
+.frame-renderer .game-knowledge-window {
+	/* Для Safari */
 	backdrop-filter: blur(10px); /* Для других браузеров */
 	background-color: rgb(
-		255
-		255
-		255 / 50%
+		255 255 255 / 50%
 	); /* Полупрозрачный фон для поддержки */
 }
 

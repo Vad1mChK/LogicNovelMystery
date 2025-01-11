@@ -1,6 +1,7 @@
 // CharacterSprite.tsx
 import React from 'react';
 import { LnmCharacter, LnmFrameCharacterData } from './types';
+import { BASE_URL } from '../metaEnv';
 
 interface CharacterSpriteProps {
 	character: LnmCharacter;
@@ -13,7 +14,7 @@ const CharacterSprite: React.FC<CharacterSpriteProps> = ({
 	isSpeaker,
 	characterData,
 }) => {
-	const spriteUrl = `${import.meta.env.BASE_URL}${
+	const spriteUrl = `${BASE_URL}${
 		character.sprites.get(
 			characterData.pose || character.defaultPose || ''
 		) || ''

@@ -1,6 +1,7 @@
 // LocationBackground.tsx
 import React from 'react';
 import { LnmLocation } from './types';
+import { BASE_URL } from '../metaEnv';
 
 interface LocationBackgroundProps {
 	location: LnmLocation;
@@ -11,7 +12,7 @@ const LocationBackground: React.FC<LocationBackgroundProps> = ({
 }) => (
 	<div className="game-background">
 		<img
-			src={`${import.meta.env.BASE_URL}${location.background || ''}`}
+			src={`${BASE_URL}${location.background || ''}`}
 			alt={location.name}
 			title={location.name}
 		/>

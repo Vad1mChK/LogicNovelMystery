@@ -52,7 +52,6 @@ export interface LnmChapter {
 	startFrame: string;
 	nextChapter: string;
 	waitForPartner?: boolean; // Default: false
-	knowledge: string[];
 }
 
 export const LNM_CHAPTER_DEFAULTS: Pick<LnmChapter, 'waitForPartner'> = {
@@ -120,6 +119,7 @@ export enum LnmFrameEffectType {
 	START_TASK = 'START_TASK',
 	OPEN_KNOWLEDGE = 'OPEN_KNOWLEDGE',
 	ENDING = 'ENDING',
+	RESULTS = 'RESULTS',
 }
 
 // Individual type of effect args
@@ -170,6 +170,7 @@ export type LnmEffectArgsMap = {
 	[LnmFrameEffectType.ENDING]: {
 		endingId: string;
 	};
+	[LnmFrameEffectType.RESULTS]: object;
 	// Add additional effect mappings as needed
 };
 
@@ -250,3 +251,11 @@ export type LnmTask =
 	| LnmCompleteQueryTask
 	| LnmSelectOneTask
 	| LnmSelectManyTask;
+
+export enum LnmResult {
+	SINGLE_BAD = 'SINGLE_BAD',
+	SINGLE_GOOD = 'SINGLE_GOOD',
+	DOUBLE_BAD = 'DOUBLE_BAD',
+	DOUBLE_AVERAGE = 'DOUBLE_AVERAGE',
+	DOUBLE_GOOD = 'DOUBLE_GOOD',
+}

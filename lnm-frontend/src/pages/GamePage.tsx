@@ -5,6 +5,7 @@ import PlotLoader from '../frameInterpreter/PlotLoader.tsx';
 import '../css/FrameInterpreter.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
+import { BASE_URL } from '../metaEnv';
 
 const GamePage: React.FC = () => {
 	const [plot, setPlot] = useState<LnmPlot | null>(null);
@@ -18,7 +19,7 @@ const GamePage: React.FC = () => {
 		(state: RootState) => state.languageState.currentLanguage
 	);
 
-	const plotUrl = `${import.meta.env.BASE_URL}assets/plot/single_game_${storedLanguage}.json`;
+	const plotUrl = `${BASE_URL}assets/plot/single_game_${storedLanguage}.json`;
 	console.log(plotUrl);
 	const storedCurrentChapter = useSelector(
 		(state: RootState) => state.gameState.currentChapterId

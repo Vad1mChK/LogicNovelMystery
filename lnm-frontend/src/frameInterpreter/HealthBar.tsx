@@ -24,9 +24,10 @@ const HealthBar: React.FC<HealthBarProps> = ({ currentHealth, maxHealth }) => {
 
 	return (
 		<Tooltip title={`${healthPercentage}%`}>
-			<div className="health-bar">
+			<div className="health-bar" data-testid="health-bar">
 				<div
 					className={`health-bar-fill ${healthLevelClass}`}
+					data-testid="health-bar-fill"
 					style={{
 						width: `${healthPercentage}%`,
 					}}
