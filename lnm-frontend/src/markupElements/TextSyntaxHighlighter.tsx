@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import SyntaxHighlightDisplay from './SyntaxHighlightDisplay'; // Assuming these components exist
 import SyntaxHighlightDisplayInline from './SyntaxHighlightDisplayInline';
 
@@ -81,13 +82,17 @@ const TextSyntaxHighlighter: React.FC<TextSyntaxHighlighterProps> = ({
 	let segments = parseCodeBlocks(input);
 	segments = parseInlineCode(segments);
 
+	console.log('Highlighting input:', input);
+
 	const jsxContent = segments.map((seg, i) => {
+		const key = `${uuidv4()}-${seg.type}`; // Each key is now truly unique
+
 		if (seg.type === 'blockCode') {
 			return <SyntaxHighlightDisplay key={i} value={seg.content} />;
 		} else if (seg.type === 'inlineCode') {
 			return (
 				<SyntaxHighlightDisplayInline
-					key={i}
+					key={key}
 					value={seg.content}
 					copyable={copyable}
 				/>
