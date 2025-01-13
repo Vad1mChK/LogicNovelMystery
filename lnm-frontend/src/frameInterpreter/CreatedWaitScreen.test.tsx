@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CreatedWaitScreen from './CreatedWaitScreen';
+import { LnmHero } from './types';
+import { BASE_URL } from '../metaEnv';
 
 jest.mock('i18next', () => ({
 	t: jest.fn((key) => key),
@@ -11,12 +13,15 @@ jest.mock('../metaEnv', () => ({
 }));
 
 describe('CreatedWaitScreen', () => {
-	it('should display the mansion entrance image when an unknown protagonist is provided', () => {
-		render(<CreatedWaitScreen protagonist="unknown" />);
+	it('should display the correct protagonist character sprite', () => {
+		const protagonist = LnmHero.STEVE;
+		render(<CreatedWaitScreen protagonist={protagonist} />);
 
-		const backgroundImage = screen.getByAltText(
-			'game.createdWaitScreen.wait'
+		const characterSprite = screen.getByRole('img', { name: /steve/i });
+		expect(characterSprite).toBeInTheDocument();
+		expect(characterSprite).toHaveAttribute(
+			'src',
+			`${BASE_URL}assets/img/characters/steve/idle.webp`
 		);
-		expect(backgroundImage).toHaveAttribute('src', 'test-file-stub');
 	});
 });
