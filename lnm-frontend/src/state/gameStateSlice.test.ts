@@ -1,19 +1,20 @@
 import gameStateReducer, {
-	increaseHealth,
 	decreaseHealth,
+	increaseHealth,
+	resetState,
 	setCurrentChapter,
 	setCurrentFrame,
-	setProtagonist,
 	setPlayerState,
+	setProtagonist,
 } from './gameStateSlice';
-import { LnmPlayerState } from '../frameInterpreter/types';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 
 // Initial state for testing
 const initialState = {
 	health: 100,
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
-	protagonist: 'steve',
+	protagonist: LnmHero.STEVE,
 	playerState: LnmPlayerState.CREATED,
 };
 
@@ -81,8 +82,11 @@ describe('gameStateSlice', () => {
 	});
 
 	it('should update the current protagonist', () => {
-		const state = gameStateReducer(initialState, setProtagonist('jane'));
-		expect(state.protagonist).toBe('jane');
+		const state = gameStateReducer(
+			initialState,
+			setProtagonist(LnmHero.VICKY)
+		);
+		expect(state.protagonist).toBe(LnmHero.VICKY);
 	});
 
 	it('should update the current player state', () => {
@@ -91,5 +95,17 @@ describe('gameStateSlice', () => {
 			setPlayerState(LnmPlayerState.PLAYING)
 		);
 		expect(state.playerState).toBe(LnmPlayerState.PLAYING);
+	});
+
+	it('should reset all state properties to their initial values', () => {
+		const modifiedState = {
+			health: 50,
+			currentChapterId: 'chapter2',
+			currentFrameId: 'frame5',
+			protagonist: LnmHero.VICKY,
+			playerState: LnmPlayerState.PLAYING,
+		};
+		const state = gameStateReducer(modifiedState, resetState());
+		expect(state).toEqual(initialState);
 	});
 });

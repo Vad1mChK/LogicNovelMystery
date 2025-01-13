@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LnmPlayerState } from '../frameInterpreter/types';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 
 // Define the shape of your game state
 export interface GameState {
 	health: number;
 	currentChapterId: string;
 	currentFrameId: string;
-	protagonist: string;
+	protagonist: LnmHero;
 	playerState: LnmPlayerState;
 }
 
@@ -15,7 +15,7 @@ const initialState: GameState = {
 	health: 100,
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
-	protagonist: 'steve',
+	protagonist: LnmHero.STEVE,
 	playerState: LnmPlayerState.CREATED,
 };
 
@@ -57,11 +57,14 @@ const gameStateSlice = createSlice({
 		setCurrentFrame(state, action: PayloadAction<string>) {
 			state.currentFrameId = action.payload;
 		},
-		setProtagonist(state, action: PayloadAction<string>) {
+		setProtagonist(state, action: PayloadAction<LnmHero>) {
 			state.protagonist = action.payload;
 		},
 		setPlayerState(state, action: PayloadAction<LnmPlayerState>) {
 			state.playerState = action.payload;
+		},
+		resetState(state) {
+			Object.assign(state, initialState);
 		},
 	},
 });
@@ -74,6 +77,7 @@ export const {
 	setCurrentFrame,
 	setProtagonist,
 	setPlayerState,
+	resetState,
 } = gameStateSlice.actions;
 
 export default gameStateSlice.reducer;
