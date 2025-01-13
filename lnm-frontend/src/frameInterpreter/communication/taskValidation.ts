@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LnmTask, LnmTaskType } from '../types';
+import { VITE_SERVER_URL } from '../../metaEnv';
 
 const API_TIMEOUT = 5000;
 
@@ -30,7 +31,7 @@ const validateSelectOne = async (
 	}
 	try {
 		const response = await axios.post(
-			'http://localhost:8080/task/select-one',
+			`${VITE_SERVER_URL}/task/select-one`,
 			{
 				taskId: task.id,
 				taskType: task.type,
@@ -64,7 +65,7 @@ const validateSelectMany = async (
 	}
 	try {
 		const response = await axios.post(
-			'http://localhost:8080/task/select-many',
+			`${VITE_SERVER_URL}/task/select-many`,
 			{
 				taskId: task.id,
 				taskType: task.type,
@@ -103,7 +104,7 @@ const validateWriteKnowledge = async (
 	}
 	try {
 		const response = await axios.post(
-			'http://localhost:8080/task/write-knowledge',
+			`${VITE_SERVER_URL}/task/write-knowledge`,
 			{
 				taskId: task.id,
 				taskType: task.type,
@@ -138,7 +139,7 @@ const validateCompleteQuery = async (
 		console.log(task.knowledge);
 		console.log(userInput);
 		const response = await axios.post(
-			'http://localhost:8080/task/complete-query', // Replace with your actual endpoint
+			`${VITE_SERVER_URL}/task/complete-query`, // Replace with your actual endpoint
 			{
 				taskId: task.id,
 				taskType: task.type,
