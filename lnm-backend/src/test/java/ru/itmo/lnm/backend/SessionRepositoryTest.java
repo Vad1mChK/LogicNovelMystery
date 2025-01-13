@@ -46,7 +46,7 @@ public class SessionRepositoryTest {
         session.setGameStatus(true);
         session.setUserHp(100);
         session.setCurrentScore(0);
-        session.setCurrentTask(0);
+        session.setCurrentTask(1);
         sessionRepository.save(session);
 
         // Проверка, что сессия была успешно сохранена
@@ -64,7 +64,7 @@ public class SessionRepositoryTest {
         session.setGameStatus(true);
         session.setUserHp(100);
         session.setCurrentScore(0);
-        session.setCurrentTask(0);
+        session.setCurrentTask(1);
         sessionRepository.save(session);
 
         // Ищем сессию по токену и пользователю
@@ -84,7 +84,7 @@ public class SessionRepositoryTest {
         session.setGameStatus(true);
         session.setUserHp(100);
         session.setCurrentScore(0);
-        session.setCurrentTask(0);
+        session.setCurrentTask(1);
         sessionRepository.save(session);
 
         // Обновляем сессию
@@ -106,7 +106,7 @@ public class SessionRepositoryTest {
         session.setGameStatus(true);
         session.setUserHp(100);
         session.setCurrentScore(0);
-        session.setCurrentTask(0);
+        session.setCurrentTask(1);
         sessionRepository.save(session);
 
         // Устанавливаем время завершения

@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.itmo.lnm.backend.dto.SessionDto;
+import ru.itmo.lnm.backend.model.LnmHero;
+import ru.itmo.lnm.backend.model.LnmPlayerState;
 import ru.itmo.lnm.backend.model.Session;
 import ru.itmo.lnm.backend.model.User;
 import ru.itmo.lnm.backend.repository.SessionRepository;
@@ -31,7 +33,20 @@ public class SessionService {
         User user = userRepository.findByUsername(username);
         Session session = new Session();
         session.setUser(user);
-        session.setSessionToken(sessionDto.getSessionToken());
+        if (sessionDto.isMultiplayer()){
+            session.setPlayerState(LnmPlayerState.CREATED);
+            if (sessionRepository.existsBySessionToken(sessionDto.getSessionToken())){
+                session.setHero(LnmHero.VIKI);
+            }
+            else {
+                session.setHero(LnmHero.PROFESSOR);
+            }
+        }
+        else {
+            session.setPlayerState(LnmPlayerState.PLAYING);
+            session.setHero(LnmHero.STEVE);
+            session.setSessionToken(sessionDto.getSessionToken());
+        }
         session.setCurrentScore(0);
         session.setCurrentTask(1);
         session.setUserHp(100);
