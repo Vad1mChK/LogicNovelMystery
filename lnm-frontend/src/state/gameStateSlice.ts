@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LnmPlayerState } from '../frameInterpreter/types';
 
 // Define the shape of your game state
 export interface GameState {
 	health: number;
 	currentChapterId: string;
 	currentFrameId: string;
-	errorSum: number;
-	errorCount: number;
+	protagonist: string;
+	playerState: LnmPlayerState;
 }
 
 // Define the initial state
@@ -14,8 +15,8 @@ const initialState: GameState = {
 	health: 100,
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
-	errorSum: 0,
-	errorCount: 0,
+	protagonist: 'steve',
+	playerState: LnmPlayerState.CREATED,
 };
 
 const loadGameState = (): GameState => {
@@ -56,18 +57,11 @@ const gameStateSlice = createSlice({
 		setCurrentFrame(state, action: PayloadAction<string>) {
 			state.currentFrameId = action.payload;
 		},
-		// Error management reducers
-		incrementErrorSum(state, action: PayloadAction<number>) {
-			state.errorSum += action.payload;
+		setProtagonist(state, action: PayloadAction<string>) {
+			state.protagonist = action.payload;
 		},
-		clearErrorSum(state) {
-			state.errorSum = 0;
-		},
-		incrementErrorCount(state, action: PayloadAction<number>) {
-			state.errorCount += action.payload;
-		},
-		clearErrorCount(state) {
-			state.errorCount = 0;
+		setPlayerState(state, action: PayloadAction<LnmPlayerState>) {
+			state.playerState = action.payload;
 		},
 	},
 });
@@ -78,10 +72,8 @@ export const {
 	decreaseHealth,
 	setCurrentChapter,
 	setCurrentFrame,
-	incrementErrorSum,
-	clearErrorSum,
-	incrementErrorCount,
-	clearErrorCount,
+	setProtagonist,
+	setPlayerState,
 } = gameStateSlice.actions;
 
 export default gameStateSlice.reducer;

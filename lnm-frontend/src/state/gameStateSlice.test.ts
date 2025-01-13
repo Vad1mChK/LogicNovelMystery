@@ -3,19 +3,18 @@ import gameStateReducer, {
 	decreaseHealth,
 	setCurrentChapter,
 	setCurrentFrame,
-	incrementErrorSum,
-	clearErrorSum,
-	incrementErrorCount,
-	clearErrorCount,
+	setProtagonist,
+	setPlayerState,
 } from './gameStateSlice';
+import { LnmPlayerState } from '../frameInterpreter/types';
 
 // Initial state for testing
 const initialState = {
 	health: 100,
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
-	errorSum: 0,
-	errorCount: 0,
+	protagonist: 'steve',
+	playerState: LnmPlayerState.CREATED,
 };
 
 describe('gameStateSlice', () => {
@@ -81,39 +80,16 @@ describe('gameStateSlice', () => {
 		expect(state.currentFrameId).toBe('frame2');
 	});
 
-	// Test incrementErrorSum
-	it('should increment error sum by a given value', () => {
-		const state = gameStateReducer(
-			{ ...initialState, errorSum: 10 },
-			incrementErrorSum(5)
-		);
-		expect(state.errorSum).toBe(15);
+	it('should update the current protagonist', () => {
+		const state = gameStateReducer(initialState, setProtagonist('jane'));
+		expect(state.protagonist).toBe('jane');
 	});
 
-	// Test clearErrorSum
-	it('should reset error sum to 0', () => {
+	it('should update the current player state', () => {
 		const state = gameStateReducer(
-			{ ...initialState, errorSum: 10 },
-			clearErrorSum()
+			initialState,
+			setPlayerState(LnmPlayerState.PLAYING)
 		);
-		expect(state.errorSum).toBe(0);
-	});
-
-	// Test incrementErrorCount
-	it('should increment error count by a given value', () => {
-		const state = gameStateReducer(
-			{ ...initialState, errorCount: 2 },
-			incrementErrorCount(3)
-		);
-		expect(state.errorCount).toBe(5);
-	});
-
-	// Test clearErrorCount
-	it('should reset error count to 0', () => {
-		const state = gameStateReducer(
-			{ ...initialState, errorCount: 5 },
-			clearErrorCount()
-		);
-		expect(state.errorCount).toBe(0);
+		expect(state.playerState).toBe(LnmPlayerState.PLAYING);
 	});
 });
