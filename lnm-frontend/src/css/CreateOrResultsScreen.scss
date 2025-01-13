@@ -63,4 +63,27 @@
 			}
 		}
 	}
+	.game-character {
+		transition:
+						opacity 1s ease-in-out,
+						left 1s ease-in-out,
+						filter 0.3s ease-in-out;
+		position: absolute;
+		right: calc((1 + math.sqrt(5)) / 2 - 1) * 100%;
+		bottom: 0;
+		height: 100vh;
+		z-index: -1;
+		transform: translateX(-50%);
+		cursor: pointer;
+
+		&.hidden-character {
+			opacity: 0;
+		}
+
+		&.speaker {
+			filter: drop-shadow(
+											0 0 25px color.scale(colors.$WHITE, $alpha: -10%)
+			);
+		}
+	}
 }

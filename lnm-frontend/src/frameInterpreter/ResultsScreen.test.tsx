@@ -13,7 +13,7 @@ jest.mock('../metaEnv', () => ({
 	BASE_URL: '/',
 }));
 
-jest.mock('../css/ResultsScreen.scss', () => ({}));
+jest.mock('../css/CreateOrResultsScreen.scss', () => ({}));
 
 describe('ResultsScreen', () => {
 	const mockQuitToMain = jest.fn();

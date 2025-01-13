@@ -1,7 +1,8 @@
 import React from 'react';
 import '../css/FrameInterpreter.scss';
-import ResultsScreen from '../frameInterpreter/ResultsScreen.tsx';
-import { LnmResult } from '../frameInterpreter/types.ts';
+// import ResultsScreen from '../frameInterpreter/ResultsScreen.tsx';
+// import { LnmResult } from '../frameInterpreter/types.ts';
+import CreatedWaitScreen from '../frameInterpreter/CreatedWaitScreen.tsx';
 // import TaskWindow from '../frameInterpreter/TaskWindow.tsx';
 // import { LnmTask, LnmTaskType } from '../frameInterpreter/types';
 
@@ -100,14 +101,18 @@ import { LnmResult } from '../frameInterpreter/types.ts';
 // 	);
 // };
 
+// const SecretPage: React.FC = () => {
+// 	return (
+// 		<ResultsScreen
+// 			result={LnmResult.SINGLE_GOOD}
+// 			score={1234}
+// 			highScore={1233}
+// 		/>
+// 	);
+// };
+
 const SecretPage: React.FC = () => {
-	return (
-		<ResultsScreen
-			result={LnmResult.SINGLE_GOOD}
-			score={1234}
-			highScore={1233}
-		/>
-	);
+	return <CreatedWaitScreen protagonist={'vicky'} />;
 };
 
 export default SecretPage;
