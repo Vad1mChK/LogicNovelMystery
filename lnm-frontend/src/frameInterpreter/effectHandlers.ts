@@ -6,10 +6,12 @@ import {
 	LnmFrameCharacterData,
 	LnmTask,
 } from './types';
+import { reportCampaign } from './communication/reportCampaign.ts';
 
 export type EffectHandler = (
 	effect: LnmFrameEffect,
 	context: {
+		reportCampaign: (id: string) => string | null;
 		setCurrentFrameId: (id: string) => void;
 		setCurrentChapterId: (id: string) => void;
 		setCurrentEndingId: (id: string) => void;
@@ -45,19 +47,6 @@ export const effectHandlers: Partial<
 		if (nextChapter) {
 			setCurrentChapterId(args.chapterId);
 			setCurrentFrameId(nextChapter.startFrame);
-		}
-	},
-
-	[LnmFrameEffectType.ENDING]: (
-		effect,
-		{ setCurrentEndingId, setCurrentFrameId, setIsEnding, plot }
-	) => {
-		const args = effect.args as LnmEffectArgsMap[LnmFrameEffectType.ENDING];
-		const ending = plot.frames.endings.get(args.endingId);
-		if (ending) {
-			setCurrentEndingId(args.endingId);
-			setCurrentFrameId(ending.startFrame);
-			setIsEnding(true);
 		}
 	},
 
@@ -138,6 +127,27 @@ export const effectHandlers: Partial<
 		} else {
 			console.warn(`Task with ID ${args.taskId} not found.`);
 		}
+	},
+
+	[LnmFrameEffectType.END_CAMPAIGN]: (
+		effect,
+		{ setIsEnding, setCurrentChapterId, setCurrentFrameId, plot }
+	) => {
+		const args =
+			effect.args as LnmEffectArgsMap[LnmFrameEffectType.END_CAMPAIGN];
+		console.log('Processing END_CAMPAIGN effect:', args);
+		reportCampaign(args.winner)
+			.then((response) => {
+				const nextChapter = plot.chapters.get(response.endingId);
+				if (nextChapter) {
+					setIsEnding(true);
+					setCurrentChapterId(response.endingId);
+					setCurrentFrameId(nextChapter.startFrame);
+				}
+			})
+			.catch((err) => {
+				console.error('Error reporting campaign:', err);
+			});
 	},
 	// TODO: Add handlers for other effect types as needed
 };
