@@ -44,6 +44,12 @@ public class Session {
     @Column(nullable = false)
     private int currentTask;
 
+    @Enumerated(EnumType.STRING)
+    private LnmPlayerState playerState;
+
+    @Enumerated(EnumType.STRING)
+    private LnmHero hero;
+
     @PrePersist
     protected void onCreate() {
         Instant now = Instant.now();

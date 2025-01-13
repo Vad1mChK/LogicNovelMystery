@@ -7,4 +7,6 @@ import lombok.Data;
 public class SessionDto {
     @NotNull
     private String sessionToken;
+    @NotNull
+    private boolean isMultiplayer;
 }
