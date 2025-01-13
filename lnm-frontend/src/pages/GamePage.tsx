@@ -1,52 +1,84 @@
-import React, { useEffect, useState } from 'react';
-import VisualNovelEngine from '../frameInterpreter/VisualNovelEngine.tsx';
-import { LnmPlot } from '../frameInterpreter/types';
-import PlotLoader from '../frameInterpreter/PlotLoader.tsx';
+import React, { ReactElement } from "react";
+import { LnmPlayerState, LnmResult } from '../frameInterpreter/types';
 import '../css/FrameInterpreter.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
-import { BASE_URL } from '../metaEnv';
+import VisualNovelScreen from '../frameInterpreter/VisualNovelScreen.tsx';
+import CreatedWaitScreen from '../frameInterpreter/CreatedWaitScreen.tsx';
+import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen.tsx';
+import ResultsScreen from '../frameInterpreter/ResultsScreen.tsx';
+import { useNavigate } from 'react-router-dom';
+import { resetState } from '../state/gameStateSlice.ts';
 
 const GamePage: React.FC = () => {
-	const [plot, setPlot] = useState<LnmPlot | null>(null);
-
-	// const plotUrl =
-	// 	import.meta.env.MODE === 'development'
-	// 		? '/assets/plot/single_game_ru.json' // Path for `npm run dev`
-	// 		: './assets/plot/single_game_ru.json'; // Path for `npm run build`
-	// // TODO Replace it with a better solution
-	const storedLanguage = useSelector(
-		(state: RootState) => state.languageState.currentLanguage
+	const { playerState, protagonist } = useSelector(
+		(state: RootState) => state.gameState
 	);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const plotUrl = `${BASE_URL}assets/plot/single_game_${storedLanguage}.json`;
-	console.log(plotUrl);
-	const storedCurrentChapter = useSelector(
-		(state: RootState) => state.gameState.currentChapterId
-	);
+	// TODO: Listen to server state updates only in certain states
+	// const canListenToStateUpdate = (state: LnmPlayerState) => {
+	// 	return [
+	// 		LnmPlayerState.CREATED,
+	// 		LnmPlayerState.WAITING_LOST,
+	// 		LnmPlayerState.WAITING_WON,
+	// 	].includes(state);
+	// };
 
-	const [startChapter, setStartChapter] = useState<string | undefined>(
-		undefined
-	);
-
-	useEffect(() => {
-		if (plot) {
-			setStartChapter(
-				plot.chapters.has(storedCurrentChapter)
-					? storedCurrentChapter
-					: plot.startChapter
-			);
+	const quitToMain = (clearState: boolean = false) => {
+		if (clearState) {
+			dispatch(resetState());
+			// TODO Maybe some more complex logic to remove the state?
 		}
-	}, [plot]);
+		navigate('/main');
+	};
+
+	const stateToComponent: Map<LnmPlayerState, ReactElement> = new Map([
+		[
+			LnmPlayerState.CREATED,
+			<CreatedWaitScreen protagonist={protagonist} />,
+		],
+		[
+			LnmPlayerState.PLAYING,
+			<VisualNovelScreen protagonist={protagonist} />,
+			// Formerly, GamePage contained just what VisualNovelScreen now contains
+		],
+		[LnmPlayerState.WAITING_LOST, <ResultsWaitScreen winner={false} />],
+		[LnmPlayerState.WAITING_WON, <ResultsWaitScreen winner={true} />],
+		[
+			LnmPlayerState.COMPLETED_LOST,
+			<ResultsScreen
+				result={LnmResult.SINGLE_BAD}
+				score={12300}
+				highScore={12345}
+				onQuitToMain={quitToMain}
+			/>,
+			// In reality, the server will return all this. Should I add these things to Redux instead?
+		],
+		[
+			LnmPlayerState.COMPLETED_WON,
+			<ResultsScreen
+				result={LnmResult.SINGLE_GOOD}
+				score={12300}
+				onQuitToMain={quitToMain}
+			/>,
+			// In reality, the server will return all this. Should I add these things to Redux?
+		],
+		[
+			LnmPlayerState.SEEN_RESULTS,
+			<ResultsScreen
+				result={LnmResult.SINGLE_GOOD}
+				score={1234}
+				onQuitToMain={() => quitToMain(true)}
+			/>,
+		],
+	]);
 
 	return (
-		<div className="frame-renderer">
-			{plot ? (
-				<VisualNovelEngine plot={plot} startChapterId={startChapter} />
-			) : (
-				<PlotLoader plotUrl={plotUrl} onLoad={setPlot} />
-			)}
-		</div>
+		stateToComponent.get(playerState) || (
+			<div>Illegal state: {playerState}</div>
+		)
 	);
 };
 
