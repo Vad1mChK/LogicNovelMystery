@@ -21,9 +21,7 @@ const VisualNovelScreen: React.FC<VisualNovelScreenProps> = ({
 	const gamemode =
 		protagonist == LnmHero.STEVE ? 'single_game' : 'double_game';
 
-	const plotUrl = `${BASE_URL}assets/plot/${gamemode}_${
-		protagonist.toLowerCase()
-	}_${storedLanguage}.json`;
+	const plotUrl = `${BASE_URL}assets/plot/${gamemode}_${protagonist.toLowerCase()}_${storedLanguage}.json`;
 	console.log(plotUrl);
 	const storedCurrentChapter = useSelector(
 		(state: RootState) => state.gameState.currentChapterId

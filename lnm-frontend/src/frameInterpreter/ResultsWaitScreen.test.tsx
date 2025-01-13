@@ -15,10 +15,6 @@ jest.mock('../metaEnv', () => ({
 
 jest.mock('../css/CreateOrResultsScreen.scss', () => ({}));
 
-jest.mock('../assets/img/locations/MansionEntrance.webp', () => {
-	mansionEntrance: 'E E Ei'
-});
-
 describe('ResultsWaitScreen Component', () => {
 	it('should display "You Win!" when winner prop is true', () => {
 		render(<ResultsWaitScreen winner={true} />);

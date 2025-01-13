@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement } from 'react';
 import { LnmPlayerState, LnmResult } from '../frameInterpreter/types';
 import '../css/FrameInterpreter.scss';
 import { useDispatch, useSelector } from 'react-redux';
