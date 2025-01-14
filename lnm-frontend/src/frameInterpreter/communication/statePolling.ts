@@ -42,7 +42,12 @@ export const startShortPolling = (
 					const response = await axios.post(
 						`${VITE_SERVER_URL}/game/state`,
 						{ sessionToken },
-						{ timeout: API_TIMEOUT }
+						{
+							timeout: API_TIMEOUT,
+							headers: {
+								Authorization: `${localStorage.getItem('AuthToken')}`,
+							},
+						}
 					);
 
 					const {

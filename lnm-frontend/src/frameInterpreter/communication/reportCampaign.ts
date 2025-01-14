@@ -3,7 +3,7 @@ import { VITE_SERVER_URL } from '../../metaEnv';
 
 interface CampaignReportRequest {
 	winner: boolean;
-	sessionToken: string;
+	sessionId: string;
 }
 
 interface CampaignReportResponse {
@@ -16,7 +16,7 @@ const reportCampaign = async (
 	try {
 		const requestBody: CampaignReportRequest = {
 			winner,
-			sessionToken: localStorage.getItem('sessionToken') || '',
+			sessionId: localStorage.getItem('sessionToken') || '',
 		};
 		const response = await axios.post(
 			`${VITE_SERVER_URL}/game/report-campaign`,
