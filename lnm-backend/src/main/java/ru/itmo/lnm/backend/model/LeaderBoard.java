@@ -22,7 +22,7 @@ public class LeaderBoard {
     public User user;
 
     @Column(nullable = false)
-    private long score;
+    private int score;
 
     @Column(nullable = false)
     private boolean gameMode;

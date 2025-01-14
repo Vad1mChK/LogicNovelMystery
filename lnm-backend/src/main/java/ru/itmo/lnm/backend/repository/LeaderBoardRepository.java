@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.itmo.lnm.backend.model.LeaderBoard;
+import ru.itmo.lnm.backend.model.User;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -16,4 +18,6 @@ public interface LeaderBoardRepository extends JpaRepository<LeaderBoard, UUID> 
             "WHERE lb.score = (SELECT MAX(lb2.score) FROM LeaderBoard lb2 " +
             "WHERE lb2.sessionToken = lb.sessionToken AND lb2.gameMode = :gameMode) ")
     List<LeaderBoard> findBestScoresForEachSessionToken(@Param("gameMode") boolean gameMode);
+
+    LeaderBoard findByUserAndGameMode(User user, boolean gameMode);
 }
