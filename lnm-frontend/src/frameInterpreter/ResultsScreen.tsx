@@ -1,7 +1,7 @@
 import React from 'react';
 import { LnmResult } from './types';
 import { t } from 'i18next';
-import '../css/ResultsScreen.scss';
+import '../css/CreateOrResultsScreen.scss';
 import { BASE_URL } from '../metaEnv';
 
 interface ResultsScreenProps {

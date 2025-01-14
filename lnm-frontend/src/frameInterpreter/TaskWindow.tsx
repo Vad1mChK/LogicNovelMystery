@@ -12,7 +12,7 @@ import {
 	RadioGroup,
 } from '@mui/material';
 import '../css/TaskWindow.scss';
-import { validateTask } from './taskValidation/taskValidation';
+import { validateTask } from './communication/taskValidation';
 import { t } from 'i18next';
 
 interface TaskWindowProps {
