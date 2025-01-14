@@ -6,6 +6,7 @@ import gameStateReducer, {
 	setCurrentFrame,
 	setPlayerState,
 	setProtagonist,
+	setMusicPath,
 } from './gameStateSlice';
 import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 
@@ -16,6 +17,7 @@ const initialState = {
 	currentFrameId: 'frame1',
 	protagonist: LnmHero.STEVE,
 	playerState: LnmPlayerState.CREATED,
+	musicPath: null,
 };
 
 describe('gameStateSlice', () => {
@@ -97,6 +99,14 @@ describe('gameStateSlice', () => {
 		expect(state.playerState).toBe(LnmPlayerState.PLAYING);
 	});
 
+	it('should update the current music path', () => {
+		const state = gameStateReducer(
+			initialState,
+			setMusicPath('path/to/music.mp3')
+		);
+		expect(state.musicPath).toBe('path/to/music.mp3');
+	});
+
 	it('should reset all state properties to their initial values', () => {
 		const modifiedState = {
 			health: 50,
@@ -104,6 +114,7 @@ describe('gameStateSlice', () => {
 			currentFrameId: 'frame5',
 			protagonist: LnmHero.VICKY,
 			playerState: LnmPlayerState.PLAYING,
+			musicPath: null,
 		};
 		const state = gameStateReducer(modifiedState, resetState());
 		expect(state).toEqual(initialState);

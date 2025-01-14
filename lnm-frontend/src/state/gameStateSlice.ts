@@ -8,6 +8,7 @@ export interface GameState {
 	currentFrameId: string;
 	protagonist: LnmHero;
 	playerState: LnmPlayerState;
+	musicPath: string | null;
 }
 
 // Define the initial state
@@ -17,6 +18,7 @@ const initialState: GameState = {
 	currentFrameId: 'frame1',
 	protagonist: LnmHero.STEVE,
 	playerState: LnmPlayerState.CREATED,
+	musicPath: null,
 };
 
 const loadGameState = (): GameState => {
@@ -63,6 +65,9 @@ const gameStateSlice = createSlice({
 		setPlayerState(state, action: PayloadAction<LnmPlayerState>) {
 			state.playerState = action.payload;
 		},
+		setMusicPath(state, action: PayloadAction<string | null>) {
+			state.musicPath = action.payload;
+		},
 		resetState(state) {
 			Object.assign(state, initialState);
 		},
@@ -77,6 +82,7 @@ export const {
 	setCurrentFrame,
 	setProtagonist,
 	setPlayerState,
+	setMusicPath,
 	resetState,
 } = gameStateSlice.actions;
 
