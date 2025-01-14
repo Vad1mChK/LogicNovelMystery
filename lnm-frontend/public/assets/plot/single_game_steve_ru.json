@@ -825,7 +825,7 @@
         "inception4_failTask0_01": {
           "id": "inception4_failTask0_01",
           "dialogue": "Будьте внимательны, пожалуйста. Подумайте ещё.",
-          "nextFrame": "inception4_12",
+          "nextFrame": "inception4_11",
           "effects": [
             {
               "type": "JUMP",
@@ -841,7 +841,7 @@
         "inception4_failTask0_02": {
           "id": "inception4_failTask0_02",
           "dialogue": "Будьте внимательны, пожалуйста. И следите за своим здоровьем. Кажется, вы начинаете нервничать...",
-          "nextFrame": "inception4_12",
+          "nextFrame": "inception4_11",
           "effects": [
             {
               "type": "JUMP",
@@ -859,10 +859,10 @@
         "inception4_failTask0_03": {
           "id": "inception4_failTask0_02",
           "dialogue": "Сфокусируйтесь, агент! Это ваша последняя попытка...",
-          "nextFrame": "inception4_12"
+          "nextFrame": "inception4_11"
         },
-        "inception4_13": {
-          "id": "inception4_13",
+        "inception4_12": {
+          "id": "inception4_12",
           "dialogue": "...Хорошо. Вижу, самое время продолжить наш путь... и наше обучение.",
           "nextFrame": "inception4_14"
         },
@@ -1716,7 +1716,12 @@
         "lose_4": {
           "id": "lose_4",
           "dialogue": "",
-          "effects": []
+          "effects": [
+            {
+              "type": "STOP",
+              "args": {}
+            }
+          ]
         }
       },
       "ending_win": {
@@ -1804,7 +1809,12 @@
           "win_8": {
             "id": "win_8",
             "dialogue": "",
-            "effects": []
+            "effects": [
+              {
+                "type": "STOP",
+                "args": {}
+              }
+            ]
           }
         }
     }
