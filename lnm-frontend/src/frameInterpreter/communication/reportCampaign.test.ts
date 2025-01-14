@@ -22,7 +22,7 @@ describe('reportCampaign', () => {
 
 		expect(axiosPostSpy).toHaveBeenCalledWith(
 			`${VITE_SERVER_URL}/game/report-campaign`,
-			{ winner: true, sessionToken: 'mockSessionToken' },
+			{ winner: true, sessionId: 'mockSessionToken' },
 			{
 				headers: {
 					'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ describe('reportCampaign', () => {
 
 		expect(axiosPostSpy).toHaveBeenCalledWith(
 			`${VITE_SERVER_URL}/game/report-campaign`,
-			{ winner: false, sessionToken: 'mockSessionToken' },
+			{ winner: false, sessionId: 'mockSessionToken' },
 			{
 				headers: {
 					'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ describe('reportCampaign', () => {
 
 		expect(axiosPostSpy).toHaveBeenCalledWith(
 			`${VITE_SERVER_URL}/game/report-campaign`,
-			{ winner: true, sessionToken: '' },
+			{ winner: true, sessionId: '' },
 			{
 				headers: {
 					'Content-Type': 'application/json',
