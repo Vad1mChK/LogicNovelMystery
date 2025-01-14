@@ -1,5 +1,6 @@
 // DialogueBox.tsx
 import React from 'react';
+import TextSyntaxHighlighter from '../markupElements/TextSyntaxHighlighter';
 
 interface DialogueBoxProps {
 	speakerName?: string;
@@ -14,7 +15,7 @@ const DialogueBox: React.FC<DialogueBoxProps> = ({ speakerName, text }) => (
 			</div>
 		)}
 		<div className="dialogue-text" data-testid="dialogue-text">
-			{text}
+			<TextSyntaxHighlighter input={text} copyable={false} />
 		</div>
 	</div>
 );

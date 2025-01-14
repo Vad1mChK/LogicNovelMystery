@@ -58,6 +58,11 @@ i18n.use(initReactI18next).init({
 					loginLink: 'Login here',
 				},
 				game: {
+					protagonist: {
+						steve: 'Steve',
+						vicky: 'Vicky',
+						professor: 'Professor'
+					},
 					knowledgeButton: 'Knowledge',
 					giveUpButton: 'Give up',
 					homeButton: 'Home',
@@ -82,6 +87,23 @@ i18n.use(initReactI18next).init({
 							hintTitle: 'Hint: ',
 							toggle: 'Toggle hint',
 						},
+					},
+					createdWaitScreen: {
+						created: 'Game created',
+						wait: 'Waiting for the partner to join...',
+            willPlayAs: 'You will play as: {{protagonist}}',
+					},
+					resultWaitScreen: {
+						win: 'You won!',
+						lose: 'You lost...',
+						wait: {
+							single: 'Waiting for the response from the server...',
+							multiplayer: 'Waiting for partner...',
+						},
+						pageWillUpdate: {
+							single: 'The page will update once the server responds.',
+							multiplayer: 'The page will update once your partner finishes the game.',
+						}
 					},
 					resultScreen: {
 						result: {
@@ -154,6 +176,11 @@ i18n.use(initReactI18next).init({
 					loginLink: 'Войдите здесь',
 				},
 				game: {
+					protagonist: {
+						steve: 'Стив',
+						vicky: 'Викки',
+						professor: 'Профессор'
+					},
 					knowledgeButton: 'Знания',
 					giveUpButton: 'Сдаться',
 					homeButton: 'Домой',
@@ -178,6 +205,23 @@ i18n.use(initReactI18next).init({
 							hintTitle: 'Подсказка: ',
 							toggle: 'Показать/скрыть',
 						},
+					},
+					createdWaitScreen: {
+						created: 'Игра создана',
+						wait: 'Ждём, пока присоединится партнёр...',
+						willPlayAs: 'Ваш персонаж: {{protagonist}}',
+					},
+					resultWaitScreen: {
+						win: 'Ты выиграл!',
+						lose: 'Ты проиграл...',
+						wait: {
+							single: 'Ожидание ответа от сервера...',
+							multiplayer: 'Ожидание партнёра...',
+						},
+						pageWillUpdate: {
+							single: 'Страница обновится, когда сервер ответит.',
+							multiplayer: 'Страница обновится, когда партнёр завершит игру.',
+						}
 					},
 					resultScreen: {
 						result: {

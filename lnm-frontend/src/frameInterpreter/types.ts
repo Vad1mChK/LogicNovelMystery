@@ -7,7 +7,6 @@ export interface LnmPlot {
 	chapters: Map<string, LnmChapter>;
 	frames: {
 		main: Map<string, Map<string, LnmFrame>>;
-		endings: Map<string, LnmEnding>;
 	};
 	tasks: Map<string, LnmTask>;
 }
@@ -52,10 +51,15 @@ export interface LnmChapter {
 	startFrame: string;
 	nextChapter: string;
 	waitForPartner?: boolean; // Default: false
+	isEnding?: boolean;
 }
 
-export const LNM_CHAPTER_DEFAULTS: Pick<LnmChapter, 'waitForPartner'> = {
+export const LNM_CHAPTER_DEFAULTS: Pick<
+	LnmChapter,
+	'waitForPartner' | 'isEnding'
+> = {
 	waitForPartner: false,
+	isEnding: false,
 };
 
 export interface LnmFrame {
@@ -107,8 +111,6 @@ export interface LnmFrameCondition {
 export enum LnmFrameEffectType {
 	JUMP = 'JUMP',
 	JUMP_CHAPTER = 'JUMP_CHAPTER',
-	FADE_IN_SCENE = 'FADE_IN_SCENE',
-	FADE_OUT_SCENE = 'FADE_OUT_SCENE',
 	FADE_IN_CHARACTER = 'FADE_IN_CHARACTER',
 	FADE_OUT_CHARACTER = 'FADE_OUT_CHARACTER',
 	CHANGE_POSE = 'CHANGE_POSE',
@@ -117,9 +119,8 @@ export enum LnmFrameEffectType {
 	INCREASE_HEALTH = 'INCREASE_HEALTH',
 	DECREASE_HEALTH = 'DECREASE_HEALTH',
 	START_TASK = 'START_TASK',
-	OPEN_KNOWLEDGE = 'OPEN_KNOWLEDGE',
-	ENDING = 'ENDING',
-	RESULTS = 'RESULTS',
+	END_CAMPAIGN = 'END_CAMPAIGN',
+	STOP = 'STOP',
 }
 
 // Individual type of effect args
@@ -130,19 +131,11 @@ export type LnmEffectArgsMap = {
 	[LnmFrameEffectType.JUMP_CHAPTER]: {
 		chapterId: string;
 	};
-	[LnmFrameEffectType.FADE_IN_SCENE]: {
-		duration?: number;
-	};
-	[LnmFrameEffectType.FADE_OUT_SCENE]: {
-		duration?: number;
-	};
 	[LnmFrameEffectType.FADE_IN_CHARACTER]: {
 		characterId: string;
-		duration: number;
 	};
 	[LnmFrameEffectType.FADE_OUT_CHARACTER]: {
 		characterId: string;
-		duration: number;
 	};
 	[LnmFrameEffectType.CHANGE_POSE]: {
 		characterId: string;
@@ -164,13 +157,10 @@ export type LnmEffectArgsMap = {
 	[LnmFrameEffectType.START_TASK]: {
 		taskId: string;
 	};
-	[LnmFrameEffectType.OPEN_KNOWLEDGE]: {
-		knowledgeId: string;
+	[LnmFrameEffectType.END_CAMPAIGN]: {
+		winner: boolean;
 	};
-	[LnmFrameEffectType.ENDING]: {
-		endingId: string;
-	};
-	[LnmFrameEffectType.RESULTS]: object;
+	[LnmFrameEffectType.STOP]: object;
 	// Add additional effect mappings as needed
 };
 
@@ -213,7 +203,7 @@ interface LnmBaseTask {
 // Task-Specific Interfaces
 
 // WRITE_KNOWLEDGE Task
-interface LnmWriteKnowledgeTask extends LnmBaseTask {
+export interface LnmWriteKnowledgeTask extends LnmBaseTask {
 	type: LnmTaskType.WRITE_KNOWLEDGE;
 	testCases: {
 		query: string;
@@ -224,7 +214,7 @@ interface LnmWriteKnowledgeTask extends LnmBaseTask {
 }
 
 // COMPLETE_QUERY Task
-interface LnmCompleteQueryTask extends LnmBaseTask {
+export interface LnmCompleteQueryTask extends LnmBaseTask {
 	type: LnmTaskType.COMPLETE_QUERY;
 	expectedResults: { variables: Record<string, string> }[];
 	knowledge: string[];
@@ -232,14 +222,14 @@ interface LnmCompleteQueryTask extends LnmBaseTask {
 }
 
 // SELECT_ONE Task
-interface LnmSelectOneTask extends LnmBaseTask {
+export interface LnmSelectOneTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_ONE;
 	options: string[];
 	correctAnswerIndex: number;
 }
 
 // SELECT_MANY Task
-interface LnmSelectManyTask extends LnmBaseTask {
+export interface LnmSelectManyTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_MANY;
 	options: string[];
 	correctAnswerIndices: number[];
@@ -252,10 +242,26 @@ export type LnmTask =
 	| LnmSelectOneTask
 	| LnmSelectManyTask;
 
+export enum LnmPlayerState {
+	CREATED = 'CREATED',
+	PLAYING = 'PLAYING',
+	WAITING_WON = 'WAITING_WON',
+	WAITING_LOST = 'WAITING_LOST',
+	COMPLETED_WON = 'COMPLETED_WON',
+	COMPLETED_LOST = 'COMPLETED_LOST',
+	SEEN_RESULTS = 'SEEN_RESULTS',
+}
+
 export enum LnmResult {
 	SINGLE_BAD = 'SINGLE_BAD',
 	SINGLE_GOOD = 'SINGLE_GOOD',
 	DOUBLE_BAD = 'DOUBLE_BAD',
 	DOUBLE_AVERAGE = 'DOUBLE_AVERAGE',
 	DOUBLE_GOOD = 'DOUBLE_GOOD',
+}
+
+export enum LnmHero {
+	STEVE = 'STEVE',
+	VICKY = 'VICKY',
+	PROFESSOR = 'PROFESSOR',
 }

@@ -1,21 +1,23 @@
 import gameStateReducer, {
-	increaseHealth,
 	decreaseHealth,
+	increaseHealth,
+	resetState,
 	setCurrentChapter,
 	setCurrentFrame,
-	incrementErrorSum,
-	clearErrorSum,
-	incrementErrorCount,
-	clearErrorCount,
+	setPlayerState,
+	setProtagonist,
+	setMusicPath,
 } from './gameStateSlice';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 
 // Initial state for testing
 const initialState = {
 	health: 100,
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
-	errorSum: 0,
-	errorCount: 0,
+	protagonist: LnmHero.STEVE,
+	playerState: LnmPlayerState.CREATED,
+	musicPath: null,
 };
 
 describe('gameStateSlice', () => {
@@ -81,39 +83,40 @@ describe('gameStateSlice', () => {
 		expect(state.currentFrameId).toBe('frame2');
 	});
 
-	// Test incrementErrorSum
-	it('should increment error sum by a given value', () => {
+	it('should update the current protagonist', () => {
 		const state = gameStateReducer(
-			{ ...initialState, errorSum: 10 },
-			incrementErrorSum(5)
+			initialState,
+			setProtagonist(LnmHero.VICKY)
 		);
-		expect(state.errorSum).toBe(15);
+		expect(state.protagonist).toBe(LnmHero.VICKY);
 	});
 
-	// Test clearErrorSum
-	it('should reset error sum to 0', () => {
+	it('should update the current player state', () => {
 		const state = gameStateReducer(
-			{ ...initialState, errorSum: 10 },
-			clearErrorSum()
+			initialState,
+			setPlayerState(LnmPlayerState.PLAYING)
 		);
-		expect(state.errorSum).toBe(0);
+		expect(state.playerState).toBe(LnmPlayerState.PLAYING);
 	});
 
-	// Test incrementErrorCount
-	it('should increment error count by a given value', () => {
+	it('should update the current music path', () => {
 		const state = gameStateReducer(
-			{ ...initialState, errorCount: 2 },
-			incrementErrorCount(3)
+			initialState,
+			setMusicPath('path/to/music.mp3')
 		);
-		expect(state.errorCount).toBe(5);
+		expect(state.musicPath).toBe('path/to/music.mp3');
 	});
 
-	// Test clearErrorCount
-	it('should reset error count to 0', () => {
-		const state = gameStateReducer(
-			{ ...initialState, errorCount: 5 },
-			clearErrorCount()
-		);
-		expect(state.errorCount).toBe(0);
+	it('should reset all state properties to their initial values', () => {
+		const modifiedState = {
+			health: 50,
+			currentChapterId: 'chapter2',
+			currentFrameId: 'frame5',
+			protagonist: LnmHero.VICKY,
+			playerState: LnmPlayerState.PLAYING,
+			musicPath: null,
+		};
+		const state = gameStateReducer(modifiedState, resetState());
+		expect(state).toEqual(initialState);
 	});
 });
