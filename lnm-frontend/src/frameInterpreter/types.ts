@@ -203,7 +203,7 @@ interface LnmBaseTask {
 // Task-Specific Interfaces
 
 // WRITE_KNOWLEDGE Task
-interface LnmWriteKnowledgeTask extends LnmBaseTask {
+export interface LnmWriteKnowledgeTask extends LnmBaseTask {
 	type: LnmTaskType.WRITE_KNOWLEDGE;
 	testCases: {
 		query: string;
@@ -214,7 +214,7 @@ interface LnmWriteKnowledgeTask extends LnmBaseTask {
 }
 
 // COMPLETE_QUERY Task
-interface LnmCompleteQueryTask extends LnmBaseTask {
+export interface LnmCompleteQueryTask extends LnmBaseTask {
 	type: LnmTaskType.COMPLETE_QUERY;
 	expectedResults: { variables: Record<string, string> }[];
 	knowledge: string[];
@@ -222,14 +222,14 @@ interface LnmCompleteQueryTask extends LnmBaseTask {
 }
 
 // SELECT_ONE Task
-interface LnmSelectOneTask extends LnmBaseTask {
+export interface LnmSelectOneTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_ONE;
 	options: string[];
 	correctAnswerIndex: number;
 }
 
 // SELECT_MANY Task
-interface LnmSelectManyTask extends LnmBaseTask {
+export interface LnmSelectManyTask extends LnmBaseTask {
 	type: LnmTaskType.SELECT_MANY;
 	options: string[];
 	correctAnswerIndices: number[];
