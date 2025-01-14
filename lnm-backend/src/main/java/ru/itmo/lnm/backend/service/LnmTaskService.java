@@ -43,11 +43,11 @@ public class LnmTaskService {
             boolean success = validateResults(results, request.getExpectedResults());
 
             if (success) {
-                currentScore += ScoreService.scoreSolution(currentTask, COMPLETE_TASK);
+                currentScore += round(ScoreService.scoreSolution(currentTask, COMPLETE_TASK));
                 session.setCurrentTask(session.getCurrentTask() + 1);
                 session.setCurrentScore(currentScore);
             } else {
-                currentScore = (int) max(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK), 1);
+                currentScore = (int) max(round(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK)), 1);
                 session.setUserHp(session.getUserHp() - UPDATE_HP);
                 if (session.getUserHp() <= 0) {
                     session.setGameStatus(false);
@@ -78,7 +78,7 @@ public class LnmTaskService {
                 List<Map<String, String>> actualResults = prologService.executeProlog(request.getKnowledge(), testCase.getInput());
                 success = validateResults(actualResults, testCase.getExpectedResults());
                 if (!success) {
-                    currentScore = (int) max(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK), 1);
+                    currentScore = (int) max(round(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK)), 1);
                     session.setUserHp(session.getUserHp() - UPDATE_HP);
                     if (session.getUserHp() <= 0) {
                         session.setGameStatus(false);
@@ -87,7 +87,7 @@ public class LnmTaskService {
                 }
             }
             if (success) {
-                currentScore += ScoreService.scoreSolution(currentTask, COMPLETE_TASK);
+                currentScore += round(ScoreService.scoreSolution(currentTask, COMPLETE_TASK));
                 session.setCurrentTask(session.getCurrentTask() + 1);
             }
             session.setCurrentScore(currentScore);
@@ -112,11 +112,11 @@ public class LnmTaskService {
             int currentTask = session.getCurrentTask();
             boolean success = request.getActualChoice() == request.getExpectedChoice();
             if (success) {
-                currentScore += ScoreService.scoreSolution(currentTask, COMPLETE_TASK);
+                currentScore += round(ScoreService.scoreSolution(currentTask, COMPLETE_TASK));
                 session.setCurrentTask(currentTask + 1);
 
             } else {
-                currentScore = (int) max(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK), 1);
+                currentScore = (int) max(round(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK)), 1);
                 session.setUserHp(session.getUserHp() - UPDATE_HP);
                 if (session.getUserHp() <= 0) {
                     session.setGameStatus(false);
@@ -146,11 +146,11 @@ public class LnmTaskService {
             List<Integer> expectedResults = request.getExpectedChoices().stream().sorted().toList();
             boolean success = actualResults.equals(expectedResults);
             if (success) {
-                currentScore += ScoreService.scoreSolution(currentTask, COMPLETE_TASK);
+                currentScore += round(ScoreService.scoreSolution(currentTask, COMPLETE_TASK));
                 session.setCurrentTask(currentTask + 1);
 
             } else {
-                currentScore = (int) max(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK), 1);
+                currentScore = (int) max(round(currentScore - ScoreService.scoreSolution(currentTask, ERROR_TASK)), 1);
                 session.setUserHp(session.getUserHp() - UPDATE_HP);
                 if (session.getUserHp() <= 0) {
                     session.setGameStatus(false);

@@ -36,7 +36,7 @@ public class SessionService {
         if (sessionDto.isMultiplayer()){
             session.setPlayerState(LnmPlayerState.CREATED);
             if (sessionRepository.existsBySessionToken(sessionDto.getSessionToken())){
-                session.setHero(LnmHero.VIKI);
+                session.setHero(LnmHero.VICKY);
             }
             else {
                 session.setHero(LnmHero.PROFESSOR);

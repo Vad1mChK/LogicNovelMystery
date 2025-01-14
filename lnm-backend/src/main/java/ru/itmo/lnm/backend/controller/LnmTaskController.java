@@ -23,8 +23,8 @@ public class LnmTaskController {
     @PostMapping("/complete-query")
     public ResponseEntity<LnmTaskResponse> handleCompleteQueryTask(
             @RequestBody LnmCompleteQueryDto request,
-             Authentication authorization) {
-        LnmTaskResponse response = lnmTaskService.processCompleteQueryTask(request, authorization.getName());
+             Authentication authentication) {
+        LnmTaskResponse response = lnmTaskService.processCompleteQueryTask(request, authentication.getName());
         return ResponseEntity.ok(response);
     }
 
