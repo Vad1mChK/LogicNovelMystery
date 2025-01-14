@@ -11,6 +11,8 @@ import ru.itmo.lnm.backend.model.User;
 import ru.itmo.lnm.backend.repository.SessionRepository;
 import ru.itmo.lnm.backend.repository.UserRepository;
 
+import java.util.IllegalFormatConversionException;
+
 @Service
 @RequiredArgsConstructor
 public class StateService {
@@ -21,12 +23,13 @@ public class StateService {
     public CampaignReportResponse campaignReport(CampaignReportDto request, String username) {
         User user = userRepository.findByUsername(username);
         Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionId(), user);
-        String ending = "";
+        Session partnerSession = null;
+        String ending = null;
         if (session.getHero().equals(LnmHero.STEVE)) {
             ending = request.isWinner() ? "1" : "0";
         } else {
-            LnmPlayerState playerState = session.getPlayerState();
-            LnmPlayerState partnerPlayerState = sessionRepository.findBySessionTokenAndUserNot(request.getSessionId(), user);
+            partnerSession = sessionRepository.findBySessionTokenAndUserNot(request.getSessionId(), user);
+            LnmPlayerState partnerPlayerState = partnerSession.getPlayerState();
             if (session.getHero().equals(LnmHero.PROFESSOR)) {
                 if (request.isWinner()) {
                     switch (partnerPlayerState) {
@@ -34,6 +37,7 @@ public class StateService {
                         case WAITING_LOST -> ending = "4A";
                         case WAITING_WON -> ending = "5A";
                         default -> {
+                            return null;
                         }
                     }
                 } else {
@@ -41,6 +45,9 @@ public class StateService {
                         case PLAYING -> ending = "0A";
                         case WAITING_LOST -> ending = "2A";
                         case WAITING_WON -> ending = "3A";
+                        default -> {
+                            return null;
+                        }
                     }
                 }
 
@@ -51,6 +58,7 @@ public class StateService {
                         case WAITING_LOST -> ending = "4B";
                         case WAITING_WON -> ending = "5B";
                         default -> {
+                            return null;
                         }
                     }
                 } else {
@@ -58,13 +66,53 @@ public class StateService {
                         case PLAYING -> ending = "0B";
                         case WAITING_LOST -> ending = "2B";
                         case WAITING_WON -> ending = "3B";
+                        default -> {
+                            return null;
+                        }
                     }
                 }
             }
         }
+        changePlayerState(session, partnerSession, ending);
         return CampaignReportResponse.builder()
                 .endingId(ending)
                 .build();
+    }
+
+    public void changePlayerState(Session session, Session partnerSession, String ending){
+        if (ending != null){
+            try {
+                if (ending.equals("0")) session.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                else if (ending.equals("1")) session.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                else {
+                    int startPart = ending.charAt(0);
+                    switch (startPart) {
+                        case 0 -> session.setPlayerState(LnmPlayerState.WAITING_LOST);
+                        case 1 -> session.setPlayerState(LnmPlayerState.WAITING_WON);
+                        case 2 -> {
+                            session.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                            partnerSession.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                        }
+                        case 3 -> {
+                            session.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                            partnerSession.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                        }
+                        case 4 -> {
+                            session.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                            partnerSession.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                        }
+                        case 5 -> {
+                            session.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                            partnerSession.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                        }
+                    }
+                    sessionRepository.save(partnerSession);
+                }
+                sessionRepository.save(session);
+            }catch (Exception e){
+                System.err.println("Some exception in changePlayerState " + e);
+            }
+        }
     }
 
 }

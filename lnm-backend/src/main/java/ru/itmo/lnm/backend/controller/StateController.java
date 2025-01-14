@@ -3,6 +3,7 @@ package ru.itmo.lnm.backend.controller;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,27 @@ public class StateController {
     @PostMapping("/report-campaign")
     public ResponseEntity<CampaignReportResponse> handleCampaignReport(@RequestBody @Valid CampaignReportDto campaignReportDto,
                                                                        Authentication authentication){
-        var response = stateService.campaignReport(campaignReportDto, authentication.getName());
-        return ResponseEntity.ok(response);
+        try {
+            var response = stateService.campaignReport(campaignReportDto, authentication.getName());
+
+            // Проверка успешности ответа
+            if (response != null) {
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(CampaignReportResponse.builder()
+                        .endingId(null)
+                        .build());
+            }
+        } catch (Exception e) {
+            System.err.println("Error processing campaign report " + e);
+
+            // Возврат ответа с ошибкой
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(CampaignReportResponse.builder()
+                            .endingId(null)
+                            .build());
+        }
+
     }
 }

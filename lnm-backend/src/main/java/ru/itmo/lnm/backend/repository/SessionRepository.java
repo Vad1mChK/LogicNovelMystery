@@ -17,6 +17,6 @@ public interface SessionRepository extends JpaRepository<Session, UUID> {
     Session findBySessionTokenAndUser(String sessionToken, User user);
     Boolean existsBySessionToken(String sessionToken);
 
-    LnmPlayerState findBySessionTokenAndUserNot(String sessionToken, User user);
+    Session findBySessionTokenAndUserNot(String sessionToken, User user);
 
 }
