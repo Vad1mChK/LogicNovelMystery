@@ -152,6 +152,48 @@ body {
 	}
 }
 
+.mode-selector {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	margin-bottom: 20px;
+
+	.mode-box {
+		width: 150px;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #007bff; /* Синий цвет для кнопок по умолчанию */
+		border: 2px solid #007bff;
+		border-radius: 8px;
+		font-size: 18px;
+		font-weight: bold;
+		color: white;
+		cursor: pointer;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: #0056b3; /* Тёмно-синий при наведении */
+		}
+
+		&.active {
+			background-color: #0056b3; /* Тёмно-синий фон, когда кнопка нажата */
+			color: white;
+			pointer-events: none; /* Отключаем возможность повторного клика */
+			cursor: not-allowed; /* Курсор для недоступных кнопок */
+		}
+
+		&.inactive {
+			background-color: #ccc; /* Светлый фон для ненажатых кнопок */
+			color: #333;
+			&:hover {
+				background-color: #ddd; /* Немного темнее при наведении */
+			}
+		}
+	}
+}
+
 /* Ползунок звука */
 .volume-control {
 	margin: 10px 0;
