@@ -169,7 +169,7 @@ body {
 		border-radius: 8px;
 		font-size: 18px;
 		font-weight: bold;
-		color: white;
+		color: colors.$WHITE;
 		cursor: pointer;
 		transition: background-color 0.3s;
 
@@ -179,16 +179,17 @@ body {
 
 		&.active {
 			background-color: #0056b3; /* Тёмно-синий фон, когда кнопка нажата */
-			color: white;
+			color: colors.$WHITE;
 			pointer-events: none; /* Отключаем возможность повторного клика */
 			cursor: not-allowed; /* Курсор для недоступных кнопок */
 		}
 
 		&.inactive {
-			background-color: #ccc; /* Светлый фон для ненажатых кнопок */
-			color: #333;
+			background-color: #cccccc; /* Светлый фон для ненажатых кнопок */
+			color: #333333;
+
 			&:hover {
-				background-color: #ddd; /* Немного темнее при наведении */
+				background-color: #dddddd; /* Немного темнее при наведении */
 			}
 		}
 	}
