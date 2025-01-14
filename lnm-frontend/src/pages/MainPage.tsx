@@ -136,6 +136,7 @@ const MainMenu: React.FC = () => {
 				<button
 					className="button left-button"
 					onClick={handleStartGame}
+					id="start-game-button"
 				>
 					{t('Start game')}
 				</button>
@@ -144,6 +145,7 @@ const MainMenu: React.FC = () => {
 				<button
 					className="button top-button"
 					onClick={() => setSettingsOpen(true)}
+					id="settings-button"
 				>
 					{t('Settings')}
 				</button>
@@ -152,6 +154,7 @@ const MainMenu: React.FC = () => {
 				<button
 					className="button right-button"
 					onClick={() => setLeaderboardOpen(true)}
+					id="leaderboard-button"
 				>
 					{t('Leaderboard')}
 				</button>
@@ -160,6 +163,7 @@ const MainMenu: React.FC = () => {
 				<button
 					className="button right-button"
 					onClick={() => setAboutOpen(true)}
+					id="about-button"
 				>
 					{t('About')}
 				</button>

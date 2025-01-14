@@ -40,7 +40,7 @@ test.describe('Example e2e Test Suite', () => {
 		await page.goto('http://localhost:5173/LogicNovelMystery/main');
 
 		// Open settings modal
-		const settingsButton = page.locator('.settings-button');
+		const settingsButton = page.locator('#settings-button');
 		await settingsButton.click();
 
 		// Ensure settings modal is visible
@@ -66,14 +66,14 @@ test.describe('Example e2e Test Suite', () => {
 		await page.goto('http://localhost:5173/LogicNovelMystery/main');
 
 		// Open settings and select Russian
-		const settingsButton = page.locator('.settings-button');
+		const settingsButton = page.locator('#settings-button');
 		await settingsButton.click();
 		const languageSelect = page.locator('#language-select');
 		await languageSelect.selectOption('ru');
 
 		// Reload the page
 		await page.reload();
-		await expect(page.locator('.settings-button')).toHaveText('Настройки'); // Verify persistence
+		await expect(page.locator('#settings-button')).toHaveText('Настройки'); // Verify persistence
 	});
 	/*
 	 * TODO:
