@@ -2,7 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import gameStateReducer, { GameState } from './gameStateSlice';
 import languageReducer, { LanguageState } from './languageSlice';
 import musicReducer, { MusicState } from './musicSlice';
-import gameFinalResultReducer, { GameFinalResultState } from "./gameFinalResultSlice.ts";
+import gameFinalResultReducer, {
+	GameFinalResultState,
+} from './gameFinalResultSlice.ts';
 
 // Middleware to persist state changes to localStorage
 const saveStateToLocalStorage = (state: GameState) => {

@@ -33,19 +33,24 @@ const GamePage: React.FC = () => {
 
 	// Handle short polling lifecycle
 	useEffect(() => {
-		if (!sessionToken) {
-			console.error('No sessionToken found in localStorage');
-			return; // Exit the effect early if no sessionToken
+		let cleanup: (() => void) | undefined;
+
+		if (sessionToken) {
+			console.log('Starting short polling...');
+			startShortPolling(sessionToken, playerState, dispatch);
+
+			// Define the cleanup function
+			cleanup = () => {
+				console.log('Stopping short polling...');
+				stopShortPolling();
+			};
+		} else {
+			console.error('No sessionId found in localStorage');
+			// No cleanup needed if polling wasn't started
 		}
 
-		console.log('Starting short polling...');
-		startShortPolling(sessionToken, playerState, dispatch);
-
-		// Return the cleanup function
-		return () => {
-			console.log('Stopping short polling...');
-			stopShortPolling();
-		};
+		// Always return the cleanup function or undefined
+		return cleanup;
 	}, [sessionToken, playerState, dispatch]);
 
 	const quitToMain = (clearState: boolean = false) => {

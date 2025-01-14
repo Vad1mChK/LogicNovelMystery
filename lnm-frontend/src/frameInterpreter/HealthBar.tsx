@@ -8,7 +8,11 @@ interface HealthBarProps {
 	hidden?: boolean;
 }
 
-const HealthBar: React.FC<HealthBarProps> = ({ currentHealth, maxHealth, hidden = false }) => {
+const HealthBar: React.FC<HealthBarProps> = ({
+	currentHealth,
+	maxHealth,
+	hidden = false,
+}) => {
 	const healthPercentage = Math.max(
 		0,
 		Math.min(100, (currentHealth / maxHealth) * 100)
@@ -25,9 +29,10 @@ const HealthBar: React.FC<HealthBarProps> = ({ currentHealth, maxHealth, hidden 
 
 	return (
 		<Tooltip title={`${healthPercentage}%`}>
-			<div className={
-				`health-bar ${hidden ? 'hidden-health-bar' : ''}`
-			} data-testid="health-bar">
+			<div
+				className={`health-bar ${hidden ? 'hidden-health-bar' : ''}`}
+				data-testid="health-bar"
+			>
 				<div
 					className={`health-bar-fill ${healthLevelClass}`}
 					data-testid="health-bar-fill"

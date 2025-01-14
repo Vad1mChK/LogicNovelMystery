@@ -117,7 +117,11 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 			{currentTask && (
 				<TaskWindow task={currentTask} onSubmit={onTaskSubmit} />
 			)}
-			<HealthBar hidden={isEnding} currentHealth={health} maxHealth={100} />
+			<HealthBar
+				hidden={isEnding}
+				currentHealth={health}
+				maxHealth={100}
+			/>
 		</div>
 	);
 };
