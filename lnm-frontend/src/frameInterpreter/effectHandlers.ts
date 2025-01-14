@@ -1,12 +1,13 @@
 import {
+	LnmEffectArgsMap,
+	LnmFrameCharacterData,
 	LnmFrameEffect,
 	LnmFrameEffectType,
-	LnmEffectArgsMap,
+	LnmPlayerState,
 	LnmPlot,
-	LnmFrameCharacterData,
 	LnmTask,
 } from './types';
-import { reportCampaign } from './communication/reportCampaign.ts';
+import { reportCampaign } from './communication/reportCampaign';
 
 export type EffectHandler = (
 	effect: LnmFrameEffect,
@@ -21,6 +22,9 @@ export type EffectHandler = (
 		>;
 		decreaseHealth: (amount: number | 'kill') => void;
 		increaseHealth: (amount: number | 'full') => void;
+		setPlayerState: (playerState: LnmPlayerState) => void;
+		getIntermediateResult: () => boolean | null;
+		setIntermediateResult: (result: boolean | null) => void;
 		openTaskWindow: (task: LnmTask) => void;
 		plot: LnmPlot;
 	}
@@ -131,11 +135,18 @@ export const effectHandlers: Partial<
 
 	[LnmFrameEffectType.END_CAMPAIGN]: (
 		effect,
-		{ setIsEnding, setCurrentChapterId, setCurrentFrameId, plot }
+		{
+			setIsEnding,
+			setCurrentChapterId,
+			setCurrentFrameId,
+			setIntermediateResult,
+			plot,
+		}
 	) => {
 		const args =
 			effect.args as LnmEffectArgsMap[LnmFrameEffectType.END_CAMPAIGN];
 		console.log('Processing END_CAMPAIGN effect:', args);
+		setIntermediateResult(args.winner);
 		reportCampaign(args.winner)
 			.then((response) => {
 				const nextChapter = plot.chapters.get(response.endingId);
@@ -147,7 +158,19 @@ export const effectHandlers: Partial<
 			})
 			.catch((err) => {
 				console.error('Error reporting campaign:', err);
+				setIntermediateResult(false);
 			});
+	},
+
+	[LnmFrameEffectType.STOP]: (
+		_effect,
+		{ setPlayerState, getIntermediateResult }
+	) => {
+		setPlayerState(
+			getIntermediateResult() === true
+				? LnmPlayerState.WAITING_WON
+				: LnmPlayerState.WAITING_LOST
+		);
 	},
 	// TODO: Add handlers for other effect types as needed
 };
