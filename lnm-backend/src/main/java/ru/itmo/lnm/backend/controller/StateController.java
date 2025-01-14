@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.itmo.lnm.backend.dto.CampaignReportDto;
 import ru.itmo.lnm.backend.dto.SessionDto;
 import ru.itmo.lnm.backend.messages.CampaignReportResponse;
+import ru.itmo.lnm.backend.messages.StateResponse;
 import ru.itmo.lnm.backend.model.LnmPlayerState;
 import ru.itmo.lnm.backend.service.StateService;
 
@@ -42,17 +43,17 @@ public class StateController {
             System.err.println("Error processing campaign report " + e);
 
             // Возврат ответа с ошибкой
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(CampaignReportResponse.builder()
-                            .endingId(null)
-                            .build());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
     }
     @PostMapping("/player-state")
-    public ResponseEntity<LnmPlayerState> handlePlayerState(@RequestBody @Valid SessionDto sessionDto,
-                                                            Authentication authentication) {
+    public ResponseEntity<StateResponse> handlePlayerState(@RequestBody @Valid SessionDto sessionDto,
+                                                           Authentication authentication) {
         var response = stateService.receivePlayerState(sessionDto, authentication.getName());
-        return ResponseEntity.ok(response);
+        if (response != null) {
+            return ResponseEntity.ok(response);
+        }
+       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }
