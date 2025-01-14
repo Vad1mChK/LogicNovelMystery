@@ -1,14 +1,18 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { LnmPlayerState, LnmResult } from '../frameInterpreter/types';
 import '../css/FrameInterpreter.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../state/store.ts';
-import VisualNovelScreen from '../frameInterpreter/VisualNovelScreen.tsx';
-import CreatedWaitScreen from '../frameInterpreter/CreatedWaitScreen.tsx';
-import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen.tsx';
-import ResultsScreen from '../frameInterpreter/ResultsScreen.tsx';
+import { RootState } from '../state/store';
+import VisualNovelScreen from '../frameInterpreter/VisualNovelScreen';
+import CreatedWaitScreen from '../frameInterpreter/CreatedWaitScreen';
+import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen';
+import ResultsScreen from '../frameInterpreter/ResultsScreen';
 import { useNavigate } from 'react-router-dom';
-import { resetState } from '../state/gameStateSlice.ts';
+import { resetState } from '../state/gameStateSlice';
+import {
+	startShortPolling,
+	stopShortPolling,
+} from '../frameInterpreter/communication/statePolling';
 
 const GamePage: React.FC = () => {
 	const { playerState, protagonist } = useSelector(
@@ -17,14 +21,32 @@ const GamePage: React.FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	// TODO: Listen to server state updates only in certain states
-	// const canListenToStateUpdate = (state: LnmPlayerState) => {
-	// 	return [
-	// 		LnmPlayerState.CREATED,
-	// 		LnmPlayerState.WAITING_LOST,
-	// 		LnmPlayerState.WAITING_WON,
-	// 	].includes(state);
-	// };
+	// Retrieve sessionId (could be stored in localStorage or Redux)
+	const sessionToken = localStorage.getItem('sessionToken');
+
+	const {
+		result: finalResult,
+		score,
+		highScore,
+		partnerName,
+	} = useSelector((state: RootState) => state.gameFinalResultState);
+
+	// Handle short polling lifecycle
+	useEffect(() => {
+		if (!sessionToken) {
+			console.error('No sessionToken found in localStorage');
+			return; // Exit the effect early if no sessionToken
+		}
+
+		console.log('Starting short polling...');
+		startShortPolling(sessionToken, playerState, dispatch);
+
+		// Return the cleanup function
+		return () => {
+			console.log('Stopping short polling...');
+			stopShortPolling();
+		};
+	}, [sessionToken, playerState, dispatch]);
 
 	const quitToMain = (clearState: boolean = false) => {
 		if (clearState) {
@@ -49,9 +71,10 @@ const GamePage: React.FC = () => {
 		[
 			LnmPlayerState.COMPLETED_LOST,
 			<ResultsScreen
-				result={LnmResult.SINGLE_BAD}
-				score={12300}
-				highScore={12345}
+				result={finalResult || LnmResult.SINGLE_BAD}
+				score={score || 0}
+				highScore={highScore ?? undefined}
+				partnerName={partnerName ?? undefined}
 				onQuitToMain={quitToMain}
 			/>,
 			// In reality, the server will return all this. Should I add these things to Redux instead?
@@ -59,8 +82,10 @@ const GamePage: React.FC = () => {
 		[
 			LnmPlayerState.COMPLETED_WON,
 			<ResultsScreen
-				result={LnmResult.SINGLE_GOOD}
-				score={12300}
+				result={finalResult || LnmResult.SINGLE_BAD}
+				score={score || 0}
+				highScore={highScore ?? undefined}
+				partnerName={partnerName ?? undefined}
 				onQuitToMain={quitToMain}
 			/>,
 			// In reality, the server will return all this. Should I add these things to Redux?
@@ -68,8 +93,10 @@ const GamePage: React.FC = () => {
 		[
 			LnmPlayerState.SEEN_RESULTS,
 			<ResultsScreen
-				result={LnmResult.SINGLE_GOOD}
-				score={1234}
+				result={finalResult || LnmResult.SINGLE_BAD}
+				score={score || 0}
+				highScore={highScore ?? undefined}
+				partnerName={partnerName ?? undefined}
 				onQuitToMain={() => quitToMain(true)}
 			/>,
 		],
