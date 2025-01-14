@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import gameStateReducer, { GameState } from './gameStateSlice';
 import languageReducer, { LanguageState } from './languageSlice';
 import musicReducer, { MusicState } from './musicSlice';
+import gameFinalResultReducer, { GameFinalResultState } from "./gameFinalResultSlice.ts";
 
 // Middleware to persist state changes to localStorage
 const saveStateToLocalStorage = (state: GameState) => {
@@ -26,6 +27,8 @@ const store = configureStore({
 		gameState: gameStateReducer,
 		languageState: languageReducer,
 		musicState: musicReducer,
+		gameFinalResultState: gameFinalResultReducer, // Add the gameFinalResult slice to the store,
+		// and include it in the middleware to persist changes to localStorage.
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(persistenceMiddleware),
@@ -35,6 +38,7 @@ export type RootState = {
 	gameState: GameState;
 	languageState: LanguageState;
 	musicState: MusicState;
+	gameFinalResultState: GameFinalResultState; // Add the gameFinalResult type to the RootState.
 };
 export type AppDispatch = typeof store.dispatch;
 

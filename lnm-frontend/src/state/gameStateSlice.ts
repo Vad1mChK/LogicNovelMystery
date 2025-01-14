@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
+import { LnmHero, LnmPlayerState } from "../frameInterpreter/types";
 
 // Define the shape of your game state
 export interface GameState {
