@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HealthBar from './HealthBar';
-import healthBar from "./HealthBar";
 
 jest.mock('../css/HealthBar.scss', () => ({}));
 
@@ -80,7 +79,11 @@ describe('HealthBar Component', () => {
 		const maxHealth = 100;
 
 		render(
-			<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} hidden />
+			<HealthBar
+				currentHealth={currentHealth}
+				maxHealth={maxHealth}
+				hidden
+			/>
 		);
 
 		screen.debug();
@@ -88,5 +91,5 @@ describe('HealthBar Component', () => {
 		const healthBar = screen.getByTestId('health-bar');
 		expect(healthBar).toHaveClass('hidden-health-bar');
 		expect(healthBar).toHaveStyle({ left: -5 });
-	})
+	});
 });
