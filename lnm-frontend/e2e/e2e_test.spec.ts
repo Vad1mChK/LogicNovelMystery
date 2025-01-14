@@ -1,4 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { generateMockAuthToken } from './MockAuthToken';
+
+// Добавляем токен перед всеми тестами
+test.beforeEach(async ({ page }) => {
+	const mockToken = generateMockAuthToken();
+	await page.addInitScript((token) => {
+		localStorage.setItem('AuthToken', token);
+	}, mockToken);
+});
 
 test.describe('Example e2e Test Suite', () => {
 	test('Home page loads with correct title', async ({ page }) => {
