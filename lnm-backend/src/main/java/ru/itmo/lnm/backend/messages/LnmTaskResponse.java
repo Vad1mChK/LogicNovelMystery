@@ -8,5 +8,5 @@ import lombok.Data;
 public class LnmTaskResponse {
     private boolean isCorrect;
 
-    private double score;
+    private int score;
 }

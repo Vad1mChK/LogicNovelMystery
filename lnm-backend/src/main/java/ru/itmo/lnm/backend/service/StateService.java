@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.itmo.lnm.backend.dto.CampaignReportDto;
 import ru.itmo.lnm.backend.dto.SessionDto;
 import ru.itmo.lnm.backend.messages.CampaignReportResponse;
-import ru.itmo.lnm.backend.model.LnmHero;
-import ru.itmo.lnm.backend.model.LnmPlayerState;
-import ru.itmo.lnm.backend.model.Session;
-import ru.itmo.lnm.backend.model.User;
+import ru.itmo.lnm.backend.messages.StateResponse;
+import ru.itmo.lnm.backend.model.*;
+import ru.itmo.lnm.backend.repository.LeaderBoardRepository;
 import ru.itmo.lnm.backend.repository.SessionRepository;
 import ru.itmo.lnm.backend.repository.UserRepository;
 
@@ -18,6 +17,7 @@ public class StateService {
 
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
+    private final LeaderBoardRepository leaderBoardRepository;
 
     public CampaignReportResponse campaignReport(CampaignReportDto request, String username) {
         User user = userRepository.findByUsername(username);
@@ -113,10 +113,69 @@ public class StateService {
             }
         }
     }
-    public LnmPlayerState receivePlayerState(SessionDto request, String username){
-        User user = userRepository.findByUsername(username);
-        Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
-        return session.getPlayerState();
+    public StateResponse receivePlayerState(SessionDto request, String username) {
+        try {
+
+            User user = userRepository.findByUsername(username);
+            Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
+            String partnerName = null;
+            LnmResult result = null;
+            Integer score = null;
+            Integer partnerScore = null;
+            LeaderBoard leaderBoard = null;
+            Integer highScore = null;
+            LnmPlayerState playerState = session.getPlayerState();
+            score = session.getCurrentScore();
+            if (session.getHero().equals(LnmHero.STEVE)) {
+                if (playerState.equals(LnmPlayerState.COMPLETED_WON)) {
+                    result = LnmResult.SINGLE_GOOD;
+                } else if (playerState.equals(LnmPlayerState.COMPLETED_LOST)) {
+                    result = LnmResult.SINGLE_BAD;
+                }
+                leaderBoard = leaderBoardRepository.findByUserAndGameMode(user, false);
+
+            } else {
+                Session partnerSession = sessionRepository.findBySessionTokenAndUserNot(request.getSessionToken(), user);
+                partnerName = partnerSession.getUser().getUsername();
+                LnmPlayerState partnerState = partnerSession.getPlayerState();
+                if (playerState.equals(LnmPlayerState.COMPLETED_WON) && partnerState.equals(LnmPlayerState.COMPLETED_WON)) {
+                    result = LnmResult.DOUBLE_GOOD;
+                } else if (playerState.equals(LnmPlayerState.COMPLETED_WON) && partnerState.equals(LnmPlayerState.COMPLETED_LOST)) {
+                    result = LnmResult.DOUBLE_AVERAGE;
+                } else if (playerState.equals(LnmPlayerState.COMPLETED_LOST) && partnerState.equals(LnmPlayerState.COMPLETED_LOST)) {
+                    result = LnmResult.DOUBLE_BAD;
+                }
+                partnerScore = partnerSession.getCurrentScore();
+                leaderBoard = leaderBoardRepository.findByUserAndGameMode(user, true);
+
+            }
+            if (leaderBoard != null) {
+                highScore = leaderBoard.getScore();
+                if (score > highScore) {
+                    leaderBoard.setScore(score);
+                    leaderBoard.setSessionToken(session.getSessionToken());
+                    leaderBoardRepository.save(leaderBoard);
+                }
+            } else {
+                LeaderBoard newLeaderBoard = new LeaderBoard();
+                newLeaderBoard.setUser(user);
+                newLeaderBoard.setScore(score);
+                newLeaderBoard.setSessionToken(session.getSessionToken());
+                newLeaderBoard.setGameMode(partnerName != null);
+                leaderBoardRepository.save(newLeaderBoard);
+            }
+
+            return StateResponse.builder()
+                    .playerState(playerState)
+                    .result(result)
+                    .partnerName(partnerName)
+                    .score(score)
+                    .highScore(highScore)
+                    .build();
+        }catch (Exception e){
+            System.err.println("Some problem in receiveState " + e);
+            return null;
+        }
     }
 
 }
