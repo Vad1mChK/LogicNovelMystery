@@ -35,9 +35,7 @@ const MainMenu: React.FC = () => {
 	const { t, i18n } = useTranslation(); // Используем локализацию
 
 	//todo replace without mock
-	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
-		fallbackLeaderboardData
-	);
+	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(fallbackLeaderboardData);
 
 	const [isRefreshDisabled, setRefreshDisabled] = useState(false);
 	const [timer, setTimer] = useState(0);
@@ -48,7 +46,7 @@ const MainMenu: React.FC = () => {
 		if (!isMusicPlaying) {
 			toggleMusic(); // Запускаем музыку, если она не играет
 		}
-	}, []);
+	}, [isMusicPlaying, setMusicFile, toggleMusic]);
 
 	useEffect(() => {
 		console.log('Mounted: MainMenu');
@@ -74,6 +72,7 @@ const MainMenu: React.FC = () => {
 			setLeaderboardData(fallbackLeaderboardData); // Используем заглушку
 		}
 	};
+
 	// Деактивация кнопки Refresh с таймером
 	const handleRefresh = () => {
 		setRefreshDisabled(true);
@@ -111,6 +110,20 @@ const MainMenu: React.FC = () => {
 		dispatch(setLanguage(selectedLanguage));
 	};
 
+	// Воспроизведение музыки
+	const playMusic = () => {
+		const audio = new Audio(defaultMusic);
+		audio.play().catch((err) => {
+			console.error("Ошибка при попытке воспроизвести музыку:", err);
+		});
+	};
+
+	// Обработчик нажатия на кнопку "Начать игру" с воспроизведением музыки
+	const handleStartGame = () => {
+		playMusic(); // Воспроизведение музыки
+		navigate('/select'); // Переход на другую страницу
+	};
+
 	return (
 		<div
 			className="background"
@@ -119,32 +132,25 @@ const MainMenu: React.FC = () => {
 			}}
 		>
 			<div className="main-container">
-				{/* Кнопка "Начать игру" */}
-				<button className="button" onClick={() => navigate('/select')}>
+				{/* Кнопка "Начать игру" слева */}
+				<button className="button left-button" onClick={handleStartGame}>
 					{t('Start game')}
 				</button>
 
-				{/* Блок с дополнительными кнопками */}
-				<div className="side-buttons">
-					<button
-						className="button leaderboard-button"
-						onClick={() => setLeaderboardOpen(true)}
-					>
-						{t('Leaderboard')}
-					</button>
-					<button
-						className="button settings-button"
-						onClick={() => setSettingsOpen(true)}
-					>
-						{t('Settings')}
-					</button>
-					<button
-						className="button about-button"
-						onClick={() => setAboutOpen(true)}
-					>
-						{t('About')}
-					</button>
-				</div>
+				{/* Кнопка "Настройки" по центру сверху */}
+				<button className="button top-button" onClick={() => setSettingsOpen(true)}>
+					{t('Settings')}
+				</button>
+
+				{/* Кнопка "Доска лидеров" справа */}
+				<button className="button right-button" onClick={() => setLeaderboardOpen(true)}>
+					{t('Leaderboard')}
+				</button>
+
+				{/* Кнопка "О игре" справа */}
+				<button className="button right-button" onClick={() => setAboutOpen(true)}>
+					{t('About')}
+				</button>
 			</div>
 
 			{/* Затенение фона для модальных окон */}
@@ -203,22 +209,22 @@ const MainMenu: React.FC = () => {
 					<h2>{t('Leaderboard')}</h2>
 					<table>
 						<thead>
-							<tr>
-								<th>№</th>
-								<th>{t('Name')}</th>
-								<th>{t('Score')}</th>
-								<th>{t('GameMode')}</th>
-							</tr>
+						<tr>
+							<th>№</th>
+							<th>{t('Name')}</th>
+							<th>{t('Score')}</th>
+							<th>{t('GameMode')}</th>
+						</tr>
 						</thead>
 						<tbody>
-							{leaderboardData.map((leader, index) => (
-								<tr key={index}>
-									<td>{index + 1}</td>
-									<td>{leader.name}</td>
-									<td>{leader.gameMode}</td>
-									<td>{leader.score}</td>
-								</tr>
-							))}
+						{leaderboardData.map((leader, index) => (
+							<tr key={index}>
+								<td>{index + 1}</td>
+								<td>{leader.name}</td>
+								<td>{leader.gameMode}</td>
+								<td>{leader.score}</td>
+							</tr>
+						))}
 						</tbody>
 					</table>
 					<button
