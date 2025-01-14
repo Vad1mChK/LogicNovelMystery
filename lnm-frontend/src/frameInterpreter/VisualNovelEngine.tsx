@@ -257,6 +257,10 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 				})
 				.catch((e) => {
 					console.error('Error reporting campaign:', e);
+					console.log('Fallback to default ending...');
+					if (plot.defaultEnding)
+						setCurrentEndingId(plot.defaultEnding);
+					handleNextFrame(currentFrameId ?? null);
 				});
 		}
 	}, [currentFrameId, handleNextFrame, health, isEnding]);

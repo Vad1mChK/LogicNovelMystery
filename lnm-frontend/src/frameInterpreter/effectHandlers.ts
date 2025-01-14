@@ -159,6 +159,18 @@ export const effectHandlers: Partial<
 			.catch((err) => {
 				console.error('Error reporting campaign:', err);
 				setIntermediateResult(false);
+				console.log('Fallback to default ending...');
+				if (
+					plot.defaultEnding &&
+					plot.chapters.has(plot.defaultEnding)
+				) {
+					const defaultEndingChapter = plot.chapters.get(
+						plot.defaultEnding
+					);
+					setIsEnding(true);
+					setCurrentChapterId(plot.defaultEnding);
+					setCurrentFrameId(defaultEndingChapter!.startFrame);
+				}
 			});
 	},
 
