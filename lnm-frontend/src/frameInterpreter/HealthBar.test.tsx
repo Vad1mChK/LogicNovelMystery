@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HealthBar from './HealthBar';
+import healthBar from "./HealthBar";
 
 jest.mock('../css/HealthBar.scss', () => ({}));
 
@@ -16,7 +17,6 @@ describe('HealthBar Component', () => {
 		render(
 			<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} />
 		);
-		screen.debug();
 
 		// Select the health bar fill element
 		const healthBarFill = screen.getByTestId('health-bar-fill');
@@ -74,4 +74,19 @@ describe('HealthBar Component', () => {
 		// Assert low health applies the correct class
 		expect(healthBarFill).toHaveClass('health-low');
 	});
+
+	it('is outside the screen when hidden', () => {
+		const currentHealth = 100;
+		const maxHealth = 100;
+
+		render(
+			<HealthBar currentHealth={currentHealth} maxHealth={maxHealth} hidden />
+		);
+
+		screen.debug();
+
+		const healthBar = screen.getByTestId('health-bar');
+		expect(healthBar).toHaveClass('hidden-health-bar');
+		expect(healthBar).toHaveStyle({ left: -5 });
+	})
 });
