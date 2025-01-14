@@ -5,6 +5,7 @@ export interface LnmPlot {
 	music: Map<string, LnmMusic>;
 	startChapter: string;
 	chapters: Map<string, LnmChapter>;
+	defaultEnding?: string;
 	frames: {
 		main: Map<string, Map<string, LnmFrame>>;
 	};

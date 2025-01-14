@@ -142,6 +142,7 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 		music,
 		chapters,
 		startChapter: plotObject.startChapter,
+		defaultEnding: plotObject.defaultEnding,
 		frames: {
 			main: framesMain,
 		},

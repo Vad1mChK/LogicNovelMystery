@@ -41,10 +41,8 @@
     "anonymous": {
       "id": "anonymous",
       "name": "???",
-      "defaultPose": "angry",
-      "sprites": {
-        "idle": "assets/img/characters/robot/idle.webp"
-      }
+      "defaultPose": null,
+      "sprites": {}
     },
     "sarah": {
       "id": "sarah",
@@ -53,6 +51,15 @@
       "sprites": {
         "idle": "assets/img/characters/sarah/idle.webp",
         "hostage": "assets/img/characters/sarah/hostage.webp"
+      }
+    },
+    "mitnik": {
+      "id": "mitnik",
+      "name": "Митник",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/mitnik/idle.webp",
+        "shrug": "assets/img/characters/mitnik/shrug.webp"
       }
     }
   },
@@ -96,6 +103,11 @@
       "id": "goodEndingScreens",
       "name": "Комната с компьютером",
       "background": "assets/img/endings/GoodEndingScreens.webp"
+    },
+    "badEndingFinal": {
+      "id": "badEndingFinal",
+      "name": "Комната с компьютером",
+      "background": "assets/img/endings/BadEndingFinal.webp"
     }
   },
   "music": {},
@@ -157,8 +169,15 @@
       "title": "Победа",
       "startFrame": "win_start",
       "isEnding": "true"
+    },
+    "ending_limbo": {
+      "id": "ending_limbo",
+      "title": "Лимбо",
+      "startFrame": "limbo_start",
+      "isEnding": "true"
     }
   },
+  "defaultEnding": "ending_limbo",
   "frames": {
     "main": {
       "inception1": {
@@ -825,7 +844,7 @@
         "inception4_failTask0_01": {
           "id": "inception4_failTask0_01",
           "dialogue": "Будьте внимательны, пожалуйста. Подумайте ещё.",
-          "nextFrame": "inception4_12",
+          "nextFrame": "inception4_11",
           "effects": [
             {
               "type": "JUMP",
@@ -841,7 +860,7 @@
         "inception4_failTask0_02": {
           "id": "inception4_failTask0_02",
           "dialogue": "Будьте внимательны, пожалуйста. И следите за своим здоровьем. Кажется, вы начинаете нервничать...",
-          "nextFrame": "inception4_12",
+          "nextFrame": "inception4_11",
           "effects": [
             {
               "type": "JUMP",
@@ -859,10 +878,10 @@
         "inception4_failTask0_03": {
           "id": "inception4_failTask0_02",
           "dialogue": "Сфокусируйтесь, агент! Это ваша последняя попытка...",
-          "nextFrame": "inception4_12"
+          "nextFrame": "inception4_11"
         },
-        "inception4_13": {
-          "id": "inception4_13",
+        "inception4_12": {
+          "id": "inception4_12",
           "dialogue": "...Хорошо. Вижу, самое время продолжить наш путь... и наше обучение.",
           "nextFrame": "inception4_14"
         },
@@ -1716,7 +1735,12 @@
         "lose_4": {
           "id": "lose_4",
           "dialogue": "",
-          "effects": []
+          "effects": [
+            {
+              "type": "STOP",
+              "args": {}
+            }
+          ]
         }
       },
       "ending_win": {
@@ -1804,9 +1828,95 @@
           "win_8": {
             "id": "win_8",
             "dialogue": "",
-            "effects": []
+            "effects": [
+              {
+                "type": "STOP",
+                "args": {}
+              }
+            ]
           }
+        },
+      "ending_limbo": {
+        "limbo_start": {
+          "id": "limbo_start",
+          "location": "computerRoom",
+          "characters": [
+            {
+              "id": "mitnik",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "anonymous",
+          "dialogue": "...Ну, вот ты и проснулся, агент.",
+          "nextFrame": "limbo_1"
+        },
+        "limbo_1": {
+          "id": "limbo_1",
+          "speaker": "mitnik",
+          "dialogue": "Привет, это Митник.",
+          "nextFrame": "limbo_2",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "mitnik"
+              }
+            }
+          ]
+        },
+        "limbo_2": {
+          "id": "limbo_2",
+          "dialogue": "Во время своего приключения ты каким-то образом отключился.",
+          "nextFrame": "limbo_3"
+        },
+        "limbo_3": {
+          "id": "limbo_3",
+          "dialogue": "Увы, хотя твоей вины в этом нет...",
+          "nextFrame": "limbo_4",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "mitnik",
+                "newPose": "shrug"
+              }
+            }
+          ]
+        },
+        "limbo_4": {
+          "id": "limbo_4",
+          "dialogue": "Мой вирус уже запущен в сеть и прямо сейчас проникает на миллиарды устройств.",
+          "nextFrame": "limbo_5",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "mitnik"
+              }
+            }
+          ]
+        },
+        "limbo_5": {
+          "id": "limbo_5",
+          "location": "badEndingFinal",
+          "dialogue": "Ты опоздал, Стивен! Теперь я сертифицированный повелитель этого мира.",
+          "nextFrame": "limbo_6"
+        },
+        "limbo_6": {
+          "id": "limbo_6",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "STOP",
+              "args": {}
+            }
+          ]
         }
+      }
     }
   },
   "tasks": {

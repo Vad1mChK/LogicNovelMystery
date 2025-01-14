@@ -6,6 +6,7 @@ import {
 	LnmLocation,
 	LnmFrameCharacterData,
 	LnmTask,
+	LnmPlayerState,
 } from './types';
 import FrameRenderer from './FrameRenderer';
 import { createConditionEvaluator } from './conditionHandlers';
@@ -17,6 +18,8 @@ import {
 	increaseHealth,
 	setCurrentFrame,
 	setCurrentChapter,
+	setIntermediateResult,
+	setPlayerState,
 } from '../state/gameStateSlice.ts';
 import { reportCampaign } from './communication/reportCampaign.ts';
 
@@ -52,13 +55,8 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	const [_, setTaskOpen] = useState(false);
 
 	const dispatch = useDispatch();
-	const health = useSelector((state: RootState) => state.gameState.health);
-	const currentFrameId = useSelector(
-		(state: RootState) => state.gameState.currentFrameId
-	);
-	const currentChapterId = useSelector(
-		(state: RootState) => state.gameState.currentChapterId
-	);
+	const { health, currentFrameId, currentChapterId, intermediateResult } =
+		useSelector((state: RootState) => state.gameState);
 
 	const evaluateCondition = createConditionEvaluator(() => health);
 
@@ -142,6 +140,11 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 								dispatch(decreaseHealth(amount)),
 							increaseHealth: (amount: number | 'full') =>
 								dispatch(increaseHealth(amount)),
+							getIntermediateResult: () => intermediateResult,
+							setIntermediateResult: (result) =>
+								dispatch(setIntermediateResult(result)),
+							setPlayerState: (playerState: LnmPlayerState) =>
+								dispatch(setPlayerState(playerState)),
 							openTaskWindow: (task: LnmTask) => {
 								setCurrentTask(task); // Set the task
 								setTaskOpen(true); // Open the task window
@@ -246,6 +249,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	useEffect(() => {
 		if (health <= 0 && !isEnding) {
 			console.log('Health reached 0, giving up');
+			dispatch(setIntermediateResult(false));
 			reportCampaign(false)
 				.then((response) => {
 					setCurrentEndingId(response.endingId);
@@ -253,6 +257,10 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 				})
 				.catch((e) => {
 					console.error('Error reporting campaign:', e);
+					console.log('Fallback to default ending...');
+					if (plot.defaultEnding)
+						setCurrentEndingId(plot.defaultEnding);
+					handleNextFrame(currentFrameId ?? null);
 				});
 		}
 	}, [currentFrameId, handleNextFrame, health, isEnding]);
