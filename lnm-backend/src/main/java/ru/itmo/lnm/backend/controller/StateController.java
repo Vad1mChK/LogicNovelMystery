@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itmo.lnm.backend.dto.CampaignReportDto;
+import ru.itmo.lnm.backend.dto.SessionDto;
 import ru.itmo.lnm.backend.messages.CampaignReportResponse;
+import ru.itmo.lnm.backend.model.LnmPlayerState;
 import ru.itmo.lnm.backend.service.StateService;
 
 @RestController
@@ -46,5 +48,11 @@ public class StateController {
                             .build());
         }
 
+    }
+    @PostMapping("/player-state")
+    public ResponseEntity<LnmPlayerState> handlePlayerState(@RequestBody @Valid SessionDto sessionDto,
+                                                            Authentication authentication) {
+        var response = stateService.receivePlayerState(sessionDto, authentication.getName());
+        return ResponseEntity.ok(response);
     }
 }

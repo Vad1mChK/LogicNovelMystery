@@ -3,6 +3,7 @@ package ru.itmo.lnm.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itmo.lnm.backend.dto.CampaignReportDto;
+import ru.itmo.lnm.backend.dto.SessionDto;
 import ru.itmo.lnm.backend.messages.CampaignReportResponse;
 import ru.itmo.lnm.backend.model.LnmHero;
 import ru.itmo.lnm.backend.model.LnmPlayerState;
@@ -10,8 +11,6 @@ import ru.itmo.lnm.backend.model.Session;
 import ru.itmo.lnm.backend.model.User;
 import ru.itmo.lnm.backend.repository.SessionRepository;
 import ru.itmo.lnm.backend.repository.UserRepository;
-
-import java.util.IllegalFormatConversionException;
 
 @Service
 @RequiredArgsConstructor
@@ -113,6 +112,11 @@ public class StateService {
                 System.err.println("Some exception in changePlayerState " + e);
             }
         }
+    }
+    public LnmPlayerState receivePlayerState(SessionDto request, String username){
+        User user = userRepository.findByUsername(username);
+        Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
+        return session.getPlayerState();
     }
 
 }
