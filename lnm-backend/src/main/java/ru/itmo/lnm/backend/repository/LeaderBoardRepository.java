@@ -20,4 +20,10 @@ public interface LeaderBoardRepository extends JpaRepository<LeaderBoard, UUID> 
     List<LeaderBoard> findBestScoresForEachSessionToken(@Param("gameMode") boolean gameMode);
 
     LeaderBoard findByUserAndGameMode(User user, boolean gameMode);
+
+    @Query("SELECT l FROM LeaderBoard l WHERE l.sessionToken IN " +
+            "(SELECT l2.sessionToken FROM LeaderBoard l2 WHERE l2.user = :user1) " +
+            "AND l.user = :user2")
+    List<LeaderBoard> findByUsersWithSameSessionToken(@Param("user1") User user1, @Param("user2") User user2);
+
 }

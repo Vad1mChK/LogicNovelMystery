@@ -55,7 +55,5 @@ public class SessionService {
 
         return new ResponseEntity<>("Successful", HttpStatus.CREATED);
 
-
-
     }
 }
