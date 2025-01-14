@@ -158,14 +158,14 @@
       "title": "Продолжение, Глава 5",
       "startFrame": "elaboration5_start"
     },
-    "ending_lose": {
-      "id": "ending_lose",
+    "ending_0": {
+      "id": "ending_0",
       "title": "Поражение",
       "startFrame": "lose_start",
       "isEnding": "true"
     },
-    "ending_win": {
-      "id": "ending_win",
+    "ending_1": {
+      "id": "ending_1",
       "title": "Победа",
       "startFrame": "win_start",
       "isEnding": "true"
@@ -880,8 +880,8 @@
           "dialogue": "Сфокусируйтесь, агент! Это ваша последняя попытка...",
           "nextFrame": "inception4_11"
         },
-        "inception4_12": {
-          "id": "inception4_12",
+        "inception4_13": {
+          "id": "inception4_13",
           "dialogue": "...Хорошо. Вижу, самое время продолжить наш путь... и наше обучение.",
           "nextFrame": "inception4_14"
         },
@@ -1698,7 +1698,7 @@
           ]
         }
       },
-      "ending_lose": {
+      "ending_0": {
         "lose_start": {
           "id": "lose_start",
           "nextFrame": "lose_1",
@@ -1743,7 +1743,7 @@
           ]
         }
       },
-      "ending_win": {
+      "ending_1": {
           "win_start": {
             "id": "win_start",
             "location": "computerRoom",

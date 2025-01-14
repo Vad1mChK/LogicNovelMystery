@@ -149,10 +149,12 @@ export const effectHandlers: Partial<
 		setIntermediateResult(args.winner);
 		reportCampaign(args.winner)
 			.then((response) => {
-				const nextChapter = plot.chapters.get(response.endingId);
+				const nextChapter = plot.chapters.get(
+					`ending_${response.endingId}`
+				);
 				if (nextChapter) {
 					setIsEnding(true);
-					setCurrentChapterId(response.endingId);
+					setCurrentChapterId(`ending_${response.endingId}`);
 					setCurrentFrameId(nextChapter.startFrame);
 				}
 			})

@@ -252,7 +252,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 			dispatch(setIntermediateResult(false));
 			reportCampaign(false)
 				.then((response) => {
-					setCurrentEndingId(response.endingId);
+					setCurrentEndingId(`ending_${response.endingId}`);
 					handleNextFrame(currentFrameId ?? null);
 				})
 				.catch((e) => {
