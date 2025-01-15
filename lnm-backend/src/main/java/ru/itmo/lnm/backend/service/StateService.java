@@ -265,12 +265,17 @@ public class StateService {
             int userHp;
             String chapter;
             if (session.isGameStatus()) {
-                userHp = session.getUserHp();
-                chapter = session.getCurrentChapter();
-                return RestoreStateResponse.builder()
-                        .userHp(userHp)
-                        .chapter(chapter)
-                        .build();
+                if (!request.getIsMultiplayer() && session.getHero().equals(LnmHero.STEVE)
+                        || request.getIsMultiplayer() && (session.getHero().equals(LnmHero.PROFESSOR)
+                        || session.getHero().equals(LnmHero.VICKY))) {
+                    
+                    userHp = session.getUserHp();
+                    chapter = session.getCurrentChapter();
+                    return RestoreStateResponse.builder()
+                            .userHp(userHp)
+                            .chapter(chapter)
+                            .build();
+                }
             }
         }catch (Exception e){
             System.err.println("Some problem with jpa " + e);
