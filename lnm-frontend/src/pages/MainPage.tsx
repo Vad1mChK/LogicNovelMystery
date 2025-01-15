@@ -15,6 +15,8 @@ import {
 	setVolume,
 	togglePlayMusic,
 } from '../state/musicSlice.ts';
+import { VITE_SERVER_URL } from '../metaEnv';
+import leaderboardWorkerScript from '../workers/leaderboardWorker.tsx?worker';
 
 interface LeaderboardEntry {
 	username: string;
@@ -43,6 +45,7 @@ const MainMenu: React.FC = () => {
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	const [isMultiplayer, setIsMultiplayer] = useState(false);
+	const [showQuestion, setShowQuestion] = useState(false); // Состояние для пасхалки
 
 	// Устанавливаем музыку при загрузке страницы
 	useEffect(() => {
@@ -62,13 +65,15 @@ const MainMenu: React.FC = () => {
 		if (isLeaderboardOpen) {
 			fetchLeaderboardData(isMultiplayer);
 		}
-	}, [isLeaderboardOpen, isMultiplayer]); // Добавляем зависимости
+	}, [isLeaderboardOpen]); // Добавляем зависимости
 	// Запрос данных с сервера
 	const fetchLeaderboardData = async (isMultiplayer: boolean) => {
 		try {
 			setErrorMessage(null); // Сбрасываем сообщение об ошибке перед запросом
-			const response = await axios.post<LeaderboardEntry[]>(
-				'http://localhost:8080/api/leaderboard',
+			const response = await axios.post<{
+				leaderBoardList: LeaderboardEntry[];
+			}>(
+				`${VITE_SERVER_URL}/api/leaderboard`,
 				{
 					isMultiplayer,
 				},
@@ -79,10 +84,11 @@ const MainMenu: React.FC = () => {
 					},
 				}
 			);
-			if (Array.isArray(response.data)) {
+			const leaderBoardList = response.data?.leaderBoardList;
+			if (Array.isArray(leaderBoardList)) {
 				if (isMultiplayer) {
 					// Группируем записи по sessionToken
-					const groupedData = response.data.reduce(
+					const groupedData = leaderBoardList.reduce(
 						(
 							acc: Record<string, LeaderboardEntry>,
 							entry: LeaderboardEntry
@@ -110,7 +116,7 @@ const MainMenu: React.FC = () => {
 					setLeaderboardData(sortedData);
 				} else {
 					// Для одиночного режима просто сортируем и берем топ-10
-					const sortedData = response.data
+					const sortedData = leaderBoardList
 						.sort(
 							(a: LeaderboardEntry, b: LeaderboardEntry) =>
 								b.score - a.score
@@ -131,6 +137,35 @@ const MainMenu: React.FC = () => {
 			);
 		}
 	};
+	// Открытие leaderboard с использованием воркера
+	const openLeaderboard = () => {
+		const worker = new leaderboardWorkerScript();
+		worker.postMessage(null);
+
+		worker.onmessage = (e) => {
+			const { type, message } = e.data;
+			if (type === 'question') {
+				// Пасхалка: показываем вопрос
+				console.log(message);
+				setShowQuestion(true);
+			} else if (type === 'fetch') {
+				// Выполняем запрос к серверу
+				fetchLeaderboardData(isMultiplayer);
+				setLeaderboardOpen(true);
+			}
+			worker.terminate();
+		};
+	};
+
+	const handleQuestionResponse = (answer: boolean) => {
+		if (answer) {
+			// Если "Да", загружаем таблицу лидеров
+			fetchLeaderboardData(isMultiplayer);
+			setLeaderboardOpen(true);
+		}
+		setShowQuestion(false); // Закрываем вопрос
+	};
+
 	const closeAllModals = () => {
 		setSettingsOpen(false);
 		setAboutOpen(false);
@@ -193,7 +228,7 @@ const MainMenu: React.FC = () => {
 				{/* Кнопка "Доска лидеров" справа */}
 				<button
 					className="button right-button"
-					onClick={() => setLeaderboardOpen(true)}
+					onClick={openLeaderboard}
 					id="leaderboard-button"
 				>
 					{t('Leaderboard')}
@@ -217,7 +252,10 @@ const MainMenu: React.FC = () => {
 			</div>
 
 			{/* Затенение фона для модальных окон */}
-			{isSettingsOpen || isAboutOpen || isLeaderboardOpen ? (
+			{isSettingsOpen ||
+			isAboutOpen ||
+			isLeaderboardOpen ||
+			showQuestion ? (
 				<div className="modal-overlay" onClick={closeAllModals}></div>
 			) : null}
 
@@ -279,6 +317,21 @@ const MainMenu: React.FC = () => {
 					<button className="modal-button" onClick={closeAllModals}>
 						{t('Close')}
 					</button>
+				</div>
+			)}
+
+			{/* Модальное окно с вопросом (пассхалка) */}
+			{showQuestion && (
+				<div id="question-modal">
+					<h2>{t('Question')}</h2>
+					<div className="modal-actions">
+						<button onClick={() => handleQuestionResponse(true)}>
+							{t('Yes')}
+						</button>
+						<button onClick={() => handleQuestionResponse(false)}>
+							{t('No')}
+						</button>
+					</div>
 				</div>
 			)}
 

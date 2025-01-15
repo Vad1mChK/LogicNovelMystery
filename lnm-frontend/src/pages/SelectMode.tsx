@@ -6,12 +6,12 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { VITE_SERVER_URL } from '../metaEnv.ts';
 import { restoreState } from '../frameInterpreter/communication/restoreState.ts';
 import { generateSessionToken } from '../util/generateSessionToken.ts';
 import { useDispatch } from 'react-redux';
 import { setPlayerState, setProtagonist } from '../state/gameStateSlice.ts';
 import { LnmHero, LnmPlayerState } from '../frameInterpreter/types.ts';
+import { VITE_SERVER_URL } from '../metaEnv';
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
@@ -64,6 +64,9 @@ const GameSelection: React.FC = () => {
 					token,
 					isMultiplayer: false,
 				},
+<!-- 			/*const result = */ await axios.post(
+				`${VITE_SERVER_URL}/session`, // Замените на ваш API-эндпоинт
+				{ sessionToken }, // Токен передается в теле запроса -->
 				{
 					headers: {
 						'Content-Type': 'application/json',
