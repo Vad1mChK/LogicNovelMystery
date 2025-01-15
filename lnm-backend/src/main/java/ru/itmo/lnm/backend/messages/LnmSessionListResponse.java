@@ -2,12 +2,11 @@ package ru.itmo.lnm.backend.messages;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.itmo.lnm.backend.model.WaitingRoom;
 
-import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
 public class LnmSessionListResponse {
-    private List<WaitingRoom> sessionList;
+    private Map<String , String> sessionList;
 }

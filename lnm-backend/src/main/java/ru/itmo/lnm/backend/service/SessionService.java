@@ -11,8 +11,9 @@ import ru.itmo.lnm.backend.model.*;
 import ru.itmo.lnm.backend.repository.SessionRepository;
 import ru.itmo.lnm.backend.repository.UserRepository;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -54,12 +55,9 @@ public class SessionService {
     }
     public LnmSessionListResponse getWaitingSession(){
         List<Session> lnmSessionList = sessionRepository.findAllByPlayerStateAndGameStatus(LnmPlayerState.CREATED, true);
-        List<WaitingRoom> waitingRooms = new ArrayList<>();
+        Map<String, String> waitingRooms = new HashMap<>();
         for (Session lnmSession : lnmSessionList){
-            waitingRooms.add(WaitingRoom.builder()
-                            .username(lnmSession.getUser().getUsername())
-                            .sessionToken(lnmSession.getSessionToken())
-                    .build());
+            waitingRooms.put(lnmSession.getUser().getUsername(), lnmSession.getSessionToken());
         }
         return LnmSessionListResponse.builder()
                 .sessionList(waitingRooms)
