@@ -268,7 +268,7 @@ public class StateService {
                 if (!request.getIsMultiplayer() && session.getHero().equals(LnmHero.STEVE)
                         || request.getIsMultiplayer() && (session.getHero().equals(LnmHero.PROFESSOR)
                         || session.getHero().equals(LnmHero.VICKY))) {
-                    
+
                     userHp = session.getUserHp();
                     chapter = session.getCurrentChapter();
                     return RestoreStateResponse.builder()
