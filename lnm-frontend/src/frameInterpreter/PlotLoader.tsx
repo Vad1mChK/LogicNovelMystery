@@ -15,7 +15,6 @@ import {
 	LnmFrameCondition,
 	LnmFrameEffect,
 	LnmFrameEffectType,
-	LnmKnowledge,
 	LnmLocation,
 	LnmMetadata,
 	LnmMusic,
@@ -129,22 +128,12 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 			}
 		)
 	);
-	const framesEndings = // objectToMap<LnmEnding>(plotObject.frames.endings);
-		new Map(
-			Object.entries(plotObject.frames.endings).map(
-				([endingId, endingData]) => [
-					endingId,
-					convertAndCreateEnding(endingData, signal),
-				]
-			)
-		);
 	const tasks = new Map(
 		Object.entries(plotObject.tasks).map(([taskId, taskData]) => [
 			taskId,
 			convertAndCreateTask(taskData, signal),
 		])
 	);
-	const knowledge = objectToMap<LnmKnowledge>(plotObject.knowledge);
 
 	return {
 		metadata,
@@ -153,12 +142,11 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 		music,
 		chapters,
 		startChapter: plotObject.startChapter,
+		defaultEnding: plotObject.defaultEnding,
 		frames: {
 			main: framesMain,
-			endings: framesEndings,
 		},
 		tasks,
-		knowledge,
 	};
 }
 
@@ -348,9 +336,7 @@ function convertAndCreateTask(taskObject: any, signal?: AbortSignal): LnmTask {
 			const testCases = testCasesObject.map((testCase: any) => ({
 				input: testCase.input,
 				expectedResults: testCase.expectedResults.map(
-					(result: any) => ({
-						variables: result.variables,
-					})
+					(result: any) => result.variables
 				),
 			}));
 			return {
@@ -370,9 +356,7 @@ function convertAndCreateTask(taskObject: any, signal?: AbortSignal): LnmTask {
 			const { knowledge, defaultValue } = taskObject;
 			const expectedResultsObject = taskObject.expectedResults;
 			const expectedResults = expectedResultsObject.map(
-				(result: any) => ({
-					variables: result.variables,
-				})
+				(result: any) => result.variables
 			);
 
 			return {

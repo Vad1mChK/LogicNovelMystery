@@ -41,10 +41,8 @@
     "anonymous": {
       "id": "anonymous",
       "name": "???",
-      "defaultPose": "angry",
-      "sprites": {
-        "idle": "assets/img/characters/robot/idle.webp"
-      }
+      "defaultPose": null,
+      "sprites": {}
     },
     "sarah": {
       "id": "sarah",
@@ -53,6 +51,15 @@
       "sprites": {
         "idle": "assets/img/characters/sarah/idle.webp",
         "hostage": "assets/img/characters/sarah/hostage.webp"
+      }
+    },
+    "mitnik": {
+      "id": "mitnik",
+      "name": "Митник",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/mitnik/idle.webp",
+        "shrug": "assets/img/characters/mitnik/shrug.webp"
       }
     }
   },
@@ -86,6 +93,21 @@
       "id": "computerRoom",
       "name": "Комната с компьютером",
       "background": "assets/img/locations/ComputerRoom.webp"
+    },
+    "badEndingScreens": {
+      "id": "badEndingScreens",
+      "name": "Комната с компьютером",
+      "background": "assets/img/endings/BadEndingScreens.webp"
+    },
+    "goodEndingScreens": {
+      "id": "goodEndingScreens",
+      "name": "Комната с компьютером",
+      "background": "assets/img/endings/GoodEndingScreens.webp"
+    },
+    "badEndingFinal": {
+      "id": "badEndingFinal",
+      "name": "Комната с компьютером",
+      "background": "assets/img/endings/BadEndingFinal.webp"
     }
   },
   "music": {},
@@ -94,71 +116,68 @@
     "inception1": {
       "id": "inception1",
       "title": "Начало, Глава 1",
-      "startFrame": "inception1_start",
-      "knowledge": [
-        "iAmSteve"
-      ]
+      "startFrame": "inception1_start"
     },
     "inception2": {
       "id": "inception2",
       "title": "Начало, Глава 2",
-      "startFrame": "inception2_start",
-      "knowledge": [
-        "iAmSteve",
-        "mySuperior"
-      ]
+      "startFrame": "inception2_start"
     },
     "inception3": {
       "id": "inception3",
       "title": "Начало, Глава 3",
-      "startFrame": "inception3_start",
-      "knowledge": [
-        "iAmSteve",
-        "mySuperior",
-        "ifAssistedKevinThenCreatedVirus"
-      ]
+      "startFrame": "inception3_start"
     },
     "inception4": {
       "id": "inception4",
       "title": "Начало, Глава 4",
-      "startFrame": "inception4_start",
-      "knowledge": [
-        "iAmSteve",
-        "mySuperior",
-        "ifAssistedKevinThenCreatedVirus"
-      ]
+      "startFrame": "inception4_start"
     },
     "elaboration1": {
       "id": "elaboration1",
       "title": "Продолжение, Глава 1",
-      "startFrame": "elaboration1_start",
-      "knowledge": []
+      "startFrame": "elaboration1_start"
     },
     "elaboration2": {
       "id": "elaboration2",
       "title": "Продолжение, Глава 2",
-      "startFrame": "elaboration2_start",
-      "knowledge": []
+      "startFrame": "elaboration2_start"
     },
     "elaboration3": {
       "id": "elaboration3",
       "title": "Продолжение, Глава 3",
-      "startFrame": "elaboration3_start",
-      "knowledge": []
+      "startFrame": "elaboration3_start"
     },
     "elaboration4": {
       "id": "elaboration4",
       "title": "Продолжение, Глава 4",
-      "startFrame": "elaboration4_start",
-      "knowledge": []
+      "startFrame": "elaboration4_start"
     },
     "elaboration5": {
       "id": "elaboration5",
       "title": "Продолжение, Глава 5",
-      "startFrame": "elaboration5_start",
-      "knowledge": []
+      "startFrame": "elaboration5_start"
+    },
+    "ending_0": {
+      "id": "ending_0",
+      "title": "Поражение",
+      "startFrame": "lose_start",
+      "isEnding": "true"
+    },
+    "ending_1": {
+      "id": "ending_1",
+      "title": "Победа",
+      "startFrame": "win_start",
+      "isEnding": "true"
+    },
+    "ending_limbo": {
+      "id": "ending_limbo",
+      "title": "Лимбо",
+      "startFrame": "limbo_start",
+      "isEnding": "true"
     }
   },
+  "defaultEnding": "ending_limbo",
   "frames": {
     "main": {
       "inception1": {
@@ -188,21 +207,7 @@
           "id": "inception1_02",
           "dialogue": "Стив Хэриссон. С вами говорит директор ФБР Эдгар Гувер.",
           "speaker": "director",
-          "nextFrame": "inception1_03",
-          "effects": [
-            {
-              "type": "OPEN_KNOWLEDGE",
-              "args": {
-                "knowledgeId": "mySuperior"
-              }
-            },
-            {
-              "type": "DECREASE_HEALTH",
-              "args": {
-                "amount": 40
-              }
-            }
-          ]
+          "nextFrame": "inception1_03"
         },
         "inception1_03": {
           "id": "inception1_03",
@@ -327,21 +332,7 @@
           "id": "inception2_06",
           "dialogue": "Группа хакеров во главе с Кэвином Митником создала вирус.",
           "speaker": "director",
-          "nextFrame": "inception2_07",
-          "effects": [
-            {
-              "type": "OPEN_KNOWLEDGE",
-              "args": {
-                "knowledgeId": "ifAssistedKevinThenCreatedVirus"
-              }
-            },
-            {
-              "type": "INCREASE_HEALTH",
-              "args": {
-                "amount": "full"
-              }
-            }
-          ]
+          "nextFrame": "inception2_07"
         },
         "inception2_07": {
           "id": "inception2_07",
@@ -779,64 +770,62 @@
               "position": "right"
             }
           ],
-          "speaker": "steve",
-          "dialogue": "Программа на языке Prolog состоит из множества предложений. Каждое предложение может быть одного из трех типов: это либо факт, либо правило, либо запрос.",
+          "speaker": "robot",
+          "dialogue": "Программа на языке Prolog состоит из множества предложений. Каждое из них может быть одного из трех типов: это либо факт, либо правило, либо запрос.",
           "nextFrame": "inception4_01"
         },
         "inception4_01": {
           "id": "inception4_01",
-          "speaker": "steve",
-          "dialogue": "Факт — это фраза без условий, утверждение о том, что соблюдается некоторое отношение. ",
+          "dialogue": "Факт — фраза без условий, утверждение о том, что соблюдается некоторое отношение.",
           "nextFrame": "inception4_02"
         },
         "inception4_02": {
           "id": "inception4_02",
           "speaker": "steve",
-          "dialogue": "Каждый факт должен заканчиваться точкой. Например: likes('Steve’,’work’).",
+          "dialogue": "Каждый факт должен заканчиваться точкой. Например: `likes('Steve', work).`",
           "nextFrame": "inception4_03"
         },
         "inception4_03": {
           "id": "inception4_03",
-          "speaker": "steve",
-          "dialogue": "Правило — это факт, истинность которого зависит от истинности других фактов. Состоит из головы и тела, разделенных знаком :- , который читается как «если» и соответствует импликации. ",
+          "dialogue": "Правило — это факт, истинность которого зависит от истинности других фактов. Состоит из головы и тела, разделенных знаком `:-` — оператором «если», обратной импликации.",
           "nextFrame": "inception4_04"
         },
         "inception4_04": {
           "id": "inception4_04",
-          "speaker": "steve",
           "dialogue": "Голова правила — это предикат, а тело правила — последовательность предикатов, разделенных запятыми. ",
           "nextFrame": "inception4_05"
         },
         "inception4_05": {
           "id": "inception4_05",
           "speaker": "steve",
-          "dialogue": "Правило должно заканчиваться точкой, а запятая в теле правила означает конъюнкцию (логическое И). Например: likes(‘Steve’,X) :- likes(‘Robot’,X).",
+          "dialogue": "Правило должно заканчиваться точкой.\nНапример: `likes(steve, X) :- likes(robot, X)`.",
           "nextFrame": "inception4_06"
         },
         "inception4_06": {
           "id": "inception4_06",
-          "dialogue": "Запрос — это последовательность предикатов, разделенных запятыми или точкой с запятой и завершающаяся точкой. ",
+          "dialogue": "Запрос — последовательность предикатов, разделенных запятыми или точкой с запятой и завершающаяся точкой.",
           "nextFrame": "inception4_07"
         },
         "inception4_07": {
           "id": "inception4_07",
-          "dialogue": "На естественном языке запятая соответствует союзу «и», а на языке математической логики обозначает конъюнкцию.",
+          "dialogue": "Запятая `,` соответствует союзу «и», а в математической логике обозначает конъюнкцию.",
           "nextFrame": "inception4_08"
         },
         "inception4_08": {
           "id": "inception4_08",
-          "dialogue": "Точка с запятой соответствует союзу «или» и обозначает дизъюнкцию. Предикат запроса называется целью.",
+          "dialogue": "Точка с запятой `;` соответствует союзу «или» и обозначает дизъюнкцию. Предикат запроса называется целью.",
           "nextFrame": "inception4_09"
         },
         "inception4_09": {
           "id": "inception4_09",
+          "speaker": "steve",
           "dialogue": "Понял, понял, сейчас все решу!",
           "nextFrame": "inception4_10"
         },
         "inception4_10": {
           "id": "inception4_10",
           "speaker": "robot",
-          "dialogue": "Будьте внимательны. Совершите слишком много ошибок -- не сможете продолжить.",
+          "dialogue": "Будьте внимательны. Совершите слишком много ошибок — не сможете продолжить.",
           "nextFrame": "inception4_11"
         },
         "inception4_11": {
@@ -855,7 +844,7 @@
         "inception4_failTask0_01": {
           "id": "inception4_failTask0_01",
           "dialogue": "Будьте внимательны, пожалуйста. Подумайте ещё.",
-          "nextFrame": "inception4_12",
+          "nextFrame": "inception4_11",
           "effects": [
             {
               "type": "JUMP",
@@ -871,7 +860,7 @@
         "inception4_failTask0_02": {
           "id": "inception4_failTask0_02",
           "dialogue": "Будьте внимательны, пожалуйста. И следите за своим здоровьем. Кажется, вы начинаете нервничать...",
-          "nextFrame": "inception4_12",
+          "nextFrame": "inception4_11",
           "effects": [
             {
               "type": "JUMP",
@@ -889,7 +878,7 @@
         "inception4_failTask0_03": {
           "id": "inception4_failTask0_02",
           "dialogue": "Сфокусируйтесь, агент! Это ваша последняя попытка...",
-          "nextFrame": "inception4_12"
+          "nextFrame": "inception4_11"
         },
         "inception4_13": {
           "id": "inception4_13",
@@ -898,7 +887,7 @@
         },
         "inception4_14": {
           "id": "inception4_14",
-          "dialogue": "...Хорошо. Вижу, самое время продолжить наш путь... и наше обучение.",
+          "dialogue": "",
           "nextFrame": null,
           "effects": [
             {
@@ -1010,44 +999,38 @@
         },
         "elaboration1_13": {
           "id": "elaboration1_13",
-          "dialogue": "Аргументы предложений Prolog-программы называются термами, а саму Prolog-программу можно рассматривать как сеть отношений, существующих между термами. ",
+          "dialogue": "Аргументы предложений Prolog-программы называются термами, а саму Prolog-программу можно рассматривать как сеть отношений между термами. ",
           "speaker": "steve",
           "nextFrame": "elaboration1_14"
         },
         "elaboration1_14": {
           "id": "elaboration1_14",
-          "dialogue": "Каждый терм обозначает некоторый объект предметной области и записывается как последовательность литер, которые делятся на четыре категории: прописные буквы, строчные буквы, цифры и спецзнаки.",
-          "speaker": "steve",
+          "dialogue": "Каждый терм обозначает объект предметной области и записывается как последовательность литер из этих категорий: прописные и строчные буквы, цифры и спецзнаки.",
           "nextFrame": "elaboration1_15"
         },
         "elaboration1_15": {
           "id": "elaboration1_15",
-          "dialogue": "В качестве основных объектов данных обычно выделяет три типа термов: константы, переменные (простые термы) и структуры (составные термы).",
-          "speaker": "steve",
+          "dialogue": "В качестве основных объектов данных обычно выделяют три типа термов: константы, переменные (простые термы) и структуры (составные термы).",
           "nextFrame": "elaboration1_16"
         },
         "elaboration1_16": {
           "id": "elaboration1_16",
-          "dialogue": "Константа — поименованный конкретный объект или конкретное отношение. Например: Steve",
-          "speaker": "steve",
+          "dialogue": "Константа — поименованный конкретный объект или конкретное отношение.\nНапример: `steve`.",
           "nextFrame": "elaboration1_17"
         },
         "elaboration1_17": {
           "id": "elaboration1_17",
-          "dialogue": "Переменная — обозначение объекта, значения которого меняется в ходе выполнения программы. В Prolog она имеет имя, начинающееся с прописной буквы или знака подчеркивания. ",
-          "speaker": "steve",
+          "dialogue": "Переменная — объект, значение которого меняется в ходе выполнения программы. Имя переменной начинается с прописной буквы или знака подчеркивания. Например: `Who`, `_who`.",
           "nextFrame": "elaboration1_18"
         },
         "elaboration1_18": {
           "id": "elaboration1_18",
           "dialogue": "Переменная называется связанной, если имеется объект, который она обозначает. При отсутствии такого объекта переменная называется свободной.",
-          "speaker": "steve",
           "nextFrame": "elaboration1_19"
         },
         "elaboration1_19": {
           "id": "elaboration1_19",
-          "dialogue": "Структура — объект, состоящий из совокупности других объектов, которые называются компонентами. Например: likes ( \"Steve\" , book ( “name”, “author” ) ).",
-          "speaker": "steve",
+          "dialogue": "Структура — объект, состоящий из совокупности компонентов — других объектов. Например:\n`likes(\"Steve\", book (\"Name\", \"Author\")).`",
           "nextFrame": "elaboration1_20"
         },
         "elaboration1_20": {
@@ -1072,12 +1055,13 @@
         "elaboration1_failTask1_01": {
           "id": "elaboration1_failTask1_01",
           "dialogue": "Будьте внимательнее, агент! Я же говорил, задания -- это и есть ловушки.",
+          "speaker": "robot",
           "nextFrame": "elaboration1_21"
         },
         "elaboration1_22": {
           "id": "elaboration1_22",
           "dialogue": "Хорошо, агент. Давайте пройдём дальше.",
-          "nextFrame": "elaboration2",
+          "speaker": "robot",
           "effects": [
             {
               "type": "JUMP_CHAPTER",
@@ -1139,24 +1123,21 @@
         "elaboration2_06": {
           "id": "elaboration2_06",
           "dialogue": "Prolog — это язык, основанный на логике. Основные блоки - это факты, правила и запросы. ",
-          "speaker": "steve",
           "nextFrame": "elaboration2_07"
         },
         "elaboration2_07": {
           "id": "elaboration2_07",
           "dialogue": "Они позволяют описывать знания и выполнять логический вывод.",
-          "speaker": "steve",
           "nextFrame": "elaboration2_08"
         },
         "elaboration2_08": {
           "id": "elaboration2_08",
-          "dialogue": "Простые запросы, не содержащие никаких переменных, допускают два возможных ответа: \"true\" или \"false\".",
-          "speaker": "steve",
+          "dialogue": "Простые запросы, не содержащие никаких переменных, допускают два возможных ответа: `true` или `false`.",
           "nextFrame": "elaboration2_09"
         },
         "elaboration2_09": {
           "id": "elaboration2_09",
-          "dialogue": "В случае ответа \"true\" говорят, что запрос завершился успехом, цель достигнута.",
+          "dialogue": "В случае ответа `true` говорят, что запрос завершился успехом, цель достигнута.",
           "speaker": "steve",
           "nextFrame": "elaboration2_10"
         },
@@ -1168,7 +1149,7 @@
         },
         "elaboration2_11": {
           "id": "elaboration2_11",
-          "dialogue": "Например:\n?- likes('Steve','book').\ntrue.\n?- likes(Who,'book').\nWho = 'Steve' .\n",
+          "dialogue": "Например:\n`?- likes('Steve','book').` вернёт `true`.\n`?- likes(Who,'book').` вернёт `Who = 'Steve'`.\n",
           "speaker": "steve",
           "nextFrame": "elaboration2_12"
         },
@@ -1482,32 +1463,32 @@
         },
         "elaboration4_15": {
           "id": "elaboration4_15",
-          "dialogue": "sum_list(List, Sum) — вычисление суммы элементов списка",
+          "dialogue": "`sum_list(List, Sum)` — вычисление суммы элементов списка",
           "nextFrame": "elaboration4_16"
         },
         "elaboration4_16": {
           "id": "elaboration4_16",
-          "dialogue": "member(Elem, List) — выполняет поиск значения в списке. Завершается удачей если элемент найден",
+          "dialogue": "`member(Elem, List)` — проверяет, есть ли такой элемент в списке.",
           "nextFrame": "elaboration4_17"
         },
         "elaboration4_17": {
           "id": "elaboration4_17",
-          "dialogue": "reverse(List, ReverseList) — функция переворота списка",
+          "dialogue": "`reverse(List, ReverseList)` — переворачивает список.",
           "nextFrame": "elaboration4_18"
         },
         "elaboration4_18": {
           "id": "elaboration4_18",
-          "dialogue": "length(List, Length) — вычисляет длину списка",
+          "dialogue": "`length(List, Length)` — вычисляет длину списка.",
           "nextFrame": "elaboration4_19"
         },
         "elaboration4_19": {
           "id": "elaboration4_19",
-          "dialogue": "append(List1, List2, List1AndList2)— функция объединения двух списков",
+          "dialogue": "`append(List1, List2, List1AndList2)` — объединяет два списка.",
           "nextFrame": "elaboration4_20"
         },
         "elaboration4_20": {
           "id": "elaboration4_20",
-          "dialogue": "delete(InputList, Elem, ResultList) — функция удаления всех элементов с заданным значением из списка.",
+          "dialogue": "`delete(InputList, Elem, ResultList)` — удаляет все элементы с заданным значением из списка, возвращая новый список.",
           "nextFrame": "elaboration4_21"
         },
         "elaboration4_21": {
@@ -1693,7 +1674,8 @@
           ]
         },
         "elaboration5_failTask5_01": {
-          "id": "frame_weapon_failure5",
+          "id": "elaboration5_failTask5_01",
+          "speaker": "steve",
           "dialogue": "Я должен попробовать ещё раз!",
           "nextFrame": "elaboration5_13"
         },
@@ -1708,75 +1690,231 @@
           "dialogue": "",
           "effects": [
             {
-              "type": "ENDING",
+              "type": "END_CAMPAIGN",
               "args": {
-                "endingId": "demoEnding"
+                "winner": true
               }
             }
           ]
         }
-      }
-    },
-    "endings": {
-      "gameOver": {
-        "id": "gameOver",
-        "condition": {
-          "healthEquals": 0
+      },
+      "ending_0": {
+        "lose_start": {
+          "id": "lose_start",
+          "nextFrame": "lose_1",
+          "location": "badEndingScreens",
+          "characters": [
+            {
+              "id": "steve",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "anonymous",
+          "dialogue": "2... 1... 0... Загрузка `virus.pl` в сеть успешно завершена."
         },
-        "startFrame": "gameOver_1",
-        "frames": {
-          "gameOver_1": {
-            "id": "gameOver_1",
-            "location": "agentOffice",
-            "characters": [
-              {
-                "id": "steve",
-                "pose": "holdNotebook",
-                "position": "left",
-                "hidden": true
-              }
-            ],
-            "speaker": "steve",
-            "dialogue": "Чёрт возьми... Не надо было растрачивать все попытки."
-          }
+        "lose_1": {
+          "id": "lose_1",
+          "nextFrame": "lose_2",
+          "speaker": "steve",
+          "dialogue": "Чёрт возьми... Не надо было растрачивать все попытки."
+        },
+        "lose_2": {
+          "id": "lose_2",
+          "nextFrame": "lose_3",
+          "dialogue": "Осталось только позвонить директору и предупредить его, чтобы он подключил своих специалистов."
+        },
+        "lose_3": {
+          "id": "lose_3",
+          "nextFrame": "lose_4",
+          "dialogue": "Может, они что-то смогут сделать... Хотя это и маловероятно."
+        },
+        "lose_4": {
+          "id": "lose_4",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "STOP",
+              "args": {}
+            }
+          ]
         }
       },
-      "demoEnding": {
-        "id": "demoEnding",
-        "title": "Конец ознакомительного фрагмента",
-        "startFrame": "demoEnding_1",
-        "frames": {
-          "demoEnding_1": {
-            "id": "demoEnding_1",
-            "location": "mansionEntrance",
+      "ending_1": {
+          "win_start": {
+            "id": "win_start",
+            "location": "computerRoom",
             "characters": [
               {
                 "id": "steve",
-                "pose": "holdNotebook",
-                "position": "left",
                 "hidden": true
               },
               {
                 "id": "robot",
-                "pose": "angry",
-                "position": "center"
+                "pose": "think",
+                "position": "left"
+              },
+              {
+                "id": "sarah",
+                "position": "right"
+              },
+              {
+                "id": "anonymous",
+                "hidden": true
               }
             ],
+            "speaker": "anonymous",
+            "dialogue": "12... 11... 10... Вы уверены, что хотите остановить загрузку `virus.pl`?",
+            "nextFrame": "win_1"
+          },
+          "win_1": {
+            "id": "win_1",
             "speaker": "robot",
-            "dialogue": "Конец ознакомительного фрагмента.",
-            "nextFrame": "demoEnding_2"
+            "dialogue": "Да.",
+            "nextFrame": "win_2"
           },
-          "demoEnding_2": {
-            "id": "demoEnding_2",
-            "dialogue": "Чтобы поиграть в полную версию, купите её за $42,069.",
-            "nextFrame": "demoEnding_3"
+          "win_2": {
+            "id": "win_2",
+            "speaker": "sarah",
+            "dialogue": "Да!",
+            "nextFrame": "win_3"
           },
-          "demoEnding_3": {
-            "id": "demoEnding_3",
+          "win_3": {
+            "id": "win_3",
             "speaker": "steve",
-            "dialogue": "Что?",
-            "nextFrame": null
+            "dialogue": "ДААААА!",
+            "nextFrame": "win_4"
+          },
+          "win_4": {
+            "id": "win_4",
+            "speaker": "anonymous",
+            "dialogue": "Принято...",
+            "nextFrame": "win_5",
+            "effects": [
+              {
+                "type": "FADE_OUT_CHARACTER",
+                "args": {
+                  "characterId": "sarah"
+                }
+              },
+              {
+                "type": "FADE_OUT_CHARACTER",
+                "args": {
+                  "characterId": "robot"
+                }
+              }
+            ]
+          },
+          "win_5": {
+            "id": "win_5",
+            "location": "goodEndingScreens",
+            "dialogue": "Загрузка отменена.",
+            "nextFrame": "win_6"
+          },
+          "win_6": {
+            "id": "win_6",
+            "speaker": "steve",
+            "dialogue": "Отлично! Теперь пора ввести антивирус на случай, если Митник попытается повторить загрузку.",
+            "nextFrame": "win_7"
+          },
+          "win_7": {
+            "id": "win_7",
+            "dialogue": "А потом нужно сматываться отсюда.",
+            "nextFrame": "win_8"
+          },
+          "win_8": {
+            "id": "win_8",
+            "dialogue": "",
+            "effects": [
+              {
+                "type": "STOP",
+                "args": {}
+              }
+            ]
           }
+        },
+      "ending_limbo": {
+        "limbo_start": {
+          "id": "limbo_start",
+          "location": "computerRoom",
+          "characters": [
+            {
+              "id": "mitnik",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "anonymous",
+          "dialogue": "...Ну, вот ты и проснулся, агент.",
+          "nextFrame": "limbo_1"
+        },
+        "limbo_1": {
+          "id": "limbo_1",
+          "speaker": "mitnik",
+          "dialogue": "Привет, это Митник.",
+          "nextFrame": "limbo_2",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "mitnik"
+              }
+            }
+          ]
+        },
+        "limbo_2": {
+          "id": "limbo_2",
+          "dialogue": "Во время своего приключения ты каким-то образом отключился.",
+          "nextFrame": "limbo_3"
+        },
+        "limbo_3": {
+          "id": "limbo_3",
+          "dialogue": "Увы, хотя твоей вины в этом нет...",
+          "nextFrame": "limbo_4",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "mitnik",
+                "newPose": "shrug"
+              }
+            }
+          ]
+        },
+        "limbo_4": {
+          "id": "limbo_4",
+          "dialogue": "Мой вирус уже запущен в сеть и прямо сейчас проникает на миллиарды устройств.",
+          "nextFrame": "limbo_5",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "mitnik"
+              }
+            }
+          ]
+        },
+        "limbo_5": {
+          "id": "limbo_5",
+          "location": "badEndingFinal",
+          "dialogue": "Ты опоздал, Стивен! Теперь я сертифицированный повелитель этого мира.",
+          "nextFrame": "limbo_6"
+        },
+        "limbo_6": {
+          "id": "limbo_6",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "STOP",
+              "args": {}
+            }
+          ]
         }
       }
     }
@@ -1803,15 +1941,16 @@
       "failureScorePenalty": 2
     },
     "task1": {
-      "id": "task_choose_weapon2",
-      "type": "SELECT_ONE",
-      "questionText": "Можно ли использовать X в правилах `destroy(X) :- work(X, virus).`?",
+      "id": "task1",
+      "type": "SELECT_MANY",
+      "questionText": "Выберите все корректные идентификаторы переменных.",
       "options": [
-        "Да",
-        "Нет",
-        "Есть исключения"
+        "`steve`",
+        "`SteveHarrison`",
+        "`\"Steve\"`",
+        "`_steve`"
       ],
-      "correctAnswerIndex": 0,
+      "correctAnswerIndices": [1, 3],
       "nextFrameOnSuccess": "elaboration1_22",
       "nextFrameOnFailure": "elaboration1_failTask1_01",
       "failureScorePenalty": 2
@@ -1864,40 +2003,33 @@
     },
     "task5": {
       "id": "task5",
-      "type": "SELECT_ONE",
-      "knowledge": [],
-      "questionText": "Напиши запрос, чтобы одним запросом вернуть всех персонажей \ncharacter(professor). \n character(steve).\n character(vicky).",
-      "options": [
-        "`true`",
-        "`steve`",
-        "`false`",
-        "`X = steve`"
+      "type": "COMPLETE_QUERY",
+      "knowledge": [
+        "character(professor).",
+        "character(vicky).",
+        "character(steve)."
       ],
-      "correctAnswerIndex": 0,
-      "hint": "У `append/3` первые 2 аргумента -- это массивы, которые нужно склеить, а 3-й -- переменная результата.",
+      "questionText": "Напиши запрос, чтобы одним запросом вернуть всех персонажей:```character(professor).\ncharacter(steve).\ncharacter(vicky).```Результат запроса сохранить в переменную `Who`\n(переменная должна хранить одного персонажа).",
+      "expectedResults": [
+        {
+          "variables": {
+            "Who": "professor"
+          }
+        },
+        {
+          "variables": {
+            "Who": "vicky"
+          }
+        },
+        {
+          "variables": {
+            "Who": "steve"
+          }
+        }
+      ],
       "nextFrameOnSuccess": "elaboration5_14",
       "nextFrameOnFailure": "elaboration5_failTask5_01",
       "failureScorePenalty": 2
-    }
-  },
-  "knowledge": {
-    "iAmSteve": {
-      "id": "iAmSteve",
-      "type": "fact",
-      "content": "fbi_agent(steve).",
-      "description": "Стив -- агент ФБР."
-    },
-    "mySuperior": {
-      "id": "mySuperior",
-      "type": "fact",
-      "content": "superior(director, steve).",
-      "description": "Директор ФБР -- руководитель Стива."
-    },
-    "ifAssistedKevinThenCreatedVirus": {
-      "id": "ifAssistedKevinThenHacked",
-      "type": "rule",
-      "content": "creates(X, virus) :-\n\t(assists(X, kevin); X = kevin),\n\thacker(X).",
-      "description": "Кэвин и все хакеры, помогавшие ему, участвовали в создании вируса."
     }
   }
 }

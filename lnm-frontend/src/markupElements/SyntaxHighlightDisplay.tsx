@@ -48,6 +48,7 @@ const SyntaxHighlightDisplay: React.FC<SyntaxHighlightDisplayProps> = ({
 	return (
 		<div
 			className="syntax-highlight display"
+			data-testid="syntax-highlight-display"
 			style={{
 				width: width,
 				height: height,
@@ -55,7 +56,10 @@ const SyntaxHighlightDisplay: React.FC<SyntaxHighlightDisplayProps> = ({
 		>
 			<div className="syntax-highlight-top-row">
 				<Tooltip title={t('game.taskWindow.syntaxHighlight.copy')}>
-					<IconButton onClick={copyCode}>
+					<IconButton
+						onClick={copyCode}
+						data-testid="syntax-highlight-copy-button"
+					>
 						<CopyIcon className="syntax-highlight-icon-button" />
 					</IconButton>
 				</Tooltip>
@@ -63,6 +67,7 @@ const SyntaxHighlightDisplay: React.FC<SyntaxHighlightDisplayProps> = ({
 			<div className="syntax-highlight-code-area">
 				<pre
 					className="syntax-highlight-display-content"
+					data-testid="syntax-highlight-display-content"
 					ref={preRef}
 					aria-hidden="true"
 					dangerouslySetInnerHTML={{ __html: highlightedContent }}

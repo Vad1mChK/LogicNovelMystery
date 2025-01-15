@@ -1,23 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 
 // Define the shape of your game state
 export interface GameState {
 	health: number;
-	knowledge: string[]; // Example: List of known facts
 	currentChapterId: string;
 	currentFrameId: string;
-	errorSum: number;
-	errorCount: number;
+	protagonist: LnmHero;
+	playerState: LnmPlayerState;
+	intermediateResult: boolean | null;
 }
 
 // Define the initial state
 const initialState: GameState = {
 	health: 100,
-	knowledge: [],
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
-	errorSum: 0,
-	errorCount: 0,
+	protagonist: LnmHero.STEVE,
+	playerState: LnmPlayerState.CREATED,
+	intermediateResult: null,
 };
 
 const loadGameState = (): GameState => {
@@ -52,33 +53,23 @@ const gameStateSlice = createSlice({
 				state.health = Math.max(0, state.health - action.payload);
 			}
 		},
-		addKnowledge(state, action: PayloadAction<string>) {
-			state.knowledge.push(action.payload);
-		},
-		clearKnowledge(state) {
-			state.knowledge = [];
-		},
-		setKnowledge(state, action: PayloadAction<string[]>) {
-			state.knowledge = [...action.payload];
-		},
 		setCurrentChapter(state, action: PayloadAction<string>) {
 			state.currentChapterId = action.payload;
 		},
 		setCurrentFrame(state, action: PayloadAction<string>) {
 			state.currentFrameId = action.payload;
 		},
-		// Error management reducers
-		incrementErrorSum(state, action: PayloadAction<number>) {
-			state.errorSum += action.payload;
+		setProtagonist(state, action: PayloadAction<LnmHero>) {
+			state.protagonist = action.payload;
 		},
-		clearErrorSum(state) {
-			state.errorSum = 0;
+		setPlayerState(state, action: PayloadAction<LnmPlayerState>) {
+			state.playerState = action.payload;
 		},
-		incrementErrorCount(state, action: PayloadAction<number>) {
-			state.errorCount += action.payload;
+		setIntermediateResult(state, action: PayloadAction<boolean | null>) {
+			state.intermediateResult = action.payload;
 		},
-		clearErrorCount(state) {
-			state.errorCount = 0;
+		resetState(state) {
+			Object.assign(state, initialState);
 		},
 	},
 });
@@ -87,15 +78,12 @@ const gameStateSlice = createSlice({
 export const {
 	increaseHealth,
 	decreaseHealth,
-	addKnowledge,
-	clearKnowledge,
-	setKnowledge,
 	setCurrentChapter,
 	setCurrentFrame,
-	incrementErrorSum,
-	clearErrorSum,
-	incrementErrorCount,
-	clearErrorCount,
+	setProtagonist,
+	setPlayerState,
+	setIntermediateResult,
+	resetState,
 } = gameStateSlice.actions;
 
 export default gameStateSlice.reducer;

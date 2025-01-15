@@ -9,7 +9,7 @@
 	$HEALTH_MEDIUM: colors.$YELLOWISH-ORANGE;
 	$HEALTH_LOW: colors.$RED;
 
-	transition: all 1s ease-in-out;
+	transition: all 0.5s ease-in-out;
 	position: absolute;
 	top: 5%;
 	left: 5%;
@@ -21,7 +21,6 @@
 	border-radius: 4px;
 
 	&.hidden-health-bar {
-		z-index: 100;
 		left: -5%;
 		transform: translateX(-100%);
 	}

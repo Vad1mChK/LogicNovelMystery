@@ -1,15 +1,18 @@
 import {
+	LnmEffectArgsMap,
+	LnmFrameCharacterData,
 	LnmFrameEffect,
 	LnmFrameEffectType,
-	LnmEffectArgsMap,
+	LnmPlayerState,
 	LnmPlot,
-	LnmFrameCharacterData,
 	LnmTask,
 } from './types';
+import { reportCampaign } from './communication/reportCampaign';
 
 export type EffectHandler = (
 	effect: LnmFrameEffect,
 	context: {
+		reportCampaign: (id: string) => string | null;
 		setCurrentFrameId: (id: string) => void;
 		setCurrentChapterId: (id: string) => void;
 		setCurrentEndingId: (id: string) => void;
@@ -17,9 +20,11 @@ export type EffectHandler = (
 		setCurrentCharacters: React.Dispatch<
 			React.SetStateAction<LnmFrameCharacterData[] | null>
 		>;
-		addKnowledge: (knowledgeId: string) => void;
 		decreaseHealth: (amount: number | 'kill') => void;
 		increaseHealth: (amount: number | 'full') => void;
+		setPlayerState: (playerState: LnmPlayerState) => void;
+		getIntermediateResult: () => boolean | null;
+		setIntermediateResult: (result: boolean | null) => void;
 		openTaskWindow: (task: LnmTask) => void;
 		plot: LnmPlot;
 	}
@@ -46,19 +51,6 @@ export const effectHandlers: Partial<
 		if (nextChapter) {
 			setCurrentChapterId(args.chapterId);
 			setCurrentFrameId(nextChapter.startFrame);
-		}
-	},
-
-	[LnmFrameEffectType.ENDING]: (
-		effect,
-		{ setCurrentEndingId, setCurrentFrameId, setIsEnding, plot }
-	) => {
-		const args = effect.args as LnmEffectArgsMap[LnmFrameEffectType.ENDING];
-		const ending = plot.frames.endings.get(args.endingId);
-		if (ending) {
-			setCurrentEndingId(args.endingId);
-			setCurrentFrameId(ending.startFrame);
-			setIsEnding(true);
 		}
 	},
 
@@ -113,15 +105,6 @@ export const effectHandlers: Partial<
 		});
 	},
 
-	[LnmFrameEffectType.OPEN_KNOWLEDGE]: (effect, { addKnowledge }) => {
-		const args =
-			effect.args as LnmEffectArgsMap[LnmFrameEffectType.OPEN_KNOWLEDGE];
-		console.log('Processing OPEN_KNOWLEDGE effect:', args);
-		if (args.knowledgeId) {
-			addKnowledge(args.knowledgeId);
-		}
-	},
-
 	[LnmFrameEffectType.DECREASE_HEALTH]: (effect, { decreaseHealth }) => {
 		const args =
 			effect.args as LnmEffectArgsMap[LnmFrameEffectType.DECREASE_HEALTH];
@@ -148,6 +131,60 @@ export const effectHandlers: Partial<
 		} else {
 			console.warn(`Task with ID ${args.taskId} not found.`);
 		}
+	},
+
+	[LnmFrameEffectType.END_CAMPAIGN]: (
+		effect,
+		{
+			setIsEnding,
+			setCurrentChapterId,
+			setCurrentFrameId,
+			setIntermediateResult,
+			plot,
+		}
+	) => {
+		const args =
+			effect.args as LnmEffectArgsMap[LnmFrameEffectType.END_CAMPAIGN];
+		console.log('Processing END_CAMPAIGN effect:', args);
+		setIntermediateResult(args.winner);
+		reportCampaign(args.winner)
+			.then((response) => {
+				const nextChapter = plot.chapters.get(
+					`ending_${response.endingId}`
+				);
+				if (nextChapter) {
+					setIsEnding(true);
+					setCurrentChapterId(`ending_${response.endingId}`);
+					setCurrentFrameId(nextChapter.startFrame);
+				}
+			})
+			.catch((err) => {
+				console.error('Error reporting campaign:', err);
+				setIntermediateResult(false);
+				console.log('Fallback to default ending...');
+				if (
+					plot.defaultEnding &&
+					plot.chapters.has(plot.defaultEnding)
+				) {
+					const defaultEndingChapter = plot.chapters.get(
+						plot.defaultEnding
+					);
+					setIsEnding(true);
+					setCurrentChapterId(plot.defaultEnding);
+					setCurrentFrameId(defaultEndingChapter!.startFrame);
+				}
+			});
+	},
+
+	[LnmFrameEffectType.STOP]: (
+		_effect,
+		{ setPlayerState, getIntermediateResult }
+	) => {
+		setPlayerState(
+			getIntermediateResult() === true
+				? LnmPlayerState.WAITING_WON
+				: LnmPlayerState.WAITING_LOST
+		);
 	},
 	// TODO: Add handlers for other effect types as needed
 };
