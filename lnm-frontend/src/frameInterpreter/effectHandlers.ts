@@ -15,6 +15,7 @@ export type EffectHandler = (
 		reportCampaign: (id: string) => string | null;
 		setCurrentFrameId: (id: string) => void;
 		setCurrentChapterId: (id: string) => void;
+		onJumpChapter: (id: string) => void;
 		setCurrentEndingId: (id: string) => void;
 		setIsEnding: (isEnding: boolean) => void;
 		setCurrentCharacters: React.Dispatch<
@@ -26,6 +27,8 @@ export type EffectHandler = (
 		getIntermediateResult: () => boolean | null;
 		setIntermediateResult: (result: boolean | null) => void;
 		openTaskWindow: (task: LnmTask) => void;
+		playMusic: (musicId: string) => void;
+		stopMusic: () => void;
 		plot: LnmPlot;
 	}
 ) => void;
@@ -42,7 +45,7 @@ export const effectHandlers: Partial<
 
 	[LnmFrameEffectType.JUMP_CHAPTER]: (
 		effect,
-		{ setCurrentChapterId, setCurrentFrameId, plot }
+		{ setCurrentChapterId, setCurrentFrameId, onJumpChapter, plot }
 	) => {
 		const args =
 			effect.args as LnmEffectArgsMap[LnmFrameEffectType.JUMP_CHAPTER];
@@ -51,6 +54,7 @@ export const effectHandlers: Partial<
 		if (nextChapter) {
 			setCurrentChapterId(args.chapterId);
 			setCurrentFrameId(nextChapter.startFrame);
+			onJumpChapter(args.chapterId);
 		}
 	},
 
@@ -133,7 +137,7 @@ export const effectHandlers: Partial<
 		}
 	},
 
-	[LnmFrameEffectType.END_CAMPAIGN]: (
+	[LnmFrameEffectType.END_CAMPAIGN]: async (
 		effect,
 		{
 			setIsEnding,
@@ -147,33 +151,29 @@ export const effectHandlers: Partial<
 			effect.args as LnmEffectArgsMap[LnmFrameEffectType.END_CAMPAIGN];
 		console.log('Processing END_CAMPAIGN effect:', args);
 		setIntermediateResult(args.winner);
-		reportCampaign(args.winner)
-			.then((response) => {
-				const nextChapter = plot.chapters.get(
-					`ending_${response.endingId}`
+		try {
+			const response = await reportCampaign(args.winner);
+			const nextChapter = plot.chapters.get(
+				`ending_${response.endingId}`
+			);
+			if (nextChapter) {
+				setIsEnding(true);
+				setCurrentChapterId(`ending_${response.endingId}`);
+				setCurrentFrameId(nextChapter.startFrame);
+			}
+		} catch (err) {
+			console.error('Error reporting campaign:', err);
+			setIntermediateResult(false);
+			console.log('Fallback to default ending...');
+			if (plot.defaultEnding && plot.chapters.has(plot.defaultEnding)) {
+				const defaultEndingChapter = plot.chapters.get(
+					plot.defaultEnding
 				);
-				if (nextChapter) {
-					setIsEnding(true);
-					setCurrentChapterId(`ending_${response.endingId}`);
-					setCurrentFrameId(nextChapter.startFrame);
-				}
-			})
-			.catch((err) => {
-				console.error('Error reporting campaign:', err);
-				setIntermediateResult(false);
-				console.log('Fallback to default ending...');
-				if (
-					plot.defaultEnding &&
-					plot.chapters.has(plot.defaultEnding)
-				) {
-					const defaultEndingChapter = plot.chapters.get(
-						plot.defaultEnding
-					);
-					setIsEnding(true);
-					setCurrentChapterId(plot.defaultEnding);
-					setCurrentFrameId(defaultEndingChapter!.startFrame);
-				}
-			});
+				setIsEnding(true);
+				setCurrentChapterId(plot.defaultEnding);
+				setCurrentFrameId(defaultEndingChapter!.startFrame);
+			}
+		}
 	},
 
 	[LnmFrameEffectType.STOP]: (
@@ -185,6 +185,24 @@ export const effectHandlers: Partial<
 				? LnmPlayerState.WAITING_WON
 				: LnmPlayerState.WAITING_LOST
 		);
+	},
+
+	[LnmFrameEffectType.PLAY_MUSIC]: (_effect, { playMusic, plot }) => {
+		const args =
+			_effect.args as LnmEffectArgsMap[LnmFrameEffectType.PLAY_MUSIC];
+		console.log('Processing PLAY_MUSIC effect:', args);
+		if (plot.music.has(args.musicId)) {
+			const url = plot.music.get(args.musicId)?.file || '';
+			console.log(`music id: ${args.musicId}, url: ${url}`);
+			playMusic(url);
+		} else {
+			console.warn(`Music with ID ${args.musicId} not found.`);
+		}
+	},
+
+	[LnmFrameEffectType.STOP_MUSIC]: (_effect, { stopMusic }) => {
+		console.log('Processing STOP_MUSIC effect');
+		stopMusic();
 	},
 	// TODO: Add handlers for other effect types as needed
 };
