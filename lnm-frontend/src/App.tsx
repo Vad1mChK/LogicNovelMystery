@@ -2,7 +2,6 @@ import React, { /*useContext, */ useEffect } from 'react';
 import { Routes, Route, Navigate /*, useLocation*/ } from 'react-router-dom';
 import './App.css';
 import './css/global.scss';
-
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MainPage from './pages/MainPage';
@@ -19,10 +18,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
 import UsersPage from './pages/UsersPage.tsx';
 import PrivateRoute from './util/PrivateRoute';
+import TabErrorPage from './pages/TabErrorPage';
 
 Sentry.init({
 	dsn: 'https://2a79b7cbcd0c952c1d8bb6dcf79cc459@o4508292474339328.ingest.de.sentry.io/4508292540530768',
 	integrations: [new BrowserTracing()],
+	// eslint-disable-next-line no-magic-numbers
 	tracesSampleRate: 0.3,
 });
 
@@ -41,11 +42,11 @@ const App: React.FC = () => {
 			i18n.changeLanguage(currentLanguage);
 		}
 	}, [currentLanguage, i18n]);
-
 	return (
 		<Routes>
 			<Route path="/auth/login" element={<Login />} />
 			<Route path="/auth/register" element={<Register />} />
+			<Route path="/tab-error" element={<TabErrorPage />} />
 			<Route
 				path="/main"
 				element={

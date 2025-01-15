@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../css/UsersPage.scss'; // Подключите стили
 
 interface User {
@@ -7,30 +7,16 @@ interface User {
 }
 
 const UsersPage: React.FC = () => {
-	const [users, setUsers] = useState<User[]>([]); // Изначально пустой массив пользователей
-	const [loading, setLoading] = useState<boolean>(true); // Состояние загрузки
-	const [error, setError] = useState<string | null>(null); // Состояние ошибки
-	const [selectedUser, setSelectedUser] = useState<number | null>(null); // Состояние для выбранного пользователя
+	const [users] = useState<User[]>([
+		{ id: 1, name: 'Иванов' },
+		{ id: 2, name: 'Петров' },
+		{ id: 3, name: 'Сидоров' },
+		{ id: 4, name: 'Иванов' },
+		{ id: 5, name: 'Петров' },
+		{ id: 6, name: 'Сидоров' },
+	]);
 
-	// useEffect(() => {
-	// 	// Функция для загрузки данных с сервера
-	// 	const fetchUsers = async () => {
-	// 		try {
-	// 			const response = await fetch('https://api.example.com/users'); // Замените URL на ваш
-	// 			if (!response.ok) {
-	// 				throw new Error(`Ошибка: ${response.status}`);
-	// 			}
-	// 			const data: User[] = await response.json(); // Предполагается, что сервер возвращает массив пользователей
-	// 			setUsers(data);
-	// 		} catch (err: any) {
-	// 			setError(err.message || 'Произошла ошибка при загрузке данных');
-	// 		} finally {
-	// 			setLoading(false); // Останавливаем загрузку
-	// 		}
-	// 	};
-	//
-	// 	fetchUsers();
-	// }, []); // Пустой массив зависимостей, чтобы выполнить запрос только один раз
+	const [selectedUser, setSelectedUser] = useState<number | null>(null); // Состояние для выбранного пользователя
 
 	const handleJoin = () => {
 		alert('Присоединиться');
@@ -43,10 +29,6 @@ const UsersPage: React.FC = () => {
 	const handleUserClick = (id: number) => {
 		setSelectedUser(id === selectedUser ? null : id); // Если пользователь уже выбран, отменяем выбор
 	};
-
-	if (loading) return <div className="users-page-container">Загрузка...</div>;
-	if (error)
-		return <div className="users-page-container">Ошибка: {error}</div>;
 
 	return (
 		<div className="users-page-container">
@@ -63,12 +45,12 @@ const UsersPage: React.FC = () => {
 							{users.map((user) => (
 								<tr
 									key={user.id}
-									onClick={() => handleUserClick(user.id)}
+									onClick={() => handleUserClick(user.id)} // Обработчик клика
 									className={
 										selectedUser === user.id
 											? 'selected'
 											: ''
-									}
+									} // Добавляем класс для выделенной строки
 								>
 									<td>{user.name}</td>
 								</tr>
