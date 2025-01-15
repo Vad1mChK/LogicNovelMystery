@@ -128,15 +128,6 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 			}
 		)
 	);
-	const framesEndings = // objectToMap<LnmEnding>(plotObject.frames.endings);
-		new Map(
-			Object.entries(plotObject.frames.endings).map(
-				([endingId, endingData]) => [
-					endingId,
-					convertAndCreateEnding(endingData, signal),
-				]
-			)
-		);
 	const tasks = new Map(
 		Object.entries(plotObject.tasks).map(([taskId, taskData]) => [
 			taskId,
@@ -151,9 +142,9 @@ function convertAndCreatePlot(plotObject: any, signal?: AbortSignal): LnmPlot {
 		music,
 		chapters,
 		startChapter: plotObject.startChapter,
+		defaultEnding: plotObject.defaultEnding,
 		frames: {
 			main: framesMain,
-			endings: framesEndings,
 		},
 		tasks,
 	};

@@ -6,7 +6,11 @@ module.exports = {
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
     },
-    testMatch: ['**/?(*.)+(test).(js|ts)'],
+    testMatch: ['**/?(*.)+(test).(js|ts|jsx|tsx)'],
+    moduleNameMapper: {
+        "\\.(css|scss)$": "identity-obj-proxy",
+        "\\.(jpg|png|gif|webp|svg)$": '<rootDir>/__mocks__/fileMock.ts'
+    },
 
     // Собираем покрытие тестами
     collectCoverage: false,
