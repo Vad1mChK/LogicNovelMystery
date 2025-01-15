@@ -49,7 +49,7 @@ describe('statePolling', () => {
 
 		expect(mockAxiosPost).toHaveBeenCalledTimes(1);
 		expect(mockAxiosPost).toHaveBeenCalledWith(
-			expect.stringContaining('/game/state'),
+			expect.stringContaining('/game/player-state'),
 			{ sessionToken: 'session-token' },
 			expect.objectContaining({ timeout: 5000 })
 		);
