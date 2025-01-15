@@ -136,7 +136,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 								dispatch(setCurrentChapter(chapterId)),
 							onJumpChapter: (chapterId: string) => {
 								axios.post(
-									`${VITE_SERVER_URL}/chapters/${chapterId}`,
+									`${VITE_SERVER_URL}/game/jumped-chapter`,
 									{
 										sessionToken:
 											localStorage.getItem(
