@@ -19,9 +19,9 @@
 .table-container {
   text-align: center;
   padding: 20px;
-  background: color.adjust(colors.$WHITE, $alpha: 0.8);
+  background: color.adjust(colors.$WHITE, $alpha: -0.2);
   border-radius: 10px;
-  box-shadow: 0 4px 10px color.adjust(colors.$BLACK, $alpha: 0.1);;
+  box-shadow: 0 4px 10px color.adjust(colors.$BLACK, $alpha: -0.9);;
   max-height: 80vh;
   overflow: hidden;
 }
@@ -44,7 +44,7 @@ table {
 }
 
 thead th {
-  background-color: color.adjust(colors.$BLACK, $alpha: 0.1);;
+  background-color: color.adjust(colors.$BLACK, $alpha: -0.9);;
   padding: 10px;
   text-align: left;
   font-weight: bold;
