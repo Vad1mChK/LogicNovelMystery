@@ -10,18 +10,10 @@ import { useDispatch } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
 
 interface LeaderboardEntry {
+	username: string;
 	score: number;
-	name: string;
+	sessionToken: string;
 }
-
-//todo del cause it's just a mock data
-const fallbackLeaderboardData = [
-	{ name: 'Иванов', score: 100 },
-	// eslint-disable-next-line no-magic-numbers
-	{ name: 'Петров', score: 90 },
-	// eslint-disable-next-line no-magic-numbers
-	{ name: 'Сидоров', score: 80 },
-];
 
 const MainMenu: React.FC = () => {
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
@@ -34,11 +26,10 @@ const MainMenu: React.FC = () => {
 	const { isMusicPlaying, toggleMusic, setMusicFile, volume, setVolume } =
 		useContext(AudioContext)!;
 	const { t, i18n } = useTranslation(); // Используем локализацию
-
-	//todo replace without mock
 	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
-		fallbackLeaderboardData
+		[]
 	);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	const [isMultiplayer, setIsMultiplayer] = useState(false);
 
@@ -54,10 +45,18 @@ const MainMenu: React.FC = () => {
 		console.log('Mounted: MainMenu');
 		return () => console.log('Unmounted: MainMenu');
 	}, []);
+
+	useEffect(() => {
+		// Выполняем запрос к серверу только при открытии leaderboard
+		if (isLeaderboardOpen) {
+			fetchLeaderboardData(isMultiplayer);
+		}
+	}, [isLeaderboardOpen, isMultiplayer]); // Добавляем зависимости
 	// Запрос данных с сервера
 	const fetchLeaderboardData = async (isMultiplayer: boolean) => {
 		try {
-			const response = await axios.post(
+			setErrorMessage(null); // Сбрасываем сообщение об ошибке перед запросом
+			const response = await axios.post<LeaderboardEntry[]>(
 				'http://localhost:8080/api/leaderboard',
 				{
 					isMultiplayer,
@@ -70,31 +69,57 @@ const MainMenu: React.FC = () => {
 				}
 			);
 			if (Array.isArray(response.data)) {
-				const sortedData = response.data
-					.sort(
-						(a: LeaderboardEntry, b: LeaderboardEntry) =>
-							b.score - a.score
-					)
-					.slice(0, 10);
-				setLeaderboardData(sortedData);
+				if (isMultiplayer) {
+					// Группируем записи по sessionToken
+					const groupedData = response.data.reduce(
+						(
+							acc: Record<string, LeaderboardEntry>,
+							entry: LeaderboardEntry
+						) => {
+							if (acc[entry.sessionToken]) {
+								acc[entry.sessionToken].username +=
+									`, ${entry.username}`;
+								acc[entry.sessionToken].score += entry.score;
+							} else {
+								acc[entry.sessionToken] = { ...entry };
+							}
+							return acc;
+						},
+						{}
+					);
+
+					// Преобразуем обратно в массив, сортируем и берем топ-10
+					const sortedData = Object.values(groupedData)
+						.sort(
+							(a: LeaderboardEntry, b: LeaderboardEntry) =>
+								b.score - a.score
+						)
+						.slice(0, 10);
+
+					setLeaderboardData(sortedData);
+				} else {
+					// Для одиночного режима просто сортируем и берем топ-10
+					const sortedData = response.data
+						.sort(
+							(a: LeaderboardEntry, b: LeaderboardEntry) =>
+								b.score - a.score
+						)
+						.slice(0, 10);
+
+					setLeaderboardData(sortedData);
+				}
 			} else {
-				//todo replace mock and add locale
-				console.warn(
-					'Некорректный формат данных от сервера, используем заглушку.'
-				);
-				setLeaderboardData(fallbackLeaderboardData); // Используем заглушку
+				setErrorMessage(t('Invalid data format from server.'));
 			}
 		} catch (error) {
-			//todo replace mock and add locale
-			console.error('Ошибка при запросе данных:', error);
-			setLeaderboardData(fallbackLeaderboardData); // Используем заглушку
+			console.error('Error during getting data', error);
+			setErrorMessage(
+				t(
+					'Failed to load leaderboard data. Please check your connection or try again later.'
+				)
+			);
 		}
 	};
-
-	useEffect(() => {
-		if (isLeaderboardOpen) fetchLeaderboardData(false);
-	}, [isLeaderboardOpen]);
-
 	const closeAllModals = () => {
 		setSettingsOpen(false);
 		setAboutOpen(false);
@@ -234,49 +259,70 @@ const MainMenu: React.FC = () => {
 			{isLeaderboardOpen && (
 				<div id="leaderboard-modal">
 					<h2>{t('Leaderboard')}</h2>
-					<div className="mode-selector">
-						<div
-							className={`mode-box ${!isMultiplayer ? 'active' : ''}`}
-							onClick={() => {
-								if (!isMultiplayer) return; // Если кнопка уже активна, ничего не делаем
-								setIsMultiplayer(false);
-								fetchLeaderboardData(false);
-							}}
-						>
-							{t('Single')}
+					{errorMessage ? (
+						<div className="error-message">
+							<p>{errorMessage}</p>
+							<button
+								className="modal-button"
+								onClick={() => setErrorMessage(null)}
+							>
+								{t('Close')}
+							</button>
 						</div>
-						<div
-							className={`mode-box ${isMultiplayer ? 'active' : ''}`}
-							onClick={() => {
-								if (isMultiplayer) return; // Если кнопка уже активна, ничего не делаем
-								setIsMultiplayer(true);
-								fetchLeaderboardData(true);
-							}}
-						>
-							{t('Multi')}
-						</div>
-					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>№</th>
-								<th>{t('Name')}</th>
-								<th>{t('Score')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{leaderboardData.map((leader, index) => (
-								<tr key={index}>
-									<td>{index + 1}</td>
-									<td>{leader.name}</td>
-									<td>{leader.score}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-					<button className="modal-button" onClick={closeAllModals}>
-						{t('Close')}
-					</button>
+					) : (
+						<>
+							<div className="mode-selector">
+								<div
+									className={`mode-box ${
+										!isMultiplayer ? 'active' : ''
+									}`}
+									onClick={() => {
+										if (!isMultiplayer) return;
+										setIsMultiplayer(false);
+										fetchLeaderboardData(false);
+									}}
+								>
+									{t('Single')}
+								</div>
+								<div
+									className={`mode-box ${
+										isMultiplayer ? 'active' : ''
+									}`}
+									onClick={() => {
+										if (isMultiplayer) return;
+										setIsMultiplayer(true);
+										fetchLeaderboardData(true);
+									}}
+								>
+									{t('Multi')}
+								</div>
+							</div>
+							<table>
+								<thead>
+									<tr>
+										<th>№</th>
+										<th>{t('Name')}</th>
+										<th>{t('Score')}</th>
+									</tr>
+								</thead>
+								<tbody>
+									{leaderboardData.map((leader, index) => (
+										<tr key={index}>
+											<td>{index + 1}</td>
+											<td>{leader.username}</td>
+											<td>{leader.score}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+							<button
+								className="modal-button"
+								onClick={closeAllModals}
+							>
+								{t('Close')}
+							</button>
+						</>
+					)}
 				</div>
 			)}
 		</div>
