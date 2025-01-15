@@ -1,17 +1,20 @@
-import React, { ReactElement, useEffect } from "react";
-import { LnmHero, LnmPlayerState, LnmResult } from "../frameInterpreter/types";
-import "../css/FrameInterpreter.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../state/store";
-import VisualNovelScreen from "../frameInterpreter/VisualNovelScreen";
-import CreatedWaitScreen from "../frameInterpreter/CreatedWaitScreen";
-import ResultsWaitScreen from "../frameInterpreter/ResultsWaitScreen";
-import ResultsScreen from "../frameInterpreter/ResultsScreen";
-import { useNavigate } from "react-router-dom";
-import { resetState, setPlayerState } from "../state/gameStateSlice";
-import { startShortPolling, stopShortPolling } from "../frameInterpreter/communication/statePolling";
-import axios from "axios";
-import { VITE_SERVER_URL } from "../metaEnv.ts";
+import React, { ReactElement, useEffect } from 'react';
+import { LnmHero, LnmPlayerState, LnmResult } from '../frameInterpreter/types';
+import '../css/FrameInterpreter.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../state/store';
+import VisualNovelScreen from '../frameInterpreter/VisualNovelScreen';
+import CreatedWaitScreen from '../frameInterpreter/CreatedWaitScreen';
+import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen';
+import ResultsScreen from '../frameInterpreter/ResultsScreen';
+import { useNavigate } from 'react-router-dom';
+import { resetState, setPlayerState } from '../state/gameStateSlice';
+import {
+	startShortPolling,
+	stopShortPolling,
+} from '../frameInterpreter/communication/statePolling';
+import axios from 'axios';
+import { VITE_SERVER_URL } from '../metaEnv.ts';
 
 const GamePage: React.FC = () => {
 	const { playerState, protagonist } = useSelector(
