@@ -40,7 +40,7 @@ export const startShortPolling = (
 			pollingInterval = setInterval(async () => {
 				try {
 					const response = await axios.post(
-						`${VITE_SERVER_URL}/game/state`,
+						`${VITE_SERVER_URL}/game/player-state`,
 						{ sessionToken },
 						{
 							timeout: API_TIMEOUT,
