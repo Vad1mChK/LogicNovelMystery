@@ -17,7 +17,7 @@ import { BrowserTracing } from '@sentry/tracing';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
-
+import UsersPage from './pages/UsersPage.tsx';
 import PrivateRoute from './util/PrivateRoute';
 
 Sentry.init({
@@ -59,6 +59,14 @@ const App: React.FC = () => {
 				element={
 					<PrivateRoute>
 						<SelectMode />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/users"
+				element={
+					<PrivateRoute>
+						<UsersPage />
 					</PrivateRoute>
 				}
 			/>
