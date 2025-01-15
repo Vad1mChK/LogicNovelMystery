@@ -17,6 +17,7 @@ import { BrowserTracing } from '@sentry/tracing';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
+import UsersPage from "./pages/UsersPage.tsx";
 
 Sentry.init({
 	dsn: 'https://2a79b7cbcd0c952c1d8bb6dcf79cc459@o4508292474339328.ingest.de.sentry.io/4508292540530768',
@@ -48,6 +49,7 @@ const App: React.FC = () => {
 			<Route path="/select" element={<SelectMode />} />
 			<Route path="/single-player" element={<GamePage />} />
 			<Route path="/secret" element={<SecretPage />} />
+			<Route path="/users" element={<UsersPage />} />
 			<Route path="/" element={<Navigate to="/auth/login" />} />
 		</Routes>
 	);
