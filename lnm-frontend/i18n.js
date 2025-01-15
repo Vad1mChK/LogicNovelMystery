@@ -121,6 +121,10 @@ i18n.use(initReactI18next).init({
 						toMain: 'Quit to Main',
 					}
 				},
+				TabErrorPage: {
+					'You have unclosed tabs with our website!': 'You have unclosed tabs with our website!',
+					'Please return to the tab that is already open or close it.': 'Please return to the tab that is already open or close it.',
+				},
 			},
 		},
 		ru: {
@@ -239,6 +243,10 @@ i18n.use(initReactI18next).init({
 						newHighScore: 'Новый рекорд!',
 						toMain: 'На главную'
 					}
+				},
+				TabErrorPage: {
+					'You have unclosed tabs with our website!': 'У Вас есть незакрытые вкладки с нашим сайтом!',
+					'Please return to the tab that is already open or close it.': 'Пожалуйста, вернитесь на уже открытую вкладку или закройте ее.',
 				},
 			},
 		},

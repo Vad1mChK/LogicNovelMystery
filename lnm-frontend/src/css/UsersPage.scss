@@ -1,3 +1,6 @@
+@use 'colors';
+@use 'sass:color';
+
 .users-page-container {
   display: flex;
   justify-content: center;
@@ -16,9 +19,9 @@
 .table-container {
   text-align: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
+  background: color.adjust(colors.$WHITE, $alpha: -0.2);
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px color.adjust(colors.$BLACK, $alpha: -0.9);;
   max-height: 80vh;
   overflow: hidden;
 }
@@ -30,7 +33,7 @@
 }
 
 h2 {
-  color: black;
+  color: colors.$BLACK;
   margin-bottom: 20px;
 }
 
@@ -41,23 +44,23 @@ table {
 }
 
 thead th {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: color.adjust(colors.$BLACK, $alpha: -0.9);;
   padding: 10px;
   text-align: left;
   font-weight: bold;
-  color: black;
+  color: colors.$BLACK;
 }
 
 tbody td {
   padding: 10px;
   text-align: left;
-  color: black;
+  color: colors.$BLACK;
   cursor: pointer; /* Добавляем курсор, чтобы показать, что строка кликабельная */
 }
 
 tbody tr.selected {
   background-color: #0056b3;
-  color: white; /* Цвет текста для выделенной строки */
+  color: colors.$WHITE; /* Цвет текста для выделенной строки */
 }
 
 .button-container {
@@ -68,7 +71,7 @@ button {
   margin: 0 10px;
   padding: 10px 20px;
   background-color: #0056b3;
-  color: white;
+  color: colors.$WHITE;
   border: none;
   border-radius: 5px;
   cursor: pointer;

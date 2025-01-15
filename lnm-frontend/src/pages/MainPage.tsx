@@ -200,7 +200,10 @@ const MainMenu: React.FC = () => {
 					{t('About')}
 				</button>
 				{/* Кнопка "Выйти" справа */}
-				<button className="button right-button" onClick={handleExitGame}>
+				<button
+					className="button right-button"
+					onClick={handleExitGame}
+				>
 					{t('Exit')}
 				</button>
 			</div>
