@@ -39,6 +39,9 @@ const gameStateSlice = createSlice({
 	name: 'gameState',
 	initialState: loadGameState() as GameState,
 	reducers: {
+		setHealth(state, action: PayloadAction<number>) {
+			state.health = Math.min(100, Math.max(0, action.payload));
+		},
 		increaseHealth(state, action: PayloadAction<number | 'full'>) {
 			if (action.payload === 'full') {
 				state.health = 100;
@@ -76,6 +79,7 @@ const gameStateSlice = createSlice({
 
 // Export actions and reducer
 export const {
+	setHealth,
 	increaseHealth,
 	decreaseHealth,
 	setCurrentChapter,
