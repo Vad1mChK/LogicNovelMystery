@@ -15,6 +15,7 @@ export type EffectHandler = (
 		reportCampaign: (id: string) => string | null;
 		setCurrentFrameId: (id: string) => void;
 		setCurrentChapterId: (id: string) => void;
+		onJumpChapter: (id: string) => void;
 		setCurrentEndingId: (id: string) => void;
 		setIsEnding: (isEnding: boolean) => void;
 		setCurrentCharacters: React.Dispatch<
@@ -44,7 +45,7 @@ export const effectHandlers: Partial<
 
 	[LnmFrameEffectType.JUMP_CHAPTER]: (
 		effect,
-		{ setCurrentChapterId, setCurrentFrameId, plot }
+		{ setCurrentChapterId, setCurrentFrameId, onJumpChapter, plot }
 	) => {
 		const args =
 			effect.args as LnmEffectArgsMap[LnmFrameEffectType.JUMP_CHAPTER];
@@ -53,6 +54,7 @@ export const effectHandlers: Partial<
 		if (nextChapter) {
 			setCurrentChapterId(args.chapterId);
 			setCurrentFrameId(nextChapter.startFrame);
+			onJumpChapter(args.chapterId);
 		}
 	},
 

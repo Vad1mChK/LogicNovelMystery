@@ -24,6 +24,7 @@ describe('effectHandlers', () => {
 		setCurrentEndingId: jest.fn(),
 		setIsEnding: jest.fn(),
 		setCurrentCharacters: jest.fn(),
+		onJumpChapter: jest.fn(),
 		decreaseHealth: jest.fn(),
 		increaseHealth: jest.fn(),
 		setPlayerState: jest.fn(),
@@ -307,11 +308,13 @@ describe('effectHandlers', () => {
 
 		const mockSetCurrentChapterId = jest.fn();
 		const mockSetCurrentFrameId = jest.fn();
+		const mockOnJumpChapter = jest.fn();
 
 		const context = {
 			...mockContext,
 			setCurrentChapterId: mockSetCurrentChapterId,
 			setCurrentFrameId: mockSetCurrentFrameId,
+			onJumpChapter: mockOnJumpChapter,
 			plot: mockPlot,
 		};
 
@@ -322,6 +325,7 @@ describe('effectHandlers', () => {
 
 		expect(mockSetCurrentChapterId).toHaveBeenCalledWith('chapter2');
 		expect(mockSetCurrentFrameId).toHaveBeenCalledWith('frame5');
+		expect(mockOnJumpChapter).toHaveBeenCalled();
 	});
 
 	it('should handle FADE_IN_CHARACTER effect by updating character visibility', () => {
