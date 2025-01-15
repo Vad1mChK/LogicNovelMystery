@@ -3,8 +3,10 @@ package ru.itmo.lnm.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itmo.lnm.backend.dto.CampaignReportDto;
+import ru.itmo.lnm.backend.dto.JumpedChapterDto;
 import ru.itmo.lnm.backend.dto.SessionDto;
 import ru.itmo.lnm.backend.messages.CampaignReportResponse;
+import ru.itmo.lnm.backend.messages.RestoreStateResponse;
 import ru.itmo.lnm.backend.messages.StateResponse;
 import ru.itmo.lnm.backend.model.*;
 import ru.itmo.lnm.backend.repository.LeaderBoardRepository;
@@ -225,6 +227,56 @@ public class StateService {
             System.err.println("Some problem in receiveState " + e);
             return null;
         }
+    }
+
+    public boolean changeToSeenResult(SessionDto request, String username){
+        boolean success = false;
+        User user = userRepository.findByUsername(username);
+        Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
+        if (session.getPlayerState().equals(LnmPlayerState.COMPLETED_WON) ||
+                session.getPlayerState().equals(LnmPlayerState.COMPLETED_LOST)){
+            session.setPlayerState(LnmPlayerState.SEEN_RESULTS);
+            sessionRepository.save(session);
+            success = true;
+        }
+        return success;
+    }
+
+    public boolean changeChapter(JumpedChapterDto request, String username){
+        try {
+            User user = userRepository.findByUsername(username);
+            Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
+            session.setCurrentChapter(request.getChapter());
+            sessionRepository.save(session);
+        }catch (Exception e){
+            System.err.println("Some problems with jpa connection " + e);
+            return false;
+        }
+
+        return true;
+    }
+
+    public RestoreStateResponse restoreState(SessionDto request, String username){
+        try {
+
+            User user = userRepository.findByUsername(username);
+            Session session = sessionRepository.findBySessionTokenAndUser(request.getSessionToken(), user);
+            int userHp;
+            String chapter;
+            if (session.isGameStatus()) {
+                userHp = session.getUserHp();
+                chapter = session.getCurrentChapter();
+                return RestoreStateResponse.builder()
+                        .userHp(userHp)
+                        .chapter(chapter)
+                        .build();
+            }
+        }catch (Exception e){
+            System.err.println("Some problem with jpa " + e);
+            return null;
+        }
+        return null;
+
     }
 
 }

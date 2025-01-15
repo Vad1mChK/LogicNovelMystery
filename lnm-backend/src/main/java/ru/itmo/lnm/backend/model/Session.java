@@ -44,6 +44,9 @@ public class Session {
     @Column(nullable = false)
     private int currentTask;
 
+    @Column(nullable = false)
+    private String currentChapter;
+
     @Enumerated(EnumType.STRING)
     private LnmPlayerState playerState;
 
