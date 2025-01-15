@@ -1,4 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { generateMockAuthToken } from './MockAuthToken';
+
+// Добавляем токен перед всеми тестами
+test.beforeEach(async ({ page }) => {
+	const mockToken = generateMockAuthToken();
+	await page.addInitScript((token) => {
+		localStorage.setItem('AuthToken', token);
+	}, mockToken);
+});
 
 test.describe('Example e2e Test Suite', () => {
 	test('Home page loads with correct title', async ({ page }) => {
@@ -31,7 +40,7 @@ test.describe('Example e2e Test Suite', () => {
 		await page.goto('http://localhost:5173/LogicNovelMystery/main');
 
 		// Open settings modal
-		const settingsButton = page.locator('.settings-button');
+		const settingsButton = page.locator('#settings-button');
 		await settingsButton.click();
 
 		// Ensure settings modal is visible
@@ -57,14 +66,14 @@ test.describe('Example e2e Test Suite', () => {
 		await page.goto('http://localhost:5173/LogicNovelMystery/main');
 
 		// Open settings and select Russian
-		const settingsButton = page.locator('.settings-button');
+		const settingsButton = page.locator('#settings-button');
 		await settingsButton.click();
 		const languageSelect = page.locator('#language-select');
 		await languageSelect.selectOption('ru');
 
 		// Reload the page
 		await page.reload();
-		await expect(page.locator('.settings-button')).toHaveText('Настройки'); // Verify persistence
+		await expect(page.locator('#settings-button')).toHaveText('Настройки'); // Verify persistence
 	});
 	/*
 	 * TODO:

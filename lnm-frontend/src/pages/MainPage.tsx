@@ -12,14 +12,15 @@ import { setLanguage } from '../state/languageSlice';
 interface LeaderboardEntry {
 	score: number;
 	name: string;
-	gameMode: string;
 }
 
 //todo del cause it's just a mock data
 const fallbackLeaderboardData = [
-	{ name: 'Иванов', score: 100, gameMode: 'Single' },
-	{ name: 'Петров', score: 90, gameMode: 'Single' },
-	{ name: 'Сидоров', score: 80, gameMode: 'Single' },
+	{ name: 'Иванов', score: 100 },
+	// eslint-disable-next-line no-magic-numbers
+	{ name: 'Петров', score: 90 },
+	// eslint-disable-next-line no-magic-numbers
+	{ name: 'Сидоров', score: 80 },
 ];
 
 const MainMenu: React.FC = () => {
@@ -39,8 +40,7 @@ const MainMenu: React.FC = () => {
 		fallbackLeaderboardData
 	);
 
-	const [isRefreshDisabled, setRefreshDisabled] = useState(false);
-	const [timer, setTimer] = useState(0);
+	const [isMultiplayer, setIsMultiplayer] = useState(false);
 
 	// Устанавливаем музыку при загрузке страницы
 	useEffect(() => {
@@ -54,13 +54,29 @@ const MainMenu: React.FC = () => {
 		console.log('Mounted: MainMenu');
 		return () => console.log('Unmounted: MainMenu');
 	}, []);
-
 	// Запрос данных с сервера
-	const fetchLeaderboardData = async () => {
+	const fetchLeaderboardData = async (isMultiplayer: boolean) => {
 		try {
-			const response = await axios.get('/api/leaderboard'); // Замените на ваш URL
+			const response = await axios.post(
+				'http://localhost:8080/api/leaderboard',
+				{
+					isMultiplayer,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: localStorage.getItem('AuthToken'),
+					},
+				}
+			);
 			if (Array.isArray(response.data)) {
-				setLeaderboardData(response.data);
+				const sortedData = response.data
+					.sort(
+						(a: LeaderboardEntry, b: LeaderboardEntry) =>
+							b.score - a.score
+					)
+					.slice(0, 10);
+				setLeaderboardData(sortedData);
 			} else {
 				//todo replace mock and add locale
 				console.warn(
@@ -75,26 +91,8 @@ const MainMenu: React.FC = () => {
 		}
 	};
 
-	// Деактивация кнопки Refresh с таймером
-	const handleRefresh = () => {
-		setRefreshDisabled(true);
-		setTimer(90); // 1:30 = 90 секунд
-		fetchLeaderboardData();
-
-		const countdown = setInterval(() => {
-			setTimer((prev) => {
-				if (prev <= 1) {
-					clearInterval(countdown);
-					setRefreshDisabled(false);
-					return 0;
-				}
-				return prev - 1;
-			});
-		}, 1000);
-	};
-
 	useEffect(() => {
-		if (isLeaderboardOpen) fetchLeaderboardData();
+		if (isLeaderboardOpen) fetchLeaderboardData(false);
 	}, [isLeaderboardOpen]);
 
 	const closeAllModals = () => {
@@ -138,14 +136,16 @@ const MainMenu: React.FC = () => {
 				<button
 					className="button left-button"
 					onClick={handleStartGame}
+					id="start-game-button"
 				>
 					{t('Start game')}
 				</button>
 
 				{/* Кнопка "Настройки" по центру сверху */}
 				<button
-					className="button top-button settings-button"
+					className="button top-button"
 					onClick={() => setSettingsOpen(true)}
+					id="settings-button"
 				>
 					{t('Settings')}
 				</button>
@@ -154,14 +154,16 @@ const MainMenu: React.FC = () => {
 				<button
 					className="button right-button"
 					onClick={() => setLeaderboardOpen(true)}
+					id="leaderboard-button"
 				>
 					{t('Leaderboard')}
 				</button>
 
-				{/* Кнопка "О игре" справа */}
+				{/* Кнопка "Об игре" справа */}
 				<button
 					className="button right-button"
 					onClick={() => setAboutOpen(true)}
+					id="about-button"
 				>
 					{t('About')}
 				</button>
@@ -221,13 +223,34 @@ const MainMenu: React.FC = () => {
 			{isLeaderboardOpen && (
 				<div id="leaderboard-modal">
 					<h2>{t('Leaderboard')}</h2>
+					<div className="mode-selector">
+						<div
+							className={`mode-box ${!isMultiplayer ? 'active' : ''}`}
+							onClick={() => {
+								if (!isMultiplayer) return; // Если кнопка уже активна, ничего не делаем
+								setIsMultiplayer(false);
+								fetchLeaderboardData(false);
+							}}
+						>
+							{t('Single')}
+						</div>
+						<div
+							className={`mode-box ${isMultiplayer ? 'active' : ''}`}
+							onClick={() => {
+								if (isMultiplayer) return; // Если кнопка уже активна, ничего не делаем
+								setIsMultiplayer(true);
+								fetchLeaderboardData(true);
+							}}
+						>
+							{t('Multi')}
+						</div>
+					</div>
 					<table>
 						<thead>
 							<tr>
 								<th>№</th>
 								<th>{t('Name')}</th>
 								<th>{t('Score')}</th>
-								<th>{t('GameMode')}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -235,21 +258,11 @@ const MainMenu: React.FC = () => {
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>{leader.name}</td>
-									<td>{leader.gameMode}</td>
 									<td>{leader.score}</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
-					<button
-						className="modal-button"
-						onClick={handleRefresh}
-						disabled={isRefreshDisabled}
-					>
-						{isRefreshDisabled
-							? `${t('Refresh in')} ${timer} ${t('sec.')}`
-							: t('Refresh')}
-					</button>
 					<button className="modal-button" onClick={closeAllModals}>
 						{t('Close')}
 					</button>
