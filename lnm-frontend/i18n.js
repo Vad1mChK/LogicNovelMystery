@@ -41,6 +41,9 @@ i18n.use(initReactI18next).init({
 				Character2: 'Character 2',
 				'Invalid data format from server.': 'Invalid data format from server',
 				'Failed to load leaderboard data. Please check your connection or try again later.': 'Failed to load leaderboard data. Please check your connection or try again later.',
+				Question: 'Are you really interested?',
+				Yes: 'Yes',
+				No: 'No',
 				login: {
 					title: 'Login',
 					usernamePlaceholder: 'Enter your username',
@@ -171,6 +174,9 @@ i18n.use(initReactI18next).init({
 				Exit: 'Выйти',
 				'Invalid data format from server': 'Ошибка получения данных с сервера.',
 				'Failed to load leaderboard data. Please check your connection or try again later.': 'Не удалось загрузить данные с сервера. Проверьте соединение или попробуйте позже.',
+				Question: 'Тебе действительно интересно?',
+				Yes: 'Да',
+				No: 'Нет',
 				login: {
 					title: 'Вход',
 					usernamePlaceholder: 'Введите имя пользователя',
