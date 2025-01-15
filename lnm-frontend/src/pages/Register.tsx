@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import * as Sentry from '@sentry/react';
 import { useTranslation } from 'react-i18next';
+import { VITE_SERVER_URL } from '../metaEnv';
 
 const Register: React.FC = () => {
 	const [username, setUsername] = useState('');
@@ -30,7 +31,7 @@ const Register: React.FC = () => {
 
 		try {
 			await axios.post(
-				'http://localhost:8080/auth/register',
+				`${VITE_SERVER_URL}/auth/register`,
 				{ name: username, email, password },
 				{ headers: { 'Content-Type': 'application/json' } }
 			);
