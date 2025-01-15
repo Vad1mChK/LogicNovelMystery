@@ -1,4 +1,5 @@
 import gameStateReducer, {
+	setHealth,
 	decreaseHealth,
 	increaseHealth,
 	resetState,
@@ -22,6 +23,18 @@ const initialState = {
 
 describe('gameStateSlice', () => {
 	// Test increaseHealth
+
+	it('should set health and clamp it to (0..100) range', () => {
+		let state = gameStateReducer(initialState, setHealth(1));
+		expect(state.health).toBe(1);
+
+		state = gameStateReducer(initialState, setHealth(-50));
+		expect(state.health).toBe(0);
+
+		state = gameStateReducer(initialState, setHealth(150));
+		expect(state.health).toBe(100);
+	});
+
 	it('should set health to full when "full" is passed to increaseHealth', () => {
 		const state = gameStateReducer(
 			{ ...initialState, health: 50 },

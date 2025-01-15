@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import steveImage from '../assets/img/steve.webp';
 import professorAndVicky from '../assets/img/prof_and_vicky.webp';
 import '../css/SelectMode.scss';
@@ -6,6 +6,11 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { restoreState } from '../frameInterpreter/communication/restoreState.ts';
+import { generateSessionToken } from '../util/generateSessionToken.ts';
+import { useDispatch } from 'react-redux';
+import { setPlayerState, setProtagonist } from '../state/gameStateSlice.ts';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types.ts';
 import { VITE_SERVER_URL } from '../metaEnv';
 
 // Типизация для режима игры
@@ -19,6 +24,7 @@ const GameSelection: React.FC = () => {
 	const { t } = useTranslation(); // Подключаем локализацию
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch(); // Используем хук диспатча
 
 	// Load selected character from localStorage on component mount
 	useEffect(() => {
@@ -34,23 +40,33 @@ const GameSelection: React.FC = () => {
 		localStorage.setItem('selectedCharacter', character);
 	};
 
-	// Generate a random session token
-	const generateToken = () => {
-		const array = new Uint8Array(24); // 24 байта -> ~32 символа в Base64
-		window.crypto.getRandomValues(array);
-		return btoa(String.fromCharCode(...array))
-			.replace(/\+/g, '-')
-			.replace(/\//g, '_')
-			.replace(/=+$/, ''); // Убираем '=' в конце
-	};
-
 	// Send session token request to the server
 	const sendRequest = async () => {
-		const sessionToken = generateToken();
+		const token = localStorage.getItem('sessionToken');
+		const isMultiplayer = selectedCharacter === 'Game for two';
+		if (token) {
+			if (await restoreState(token, isMultiplayer, dispatch)) {
+				return true;
+			}
+			localStorage.removeItem('sessionToken');
+			return false;
+		}
+		return false;
+	};
+
+	const createSinglePlayerSession = async () => {
 		try {
-			/*const result = */ await axios.post(
+			const token = generateSessionToken();
+			localStorage.setItem('sessionToken', token);
+			await axios.post(
+				`${VITE_SERVER_URL}/session`,
+				{
+					token,
+					isMultiplayer: false,
+				},
+<!-- 			/*const result = */ await axios.post(
 				`${VITE_SERVER_URL}/session`, // Замените на ваш API-эндпоинт
-				{ sessionToken }, // Токен передается в теле запроса
+				{ sessionToken }, // Токен передается в теле запроса -->
 				{
 					headers: {
 						'Content-Type': 'application/json',
@@ -58,13 +74,14 @@ const GameSelection: React.FC = () => {
 					},
 				}
 			);
-			// Сохраняем токен JWT в localStorage
-			localStorage.setItem('sessionToken', sessionToken);
 		} catch (err) {
-			// Устанавливаем сообщение об ошибке
-			throw new Error(
-				err instanceof Error ? err.message : 'An unknown error occurred'
+			setError(
+				err instanceof Error
+					? err.message
+					: 'Error occurred during "createSinglePlayerSession"'
 			);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -77,9 +94,12 @@ const GameSelection: React.FC = () => {
 			await sendRequest(); // Отправляем запрос на сервер
 			// Redirect based on selected character
 			if (selectedCharacter === 'Game for one') {
+				await createSinglePlayerSession();
+				dispatch(setProtagonist(LnmHero.STEVE));
+				dispatch(setPlayerState(LnmPlayerState.PLAYING));
 				navigate('/single-player');
 			} else if (selectedCharacter === 'Game for two') {
-				navigate('/multi-player');
+				navigate('/waitRoom');
 			}
 		} catch (err) {
 			// Показываем сообщение об ошибке

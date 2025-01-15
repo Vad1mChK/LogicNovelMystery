@@ -297,3 +297,60 @@ table {
 	border-radius: 5px;
 	margin-bottom: 20px;
 }
+
+/* Модальное окно с вопросом-пасхалкой */
+#question-modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: linear-gradient(
+									135deg,
+									color.adjust(colors.$BLUE, $lightness: -10%) 0%,
+									color.adjust(colors.$DARK-AZUR, $lightness: 10%) 100%
+	);
+	padding: 30px;
+	border-radius: 15px;
+	box-shadow: 0 10px 20px color.adjust(colors.$BLACK, $alpha: -0.85);
+	z-index: 1000;
+	width: 80%; /* Адаптивная ширина */
+	max-width: 500px;
+	text-align: center;
+	color: colors.$WHITE;
+
+	h2 {
+		font-size: 24px;
+		margin-bottom: 20px;
+		font-weight: bold;
+		color: colors.$WHITE;
+		text-shadow: 0 2px 4px color.adjust(colors.$BLACK, $alpha: -0.8);
+	}
+
+	.modal-actions {
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+
+		button {
+			background-color: colors.$WHITE;
+			color: colors.$BLUE;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 20px;
+			font-size: 16px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: all 0.3s ease;
+
+			&:hover {
+				background-color: color.adjust(colors.$WHITE, $lightness: -10%);
+				color: colors.$DARK-AZUR;
+				box-shadow: 0 4px 8px color.adjust(colors.$BLACK, $alpha: -0.7);
+			}
+
+			&:active {
+				transform: scale(0.95);
+			}
+		}
+	}
+}
