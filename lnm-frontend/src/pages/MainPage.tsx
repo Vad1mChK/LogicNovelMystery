@@ -8,6 +8,7 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
+import { VITE_SERVER_URL } from '../metaEnv';
 
 interface LeaderboardEntry {
 	username: string;
@@ -57,7 +58,7 @@ const MainMenu: React.FC = () => {
 		try {
 			setErrorMessage(null); // Сбрасываем сообщение об ошибке перед запросом
 			const response = await axios.post<LeaderboardEntry[]>(
-				'http://localhost:8080/api/leaderboard',
+				`${VITE_SERVER_URL}/api/leaderboard`,
 				{
 					isMultiplayer,
 				},
