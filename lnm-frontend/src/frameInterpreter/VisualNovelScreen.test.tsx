@@ -6,39 +6,55 @@ jest.mock('../css/CreateOrResultsScreen.scss', () => ({}));
 
 // Mocking i18next translation function
 jest.mock('i18next', () => ({
-    t: jest.fn((key: string) => key),
+	t: jest.fn((key: string) => key),
 }));
 
 jest.mock('../metaEnv', () => ({
-    BASE_URL: '/',
+	BASE_URL: '/',
 }));
 
 describe('ResultsWaitScreen Component', () => {
-    it('should display "You Win!" when winner prop is true', () => {
-        render(<ResultsWaitScreen winner={true} />);
-        expect(screen.getByText('game.resultWaitScreen.win')).toBeInTheDocument();
-    });
+	it('should display "You Win!" when winner prop is true', () => {
+		render(<ResultsWaitScreen winner={true} />);
+		expect(
+			screen.getByText('game.resultWaitScreen.win')
+		).toBeInTheDocument();
+	});
 
-    it('should display "You Lose!" when winner prop is false', () => {
-        render(<ResultsWaitScreen winner={false} />);
-        expect(screen.getByText('game.resultWaitScreen.lose')).toBeInTheDocument();
-    });
+	it('should display "You Lose!" when winner prop is false', () => {
+		render(<ResultsWaitScreen winner={false} />);
+		expect(
+			screen.getByText('game.resultWaitScreen.lose')
+		).toBeInTheDocument();
+	});
 
-    it('should show multiplayer wait message when multiplayer prop is true', () => {
-        render(<ResultsWaitScreen winner={true} multiplayer={true} />);
+	it('should show multiplayer wait message when multiplayer prop is true', () => {
+		render(<ResultsWaitScreen winner={true} multiplayer={true} />);
 
-        // Checking for translated text and image for multiplayer mode
-        expect(screen.getByText('game.resultWaitScreen.wait.multiplayer')).toBeInTheDocument();
-        expect(screen.getByText('game.resultWaitScreen.pageWillUpdate.multiplayer')).toBeInTheDocument();
-        expect(screen.getByAltText('game.resultWaitScreen.wait.multiplayer')).toBeInTheDocument();
-    });
+		// Checking for translated text and image for multiplayer mode
+		expect(
+			screen.getByText('game.resultWaitScreen.wait.multiplayer')
+		).toBeInTheDocument();
+		expect(
+			screen.getByText('game.resultWaitScreen.pageWillUpdate.multiplayer')
+		).toBeInTheDocument();
+		expect(
+			screen.getByAltText('game.resultWaitScreen.wait.multiplayer')
+		).toBeInTheDocument();
+	});
 
-    it('should show single player wait message when multiplayer prop is false', () => {
-        render(<ResultsWaitScreen winner={true} multiplayer={false} />);
+	it('should show single player wait message when multiplayer prop is false', () => {
+		render(<ResultsWaitScreen winner={true} multiplayer={false} />);
 
-        // Checking for translated text and image for single-player mode
-        expect(screen.getByText('game.resultWaitScreen.wait.single')).toBeInTheDocument();
-        expect(screen.getByText('game.resultWaitScreen.pageWillUpdate.single')).toBeInTheDocument();
-        expect(screen.getByAltText('game.resultWaitScreen.wait.single')).toBeInTheDocument();
-    });
+		// Checking for translated text and image for single-player mode
+		expect(
+			screen.getByText('game.resultWaitScreen.wait.single')
+		).toBeInTheDocument();
+		expect(
+			screen.getByText('game.resultWaitScreen.pageWillUpdate.single')
+		).toBeInTheDocument();
+		expect(
+			screen.getByAltText('game.resultWaitScreen.wait.single')
+		).toBeInTheDocument();
+	});
 });

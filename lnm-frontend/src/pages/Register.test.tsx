@@ -10,51 +10,65 @@ jest.mock('axios');
 
 // Mocking the i18n translation hook
 jest.mock('react-i18next', () => ({
-    useTranslation: jest.fn(() => ({
-        t: (key: string) => key, // Mock translation function
-    })),
+	useTranslation: jest.fn(() => ({
+		t: (key: string) => key, // Mock translation function
+	})),
 }));
 
 describe('Register Component', () => {
-    const navigateMock = jest.fn();
+	const navigateMock = jest.fn();
 
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
 
-    it('should render the registration form', () => {
-        render(
-            <Router>
-                <Register />
-            </Router>
-        );
+	it('should render the registration form', () => {
+		render(
+			<Router>
+				<Register />
+			</Router>
+		);
 
-        expect(screen.getByPlaceholderText('register.usernamePlaceholder')).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('register.emailPlaceholder')).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('register.passwordPlaceholder')).toBeInTheDocument();
-        expect(screen.getByText('register.registerButton')).toBeInTheDocument();
-        expect(screen.getByText('register.alreadyHaveAccount')).toBeInTheDocument();
-        expect(screen.getByText('register.loginLink')).toBeInTheDocument();
-    });
+		expect(
+			screen.getByPlaceholderText('register.usernamePlaceholder')
+		).toBeInTheDocument();
+		expect(
+			screen.getByPlaceholderText('register.emailPlaceholder')
+		).toBeInTheDocument();
+		expect(
+			screen.getByPlaceholderText('register.passwordPlaceholder')
+		).toBeInTheDocument();
+		expect(screen.getByText('register.registerButton')).toBeInTheDocument();
+		expect(
+			screen.getByText('register.alreadyHaveAccount')
+		).toBeInTheDocument();
+		expect(screen.getByText('register.loginLink')).toBeInTheDocument();
+	});
 
-    it('should validate email input and show error for invalid email', () => {
-        render(
-            <Router>
-                <Register />
-            </Router>
-        );
+	it('should validate email input and show error for invalid email', () => {
+		render(
+			<Router>
+				<Register />
+			</Router>
+		);
 
-        const usernameInput = screen.getByPlaceholderText('register.usernamePlaceholder');
-        const emailInput = screen.getByPlaceholderText('register.emailPlaceholder');
-        const passwordInput = screen.getByPlaceholderText('register.passwordPlaceholder');
-        const registerButton = screen.getByText('register.registerButton');
+		const usernameInput = screen.getByPlaceholderText(
+			'register.usernamePlaceholder'
+		);
+		const emailInput = screen.getByPlaceholderText(
+			'register.emailPlaceholder'
+		);
+		const passwordInput = screen.getByPlaceholderText(
+			'register.passwordPlaceholder'
+		);
+		const registerButton = screen.getByText('register.registerButton');
 
-        fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-        fireEvent.change(emailInput, { target: { value: 'invalid-email' } });
-        fireEvent.change(passwordInput, { target: { value: 'password123' } });
+		fireEvent.change(usernameInput, { target: { value: 'testuser' } });
+		fireEvent.change(emailInput, { target: { value: 'invalid-email' } });
+		fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
-        fireEvent.click(registerButton);
+		fireEvent.click(registerButton);
 
-        expect(screen.getByText('register.invalidEmail')).toBeInTheDocument(); // Assuming "register.invalidEmail" is the key for the error message
-    });
+		expect(screen.getByText('register.invalidEmail')).toBeInTheDocument(); // Assuming "register.invalidEmail" is the key for the error message
+	});
 });
