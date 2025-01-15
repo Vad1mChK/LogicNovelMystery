@@ -25,9 +25,8 @@ public class SessionService {
         Session session = new Session();
         session.setUser(user);
         if (sessionDto.getIsMultiplayer()){
-            if (sessionRepository.existsBySessionToken(sessionDto.getSessionToken())){
-                Session partnerSession = sessionRepository.findBySessionTokenAndUserNot(
-                        session.getSessionToken(), user);
+            Session partnerSession = sessionRepository.findBySessionToken(sessionDto.getSessionToken());
+            if (partnerSession != null && !partnerSession.getUser().equals(user)) {
                 session.setHero(LnmHero.VICKY);
                 session.setPlayerState(LnmPlayerState.PLAYING);
                 partnerSession.setPlayerState(LnmPlayerState.PLAYING);
