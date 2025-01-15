@@ -13,6 +13,13 @@ i18n.use(initReactI18next).init({
 				About: 'About',
 				Close: 'Close',
 				Volume: 'Volume',
+				panning: {
+					panning: 'Panning',
+					format: '{{panningValue}} ({{panningConstant}})',
+					left: 'Left',
+					middle: 'Middle',
+					right: 'Right',
+				},
 				Language: 'Language',
 				Russian: 'Russian',
 				English: 'English',
@@ -61,7 +68,7 @@ i18n.use(initReactI18next).init({
 					protagonist: {
 						steve: 'Steve',
 						vicky: 'Vicky',
-						professor: 'Professor'
+						professor: 'Professor',
 					},
 					knowledgeButton: 'Knowledge',
 					giveUpButton: 'Give up',
@@ -91,7 +98,7 @@ i18n.use(initReactI18next).init({
 					createdWaitScreen: {
 						created: 'Game created',
 						wait: 'Waiting for the partner to join...',
-            willPlayAs: 'You will play as: {{protagonist}}',
+						willPlayAs: 'You will play as: {{protagonist}}',
 					},
 					resultWaitScreen: {
 						win: 'You won!',
@@ -102,8 +109,9 @@ i18n.use(initReactI18next).init({
 						},
 						pageWillUpdate: {
 							single: 'The page will update once the server responds.',
-							multiplayer: 'The page will update once your partner finishes the game.',
-						}
+							multiplayer:
+								'The page will update once your partner finishes the game.',
+						},
 					},
 					resultScreen: {
 						result: {
@@ -118,7 +126,7 @@ i18n.use(initReactI18next).init({
 						yourHighScore: 'Your high score:',
 						newHighScore: 'New high score!',
 						toMain: 'Quit to Main',
-					}
+					},
 				},
 			},
 		},
@@ -129,7 +137,14 @@ i18n.use(initReactI18next).init({
 				Leaderboard: 'Доска лидеров',
 				About: 'Об игре',
 				Close: 'Закрыть',
-				Volume: 'Звук',
+				Volume: 'Громкость звука',
+				panning: {
+					panning: 'Панорамирование',
+					format: '{{panningValue}} ({{panningConstant}})',
+					left: 'Слева',
+					middle: 'Посередине',
+					right: 'Справа',
+				},
 				Language: 'Язык',
 				Russian: 'Русский',
 				English: 'Английский',
@@ -179,7 +194,7 @@ i18n.use(initReactI18next).init({
 					protagonist: {
 						steve: 'Стив',
 						vicky: 'Викки',
-						professor: 'Профессор'
+						professor: 'Профессор',
 					},
 					knowledgeButton: 'Знания',
 					giveUpButton: 'Сдаться',
@@ -220,8 +235,9 @@ i18n.use(initReactI18next).init({
 						},
 						pageWillUpdate: {
 							single: 'Страница обновится, когда сервер ответит.',
-							multiplayer: 'Страница обновится, когда партнёр завершит игру.',
-						}
+							multiplayer:
+								'Страница обновится, когда партнёр завершит игру.',
+						},
 					},
 					resultScreen: {
 						result: {
@@ -235,8 +251,8 @@ i18n.use(initReactI18next).init({
 						yourScore: 'Твой счёт:',
 						yourHighScore: 'Твой рекорд:',
 						newHighScore: 'Новый рекорд!',
-						toMain: 'На главную'
-					}
+						toMain: 'На главную',
+					},
 				},
 			},
 		},
