@@ -1,13 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/MainPage.scss';
 import { useNavigate } from 'react-router-dom';
-import { AudioContext } from './AudioContext';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 import defaultMusic from '../assets/music/fon.mp3';
 import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
+import { RootState } from '../state/store.ts';
+import {
+	playMusic,
+	setCurrentTrack,
+	setPanning,
+	setVolume,
+	togglePlayMusic,
+} from '../state/musicSlice.ts';
 import { VITE_SERVER_URL } from '../metaEnv';
 
 interface LeaderboardEntry {
@@ -23,9 +30,13 @@ const MainMenu: React.FC = () => {
 	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
+	const {
+		isPlaying: isMusicPlaying,
+		volume,
+		currentTrack,
+		panning,
+	} = useSelector((state: RootState) => state.musicState);
 
-	const { isMusicPlaying, toggleMusic, setMusicFile, volume, setVolume } =
-		useContext(AudioContext)!;
 	const { t, i18n } = useTranslation(); // Используем локализацию
 	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
 		[]
@@ -36,11 +47,11 @@ const MainMenu: React.FC = () => {
 
 	// Устанавливаем музыку при загрузке страницы
 	useEffect(() => {
-		setMusicFile(defaultMusic);
+		dispatch(setCurrentTrack(defaultMusic));
 		if (!isMusicPlaying) {
-			toggleMusic(); // Запускаем музыку, если она не играет
+			dispatch(playMusic()); // Запускаем музыку, если она не играет
 		}
-	}, [isMusicPlaying, setMusicFile, toggleMusic]);
+	}, [isMusicPlaying, currentTrack, dispatch]);
 
 	useEffect(() => {
 		console.log('Mounted: MainMenu');
@@ -131,7 +142,11 @@ const MainMenu: React.FC = () => {
 	};
 
 	const adjustVolume = (value: number) => {
-		setVolume(value);
+		dispatch(setVolume(value));
+	};
+
+	const adjustPanning = (value: number) => {
+		dispatch(setPanning(value));
 	};
 
 	const changeLanguage = (selectedLanguage: string) => {
@@ -139,24 +154,17 @@ const MainMenu: React.FC = () => {
 		dispatch(setLanguage(selectedLanguage));
 	};
 
-	// Воспроизведение музыки
-	const playMusic = () => {
-		const audio = new Audio(defaultMusic);
-		audio.play().catch((err) => {
-			console.error('Ошибка при попытке воспроизвести музыку:', err);
-		});
-	};
-
 	// Обработчик нажатия на кнопку "Начать игру" с воспроизведением музыки
 	const handleStartGame = () => {
-		playMusic(); // Воспроизведение музыки
+		dispatch(playMusic()); // Воспроизведение музыки
 		navigate('/select'); // Переход на другую страницу
 	};
 
 	const handleExitGame = () => {
 		if (isMusicPlaying) {
-			toggleMusic(); // Остановить музыку через контекст
+			dispatch(togglePlayMusic());
 		}
+		localStorage.removeItem('AuthToken');
 		navigate('/'); // Переход на другую страницу
 	};
 
@@ -232,6 +240,22 @@ const MainMenu: React.FC = () => {
 						onChange={(e) => adjustVolume(Number(e.target.value))}
 					/>
 					<span>{volume}%</span>
+					<br />
+					<label htmlFor="panning-range">
+						{t('panning.panning')}:
+					</label>
+					<input
+						type="range"
+						id="panning-range"
+						className="volume-control"
+						min={-1}
+						max={1}
+						step={0.01}
+						value={panning}
+						onChange={(e) => adjustPanning(Number(e.target.value))}
+					/>
+					<span>{panning}</span>
+
 					<div style={{ marginTop: '10px' }}>
 						<label htmlFor="language-select">
 							{t('Language')}:

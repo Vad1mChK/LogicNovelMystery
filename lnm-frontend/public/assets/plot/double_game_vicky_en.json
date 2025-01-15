@@ -535,7 +535,7 @@
         },
         "inception2_27": {
           "id": "inception2_27",
-          "dialogue": "In Prolog, the `:-` character is called a "backward arrow". It is used to define rules in a logic program.",
+          "dialogue": "In Prolog, the `:-` character is called a \"backward arrow\". It is used to define rules in a logic program.",
           "speaker": "vicky",
           "nextFrame": "inception2_28"
         },
