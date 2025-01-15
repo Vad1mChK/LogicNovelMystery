@@ -149,6 +149,13 @@ const MainMenu: React.FC = () => {
 		navigate('/select'); // Переход на другую страницу
 	};
 
+	const handleExitGame = () => {
+		if (isMusicPlaying) {
+			toggleMusic(); // Остановить музыку через контекст
+		}
+		navigate('/'); // Переход на другую страницу
+	};
+
 	return (
 		<div
 			className="background"
@@ -191,6 +198,10 @@ const MainMenu: React.FC = () => {
 					id="about-button"
 				>
 					{t('About')}
+				</button>
+				{/* Кнопка "Выйти" справа */}
+				<button className="button right-button" onClick={handleExitGame}>
+					{t('Exit')}
 				</button>
 			</div>
 
