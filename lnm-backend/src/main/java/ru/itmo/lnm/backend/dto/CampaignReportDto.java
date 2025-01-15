@@ -9,5 +9,5 @@ public class CampaignReportDto {
     private String sessionId;
 
     @NotNull
-    private boolean winner;
+    private Boolean winner;
 }

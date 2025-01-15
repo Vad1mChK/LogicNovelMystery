@@ -23,7 +23,7 @@ public class SessionService {
         User user = userRepository.findByUsername(username);
         Session session = new Session();
         session.setUser(user);
-        if (sessionDto.isMultiplayer()){
+        if (sessionDto.getIsMultiplayer()){
             if (sessionRepository.existsBySessionToken(sessionDto.getSessionToken())){
                 Session partnerSession = sessionRepository.findBySessionTokenAndUserNot(
                         session.getSessionToken(), user);
