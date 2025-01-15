@@ -13,7 +13,9 @@ import {
 	setCurrentTrack,
 	setPanning,
 	setVolume,
+	togglePlayMusic,
 } from '../state/musicSlice.ts';
+import { VITE_SERVER_URL } from '../metaEnv';
 
 interface LeaderboardEntry {
 	username: string;
@@ -61,13 +63,15 @@ const MainMenu: React.FC = () => {
 		if (isLeaderboardOpen) {
 			fetchLeaderboardData(isMultiplayer);
 		}
-	}, [isLeaderboardOpen, isMultiplayer]); // Добавляем зависимости
+	}, [isLeaderboardOpen]); // Добавляем зависимости
 	// Запрос данных с сервера
 	const fetchLeaderboardData = async (isMultiplayer: boolean) => {
 		try {
 			setErrorMessage(null); // Сбрасываем сообщение об ошибке перед запросом
-			const response = await axios.post<LeaderboardEntry[]>(
-				'http://localhost:8080/api/leaderboard',
+			const response = await axios.post<{
+				leaderBoardList: LeaderboardEntry[];
+			}>(
+				`${VITE_SERVER_URL}/api/leaderboard`,
 				{
 					isMultiplayer,
 				},
@@ -78,10 +82,11 @@ const MainMenu: React.FC = () => {
 					},
 				}
 			);
-			if (Array.isArray(response.data)) {
+			const leaderBoardList = response.data?.leaderBoardList;
+			if (Array.isArray(leaderBoardList)) {
 				if (isMultiplayer) {
 					// Группируем записи по sessionToken
-					const groupedData = response.data.reduce(
+					const groupedData = leaderBoardList.reduce(
 						(
 							acc: Record<string, LeaderboardEntry>,
 							entry: LeaderboardEntry
@@ -109,7 +114,7 @@ const MainMenu: React.FC = () => {
 					setLeaderboardData(sortedData);
 				} else {
 					// Для одиночного режима просто сортируем и берем топ-10
-					const sortedData = response.data
+					const sortedData = leaderBoardList
 						.sort(
 							(a: LeaderboardEntry, b: LeaderboardEntry) =>
 								b.score - a.score
@@ -157,8 +162,9 @@ const MainMenu: React.FC = () => {
 
 	const handleExitGame = () => {
 		if (isMusicPlaying) {
-			toggleMusic(); // Остановить музыку через контекст
+			dispatch(togglePlayMusic());
 		}
+		localStorage.removeItem('AuthToken');
 		navigate('/'); // Переход на другую страницу
 	};
 
