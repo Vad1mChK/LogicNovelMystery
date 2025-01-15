@@ -23,7 +23,8 @@ import {
 } from '../state/gameStateSlice.ts';
 import { reportCampaign } from './communication/reportCampaign.ts';
 import { pauseMusic, playMusic, setCurrentTrack } from '../state/musicSlice.ts';
-import { BASE_URL } from '../metaEnv.ts';
+import { BASE_URL, VITE_SERVER_URL } from '../metaEnv.ts';
+import axios from 'axios';
 
 interface VisualNovelEngineProps {
 	plot: LnmPlot;
@@ -85,8 +86,6 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 
 	useEffect(() => {
 		console.log(`Load from initial chapter: ${initialChapterId}`);
-		// Load knowledge for the initial chapter
-		// const initialChapter = plot.chapters.get(initialChapterId);
 	}, [initialChapterId, plot, dispatch]);
 
 	useEffect(() => {
@@ -135,6 +134,26 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 								dispatch(setCurrentFrame(frameId)),
 							setCurrentChapterId: (chapterId: string) =>
 								dispatch(setCurrentChapter(chapterId)),
+							onJumpChapter: (chapterId: string) => {
+								axios.post(
+									`${VITE_SERVER_URL}/chapters/${chapterId}`,
+									{
+										sessionToken:
+											localStorage.getItem(
+												'sessionToken'
+											),
+										chapterId: chapterId,
+									},
+									{
+										headers: {
+											Authorization:
+												localStorage.getItem(
+													'AuthToken'
+												),
+										},
+									}
+								);
+							},
 							setCurrentEndingId,
 							setIsEnding,
 							setCurrentCharacters,
