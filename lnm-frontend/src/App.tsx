@@ -16,7 +16,7 @@ import { BrowserTracing } from '@sentry/tracing';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
-import UsersPage from './pages/UsersPage.tsx';
+import WaitRoom from './pages/WaitRoom.tsx';
 import PrivateRoute from './util/PrivateRoute';
 import TabErrorPage from './pages/TabErrorPage';
 
@@ -64,10 +64,10 @@ const App: React.FC = () => {
 				}
 			/>
 			<Route
-				path="/users"
+				path="/waitRoom"
 				element={
 					<PrivateRoute>
-						<UsersPage />
+						<WaitRoom />
 					</PrivateRoute>
 				}
 			/>

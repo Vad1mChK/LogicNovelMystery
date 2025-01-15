@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import '../css/UsersPage.scss'; // Подключите стили
+import '../css/WaitRoom.scss'; // Подключите стили
 
 interface User {
 	id: number;
 	name: string;
 }
 
-const UsersPage: React.FC = () => {
+const WaitRoom: React.FC = () => {
 	const [users] = useState<User[]>([
 		{ id: 1, name: 'Иванов' },
 		{ id: 2, name: 'Петров' },
@@ -67,4 +67,4 @@ const UsersPage: React.FC = () => {
 	);
 };
 
-export default UsersPage;
+export default WaitRoom;
