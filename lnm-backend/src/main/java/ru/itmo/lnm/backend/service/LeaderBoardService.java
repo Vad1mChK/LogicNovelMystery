@@ -8,6 +8,7 @@ import ru.itmo.lnm.backend.model.LeaderBoard;
 import ru.itmo.lnm.backend.model.LnmLeaderBoard;
 import ru.itmo.lnm.backend.repository.LeaderBoardRepository;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class LeaderBoardService {
     private final LeaderBoardRepository leaderBoardRepository;
 
     public LnmLeaderBoardResponse getLeaderBoard(LeaderBoardDto request){
-            List<LeaderBoard> leaderBoardList = leaderBoardRepository.findAllByGameMode(request.isMultiplayer());
+            List<LeaderBoard> leaderBoardList = leaderBoardRepository.findAllByGameMode(request.getIsMultiplayer());
             List<LnmLeaderBoard> lnmLeaderBoards = parseLeaderBoard(leaderBoardList);
             return LnmLeaderBoardResponse.builder()
                     .leaderBoardList(lnmLeaderBoards)
@@ -26,7 +27,7 @@ public class LeaderBoardService {
     }
 
     private List<LnmLeaderBoard> parseLeaderBoard(List<LeaderBoard> leaderBoardList){
-        List<LnmLeaderBoard> lnmLeaderBoards = new LinkedList<>();
+        List<LnmLeaderBoard> lnmLeaderBoards = new ArrayList<>();
         for (LeaderBoard leaderBoard : leaderBoardList){
             lnmLeaderBoards.add(LnmLeaderBoard.builder()
                     .score(leaderBoard.getScore())

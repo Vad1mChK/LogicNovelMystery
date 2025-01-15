@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class LeaderBoardDto {
     @NotNull
-    private boolean isMultiplayer;
+    private Boolean isMultiplayer;
 }

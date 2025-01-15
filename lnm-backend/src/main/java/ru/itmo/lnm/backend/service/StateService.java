@@ -29,12 +29,12 @@ public class StateService {
         Session partnerSession = null;
         String ending = null;
         if (session.getHero().equals(LnmHero.STEVE)) {
-            ending = request.isWinner() ? "1" : "0";
+            ending = request.getWinner() ? "1" : "0";
         } else {
             partnerSession = sessionRepository.findBySessionTokenAndUserNot(request.getSessionId(), user);
             LnmPlayerState partnerPlayerState = partnerSession.getPlayerState();
             if (session.getHero().equals(LnmHero.PROFESSOR)) {
-                if (request.isWinner()) {
+                if (request.getWinner()) {
                     switch (partnerPlayerState) {
                         case PLAYING -> ending = "1A";
                         case WAITING_LOST -> ending = "4A";
@@ -55,7 +55,7 @@ public class StateService {
                 }
 
             } else if (session.getHero().equals(LnmHero.VICKY)) {
-                if (request.isWinner()) {
+                if (request.getWinner()) {
                     switch (partnerPlayerState) {
                         case PLAYING -> ending = "1B";
                         case WAITING_LOST -> ending = "4B";
@@ -227,6 +227,7 @@ public class StateService {
             System.err.println("Some problem in receiveState " + e);
             return null;
         }
+
     }
 
     public boolean changeToSeenResult(SessionDto request, String username){
@@ -264,12 +265,17 @@ public class StateService {
             int userHp;
             String chapter;
             if (session.isGameStatus()) {
-                userHp = session.getUserHp();
-                chapter = session.getCurrentChapter();
-                return RestoreStateResponse.builder()
-                        .userHp(userHp)
-                        .chapter(chapter)
-                        .build();
+                if (!request.getIsMultiplayer() && session.getHero().equals(LnmHero.STEVE)
+                        || request.getIsMultiplayer() && (session.getHero().equals(LnmHero.PROFESSOR)
+                        || session.getHero().equals(LnmHero.VICKY))) {
+                    
+                    userHp = session.getUserHp();
+                    chapter = session.getCurrentChapter();
+                    return RestoreStateResponse.builder()
+                            .userHp(userHp)
+                            .chapter(chapter)
+                            .build();
+                }
             }
         }catch (Exception e){
             System.err.println("Some problem with jpa " + e);
