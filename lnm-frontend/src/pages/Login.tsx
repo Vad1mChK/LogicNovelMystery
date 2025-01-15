@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as Sentry from '@sentry/react';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
-// import '../css/index.css'; // Подключение CSS для стилей формы (опционально)
+import { VITE_SERVER_URL } from '../metaEnv';
 
 const Login: React.FC = () => {
 	const [username, setUsername] = useState('');
@@ -17,7 +17,7 @@ const Login: React.FC = () => {
 
 		try {
 			const response = await axios.post(
-				'http://localhost:8080/auth/login',
+				`${VITE_SERVER_URL}/auth/login`,
 				{ username, password },
 				{ headers: { 'Content-Type': 'application/json' } }
 			);

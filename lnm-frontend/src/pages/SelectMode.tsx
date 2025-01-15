@@ -6,6 +6,7 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { VITE_SERVER_URL } from '../metaEnv';
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
@@ -48,7 +49,7 @@ const GameSelection: React.FC = () => {
 		const sessionToken = generateToken();
 		try {
 			/*const result = */ await axios.post(
-				'http://localhost:8080/session', // Замените на ваш API-эндпоинт
+				`${VITE_SERVER_URL}/session`, // Замените на ваш API-эндпоинт
 				{ sessionToken }, // Токен передается в теле запроса
 				{
 					headers: {
