@@ -33,7 +33,9 @@ const SyntaxHighlightInput: React.FC<SyntaxHighlightBoxProps> = ({
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const preRef = useRef<HTMLPreElement>(null);
 	const initialValue = useRef(value);
-	const displayTabWarningTimeoutId = useRef<number | undefined>(undefined);
+	const displayTabWarningTimeoutId = useRef<
+		ReturnType<typeof setTimeout> | undefined
+	>(undefined);
 
 	// Update syntax highlighting whenever content or language changes
 	useEffect(() => {
@@ -152,11 +154,13 @@ const SyntaxHighlightInput: React.FC<SyntaxHighlightBoxProps> = ({
 					className="syntax-highlight-code-area-display"
 					ref={preRef}
 					aria-hidden="true" // Hidden for screen readers
+					data-testid="syntax-highlight-display"
 					dangerouslySetInnerHTML={{ __html: highlightedContent }}
 				/>
 				<textarea
 					className="syntax-highlight-code-area-editable"
 					ref={textareaRef}
+					data-testid="syntax-highlight-textarea"
 					placeholder={placeholder}
 					value={content}
 					onChange={handleChange}
