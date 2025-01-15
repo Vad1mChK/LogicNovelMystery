@@ -13,6 +13,13 @@ i18n.use(initReactI18next).init({
 				About: 'About',
 				Close: 'Close',
 				Volume: 'Volume',
+				panning: {
+					panning: 'Panning',
+					format: '{{panningValue}} ({{panningConstant}})',
+					left: 'Left',
+					middle: 'Middle',
+					right: 'Right',
+				},
 				Language: 'Language',
 				Russian: 'Russian',
 				English: 'English',
@@ -20,10 +27,8 @@ i18n.use(initReactI18next).init({
 					'This is an exciting game where you can learn Prolog basics.',
 				Name: 'Name',
 				Score: 'Score',
-				GameMode: 'Game Mode',
-				'Refresh in': 'Refresh in',
-				Refresh: 'Refresh',
-				'sec.': 'sec.',
+				Single: 'Single',
+				Multi: 'Multiplayer',
 				Back: 'Back',
 				'Select game mode': 'Select game mode',
 				'Game for one': 'Game for one',
@@ -31,8 +36,11 @@ i18n.use(initReactI18next).init({
 				'Start Game': 'Start Game',
 				'Loading...': 'Loading...',
 				Error: 'Error',
+				Exit: 'Exit',
 				Character1: 'Character 1',
 				Character2: 'Character 2',
+				'Invalid data format from server.': 'Invalid data format from server',
+				'Failed to load leaderboard data. Please check your connection or try again later.': 'Failed to load leaderboard data. Please check your connection or try again later.',
 				login: {
 					title: 'Login',
 					usernamePlaceholder: 'Enter your username',
@@ -61,7 +69,7 @@ i18n.use(initReactI18next).init({
 					protagonist: {
 						steve: 'Steve',
 						vicky: 'Vicky',
-						professor: 'Professor'
+						professor: 'Professor',
 					},
 					knowledgeButton: 'Knowledge',
 					giveUpButton: 'Give up',
@@ -91,7 +99,7 @@ i18n.use(initReactI18next).init({
 					createdWaitScreen: {
 						created: 'Game created',
 						wait: 'Waiting for the partner to join...',
-            willPlayAs: 'You will play as: {{protagonist}}',
+						willPlayAs: 'You will play as: {{protagonist}}',
 					},
 					resultWaitScreen: {
 						win: 'You won!',
@@ -102,8 +110,9 @@ i18n.use(initReactI18next).init({
 						},
 						pageWillUpdate: {
 							single: 'The page will update once the server responds.',
-							multiplayer: 'The page will update once your partner finishes the game.',
-						}
+							multiplayer:
+								'The page will update once your partner finishes the game.',
+						},
 					},
 					resultScreen: {
 						result: {
@@ -118,7 +127,11 @@ i18n.use(initReactI18next).init({
 						yourHighScore: 'Your high score:',
 						newHighScore: 'New high score!',
 						toMain: 'Quit to Main',
-					}
+					},
+				},
+				TabErrorPage: {
+					'You have unclosed tabs with our website!': 'You have unclosed tabs with our website!',
+					'Please return to the tab that is already open or close it.': 'Please return to the tab that is already open or close it.',
 				},
 			},
 		},
@@ -129,7 +142,14 @@ i18n.use(initReactI18next).init({
 				Leaderboard: 'Доска лидеров',
 				About: 'Об игре',
 				Close: 'Закрыть',
-				Volume: 'Звук',
+				Volume: 'Громкость звука',
+				panning: {
+					panning: 'Панорамирование',
+					format: '{{panningValue}} ({{panningConstant}})',
+					left: 'Слева',
+					middle: 'Посередине',
+					right: 'Справа',
+				},
 				Language: 'Язык',
 				Russian: 'Русский',
 				English: 'Английский',
@@ -137,10 +157,8 @@ i18n.use(initReactI18next).init({
 					'Это захватывающая игра, в которой вы сможете изучить основы языка Prolog.',
 				Name: 'Имя',
 				Score: 'Итоговый счёт',
-				GameMode: 'Режим игры',
-				'Refresh in': 'Обновление через',
-				Refresh: 'Обновить',
-				'sec.': 'сек.',
+				Single: 'Одиночный режим',
+				Multi: 'Мультиплеер',
 				Back: 'Назад',
 				'Select game mode': 'Выберите режим игры',
 				'Game for one': 'Игра для одного',
@@ -150,6 +168,9 @@ i18n.use(initReactI18next).init({
 				Error: 'Ошибка',
 				Character1: 'Персонаж 1',
 				Character2: 'Персонаж 2',
+				Exit: 'Выйти',
+				'Invalid data format from server': 'Ошибка получения данных с сервера.',
+				'Failed to load leaderboard data. Please check your connection or try again later.': 'Не удалось загрузить данные с сервера. Проверьте соединение или попробуйте позже.',
 				login: {
 					title: 'Вход',
 					usernamePlaceholder: 'Введите имя пользователя',
@@ -179,7 +200,7 @@ i18n.use(initReactI18next).init({
 					protagonist: {
 						steve: 'Стив',
 						vicky: 'Викки',
-						professor: 'Профессор'
+						professor: 'Профессор',
 					},
 					knowledgeButton: 'Знания',
 					giveUpButton: 'Сдаться',
@@ -220,8 +241,9 @@ i18n.use(initReactI18next).init({
 						},
 						pageWillUpdate: {
 							single: 'Страница обновится, когда сервер ответит.',
-							multiplayer: 'Страница обновится, когда партнёр завершит игру.',
-						}
+							multiplayer:
+								'Страница обновится, когда партнёр завершит игру.',
+						},
 					},
 					resultScreen: {
 						result: {
@@ -235,8 +257,12 @@ i18n.use(initReactI18next).init({
 						yourScore: 'Твой счёт:',
 						yourHighScore: 'Твой рекорд:',
 						newHighScore: 'Новый рекорд!',
-						toMain: 'На главную'
-					}
+						toMain: 'На главную',
+					},
+				},
+				TabErrorPage: {
+					'You have unclosed tabs with our website!': 'У Вас есть незакрытые вкладки с нашим сайтом!',
+					'Please return to the tab that is already open or close it.': 'Пожалуйста, вернитесь на уже открытую вкладку или закройте ее.',
 				},
 			},
 		},

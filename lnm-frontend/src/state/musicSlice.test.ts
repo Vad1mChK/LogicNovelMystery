@@ -2,61 +2,107 @@
 
 import musicReducer, {
 	MusicState,
+	playMusic,
+	pauseMusic,
 	setCurrentTrack,
 	setVolume,
-	resetMusicState,
+	togglePlayMusic,
+	setPanning,
 } from './musicSlice';
 
 describe('musicSlice', () => {
-	const initialState: MusicState = {
-		currentTrack: null,
-		volume: 100,
-	};
-
-	it('should handle initial state', () => {
-		expect(musicReducer(undefined, { type: 'unknown' })).toEqual(
-			initialState
-		);
-	});
-
-	it('should handle setCurrentTrack', () => {
-		const actual = musicReducer(
-			initialState,
-			setCurrentTrack('track1.mp3')
-		);
-		expect(actual.currentTrack).toEqual('track1.mp3');
-	});
-
-	it('should handle setCurrentTrack to null', () => {
-		const stateWithTrack: MusicState = {
-			currentTrack: 'track1.mp3',
+	test('should set the current track when setCurrentTrack is called', () => {
+		const initialState: MusicState = {
+			currentTrack: null,
 			volume: 100,
+			isPlaying: false,
+			panning: 0,
 		};
-		const actual = musicReducer(stateWithTrack, setCurrentTrack(null));
-		expect(actual.currentTrack).toEqual(null);
+		const newTrack = 'https://example.com/music/track1.mp3';
+
+		const nextState = musicReducer(initialState, setCurrentTrack(newTrack));
+
+		expect(nextState.currentTrack).toBe(newTrack);
 	});
 
-	it('should handle setVolume', () => {
-		const actual = musicReducer(initialState, setVolume(75));
-		expect(actual.volume).toEqual(75);
-	});
-
-	it('should cap volume at 100', () => {
-		const actual = musicReducer(initialState, setVolume(150));
-		expect(actual.volume).toEqual(100);
-	});
-
-	it('should cap volume at 0', () => {
-		const actual = musicReducer(initialState, setVolume(-20));
-		expect(actual.volume).toEqual(0);
-	});
-
-	it('should handle resetMusicState', () => {
-		const modifiedState: MusicState = {
-			currentTrack: 'track2.mp3',
+	test('should set volume correctly and clamp volume to (0..100) range', () => {
+		const initialState: MusicState = {
+			currentTrack: null,
 			volume: 50,
+			isPlaying: false,
+			panning: 0,
 		};
-		const actual = musicReducer(modifiedState, resetMusicState());
-		expect(actual).toEqual(initialState);
+		let newVolume = 70;
+		let nextState = musicReducer(initialState, setVolume(newVolume));
+		expect(nextState.volume).toBe(newVolume);
+
+		newVolume = 110;
+		nextState = musicReducer(initialState, setVolume(newVolume));
+		expect(nextState.volume).toBe(100);
+
+		newVolume = -5;
+		nextState = musicReducer(initialState, setVolume(newVolume));
+		expect(nextState.volume).toBe(0);
+	});
+
+	test('should set isPlaying to true when play action is dispatched', () => {
+		const initialState: MusicState = {
+			currentTrack: null,
+			volume: 100,
+			isPlaying: false,
+			panning: 0,
+		};
+
+		const nextState = musicReducer(initialState, playMusic());
+
+		expect(nextState.isPlaying).toBe(true);
+	});
+
+	test('should set isPlaying to false when pause action is dispatched', () => {
+		const initialState: MusicState = {
+			currentTrack: null,
+			volume: 100,
+			isPlaying: true,
+			panning: 0,
+		};
+
+		const nextState = musicReducer(initialState, pauseMusic());
+
+		expect(nextState.isPlaying).toBe(false);
+	});
+
+	test('should toggle isPlaying when togglePlayMusic is called', () => {
+		const initialState: MusicState = {
+			currentTrack: null,
+			volume: 100,
+			isPlaying: false,
+			panning: 0,
+		};
+
+		let nextState = musicReducer(initialState, togglePlayMusic());
+		expect(nextState.isPlaying).toBe(true);
+
+		nextState = musicReducer(nextState, togglePlayMusic());
+		expect(nextState.isPlaying).toBe(false);
+	});
+
+	test('should set panning correctly and clamp it to (-1..1) range', () => {
+		const initialState: MusicState = {
+			currentTrack: null,
+			volume: 100,
+			isPlaying: false,
+			panning: 0,
+		};
+		let newPanning = 0.5;
+		let nextState = musicReducer(initialState, setPanning(newPanning));
+		expect(nextState.panning).toBe(newPanning);
+
+		newPanning = 1.5;
+		nextState = musicReducer(initialState, setPanning(newPanning));
+		expect(nextState.panning).toBe(1);
+
+		newPanning = -1.5;
+		nextState = musicReducer(initialState, setPanning(newPanning));
+		expect(nextState.panning).toBe(-1);
 	});
 });

@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from 'react';
-import { LnmPlayerState, LnmResult } from '../frameInterpreter/types';
+import { LnmHero, LnmPlayerState, LnmResult } from '../frameInterpreter/types';
 import '../css/FrameInterpreter.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../state/store';
@@ -8,11 +8,13 @@ import CreatedWaitScreen from '../frameInterpreter/CreatedWaitScreen';
 import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen';
 import ResultsScreen from '../frameInterpreter/ResultsScreen';
 import { useNavigate } from 'react-router-dom';
-import { resetState } from '../state/gameStateSlice';
+import { resetState, setPlayerState } from '../state/gameStateSlice';
 import {
 	startShortPolling,
 	stopShortPolling,
 } from '../frameInterpreter/communication/statePolling';
+import axios from 'axios';
+import { VITE_SERVER_URL } from '../metaEnv.ts';
 
 const GamePage: React.FC = () => {
 	const { playerState, protagonist } = useSelector(
@@ -52,6 +54,38 @@ const GamePage: React.FC = () => {
 		// Always return the cleanup function or undefined
 		return cleanup;
 	}, [sessionToken, playerState, dispatch]);
+
+	useEffect(() => {
+		if (
+			[
+				LnmPlayerState.COMPLETED_WON,
+				LnmPlayerState.COMPLETED_LOST,
+			].includes(playerState)
+		) {
+			axios
+				.post(
+					`${VITE_SERVER_URL}/game/seen-results`,
+					{
+						sessionToken: localStorage.getItem('sessionToken'),
+						isMultiplayer: protagonist != LnmHero.STEVE,
+					},
+					{
+						headers: {
+							Authorization: localStorage.getItem('AuthToken'),
+						},
+					}
+				)
+				.then(() => {
+					dispatch(setPlayerState(LnmPlayerState.SEEN_RESULTS));
+				})
+				.catch((err) => {
+					console.error(
+						'Error reporting that the player has seen results:',
+						err
+					);
+				});
+		}
+	}, [playerState]);
 
 	const quitToMain = (clearState: boolean = false) => {
 		if (clearState) {
