@@ -22,6 +22,8 @@ import {
 	setPlayerState,
 } from '../state/gameStateSlice.ts';
 import { reportCampaign } from './communication/reportCampaign.ts';
+import { pauseMusic, playMusic, setCurrentTrack } from '../state/musicSlice.ts';
+import { BASE_URL } from '../metaEnv.ts';
 
 interface VisualNovelEngineProps {
 	plot: LnmPlot;
@@ -57,6 +59,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 	const dispatch = useDispatch();
 	const { health, currentFrameId, currentChapterId, intermediateResult } =
 		useSelector((state: RootState) => state.gameState);
+	useSelector((state: RootState) => state.musicState);
 
 	const evaluateCondition = createConditionEvaluator(() => health);
 
@@ -148,6 +151,16 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 							openTaskWindow: (task: LnmTask) => {
 								setCurrentTask(task); // Set the task
 								setTaskOpen(true); // Open the task window
+							},
+							playMusic: (musicPath: string) => {
+								dispatch(pauseMusic());
+								dispatch(
+									setCurrentTrack(`${BASE_URL}${musicPath}`)
+								);
+								dispatch(playMusic());
+							},
+							stopMusic: () => {
+								dispatch(pauseMusic());
 							},
 						});
 					} else {
