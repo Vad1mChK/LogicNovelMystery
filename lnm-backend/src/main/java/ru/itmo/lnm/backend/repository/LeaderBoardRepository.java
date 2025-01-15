@@ -26,4 +26,5 @@ public interface LeaderBoardRepository extends JpaRepository<LeaderBoard, UUID> 
             "AND l.user = :user2")
     List<LeaderBoard> findByUsersWithSameSessionToken(@Param("user1") User user1, @Param("user2") User user2);
 
+    List<LeaderBoard> findAllByGameMode(boolean gameMode);
 }

@@ -11,7 +11,6 @@ import ru.itmo.lnm.backend.repository.LeaderBoardRepository;
 import ru.itmo.lnm.backend.repository.SessionRepository;
 import ru.itmo.lnm.backend.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -84,8 +83,14 @@ public class StateService {
     public void changePlayerState(Session session, Session partnerSession, String ending){
         if (ending != null){
             try {
-                if (ending.equals("0")) session.setPlayerState(LnmPlayerState.COMPLETED_LOST);
-                else if (ending.equals("1")) session.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                if (ending.equals("0")) {
+                    session.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                    session.setGameStatus(false);
+                }
+                else if (ending.equals("1")) {
+                    session.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                    session.setGameStatus(false);
+                }
                 else {
                     int startPart = ending.charAt(0);
                     switch (startPart) {
@@ -94,18 +99,26 @@ public class StateService {
                         case 2 -> {
                             session.setPlayerState(LnmPlayerState.COMPLETED_LOST);
                             partnerSession.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                            session.setGameStatus(false);
+                            partnerSession.setGameStatus(false);
                         }
                         case 3 -> {
                             session.setPlayerState(LnmPlayerState.COMPLETED_LOST);
                             partnerSession.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                            session.setGameStatus(false);
+                            partnerSession.setGameStatus(false);
                         }
                         case 4 -> {
                             session.setPlayerState(LnmPlayerState.COMPLETED_WON);
                             partnerSession.setPlayerState(LnmPlayerState.COMPLETED_LOST);
+                            session.setGameStatus(false);
+                            partnerSession.setGameStatus(false);
                         }
                         case 5 -> {
                             session.setPlayerState(LnmPlayerState.COMPLETED_WON);
                             partnerSession.setPlayerState(LnmPlayerState.COMPLETED_WON);
+                            session.setGameStatus(false);
+                            partnerSession.setGameStatus(false);
                         }
                     }
                     sessionRepository.save(partnerSession);
@@ -166,16 +179,17 @@ public class StateService {
                 }
                 partnerScore = partnerSession.getCurrentScore();
                 List<LeaderBoard> listLeaderBoard = leaderBoardRepository.findByUsersWithSameSessionToken(user, partnerSession.getUser());
+                int sumScore = score + partnerScore;
                 if (listLeaderBoard == null){
                     LeaderBoard newLeaderBoard = new LeaderBoard();
                     newLeaderBoard.setUser(user);
-                    newLeaderBoard.setScore(score);
+                    newLeaderBoard.setScore(sumScore);
                     newLeaderBoard.setSessionToken(session.getSessionToken());
                     newLeaderBoard.setGameMode(true);
                     leaderBoardRepository.save(newLeaderBoard);
                     newLeaderBoard = new LeaderBoard();
                     newLeaderBoard.setUser(partnerSession.getUser());
-                    newLeaderBoard.setScore(partnerScore);
+                    newLeaderBoard.setScore(sumScore);
                     newLeaderBoard.setSessionToken(session.getSessionToken());
                     newLeaderBoard.setGameMode(true);
                     leaderBoardRepository.save(newLeaderBoard);
@@ -183,18 +197,17 @@ public class StateService {
                 else {
                     LeaderBoard leaderBoardFirst = listLeaderBoard.get(0);
                     LeaderBoard leaderBoardSecond = listLeaderBoard.get(1);
-                    int sumScore = score + partnerSession.getCurrentScore();
-                    int sumHighScore = leaderBoardFirst.getScore() + leaderBoardSecond.getScore();
+
+                    int sumHighScore = leaderBoardFirst.getScore();
                     if (sumScore > sumHighScore) {
-                        leaderBoardFirst.setScore(score);
+                        leaderBoardFirst.setScore(sumScore);
                         leaderBoardFirst.setSessionToken(session.getSessionToken());
-                        leaderBoardSecond.setScore(score);
+                        leaderBoardSecond.setScore(sumScore);
                         leaderBoardSecond.setSessionToken(session.getSessionToken());
                         leaderBoardRepository.save(leaderBoardFirst);
                         leaderBoardRepository.save(leaderBoardSecond);
                     }
                 }
-
             }
 
             return StateResponse.builder()
