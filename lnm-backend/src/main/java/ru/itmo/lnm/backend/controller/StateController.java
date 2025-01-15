@@ -1,7 +1,6 @@
 package ru.itmo.lnm.backend.controller;
 
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import ru.itmo.lnm.backend.dto.CampaignReportDto;
 import ru.itmo.lnm.backend.dto.SessionDto;
 import ru.itmo.lnm.backend.messages.CampaignReportResponse;
 import ru.itmo.lnm.backend.messages.StateResponse;
-import ru.itmo.lnm.backend.model.LnmPlayerState;
 import ru.itmo.lnm.backend.service.StateService;
 
 @RestController
