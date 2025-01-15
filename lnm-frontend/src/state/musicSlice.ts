@@ -1,58 +1,53 @@
-// src/state/musicSlice.ts
+// src/store/musicSlice.ts
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Define the shape of your music state
 export interface MusicState {
-	currentTrack: string | null; // URL or identifier of the current track
-	volume: number; // Volume level from 0 to 100
+	currentTrack: string | null; // URL or identifier for the track
+	volume: number; // 0 to 100
+	isPlaying: boolean;
+	panning?: number; // -1 to 1 (optional)
 }
 
-// Define the initial state
 const initialState: MusicState = {
-	currentTrack: null, // No track selected initially
-	volume: 100, // Default volume set to 100%
+	currentTrack: null,
+	volume: 100,
+	isPlaying: false,
+	panning: 0, // Center
 };
 
-// Function to load music state from localStorage
-const loadMusicState = (): MusicState => {
-	try {
-		const storedState = localStorage.getItem('musicState');
-		if (storedState) {
-			return JSON.parse(storedState) as MusicState;
-		}
-		return initialState; // Return initial state if nothing is stored
-	} catch (error) {
-		console.error('Failed to load music state from localStorage:', error);
-		return initialState;
-	}
-};
-
-// src/state/musicSlice.ts (continued)
-
-// Create the slice
 const musicSlice = createSlice({
 	name: 'music',
-	initialState: loadMusicState(),
+	initialState,
 	reducers: {
-		// Action to set the current music track
 		setCurrentTrack(state, action: PayloadAction<string | null>) {
 			state.currentTrack = action.payload;
 		},
-		// Action to set the volume level
 		setVolume(state, action: PayloadAction<number>) {
-			// Ensure volume stays within 0-100
 			state.volume = Math.min(100, Math.max(0, action.payload));
 		},
-		// Action to reset the music state to initial values
-		resetMusicState(state) {
-			Object.assign(state, initialState);
+		playMusic(state) {
+			state.isPlaying = true;
+		},
+		pauseMusic(state) {
+			state.isPlaying = false;
+		},
+		togglePlayMusic(state) {
+			state.isPlaying = !state.isPlaying;
+		},
+		setPanning(state, action: PayloadAction<number>) {
+			state.panning = Math.min(1, Math.max(-1, action.payload));
 		},
 	},
 });
 
-// Export actions and reducer
-export const { setCurrentTrack, setVolume, resetMusicState } =
-	musicSlice.actions;
+export const {
+	setCurrentTrack,
+	setVolume,
+	playMusic,
+	pauseMusic,
+	togglePlayMusic,
+	setPanning,
+} = musicSlice.actions;
 
 export default musicSlice.reducer;
