@@ -46,6 +46,7 @@ public class SessionService {
         session.setCurrentTask(1);
         session.setUserHp(100);
         session.setGameStatus(true);
+        session.setCurrentChapter("inception1");
         sessionRepository.save(session);
 
         return new ResponseEntity<>("Successful", HttpStatus.CREATED);

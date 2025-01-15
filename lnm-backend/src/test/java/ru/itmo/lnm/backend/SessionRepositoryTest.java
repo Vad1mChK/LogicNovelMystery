@@ -47,6 +47,7 @@ public class SessionRepositoryTest {
         session.setUserHp(100);
         session.setCurrentScore(0);
         session.setCurrentTask(1);
+        session.setCurrentChapter("inception1");
         sessionRepository.save(session);
 
         // Проверка, что сессия была успешно сохранена
@@ -65,6 +66,7 @@ public class SessionRepositoryTest {
         session.setUserHp(100);
         session.setCurrentScore(0);
         session.setCurrentTask(1);
+        session.setCurrentChapter("inception1");
         sessionRepository.save(session);
 
         // Ищем сессию по токену и пользователю
@@ -85,6 +87,7 @@ public class SessionRepositoryTest {
         session.setUserHp(100);
         session.setCurrentScore(0);
         session.setCurrentTask(1);
+        session.setCurrentChapter("inception1");
         sessionRepository.save(session);
 
         // Обновляем сессию
@@ -107,6 +110,7 @@ public class SessionRepositoryTest {
         session.setUserHp(100);
         session.setCurrentScore(0);
         session.setCurrentTask(1);
+        session.setCurrentChapter("inception1");
         sessionRepository.save(session);
 
         // Устанавливаем время завершения
