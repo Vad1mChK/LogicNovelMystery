@@ -41,8 +41,9 @@ public class SessionService {
         else {
             session.setPlayerState(LnmPlayerState.PLAYING);
             session.setHero(LnmHero.STEVE);
-            session.setSessionToken(sessionDto.getSessionToken());
+
         }
+        session.setSessionToken(sessionDto.getSessionToken());
         session.setCurrentScore(0);
         session.setCurrentTask(1);
         session.setUserHp(100);
