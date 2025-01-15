@@ -144,7 +144,7 @@ const MainMenu: React.FC = () => {
 
 				{/* Кнопка "Настройки" по центру сверху */}
 				<button
-					className="button top-button"
+					className="button top-button settings-button"
 					onClick={() => setSettingsOpen(true)}
 				>
 					{t('Settings')}
