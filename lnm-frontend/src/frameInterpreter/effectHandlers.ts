@@ -185,11 +185,17 @@ export const effectHandlers: Partial<
 		);
 	},
 
-	[LnmFrameEffectType.PLAY_MUSIC]: (_effect, { playMusic }) => {
+	[LnmFrameEffectType.PLAY_MUSIC]: (_effect, { playMusic, plot }) => {
 		const args =
 			_effect.args as LnmEffectArgsMap[LnmFrameEffectType.PLAY_MUSIC];
 		console.log('Processing PLAY_MUSIC effect:', args);
-		playMusic(args.musicId);
+		if (plot.music.has(args.musicId)) {
+			const url = plot.music.get(args.musicId)?.file || '';
+			console.log(`music id: ${args.musicId}, url: ${url}`);
+			playMusic(url);
+		} else {
+			console.warn(`Music with ID ${args.musicId} not found.`);
+		}
 	},
 
 	[LnmFrameEffectType.STOP_MUSIC]: (_effect, { stopMusic }) => {

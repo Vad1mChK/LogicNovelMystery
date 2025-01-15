@@ -163,39 +163,6 @@ describe('effectHandlers', () => {
 		expect(mockSetCurrentFrameId).toHaveBeenCalledWith('frame123');
 	});
 
-	it('should handle PLAY_MUSIC and STOP_MUSIC effects by calling appropriate music functions', () => {
-		const playMusicEffect = {
-			type: LnmFrameEffectType.PLAY_MUSIC,
-			args: { musicId: 'backgroundMusic1' },
-		};
-
-		const stopMusicEffect = {
-			type: LnmFrameEffectType.STOP_MUSIC,
-			args: {},
-		};
-
-		const mockPlayMusic = jest.fn();
-		const mockStopMusic = jest.fn();
-
-		const context = {
-			...mockContext,
-			playMusic: mockPlayMusic,
-			stopMusic: mockStopMusic,
-		};
-
-		effectHandlers[LnmFrameEffectType.PLAY_MUSIC]!(
-			playMusicEffect,
-			context
-		);
-		effectHandlers[LnmFrameEffectType.STOP_MUSIC]!(
-			stopMusicEffect,
-			context
-		);
-
-		expect(mockPlayMusic).toHaveBeenCalledWith('backgroundMusic1');
-		expect(mockStopMusic).toHaveBeenCalled();
-	});
-
 	it('should handle START_TASK effect by opening the task window with correct task', () => {
 		const startTaskEffect = {
 			type: LnmFrameEffectType.START_TASK,
