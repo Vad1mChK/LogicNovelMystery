@@ -35,7 +35,9 @@ const MainMenu: React.FC = () => {
 	const { t, i18n } = useTranslation(); // Используем локализацию
 
 	//todo replace without mock
-	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(fallbackLeaderboardData);
+	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
+		fallbackLeaderboardData
+	);
 
 	const [isRefreshDisabled, setRefreshDisabled] = useState(false);
 	const [timer, setTimer] = useState(0);
@@ -114,7 +116,7 @@ const MainMenu: React.FC = () => {
 	const playMusic = () => {
 		const audio = new Audio(defaultMusic);
 		audio.play().catch((err) => {
-			console.error("Ошибка при попытке воспроизвести музыку:", err);
+			console.error('Ошибка при попытке воспроизвести музыку:', err);
 		});
 	};
 
@@ -133,22 +135,34 @@ const MainMenu: React.FC = () => {
 		>
 			<div className="main-container">
 				{/* Кнопка "Начать игру" слева */}
-				<button className="button left-button" onClick={handleStartGame}>
+				<button
+					className="button left-button"
+					onClick={handleStartGame}
+				>
 					{t('Start game')}
 				</button>
 
 				{/* Кнопка "Настройки" по центру сверху */}
-				<button className="button top-button" onClick={() => setSettingsOpen(true)}>
+				<button
+					className="button top-button"
+					onClick={() => setSettingsOpen(true)}
+				>
 					{t('Settings')}
 				</button>
 
 				{/* Кнопка "Доска лидеров" справа */}
-				<button className="button right-button" onClick={() => setLeaderboardOpen(true)}>
+				<button
+					className="button right-button"
+					onClick={() => setLeaderboardOpen(true)}
+				>
 					{t('Leaderboard')}
 				</button>
 
 				{/* Кнопка "О игре" справа */}
-				<button className="button right-button" onClick={() => setAboutOpen(true)}>
+				<button
+					className="button right-button"
+					onClick={() => setAboutOpen(true)}
+				>
 					{t('About')}
 				</button>
 			</div>
@@ -209,22 +223,22 @@ const MainMenu: React.FC = () => {
 					<h2>{t('Leaderboard')}</h2>
 					<table>
 						<thead>
-						<tr>
-							<th>№</th>
-							<th>{t('Name')}</th>
-							<th>{t('Score')}</th>
-							<th>{t('GameMode')}</th>
-						</tr>
+							<tr>
+								<th>№</th>
+								<th>{t('Name')}</th>
+								<th>{t('Score')}</th>
+								<th>{t('GameMode')}</th>
+							</tr>
 						</thead>
 						<tbody>
-						{leaderboardData.map((leader, index) => (
-							<tr key={index}>
-								<td>{index + 1}</td>
-								<td>{leader.name}</td>
-								<td>{leader.gameMode}</td>
-								<td>{leader.score}</td>
-							</tr>
-						))}
+							{leaderboardData.map((leader, index) => (
+								<tr key={index}>
+									<td>{index + 1}</td>
+									<td>{leader.name}</td>
+									<td>{leader.gameMode}</td>
+									<td>{leader.score}</td>
+								</tr>
+							))}
 						</tbody>
 					</table>
 					<button
