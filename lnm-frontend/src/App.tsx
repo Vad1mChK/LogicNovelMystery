@@ -80,6 +80,14 @@ const App: React.FC = () => {
 				}
 			/>
 			<Route
+				path="/multi-player"
+				element={
+					<PrivateRoute>
+						<GamePage />
+					</PrivateRoute>
+				}
+			/>
+			<Route
 				path="/secret"
 				element={
 					<PrivateRoute>
