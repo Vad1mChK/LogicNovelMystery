@@ -13,6 +13,7 @@ import {
 	setCurrentTrack,
 	setPanning,
 	setVolume,
+	togglePlayMusic,
 } from '../state/musicSlice.ts';
 
 interface LeaderboardEntry {
@@ -157,8 +158,9 @@ const MainMenu: React.FC = () => {
 
 	const handleExitGame = () => {
 		if (isMusicPlaying) {
-			toggleMusic(); // Остановить музыку через контекст
+			dispatch(togglePlayMusic());
 		}
+		localStorage.removeItem('AuthToken');
 		navigate('/'); // Переход на другую страницу
 	};
 
