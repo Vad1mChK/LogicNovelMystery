@@ -19,4 +19,6 @@ public interface SessionRepository extends JpaRepository<Session, UUID> {
 
     Session findBySessionTokenAndUserNot(String sessionToken, User user);
 
+    List<Session> findAllByPlayerStateAndGameStatus(LnmPlayerState lnmPlayerState, boolean gameStatus);
+
 }
