@@ -14,7 +14,7 @@ export interface LnmPlot {
 
 export interface LnmMetadata {
 	name: string;
-	gamemode: 'single' | 'double';
+	gamemode: 'single' | 'pair';
 	protagonist: string;
 	author: string;
 	version: string;

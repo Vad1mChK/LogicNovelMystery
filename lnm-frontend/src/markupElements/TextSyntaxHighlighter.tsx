@@ -1,5 +1,5 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { simpleHash } from '../util/hash';
 import SyntaxHighlightDisplay from './SyntaxHighlightDisplay'; // Assuming these components exist
 import SyntaxHighlightDisplayInline from './SyntaxHighlightDisplayInline';
 
@@ -85,7 +85,7 @@ const TextSyntaxHighlighter: React.FC<TextSyntaxHighlighterProps> = ({
 	console.log('Highlighting input:', input);
 
 	const jsxContent = segments.map((seg, i) => {
-		const key = `${uuidv4()}-${seg.type}`; // Each key is now truly unique
+		const key = `${simpleHash(seg.content)}-${seg.type}`; // Each key is now truly unique
 
 		if (seg.type === 'blockCode') {
 			return <SyntaxHighlightDisplay key={i} value={seg.content} />;
