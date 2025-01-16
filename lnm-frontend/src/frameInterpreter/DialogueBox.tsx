@@ -14,7 +14,9 @@ const DialogueBox: React.FC<DialogueBoxProps> = ({ speakerName, text }) => (
 				{speakerName}
 			</div>
 		)}
-		<div className="dialogue-text" data-testid="dialogue-text">
+		<div className={
+			`dialogue-text ${speakerName ? '' : 'no-speaker'}`
+		} data-testid="dialogue-text">
 			<TextSyntaxHighlighter input={text} copyable={false} />
 		</div>
 	</div>
