@@ -24,6 +24,7 @@ jobs:
         # Optional: Confirm that the environment variable is set (without exposing it)
       - name: Confirm VITE_SERVER_URL is set
         run: |
+          echo "$VITE_SERVER_URL"
           if [ -z "$VITE_SERVER_URL" ]; then
             echo "VITE_SERVER_URL is not set!"
             exit 1
@@ -31,7 +32,7 @@ jobs:
             echo "VITE_SERVER_URL is set."
           fi
         env:
-          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          VITE_SERVER_URL: ${{ env.VITE_SERVER_URL }}
 
       - name: Build project
         working-directory: ./lnm-frontend
