@@ -39,7 +39,12 @@ const GamePage: React.FC = () => {
 
 		if (sessionToken) {
 			console.log('Starting short polling...');
-			startShortPolling(sessionToken, playerState, dispatch);
+			startShortPolling(
+				sessionToken,
+				/* isMultiplayer: */ protagonist !== LnmHero.STEVE,
+				playerState,
+				dispatch
+			);
 
 			// Define the cleanup function
 			cleanup = () => {
@@ -100,7 +105,7 @@ const GamePage: React.FC = () => {
 			LnmPlayerState.CREATED,
 			<CreatedWaitScreen
 				protagonist={protagonist}
-				onNavigateHome={quitToMain}
+				onQuitToMain={quitToMain}
 			/>,
 		],
 		[
@@ -108,8 +113,14 @@ const GamePage: React.FC = () => {
 			<VisualNovelScreen protagonist={protagonist} />,
 			// Formerly, GamePage contained just what VisualNovelScreen now contains
 		],
-		[LnmPlayerState.WAITING_LOST, <ResultsWaitScreen winner={false} />],
-		[LnmPlayerState.WAITING_WON, <ResultsWaitScreen winner={true} />],
+		[
+			LnmPlayerState.WAITING_LOST,
+			<ResultsWaitScreen winner={false} onQuitToMain={quitToMain} />,
+		],
+		[
+			LnmPlayerState.WAITING_WON,
+			<ResultsWaitScreen winner={true} onQuitToMain={quitToMain} />,
+		],
 		[
 			LnmPlayerState.COMPLETED_LOST,
 			<ResultsScreen
