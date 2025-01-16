@@ -8,12 +8,12 @@ import { LnmCharacter, LnmFrameCharacterData, LnmHero } from './types';
 
 interface CreatedWaitScreenProps {
 	protagonist: LnmHero;
-	onNavigateHome?: () => void;
+	onQuitToMain?: () => void;
 }
 
 const CreatedWaitScreen: React.FC<CreatedWaitScreenProps> = ({
 	protagonist,
-	onNavigateHome,
+	onQuitToMain = () => {},
 }) => {
 	const protagonistToLocationImage: Map<LnmHero, string> = new Map([
 		[LnmHero.STEVE, `${BASE_URL}assets/img/locations/AgentOffice.webp`],
@@ -69,7 +69,7 @@ const CreatedWaitScreen: React.FC<CreatedWaitScreenProps> = ({
 			</div>
 			<button
 				className="game-button home-button"
-				onClick={onNavigateHome}
+				onClick={onQuitToMain}
 			>
 				{t('game.homeButton')}
 			</button>
