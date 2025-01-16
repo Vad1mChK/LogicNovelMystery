@@ -9,7 +9,11 @@ import axios from 'axios';
 import { restoreState } from '../frameInterpreter/communication/restoreState.ts';
 import { generateSessionToken } from '../util/generateSessionToken.ts';
 import { useDispatch } from 'react-redux';
-import { setPlayerState, setProtagonist } from '../state/gameStateSlice.ts';
+import {
+	resetState,
+	setPlayerState,
+	setProtagonist,
+} from '../state/gameStateSlice.ts';
 import { LnmHero, LnmPlayerState } from '../frameInterpreter/types.ts';
 import { VITE_SERVER_URL } from '../metaEnv';
 
@@ -49,6 +53,7 @@ const GameSelection: React.FC = () => {
 				return true;
 			}
 			localStorage.removeItem('sessionToken');
+			dispatch(resetState());
 			return false;
 		}
 		return false;
@@ -61,7 +66,7 @@ const GameSelection: React.FC = () => {
 			await axios.post(
 				`${VITE_SERVER_URL}/session`,
 				{
-					token,
+					sessionToken: token,
 					isMultiplayer: false,
 				},
 				{
