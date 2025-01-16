@@ -344,7 +344,7 @@
         },
         "inception2_03": {
           "id": "inception2_03",
-          "dialogue": " Здравствуйте, директор! Я весь внимание!",
+          "dialogue": "Здравствуйте, директор! Я весь внимание!",
           "speaker": "steve",
           "nextFrame": "inception2_04",
           "effects": [
@@ -958,7 +958,7 @@
           "effects": [
             {
               "type": "STOP_MUSIC",
-              "args": ""
+              "args": {}
             },
             {
               "type": "JUMP_CHAPTER",
