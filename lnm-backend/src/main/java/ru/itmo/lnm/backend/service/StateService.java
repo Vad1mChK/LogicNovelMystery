@@ -189,12 +189,6 @@ public class StateService {
                             newLeaderBoard.setSessionToken(session.getSessionToken());
                             newLeaderBoard.setGameMode(true);
                             leaderBoardRepository.save(newLeaderBoard);
-                            newLeaderBoard = new LeaderBoard();
-                            newLeaderBoard.setUser(partnerSession.getUser());
-                            newLeaderBoard.setScore(sumScore);
-                            newLeaderBoard.setSessionToken(session.getSessionToken());
-                            newLeaderBoard.setGameMode(true);
-                            leaderBoardRepository.save(newLeaderBoard);
                         } else {
                             LeaderBoard leaderBoardFirst = listLeaderBoard.get(0);
                             LeaderBoard leaderBoardSecond = listLeaderBoard.get(1);
