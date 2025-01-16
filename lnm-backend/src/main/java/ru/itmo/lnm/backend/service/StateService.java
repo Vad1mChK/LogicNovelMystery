@@ -31,6 +31,7 @@ public class StateService {
         if (session.getHero().equals(LnmHero.STEVE)) {
             ending = request.getWinner() ? "1" : "0";
         } else {
+
             partnerSession = sessionRepository.findBySessionTokenAndUserNot(request.getSessionId(), user);
             LnmPlayerState partnerPlayerState = partnerSession.getPlayerState();
             if (session.getHero().equals(LnmHero.PROFESSOR)) {
@@ -94,7 +95,7 @@ public class StateService {
                     session.setGameStatus(false);
                 }
                 else {
-                    int startPart = ending.charAt(0);
+                    int startPart = Integer.parseInt(ending.substring(0, 1));
                     switch (startPart) {
                         case 0 -> session.setPlayerState(LnmPlayerState.WAITING_LOST);
                         case 1 -> session.setPlayerState(LnmPlayerState.WAITING_WON);
@@ -181,7 +182,7 @@ public class StateService {
 
                         List<LeaderBoard> listLeaderBoard = leaderBoardRepository.findByUsersWithSameSessionToken(user, partnerSession.getUser());
 
-                        if (listLeaderBoard == null) {
+                        if (listLeaderBoard.isEmpty()) {
                             LeaderBoard newLeaderBoard = new LeaderBoard();
                             newLeaderBoard.setUser(user);
                             newLeaderBoard.setScore(sumScore);

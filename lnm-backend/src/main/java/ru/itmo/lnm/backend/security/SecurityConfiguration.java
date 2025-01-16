@@ -66,6 +66,7 @@ public class SecurityConfiguration {
         return source;
     }
 
+
     @Bean
     public AuthenticationManager authenticationManager(final AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

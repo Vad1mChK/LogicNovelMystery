@@ -17,7 +17,7 @@ jobs:
       has_changes: ${{ steps.check_changes.outputs.has_changes }}
     steps:
     - uses: actions/checkout@v4
-    - uses: dorny/paths-filter@v3
+    - uses: dorny/paths-filter@v4
       id: filter
       with:
         filters: |
@@ -107,7 +107,7 @@ jobs:
       # Шаг 7: Публикация отчетов о тестах
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: ./lnm-backend/build/test-results/test
