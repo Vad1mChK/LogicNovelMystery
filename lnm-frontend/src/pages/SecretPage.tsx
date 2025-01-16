@@ -2,11 +2,10 @@
 
 import React from 'react';
 import '../css/FrameInterpreter.scss';
-import CreatedWaitScreen from '../frameInterpreter/CreatedWaitScreen.tsx';
-import { LnmHero } from '../frameInterpreter/types.ts';
+import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen';
 
 const SecretPage: React.FC = () => {
-	return <CreatedWaitScreen protagonist={LnmHero.VICKY} />;
+	return <ResultsWaitScreen winner={false} multiplayer={true} />;
 };
 
 export default SecretPage;
