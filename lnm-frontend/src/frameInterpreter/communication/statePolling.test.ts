@@ -37,6 +37,7 @@ describe('statePolling', () => {
 	it('should start polling when playerState is in statesToPoll (e.g. CREATED) and no interval exists', () => {
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.CREATED,
 			mockDispatch
 		);
@@ -50,7 +51,7 @@ describe('statePolling', () => {
 		expect(mockAxiosPost).toHaveBeenCalledTimes(1);
 		expect(mockAxiosPost).toHaveBeenCalledWith(
 			expect.stringContaining('/game/player-state'),
-			{ sessionToken: 'session-token' },
+			{ sessionToken: 'session-token', isMultiplayer: false },
 			expect.objectContaining({ timeout: 5000 })
 		);
 	});
@@ -58,6 +59,7 @@ describe('statePolling', () => {
 	it('should NOT start polling if playerState is not in statesToPoll (e.g. PLAYING)', () => {
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.PLAYING,
 			mockDispatch
 		);
@@ -71,6 +73,7 @@ describe('statePolling', () => {
 	it('should not start a new interval if one is already running', () => {
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.CREATED,
 			mockDispatch
 		);
@@ -78,6 +81,7 @@ describe('statePolling', () => {
 		// Attempt to start polling again while it is already running
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.CREATED,
 			mockDispatch
 		);
@@ -97,6 +101,7 @@ describe('statePolling', () => {
 
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.CREATED,
 			mockDispatch
 		);
@@ -124,6 +129,7 @@ describe('statePolling', () => {
 
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.CREATED,
 			mockDispatch
 		);
@@ -146,6 +152,7 @@ describe('statePolling', () => {
 
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.CREATED,
 			mockDispatch
 		);
@@ -162,6 +169,7 @@ describe('statePolling', () => {
 	it('should stop polling when stopShortPolling is called', () => {
 		startShortPolling(
 			'session-token',
+			false,
 			LnmPlayerState.CREATED,
 			mockDispatch
 		);

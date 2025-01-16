@@ -24,6 +24,7 @@ let pollingInterval: ReturnType<typeof setInterval> | null = null;
  */
 export const startShortPolling = (
 	sessionToken: string,
+	isMultiplayer: boolean,
 	playerState: LnmPlayerState,
 	dispatch: Dispatch
 ) => {
@@ -41,7 +42,7 @@ export const startShortPolling = (
 				try {
 					const response = await axios.post(
 						`${VITE_SERVER_URL}/game/player-state`,
-						{ sessionToken },
+						{ sessionToken, isMultiplayer },
 						{
 							timeout: API_TIMEOUT,
 							headers: {
