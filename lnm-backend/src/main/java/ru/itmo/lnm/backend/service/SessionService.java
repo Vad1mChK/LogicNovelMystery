@@ -53,8 +53,9 @@ public class SessionService {
         return new ResponseEntity<>("Successful", HttpStatus.CREATED);
 
     }
-    public LnmSessionListResponse getWaitingSession(){
-        List<Session> lnmSessionList = sessionRepository.findAllByPlayerStateAndGameStatus(LnmPlayerState.CREATED, true);
+    public LnmSessionListResponse getWaitingSession(String username){
+        User user = userRepository.findByUsername(username);
+        List<Session> lnmSessionList = sessionRepository.findAllByPlayerStateAndGameStatusAndUserNot(LnmPlayerState.CREATED, true, user);
         Map<String, String> waitingRooms = new HashMap<>();
         for (Session lnmSession : lnmSessionList){
             waitingRooms.put(lnmSession.getUser().getUsername(), lnmSession.getSessionToken());

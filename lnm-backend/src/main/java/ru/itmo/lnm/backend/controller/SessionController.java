@@ -24,8 +24,8 @@ public class SessionController {
     }
 
     @GetMapping
-    public ResponseEntity<LnmSessionListResponse> getWaitingSession(){
-        var response = sessionService.getWaitingSession();
+    public ResponseEntity<LnmSessionListResponse> getWaitingSession(Authentication authentication){
+        var response = sessionService.getWaitingSession(authentication.getName());
         return ResponseEntity.ok(response);
     }
 }
