@@ -1,0 +1,2365 @@
+{
+  "metadata": {
+    "name": "pair_game",
+    "gamemode": "pair",
+    "protagonist": "professor",
+    "author": "Vad1mChK, LizOchkaaaa",
+    "version": "1.0",
+    "locale": "en_US"
+  },
+  "characters": {
+    "director": {
+      "id": "director",
+      "name": "Director",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/director/idle.webp",
+        "phone": "assets/img/characters/director/phone.webp"
+      }
+    },
+    "vicky": {
+      "id": "vicky",
+      "name": "Vicky",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/vicky/idle.webp",
+        "adjustGlasses": "assets/img/characters/vicky/adjust_glasses.webp",
+        "hood": "assets/img/characters/vicky/hood.webp",
+        "think": "assets/img/characters/vicky/think.webp"
+      }
+    },
+    "robot": {
+      "id": "robot",
+      "name": "Robot",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp",
+        "think": "assets/img/characters/robot/think.webp",
+        "angry": "assets/img/characters/robot/angry.webp"
+      }
+    },
+    "anonymous": {
+      "id": "anonymous",
+      "name": "???",
+      "defaultPose": "angry",
+      "sprites": {
+        "idle": "assets/img/characters/robot/idle.webp"
+      }
+    },
+    "professor": {
+      "id": "professor",
+      "name": "Professor",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/professor/idle.webp",
+        "hold": "assets/img/characters/professor/hold_cane.webp"
+      }
+    },
+    "sarah": {
+      "id": "sarah",
+      "name": "Sarah",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/sarah/idle.webp",
+        "hostage": "assets/img/characters/sarah/hostage.webp"
+      }
+    },
+    "mitnik": {
+      "id": "mitnik",
+      "name": "Mitnik",
+      "defaultPose": "idle",
+      "sprites": {
+        "idle": "assets/img/characters/mitnik/idle.webp",
+        "shrug": "assets/img/characters/mitnik/shrug.webp"
+      }
+    }
+  },
+  "locations": {
+    "professorRoom": {
+      "id": "professorRoom",
+      "name": "Professor's Room",
+      "background": "assets/img/locations/ProfessorBedroom.webp"
+    },
+    "mansionEntrance": {
+      "id": "mansionEntrance",
+      "name": "Mansion entrance",
+      "background": "assets/img/locations/MansionEntrance.webp"
+    },
+    "grandHall": {
+      "id": "grandHall",
+      "name": "Hall",
+      "background": "assets/img/locations/GrandHall.webp"
+    } ,
+    "studyRoom": {
+      "id": "studyRoom",
+      "name": "Office",
+      "background": "assets/img/locations/StudyRoom.webp"
+    },
+    "computerRoom": {
+      "id": "computerRoom ",
+      "name": "Computer Room",
+      "background": "assets/img/locations/ComputerRoom.webp"
+    },
+    "badEndingScreens": {
+      "id": "badEndingScreens",
+      "name": "Computer Room ",
+      "background": "assets/img/endings/BadEndingScreens.webp"
+    },
+    "goodEndingScreens": {
+      "id": "goodEndingScreens",
+      "name": "Room with computer",
+      "background": "assets/img/endings/GoodEndingScreens.webp "
+    },
+    "badEndingSpaceExplosions": {
+      "id": "badEndingSpaceExplosions",
+      "name": "Earth Orbit",
+      "background": "assets/img/endings/BadEndingSpaceExplosions.webp"
+    },
+    "badEndingFinal": {
+      "id" : "badEndingFinal",
+      "name": "Room with computer",
+      "background": "assets/img/endings/BadEndingFinal.webp"
+    },
+    "goodEndingFinal": {
+      "id": "goodEndingFinal",
+      "name": "Park",
+      "background": "assets/img/endings/GoodEndingFinal.webp"
+    }
+  },
+  "music": {},
+  "startChapter": "inception1",
+  "chapters": {
+    "inception1": {
+      "id": "inception1",
+      "title": "The Beginning, Chapter 1",
+      "startFrame": "inception1_start"
+    },
+    "inception2": {
+      "id": "inception2",
+      "title": "Chapter 2",
+      "startFrame": "inception2_start"
+    },
+    "inception3": {
+      "id": "inception3",
+      "title": "Chapter 3",
+      "startFrame": "inception3_start"
+    },
+    "inception4": {
+      "id": "inception4",
+      "title": "Chapter 4",
+      "startFrame": "inception4_start"
+    },
+    "elaboration2": {
+      "id": "elaboration2",
+      "title": "Continued, Chapter 1",
+      "startFrame": "elaboration2_start"
+    },
+    "elaboration3": {
+      "id" : "elaboration3",
+      "title": "Continued, Chapter 2",
+      "startFrame": "elaboration3_start"
+    },
+    "elaboration4": {
+      "id": "elaboration4",
+      "title": "Continued, Chapter 3",
+      " startFrame": "elaboration4_start"
+    },
+    "elaboration5": {
+      "id": "elaboration5",
+      "title": "Continued, Chapter 4",
+      "startFrame": "elaboration5_start"
+    },
+    "ending_0A": {
+      "id": "ending_0A",
+      "title": "Professor lost",
+      "startFrame": "0A_start",
+      "isEnding": true
+    },
+    "ending_1A": {
+      "id": "ending_1A",
+      "title": "The Professor won",
+      "startFrame": "1A_start",
+      "isEnding": true
+    },
+    "ending_2A": {
+      "id": "ending_2A",
+      "title": "The Professor and Vicky lost",
+      "startFrame": "2A_start",
+      "isEnding": true
+    },
+    "ending_3A": {
+      "id": "ending_3A",
+      "title": "Only Vicky won",
+      "startFrame": "3A_start",
+      "isEnding": true
+    },
+    "ending_4A": {
+      "id": "ending_4A",
+      "title": "Only the Professor won",
+      "startFrame": "4A_start",
+      "isEnding": true
+    },
+    "ending_5A": {
+      "id": "ending_5A",
+      "title": "The Professor and Vicky won",
+      "startFrame": "5A_start",
+      "isEnding": true
+    },
+    "ending_limbo": {
+      "id": "ending_limbo",
+      "title": "Limbo",
+      "startFrame": "limbo_start",
+      "isEnding": true
+    }
+  },
+  "defaultEnding": "ending_limbo",
+  "frames": {
+    "main": {
+      "inception1": {
+        "inception1_start": {
+          "id": "inception1_start",
+          "location": "professorRoom",
+          "characters": [
+            {
+              "id": "professor",
+              "pose": "idle"
+            },
+            {
+              "id": "director",
+              "hidden": true
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "Time 5:00 AM! Who could have come here at this early hour... Who are you?",
+          "nextFrame": "inception1_02"
+        },
+        "inception1_02": {
+          "id": "inception1_02",
+          "characters": [
+            {
+              "id": "professor",
+              "pose": "idle",
+              "position": "left"
+            },
+            {
+              "id": "director",
+              "hidden": true
+            },
+            {
+              "id": "director",
+              "pose": "idle",
+              "position": "right"
+            }
+          ],
+          "dialogue": "I need Robert Langdon. This is FBI Director J. Edgar Hoover speaking. ",
+          "speaker": "director",
+          "nextFrame": "inception1_03"
+        },
+        "inception1_03": {
+          "id": "inception1_03",
+          "dialogue": "Who?! Are you sure you need me?!",
+          "speaker": "professor",
+          "nextFrame": "inception1_04"
+        },
+        "inception1_04": {
+          "id": "inception1_04",
+          "dialogue": "Yes, I'm sure.",
+          "speaker": "director",
+          "nextFrame": "inception1_05"
+        },
+        "inception1_05": {
+          "id": "inception1_05",
+          "dialogue": "Do you know what time it is?!",
+          "speaker": "professor",
+          "nextFrame": "inception1_06"
+        },
+        "inception1_06": {
+          "id": "inception1_06",
+          "dialogue": "Please excuse me, but this matter is urgent.",
+          "speaker": "director",
+          "nextFrame": "inception1_07"
+        },
+        "inception1_07": {
+          "id": "inception1_07",
+          "dialogue": "5 o'clock in the morning!",
+          "speaker": "professor",
+          "nextFrame": "inception1_08"
+        },
+        "inception1_08": {
+          "id": "inception1_08",
+          "dialogue": "Professor Langdon, this is a matter of life and death! I ask you to help your country! The life of the entire planet depends on your help!",
+          "speaker": "director",
+          "nextFrame": "inception1_09"
+        },
+        "inception1_09": {
+          "id": "inception1_09",
+          "dialogue": "You intrigue me. What is it about my humble person that has so interested the FBI that Director Hoover himself came to see me personally?",
+          "speaker": "professor",
+          "nextFrame": "inception1_10"
+        },
+        "inception1_10": {
+          "id": "inception1_10",
+          "dialogue": "I'm not joking. Listen carefully! A group of hackers led by Kevin Mitnick has created a dangerous virus.",
+          "speaker": "director",
+          "nextFrame": "inception1_11"
+        },
+        "inception1_11": {
+          "id": "inception1_11",
+          "dialogue": "It can disrupt the operation of the World Wide Web. It is distributed through a regular message. ",
+          "nextFrame": "inception1_12"
+        },
+        "inception1_12": {
+          "id": "inception1_12",
+          "dialogue": "Last night, information security specialist Sarah Parker's computer was hacked, files were stolen, and this virus was released onto the network.",
+          "nextFrame": "inception1_13"
+        },
+        "inception1_13": {
+          "id": "inception1_13",
+          "dialogue": "We have less than 20 hours left to create an antivirus.",
+          "nextFrame": "inception1_14"
+        },
+        "inception1_14": {
+          "id": "inception1_14",
+          "dialogue": "I understand you, Mr. Hoover, but I am not very familiar with the Prolog language...",
+          "speaker": "professor",
+          "nextFrame": "inception1_15"
+        },
+        "inception1_15": {
+          "id": "inception1_15",
+          "dialogue": "You are the world's best information security specialist. You are the fastest to learn new programming languages. The life of the entire planet is at stake!",
+          "speaker": "director",
+          "nextFrame": "inception1_16"
+        },
+        "inception1_16": {
+          "id": "inception1_16",
+          "dialogue": "Okay, I'll try to figure it out!",
+          "speaker": "professor",
+          "nextFrame": "inception1_17"
+        },
+        "inception1_17": {
+          "id": "inception1_17",
+          "dialogue": "Last night, Sarah Parker was kidnapped from her home. Her whereabouts are still unknown",
+          "speaker": "director",
+          "nextFrame": "inception1_18"
+        },
+        "inception1_18": {
+          "id": "inception1_18",
+          "dialogue": "But we have located the very computer that we need to inject the antivirus into.",
+          "speaker": "director",
+          "nextFrame": "inception1_19"
+        },
+        "inception1_19": {
+          "id": "inception1_19",
+          "dialogue": "I take it that we are going there now?",
+          "speaker": "professor",
+          "nextFrame": "inception1_20"
+        },
+        "inception1_20": {
+          "id": "inception1_20",
+          "dialogue": "Yes. The car is waiting for us downstairs. But be careful in this abandoned mansion there are life-threatening traps everywhere. ",
+          "speaker": "director",
+          "nextFrame": "inception1_21"
+        },
+        "inception1_21": {
+          "id": "inception1_21",
+          "dialogue": "To secure them, you must enter the correct code. I believe in you, Professor Langdon! Call me anytime! Good luck!",
+          "speaker": "director",
+          "nextFrame": "inception1_22"
+        },
+        "inception1_22": {
+          "id": "inception1_22",
+          "dialogue": "*click*",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception2"
+              }
+            }
+          ]
+        }
+      },
+      "inception2": {
+        "inception2_start": {
+          "id": "inception2_start",
+          "location": "mansionEntrance",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "hidden": true
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "What a thicket here... everything has grown over. Oh, the castle. What is encrypted here?",
+          "nextFrame": "inception2_01"
+        },
+        "inception2_01": {
+          "id": "inception2_01",
+          "dialogue": "Stop! Who goes there?! Stop, living creature! You are wandering in these places in vain! Such creatures are forbidden to walk here!",
+          "speaker": "robot",
+          "nextFrame": "inception2_02",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "inception2_02": {
+          "id": "inception2_02",
+          "dialogue": "Hello! My name is Professor Robert Langdon! What is your name? ",
+          "speaker": "professor",
+          "nextFrame": "inception2_03"
+        },
+        "inception2_03": {
+          "id": "inception2_03",
+          "dialogue": "Ah, you are that professor who is the best specialist in information security.",
+          "speaker": "robot",
+          "nextFrame": "inception2_04",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "inception2_04": {
+          "id": "inception2_04",
+          "dialogue": "At first I thought that the looters had come again, I thought they would try to break down the door again.",
+          "nextFrame": "inception2_05"
+        },
+        "inception2_05": {
+          "id": "inception2_05",
+          "dialogue": "After all, no one can enter the correct code. And I am a third-generation robot, model R3, I must not let anyone alive in here.",
+          "speaker": "robot",
+          "nextFrame": "inception2_06"
+        },
+        "inception2_06": {
+          "id": "inception2_06",
+          "dialogue": "After all, no one knows about the death traps. Why did you come here, Professor Langdon?",
+          "speaker": "robot",
+          "nextFrame": "inception2_07"
+        },
+        "inception2_07": {
+          "id": "inception2_07",
+          "dialogue": "You are a robot model R3, a robot assistant to humans. Your job is to listen and help any person. Right? ",
+          "speaker": "professor",
+          "nextFrame": "inception2_08"
+        },
+        "inception2_08": {
+          "id": "inception2_08",
+          "dialogue": "Kevin Mitnick has created a virus that can disrupt the operation of the world wide web, he has already launched it.",
+          "speaker": "professor",
+          "nextFrame": "inception2_09"
+        },
+        "inception2_09": {
+          "id": "inception2_09",
+          "dialogue": "Less than 18 hours left to create an antivirus in Prolog. Will you help me learn it?",
+          "speaker": "professor",
+          "nextFrame": "inception2_10"
+        },
+        "inception2_10": {
+          "id": "inception2_10",
+          "dialogue": "Yes, I have such a function programmed.",
+          "speaker": "robot",
+          "nextFrame": "inception2_11"
+        },
+        "inception2_11": {
+          "id": "inception2_11",
+          "dialogue": "But to study this language, you need to move away from the usual forms of programming and try to delve into the logic of the language itself. ",
+          "nextFrame": "inception2_12"
+        },
+        "inception2_12": {
+          "id": "inception2_12",
+          "dialogue": "Believe me, this is a pretty beautiful and logical programming language. Very soon you will appreciate all its beauty and possibilities.",
+          "nextFrame": "inception2_13"
+        },
+        "inception2_13": {
+          "id": "inception2_13",
+          "dialogue": "I have no doubt about it. Can we move on to the lesson already?",
+          "speaker": "professor",
+          "nextFrame": "inception2_14"
+        },
+        "inception2_14": {
+          "id": "inception2_14",
+          "dialogue": "Let's get started! I have a tablet, with its help you can learn more about the Prolog language. It can help you pass the assignments.",
+          "speaker": "robot",
+          "nextFrame": "inception2_15"
+        },
+        "inception2_15": {
+          "id": "inception2_15",
+          "dialogue": "A very useful thing. Give it to me... Let's see what we have here...",
+          "speaker": "professor",
+          "nextFrame": "inception2_16"
+        },
+        "inception2_16": {
+          "id": "inception2_16",
+          "dialogue": "The theoretical basis of Prolog is a branch of symbolic logic called the predicate calculus.",
+          "nextFrame": "inception2_17"
+        },
+        "inception2_17": {
+          "id": "inception2_17",
+          "dialogue": "A predicate is a logical function that expresses some relation between its arguments",
+          "nextFrame": "inception2_18"
+        },
+        "inception2_18": {
+          "id": "inception2_18",
+          "dialogue": "A Prolog program contains a description of a problem, which is a set of logical statements of the form facts.",
+          "nextFrame": "inception2_19"
+        },
+        "inception2_19": {
+          "id": "inception2_19",
+          "dialogue": "Based on the given rules and facts, Prolog makes inferences.",
+          "nextFrame": "inception2_20"
+        },
+        "inception2_20": {
+          "id": "inception2_20",
+          "dialogue": "Different symbols have their own specific meanings, which are used to denote facts, variables, predicates, and other elements of syntax.",
+          "speaker": "professor",
+          "nextFrame": "inception2_21"
+        },
+        "inception2_21": {
+          "id": "inception2_21",
+          "dialogue": "The period `.` is used to end a sentence. This is a required character, indicating that the record is complete.\n`human(professor).`",
+          "speaker": "professor",
+          "nextFrame": "inception2_22"
+        },
+        "inception2_22": {
+          "id": "inception2_22",
+          "dialogue": "The underscore (`_`) is used to denote an anonymous variable. Such a variable can have any value, but its value is not used.",
+          "speaker": "professor",
+          "nextFrame": "inception2_23"
+        },
+        "inception2_23": {
+          "id": "inception2_23",
+          "dialogue": "The dash (`-`) is used as part of various constructions. In rules to denote the separator between the condition and the conclusion (`:-`). ",
+          "speaker": "professor",
+          "nextFrame": "inception2_24"
+        },
+        "inception2_24": {
+          "id": "inception2_24",
+          "dialogue": "A variable name starts with a capital letter or an underscore. Variables store values ​​during calculations.",
+          "speaker": "professor",
+          "nextFrame": "inception2_25"
+        },
+        "inception2_25": {
+          "id": "inception2_25",
+          "dialogue": "I learned so much useful information for myself, well, let's try to complete the task...",
+          "speaker": "professor",
+          "nextFrame": "inception2_26"
+        },
+        "inception2_26": {
+          "id": "inception2_26",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task0"
+              }
+            }
+          ]
+        },
+        "inception2_27": {
+          "id": "inception2_27",
+          "dialogue": "...Okay. I see it's time to continue our journey... and our learning.",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception3"
+              }
+            }
+          ]
+        },
+        "inception2_failTask0_01": {
+          "id": "inception2_failTask0_01",
+          "dialogue": "Please be careful. Think again.",
+          "nextFrame": "inception2_26",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "healthLess": 50
+              },
+              "args": {
+                "frameId": "inception2_failTask0_02"
+              }
+            }
+          ]
+        },
+        "inception2_failTask0_02": {
+          "id": "inception2_failTask0_02",
+          "dialogue": "Please be careful. And watch your health. You seem to be getting nervous...",
+          "nextFrame": "inception2_26",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "not": {
+                  "healthMore": 10
+                }
+              },
+              "args": {
+                "frameId": "inception2_failTask0_03"
+              }
+            }
+          ]
+        },
+        "inception2_failTask0_03": {
+          "id": "inception2_failTask0_03",
+          "dialogue": "Focus, Professor! This is your last attempt...",
+          "nextFrame": "inception2_26"
+        }
+      },
+      "inception3": {
+        "inception3_start": {
+          "id": "inception3_start",
+          "location": "grandHall",
+          "characters": [
+            {
+              "id": "professor"
+            },
+            {
+              "id": "robot",
+              "hidden": true
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "We successfully completed the first task! I didn't expect it to work out so quickly!",
+          "nextFrame": "inception3_01"
+        },
+        "inception3_01": {
+          "id": "inception3_01",
+          "characters": [
+            {
+              "id": "professor",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "hidden": false,
+              "position": "right"
+            }
+          ],
+          "dialogue": "Yes, you are very smart and quick-witted, professor. I'm so happy for you!",
+          "speaker": "robot",
+          "nextFrame": "inception3_02"
+        },
+        "inception3_02": {
+          "id": "inception3_02",
+          "dialogue": "Someone's calling... I'm listening.",
+          "speaker": "professor",
+          "nextFrame": "inception3_03"
+        },
+        "inception3_03": {
+          "id": "inception3_03",
+          "dialogue": "Professor Langdon, this is FBI Director J. Edgar Hoover. I have some breaking news for you!",
+          "speaker": "director",
+          "nextFrame": "inception3_04"
+        },
+        "inception3_04": {
+          "id": "inception3_04",
+          "dialogue": "Here you go, director!",
+          "speaker": "professor",
+          "nextFrame": "inception3_05"
+        },
+        "inception3_05": {
+          "id": "inception3_05",
+          "dialogue": "We've tracked down Kevin Mitnick. He's somewhere in the house. Be careful, professor! He might have a weapon! ",
+          "speaker": "director",
+          "nextFrame": "inception3_06"
+        },
+        "inception3_06": {
+          "id": "inception3_06",
+          "dialogue": "I understand, I have a weapon too, but I still don't know how to shoot. Let's hope we won't need it.",
+          "speaker": "professor",
+          "nextFrame": "inception3_07"
+        },
+        "inception3_07": {
+          "id": "inception3_07",
+          "dialogue": "Take care of yourself, professor, you have an important mission! Goodbye!",
+          "speaker": "director",
+          "nextFrame": "inception3_08"
+        },
+        "inception3_08": {
+          "id": "inception3_08",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": false,
+              "position": "left"
+            },
+            {
+              "id": "director",
+              "hidden": true,
+              "position": "right"
+            },
+            {
+              "id": "robot",
+              "hidden": false,
+              "position": "right"
+            }
+          ],
+          "dialogue": "It's so dark and gloomy in here! But we can't wait. If Mitnick is somewhere in the house, I really don't want to meet him.",
+          "speaker": "professor",
+          "nextFrame": "inception3_09"
+        },
+        "inception3_09": {
+          "id": "inception3_09",
+          "dialogue": "Let the FBI agents deal with him themselves. Let's go go up!",
+          "speaker": "professor",
+          "nextFrame": "inception3_10"
+        },
+        "inception3_10": {
+          "id": "inception3_10",
+          "dialogue": "Be careful as you go up, professor! There are traps hidden in some of the steps of the ladder. These are the next tasks.",
+          "speaker": "robot",
+          "nextFrame": "inception3_11"
+        },
+        "inception3_11": {
+          "id": "inception3_11",
+          "dialogue": "The concept of a variable in logic programming differs from that accepted in traditional programming languages. ",
+          "speaker": "professor",
+          "nextFrame": "inception3_12"
+        },
+        "inception3_12": {
+          "id": "inception3_12",
+          "dialogue": "In a program, a variable is denoted by a sequence of characters that begins with a capital letter.",
+          "speaker": "professor",
+          "nextFrame": "inception3_13"
+        },
+        "inception3_13": {
+          "id": "inception3_13",
+          "dialogue": "A variable denotes an undefined (but single) object and is used to denote an object that cannot be referenced by name.",
+          "speaker": "professor",
+          "nextFrame": "inception3_14"
+        },
+        "inception3_14": {
+          "id": "inception3_14",
+          "dialogue": "A variable can be free, bound, and anonymous. A free variable is a variable whose value is not known.",
+          "speaker": "professor",
+          "nextFrame": "inception3_15"
+        },
+        "inception3_15": {
+          "id": "inception3_15",
+          "dialogue": "A bound variable is a variable that has been given a value by inference.",
+          "speaker": "professor",
+          "nextFrame": "inception3_16"
+        },
+        "inception3_16": {
+          "id": "inception3_16",
+          "dialogue": "An anonymous variable is a variable used to ignore a value that is not needed.",
+          "speaker": "professor",
+          "nextFrame": "inception3_17"
+        },
+        "inception3_17": {
+          "id": "inception3_17",
+          "dialogue": "An anonymous variable can be used instead of any other variable. It corresponds to something.",
+          "speaker": "professor",
+          "nextFrame": "inception3_18"
+        },
+        "inception3_18": {
+          "id": "inception3_18",
+          "dialogue": "In the program, such a variable is denoted by the underscore (`_`).",
+          "speaker": "professor",
+          "nextFrame": "inception3_19"
+        },
+        "inception3_19": {
+          "id": "inception3_19",
+          "dialogue": "How interesting! Well, let's try to solve the task.",
+          "speaker": "professor",
+          "nextFrame": "inception3_20"
+        },
+        "inception3_20": {
+          "id": "inception3_20",
+          "dialogue": "",
+          "speaker": "robot",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task1"
+              }
+            }
+          ]
+        },
+        "inception3_failTask1_01": {
+          "id": "inception3_failTask1_01",
+          "dialogue": "Please be careful. Think again.",
+          "nextFrame": "inception3_20",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "healthLess": 50
+              },
+              "args": {
+                "frameId": "inception3_failTask1_02"
+              }
+            }
+          ]
+        },
+        "inception3_failTask1_02": {
+          "id": "inception3_failTask1_02",
+          "dialogue": "Please be careful. And watch your health. It seems you are starting to get nervous...",
+          "nextFrame": "inception3_20"
+        },
+        "inception3_21": {
+          "id": "inception3_21",
+          "dialogue": "Okay, Professor. Now we can go up.",
+          "nextFrame": "inception3_22"
+        },
+        "inception3_22": {
+          "id": "inception3_22",
+          "dialogue": "",
+          "nextFrame": "inception4",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "inception4"
+              }
+            }
+          ]
+        }
+      },
+      "inception4": {
+        "inception4_start": {
+          "id": "inception4_start",
+          "location": "grandHall",
+          "characters": [
+            {
+              "id": "professor",
+              "position": "left"
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "Great, we're doing great! Let's move on quickly! Oops, we've run into a locked door again. You need to enter a code here too... ",
+          "nextFrame": "inception4_01"
+        },
+        "inception4_01": {
+          "id": "inception4_01",
+          "dialogue": "You've already completed 2 tasks! Don't lose heart, professor!",
+          "speaker": "robot",
+          "nextFrame": "inception4_02"
+        },
+        "inception4_02": {
+          "id": "inception4_02",
+          "dialogue": "Did you know that artificial intelligence is capable of killing humanity?",
+          "speaker": "professor",
+          "nextFrame": "inception4_03"
+        },
+        "inception4_03": {
+          "id": "inception4_03",
+          "dialogue": "Artificial intelligence was created to make human life better.",
+          "speaker": "robot",
+          "nextFrame": "inception4_04"
+        },
+        "inception4_04": {
+          "id": "inception4_04",
+          "dialogue": "Everything requires human control. Until AI is completely under our control, we expose ourselves to great danger. ",
+          "speaker": "professor",
+          "nextFrame": "inception4_05"
+        },
+        "inception4_05": {
+          "id": "inception4_05",
+          "dialogue": "The biggest danger we have right now is not being able to complete all the tasks in 6 hours.",
+          "speaker": "robot",
+          "nextFrame": "inception4_06"
+        },
+        "inception4_06": {
+          "id": "inception4_06",
+          "dialogue": "That's where my friend, you're absolutely right! Let's get down to business!",
+          "speaker": "professor",
+          "nextFrame": "inception4_07"
+        },
+        "inception4_07": {
+          "id": "inception4_07",
+          "dialogue": "Prologue is a declarative language. A fact is a statement that is always true without any condition.",
+          "speaker": "professor",
+          "nextFrame": "inception4_08"
+        },
+        "inception4_08": {
+          "id": "inception4_08",
+          "dialogue": "A rule is a statement whose truth is proved depending on a given condition.",
+          "speaker": "professor",
+          "nextFrame": "inception4_09"
+        },
+        "inception4_09": {
+          "id": "inception4_09",
+          "dialogue": "A rule succeeds only if the goals specified in the rule body are achievable, otherwise the rule fails.",
+          "speaker": "professor",
+          "nextFrame": "inception4_10"
+        },
+        "inception4_10": {
+          "id": "inception4_10",
+          "dialogue": "A goal is a statement that is asked as a question about facts and rules.",
+          "speaker": "professor",
+          "nextFrame": "inception4_11"
+        },
+        "inception4_11": {
+          "id": "inception4_11",
+          "dialogue": "Query example: given facts `likes(professor, book).`, `likes(vicky, dad).`",
+          "speaker": "professor",
+          "nextFrame": "inception4_12"
+        },
+        "inception4_12": {
+          "id": "inception4_12",
+          "dialogue": "Let's write the query: `?- likes(X, book).`, where the value for X is such that the rule or fact matches. Answer: `X = professor`",
+          "speaker": "professor",
+          "nextFrame": "inception4_13"
+        },
+        "inception4_13": {
+          "id": "inception4_13",
+          "dialogue": "I've discovered so much new information for myself, now I'll move on to the task...",
+          "speaker": "professor",
+          "nextFrame": "inception4_14"
+        },
+        "inception4_14": {
+          "id": "inception4_14",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task2"
+              }
+            }
+          ]
+        },
+        "inception4_failTask2_01": {
+          "id": "inception4_failTask2_01",
+          "dialogue": "Please be careful. Think again.",
+          "nextFrame": "inception4_14",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "healthLess": 50
+              },
+              "args": {
+                "frameId": "inception4_failTask2_02"
+              }
+            }
+          ]
+        },
+        "inception4_failTask2_02": {
+          "id": "inception4_failTask2_02",
+          "dialogue": "Please be careful. And watch your health. You seem to be getting nervous...",
+          "nextFrame": "inception4_14",
+          "effects": [
+            {
+              "type": "JUMP",
+              "if": {
+                "not": {
+                  "healthMore": 10
+                }
+              },
+              "args": {
+                "frameId": "inception4_failTask2_03"
+              }
+            }
+          ]
+        },
+        "inception4_failTask2_03": {
+          "id": "inception4_failTask2_03",
+          "dialogue": "Focus, Professor! This is your last attempt...",
+          "nextFrame": "inception4_14"
+        },
+        "inception4_15": {
+          "id": "inception4_15",
+          "dialogue": "...Okay. I see, it's time to continue our journey... and our learning.",
+          "nextFrame": "inception4_16"
+        },
+        "inception4_16": {
+          "id": "inception4_16",
+          "dialogue": "Let's move on.",
+          "nextFrame": "elaboration2",
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration2"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration2": {
+        "elaboration2_start": {
+          "id": "elaboration2_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "professor",
+              "position": "left"
+            },
+            {
+              "id": "vicky",
+              "hidden": true,
+              "pose": "hood",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "position": "right"
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "I couldn't even imagine that this scary house could have such a cozy office. As if someone had been here recently and left papers on the table...",
+          "nextFrame": "elaboration2_01"
+        },
+        "elaboration2_01": {
+          "id": "elaboration2_01",
+          "dialogue": "A very nice and cute room.",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_02"
+        },
+        "elaboration2_02": {
+          "id": "elaboration2_02",
+          "dialogue": "There is no computer here, so we'll have to keep looking... Do you see this? The wall moves aside...",
+          "speaker": "professor",
+          "nextFrame": "elaboration2_03"
+        },
+        "elaboration2_03": {
+          "id": "elaboration2_03",
+          "dialogue": "Wow! Maybe Mitnick decided to return to his office?",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_04"
+        },
+        "elaboration2_04": {
+          "id": "elaboration2_04",
+          "dialogue": "I'll hide under the table so no one sees me. Ouch, oh, oh...",
+          "speaker": "professor",
+          "nextFrame": "elaboration2_05",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "professor"
+              }
+            }
+          ]
+        },
+        "elaboration2_05": {
+          "id": "elaboration2_05",
+          "dialogue": "Here's another hidden trap. I accidentally touched some mechanism and found myself trapped. Metal bars dropped down from all sides of the table.",
+          "nextFrame": "elaboration2_06"
+        },
+        "elaboration2_06": {
+          "id": "elaboration2_06",
+          "dialogue": "Do you hear sounds? That's my daughter's voice...",
+          "nextFrame": "elaboration2_07"
+        },
+        "elaboration2_07": {
+          "id": "elaboration2_07",
+          "dialogue": "Wow! Just look at it! It's like you've stepped into another world from the dungeon. How cozy! ",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_08",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "vicky"
+              }
+            }
+          ]
+        },
+        "elaboration2_08": {
+          "id": "elaboration2_08",
+          "dialogue": "Dad?! What are you doing here?!",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_09"
+        },
+        "elaboration2_09": {
+          "id": "elaboration2_09",
+          "dialogue": "I wanted to ask you the same question! I expected to see anyone here but you! How did you end up here?!",
+          "speaker": "professor",
+          "nextFrame": "elaboration2_10"
+        },
+        "elaboration2_10": {
+          "id": "elaboration2_10",
+          "dialogue": "I just know that you can't cope without me! And you would never call me yourself!",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_11"
+        },
+        "elaboration2_11": {
+          "id": "elaboration2_11",
+          "dialogue": "Do you even realize that it's not safe here?! How did you manage to get in here?",
+          "speaker": "professor",
+          "nextFrame": "elaboration2_12"
+        },
+        "elaboration2_12": {
+          "id": "elaboration2_12",
+          "dialogue": "Sleight of hand and no trickery!",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_13"
+        },
+        "elaboration2_13": {
+          "id": "elaboration2_13",
+          "dialogue": "Did you hack the FBI website again?!",
+          "speaker": "professor",
+          "nextFrame": "elaboration2_14"
+        },
+        "elaboration2_14": {
+          "id": "elaboration2_14",
+          "dialogue": "Oh, Dad, stop swearing! Just admit that you were waiting for me and are very happy that I appeared! You're trapped under the table, how were you even going to get out of here without me?",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_15",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "adjustGlasses"
+              }
+            }
+          ]
+        },
+        "elaboration2_15": {
+          "id": "elaboration2_15",
+          "dialogue": "All you have to do is complete the next task and enter the code.",
+          "speaker": "professor",
+          "nextFrame": "elaboration2_16"
+        },
+        "elaboration2_16": {
+          "id": "elaboration2_16",
+          "dialogue": "With me, you'll get there faster! Just admit it!",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_17",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "idle"
+              }
+            }
+          ]
+        },
+        "elaboration2_17": {
+          "id": "elaboration2_17",
+          "dialogue": "I apologize for interrupting your conversation, but there is little time left. Plus, anyone can come in here!",
+          "speaker": "robot",
+          "nextFrame": "elaboration2_18",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "robot",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "elaboration2_18": {
+          "id": "elaboration2_18",
+          "dialogue": "Yes, you are right, we need to free father and go look for the computer already!",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_19"
+        },
+        "elaboration2_19": {
+          "id": "elaboration2_19",
+          "dialogue": "But first, let me read the theory...",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_20"
+        },
+        "elaboration2_20": {
+          "id": "elaboration2_20",
+          "dialogue": "Lists are an important structure in Prolog. They allow you to store arbitrary amounts of data.",
+          "nextFrame": "elaboration2_21",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "vicky",
+                "newPose": "think"
+              }
+            }
+          ]
+        },
+        "elaboration2_21": {
+          "id": "elaboration2_21",
+          "dialogue": "A linked list is a data structure made up of nodes. A node contains data and a link (pointer, connection) to one or two neighboring nodes.",
+          "nextFrame": "elaboration2_22"
+        },
+        "elaboration2_22": {
+          "id": "elaboration2_22",
+          "dialogue": "Lists in Prolog are singly linked, each node contains only one link. There are built-in functions for working with lists:",
+          "nextFrame": "elaboration2_23"
+        },
+        "elaboration2_23": {
+          "id": "elaboration2_23",
+          "dialogue": "`sum_list(List, Sum)` — calculates the sum of the elements of a list.",
+          "nextFrame": "elaboration2_24"
+        },
+        "elaboration2_24": {
+          "id": "elaboration2_24",
+          "dialogue": "`member(Elem, List)` — searches for a value in a list. Successful if the element is found.",
+          "nextFrame": "elaboration2_25"
+        },
+        "elaboration2_25": {
+          "id": "elaboration2_25",
+          "dialogue": "`reverse(List, ReverseList)` — function to reverse a list.",
+          "nextFrame": "elaboration2_26"
+        },
+        "elaboration2_26": {
+          "id": "elaboration2_26",
+          "dialogue": "`length(List, Length)` — calculates the length of a list.",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_27"
+        },
+        "elaboration2_27": {
+          "id": "elaboration2_27",
+          "dialogue": "`append(List1, List2, List1AndList2)` — function to merge two lists.",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_28"
+        },
+        "elaboration2_28": {
+          "id": "elaboration2_28",
+          "dialogue": "`delete(InputList, Elem, ResultList)` is a function for deleting all elements with a given value from a list.",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_29"
+        },
+        "elaboration2_29": {
+          "id": "elaboration2_29",
+          "dialogue": "I didn't even know such functions existed... let's try to apply them now.",
+          "speaker": "vicky",
+          "nextFrame": "elaboration2_30"
+        },
+        "elaboration2_30": {
+          "id": "elaboration2_30",
+          "dialogue": "",
+          "speaker": "robot",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task3"
+              }
+            }
+          ]
+        },
+        "elaboration2_failTask3_01": {
+          "id": "elaboration2_failTask3_01",
+          "dialogue": "Please be careful. Think again.",
+          "nextFrame": "elaboration2_30"
+        },
+        "elaboration2_31": {
+          "id": "elaboration2_31",
+          "dialogue": "You are making progress...",
+          "nextFrame": "elaboration2_32"
+        },
+        "elaboration2_32": {
+          "id": "elaboration2_32",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration3"
+              }
+            }
+          ]
+        }
+      },
+      "laboration3": {
+        "elaboration3_start": {
+          "id": "elaboration3_start",
+          "location": "studyRoom",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "think",
+              "position": "right"
+            },
+            {
+              "id": "vicky",
+              "hidden": false,
+              "position": "left"
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            },
+            {
+              "id": "sarah",
+              "pose": "hostage",
+              "position": "right",
+              "hidden": true
+            }
+          ],
+          "speaker": "vicky",
+          "dialogue": "Finally! Dad is free.",
+          "nextFrame": "elaboration3_01"
+        },
+        "elaboration3_01": {
+          "id": "elaboration3_01",
+          "dialogue": "Let me help you get out, professor?",
+          "speaker": "robot",
+          "nextFrame": "elaboration3_02"
+        },
+        "elaboration3_02": {
+          " id": "elaboration3_02",
+          "dialogue": "I can still crawl out from under the table myself. Thank you! Quiet! Do you hear these sounds?",
+          "speaker": "professor",
+          "nextFrame": "elaboration3_03"
+        },
+        "elaboration3_03": {
+          "id": "elaboration3_03",
+          "dialogue": "Mmm... Mmm... . Mmmmm...",
+          "speaker": "anonymous",
+          "nextFrame": "elaboration3_04"
+        },
+        "elaboration3_04": {
+          "id": "elaboration3_04",
+          "dialogue": "There's someone here!", "speaker": "vicky",
+          "nextFrame": "elaboration3_05"
+        },
+        "elaboration3_05": {
+          "id": "elaboration3_05",
+          "dialogue": "It sounds like some kind of mooing. The sounds are coming from that far corner of the room...",
+          "speaker": "professor",
+          "nextFrame": "elaboration3_06",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId" : "robot"
+              }
+            }
+          ]
+        },
+        "elaboration3_06": {
+          "id": "elaboration3_06",
+          "dialogue": "Let's go see who's there! We need to shine a flashlight...",
+          "speaker": "vicky",
+          " nextFrame": "elaboration3_06_1"
+        },
+        "elaboration3_06_1": {
+          "id": "elaboration3_06_1",
+          "dialogue": "Yes, it's the kidnapped information security specialist Sarah Parker! I'll help you now!",
+          "nextFrame": "elaboration3_07",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "sarah",
+                "duration": 1
+              }
+            }
+          ] },
+        "elaboration3_07": {
+          "id": "elaboration3_07",
+          "dialogue": "Are you Professor Langdon?! My name is Sarah Parker! Kevin Mitnick kidnapped me from my own home last night! He's gone crazy and he must be stopped immediately ! ",
+          "speaker": "sarah",
+          "nextFrame": "elaboration3_08"
+        },
+        "elaboration3_08": {
+          "id": "elaboration3_08",
+          "dialogue": "I thought that the director would turn to you for help !",
+          "speaker": "sarah",
+          "nextFrame": "elaboration3_09"
+        },
+        "elaboration3_09": {
+          "id": "elaboration3_09",
+          "dialogue": "Nice to meet you miss, I confess I didn't expect to see you here !",
+          "speaker": "professor",
+          "nextFrame": "elaboration3_10"
+        },
+        "elaboration3_10": {
+          "id": "elaboration3_10",
+          "dialogue": "Help me get free, please! I know where the main computer is ! We need to hurry, there is little time left!",
+          "speaker": "sarah",
+          "nextFrame": "elaboration3_11"
+        },
+        "elaboration3_11": {
+          "id": "elaboration3_11",
+          "dialogue": "Let me introduce you to my daughter Vicky. We will now complete the task together with her and enter the correct code to free you, miss.",
+          "speaker": "professor",
+          "nextFrame": "elaboration3_12"
+        },
+        "elaboration3_12": {
+          "id": "elaboration3_12 ",
+          "dialogue": "I have heard about you, miss, no less than about your outstanding father. I believe that you will succeed!",
+          "speaker": "sarah",
+          "nextFrame": "elaboration3_13"
+        },
+        "elaboration3_13": {
+          "id": "elaboration3_13",
+          "dialogue": "Then let's get started! Let's read the theory ...",
+          "speaker": "professor",
+          "nextFrame": "elaboration3_14"
+        },
+        "elaboration3_14": {
+          "id": "elaboration3_14",
+          "dialogue": "Let's consider an example where facts are linked by a conditional relationship with other already known facts, in this case they can be called rules:",
+          "nextFrame": "elaboration3_15"
+        },
+        "elaboration3_15": {
+          "id": "elaboration3_15",
+          "dialogue": "`likes(professor, X) :- likes(vicky, X).`\n`% Professor likes everything that Vicky likes.`",
+          "nextFrame": "elaboration3_16"
+        },
+        "elaboration3_16": {
+          "id": "elaboration3_16",
+          "dialogue": "`likes(professor, X)` is the rule header.\n`likes(vicky, X)` is the rule body. or its tail target.",
+          "nextFrame": "elaboration3_17"
+        },
+        "elaboration3_17": {
+          "id": "elaboration3_17",
+          "dialogue": "For a rule to be true, its tail targets must be true.",
+          "nextFrame": "elaboration3_18"
+        },
+        "elaboration3_18": {
+          "id": "elaboration3_18",
+          "dialogue": "The `:-` symbol has the meaning of \"if\". It separates the two parts of a rule: the header and the body. You can use `if` instead.",
+          "nextFrame": "elaboration3_19"
+        },
+        "elaboration3_19": {
+          "id": "elaboration3_19",
+          "dialogue": "I understand everything, let's move on to the task...",
+          "nextFrame": "elaboration3_20"
+        },
+        "elaboration3_20": {
+          "id": "elaboration3_20",
+          "dialogue": "",
+          "nextFrame": "elaboration3_20",
+          "speaker": "robot",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task4"
+              }
+            }
+          ]
+        },
+        "elaboration3_failTask4_01": {
+          "id": "elaboration3_failTask4_01",
+          "dialogue": "Try again, professor.",
+          "nextFrame": "elaboration3_20"
+        },
+        "elaboration3_failTask4_02": {
+          "id": "elaboration3_failTask4_02",
+          "dialogue": "Please be careful. And watch your health. Looks like you're getting nervous...",
+          "nextFrame": "elaboration3_20"
+        },
+        "elaboration3_21": {
+          "id": "elaboration3_21",
+          "dialogue": "Okay... Looks like the trap has been deactivated.",
+          "nextFrame": "elaboration3_22"
+        },
+        "elaboration3_22": {
+          "id": "elaboration3_22",
+          "dialogue": "",
+          "nextFrame": null,
+          "effects": [
+            {
+              "type": "JUMP_CHAPTER",
+              "args": {
+                "chapterId": "elaboration4"
+              }
+            }
+          ]
+        }
+      },
+      "elaboration4": {
+        "elaboration4_start": {
+          "id": "elaboration4_start",
+          "location": "computerRoom",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "center",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "hidden": false,
+              "position": "left"
+            },
+            {
+              "id": "sarah",
+              "hidden": false,
+              "position": "right"
+            }
+          ],
+          "speaker": "sarah",
+          "dialogue": "Thank you for helping to free me! Now we can't delay, time is short, let's go further!",
+          "nextFrame": "elaboration4_01"
+        },
+        "elaboration4_01": {
+          "id": "elaboration4_01",
+          "dialogue": "Agreed, send. Look! What a machine!",
+          "speaker": "vicky",
+          "nextFrame": "elaboration4_02"
+        },
+        "elaboration4_02": {
+          "id": "elaboration4_02",
+          "characters": [
+            {
+              "id": "professor",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "center",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "hidden": true
+            },
+            {
+              "id": "sarah",
+              "position": "right"
+            }
+          ],
+          "dialogue": "This is, of course, not a supercomputer, but still quite powerful...",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_03"
+        },
+        "elaboration4_03": {
+          "id": "elaboration4_03",
+          "dialogue": "Look, the computer is on and downloading some files. Let's see what's in there?",
+          "speaker": "sarah",
+          "nextFrame": "elaboration4_04"
+        },
+        "elaboration4_04": {
+          "id": "elaboration4_04",
+          "dialogue": "There's a whole list of encrypted personal data of US Mint employees. As far as I know, only 10 of them have access to the Fort Knox vault.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_05"
+        },
+        "elaboration4_05": {
+          "id": "elaboration4_05",
+          "dialogue": "To get inside the vault, each of them must enter their part of the code and then 'sim-sim' will open its doors.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_06"
+        },
+        "elaboration4_06": {
+          "id": "elaboration4_06",
+          "dialogue": "In the entire history of Fort Knox, outsiders have only entered it three times.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_07"
+        },
+        "elaboration4_07": {
+          "id": "elaboration4_07",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "robot",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "position": "left"
+            },
+            {
+              "id": "sarah",
+              "position": "right"
+            }
+          ],
+          "dialogue": "Who was given such an honor and why were they able to get there?",
+          "speaker": "vicky",
+          "nextFrame": "elaboration4_08"
+        },
+        "elaboration4_08": {
+          "id": "elaboration4_08",
+          "dialogue": "The first of those who got there was the American President Roosevelt in 1943. And the second time the reserves were checked only 31 years later.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_09"
+        },
+        "elaboration4_09": {
+          "id": "elaboration4_09",
+          "dialogue": "And the third inspection happened in 2018, as rumors began to circulate that there was no gold in the vault. But it turned out to be just a rumor, all the gold was there.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_10"
+        },
+        "elaboration4_10": {
+          "id": "elaboration4_10",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "hidden": false,
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "center",
+              "hidden": true
+            },
+            {
+              "id": "sarah",
+              "hidden": false,
+              "position": "right"
+            }
+          ],
+          "dialogue": "I wonder if the mint employees are also in on Mitnik or if he wants to use them in the dark? ",
+          "speaker": "sarah",
+          "nextFrame": "elaboration4_11"
+        },
+        "elaboration4_11": {
+          "id": "elaboration4_11",
+          "dialogue": "We'll definitely figure this out later, but now we need to stop the virus and enter the code before anyone interferes with us.",
+          "speaker": "vicky",
+          "nextFrame": "elaboration4_12"
+        },
+        "elaboration4_12": {
+          "id": "elaboration4_12",
+          "dialogue": "Yes, let's get started. I'm ready.",
+          "speaker": "robot",
+          "nextFrame": "elaboration4_13",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "vicky"
+              }
+            },
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "sarah"
+              }
+            },
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "robot"
+              }
+            }
+          ]
+        },
+        "elaboration4_13": {
+          "id": "elaboration4_13",
+          "characters": [
+            {
+              "id": "professor",
+              "position": "left"
+            },
+            {
+              "id": "robot",
+              "pose": "angry",
+              "position": "right"
+            }
+          ],
+          "dialogue": "When during goal resolution Prologue encounters not a fact but a rule, it first unifies the rule's title.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_14"
+        },
+        "elaboration4_14": {
+          "id": "elaboration4_14",
+          "dialogue": "i.e. compares bound variables and assigns values to free variables.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_15"
+        },
+        "elaboration4_15": {
+          "id": "elaboration4_15",
+          "dialogue": "If the arguments are successfully unified, the argument values from the header are substituted into the first predicate in the rule body...",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_16"
+        },
+        "elaboration4_16": {
+          "id": "elaboration4_16",
+          "dialogue": "and sets this predicate as a subgoal, which it begins to unify with the knowledge base.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_17"
+        },
+        "elaboration4_17": {
+          "id": "elaboration4_17",
+          "dialogue": "If unification of this condition predicate fails, then fallback to the previous rule condition is performed.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_18"
+        },
+        "elaboration4_18": {
+          "id": "elaboration4_18",
+          "dialogue": "This fallback only occurs if this previous predicate is ambiguous. Let's explain this with an example.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_19"
+        },
+        "elaboration4_19": {
+          "id": "elaboration4_19",
+          "dialogue": "`parent (Who, Vicky)`\nThe `Who` variable in the goal predicate is a free variable.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_20"
+        },
+        "elaboration4_20": {
+          "id": "elaboration4_20",
+          "dialogue": "We could have used `X` instead of `Who`, and they would have been different variables that would have been unified in the same way.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_21"
+        },
+        "elaboration4_21": {
+          "id": "elaboration4_21",
+          "dialogue": "Interesting, interesting... let's move on to the task.",
+          "speaker": "professor",
+          "nextFrame": "elaboration4_22"
+        },
+        "elaboration4_22": {
+          "id": "elaboration4_22",
+          "dialogue": "",
+          "nextFrame": "elaboration4_23",
+          "effects": [
+            {
+              "type": "START_TASK",
+              "args": {
+                "taskId": "task5"
+              }
+            }
+          ]
+        },
+        "elaboration4_failTask5_01": {
+          "id": "elaboration4_failTask5_01",
+          "dialogue": "I'll try again.",
+          "nextFrame": "elaboration4_22"
+        },
+        "elaboration4_23": {
+          "id": "elaboration4_23",
+          "dialogue": "Okay. Now it's time to enter the code...",
+          "nextFrame": "elaboration4_24"
+        },
+        "elaboration4_24": {
+          "id": "elaboration4_24",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "END_CAMPAIGN",
+              "args": {
+                "winner": true
+              }
+            }
+          ]
+        }
+      },
+      "ending_0A": {
+        "0A_start": {
+          "id": "0A_start",
+          "location": "badEndingScreens",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "anonymous",
+          "dialogue": "10... 9... 8... Unable to stop file upload `virus.pl`.",
+          "nextFrame": "0A_1"
+        },
+        "0A_1": {
+          "id": "0A_1",
+          "speaker": "professor",
+          "dialogue": "Oh no, 7 seconds left, what to do?..",
+          "nextFrame": "0A_2"
+        },
+        "0A_2": {
+          "id": "0A_2",
+          "dialogue": "Wait, where did Vicky go... I just hope she has a plan.",
+          "nextFrame": "0A_3"
+        },
+        "0A_3": {
+          "id": "0A_3",
+          "dialogue": "",
+          "effects": [{
+            "type": "STOP",
+            "args": {}
+          }]
+        }
+      },
+      "ending_1A": {
+        "1A_start": {
+          "id": "1A_start",
+          "location": "goodEndingScreens",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            }
+          ],
+          "dialogue": "Victory! We managed to interrupt the download of the virus itself.",
+          "nextFrame": "1A_1"
+        },
+        "1A_1": {
+          "id": "1A_1",
+          "dialogue": "But what if Mitnick has a copy of the virus? We need to download an antivirus so that the network systems can intercept and destroy it.",
+          "nextFrame": "1A_2"
+        },
+        "1A_2": {
+          "id": "1A_2",
+          "dialogue": "",
+          "effects": [{
+            "type": "STOP",
+            "args": {}
+          }]
+        }
+      },
+      "ending_2A": {
+        "2A_start": {
+          "id": "2A_start",
+          "location": "badEndingScreens",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "hidden": true
+            }
+          ],
+          "speaker": "anonymous",
+          "dialogue": "...2 ...1 ...0. The virus has been successfully uploaded and launched on the server...",
+          "nextFrame": "2A_1"
+        },
+        "2A_1": {
+          "id": "2A_1",
+          "speaker": "vicky",
+          "dialogue": "No!.. Is there really nothing we can do?",
+          "nextFrame": "2A_2"
+        },
+        "2A_2": {
+          "id": "2A_2",
+          "speaker": "professor",
+          "dialogue": "I'm afraid so... In the next few minutes, the virus will wreak havoc across the entire World Wide Web.",
+          "nextFrame": "2A_3"
+        },
+        "2A_3": {
+          "id": "2A_3",
+          "location": "badEndingSpaceExplosions",
+          "dialogue": "That's what happened. Just an hour later, reports of disasters began to come in -- in space, in the air, in data centers.",
+          "nextFrame": "2A_4"
+        },
+        "2A_4": {
+          "id": "2A_4",
+          "dialogue": "If only we could start over...",
+          "nextFrame": "2A_5"
+        },
+        "2A_5": {
+          "id": "2A_5",
+          "dialogue": "",
+          "effects": [{
+            "type": "STOP",
+            "args": {}
+          }]
+        }
+      },
+      "ending_3A": {
+        "3A_start": {
+          "id": "3A_start",
+          "location": "badEndingScreens",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            },
+            {
+              "id": "mitnik",
+              "hidden": true
+            }
+          ],
+          "speaker": "professor",
+          "dialogue": "Uh... We didn't have time to stop the virus from downloading.",
+          "nextFrame": "3A_1"
+        },
+        "3A_1": {
+          "id": "3A_1",
+          "dialogue": "Luckily, Vicky managed to download and deploy the antivirus we wrote...",
+          "nextFrame": "3A_2"
+        },
+        "3A_2": {
+          "id": "3A_2",
+          "dialogue": "...Ha. Ha. Ha.",
+          "speaker": "anonymous",
+          "nextFrame": "3A_3"
+        },
+        "3A_3": {
+          "id": "3A_3",
+          "location": "badEndingFinal",
+          "dialogue": "My virus uses advanced machine learning algorithms. Over time, he will be able to adapt and bypass any defense system!",
+          "speaker": "mitnik",
+          "nextFrame": "3A_4"
+        },
+        "3A_4": {
+          "id": "3A_4",
+          "dialogue": "And while he is free... I will rule the world!",
+          "nextFrame": "3A_5"
+        },
+        "3A_5": {
+          "id": "3A_5",
+          "dialogue": "",
+          "effects": [{
+            "type": "STOP",
+            "args": {}
+          }]
+        }
+      },
+      "ending_4A": {
+        "4A_start": {
+          "id": "4A_start",
+          "location": "goodEndingScreens",
+          "characters": [
+            {
+              "id": "anonymous",
+              "hidden": true
+            },
+            {
+              "id": "professor",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "position": "right",
+              "hidden": true
+            },
+            {
+              "id": "mitnik",
+              "hidden": true
+            }
+          ],
+          "speaker": "anonymous",
+          "dialogue": "...3 ...2 ...1... Are you sure you want to stop downloading `virus.pl`?",
+          "nextFrame": "4A_1"
+        },
+        "4A_1": {
+          "id": "4A_1",
+          "speaker": "professor",
+          "dialogue": "Yes.",
+          "nextFrame": "4A_2"
+        },
+        "4A_2": {
+          "id": "4A_2",
+          "speaker": "anonymous",
+          "dialogue": "File download stopped.",
+          "nextFrame": "4A_3"
+        },
+        "4A_3": {
+          "location": "computerRoom",
+          "id": "4A_3",
+          "speaker": "vicky",
+          "dialogue": "Hurray! We did it!",
+          "nextFrame": "4A_4",
+          "effects": [{
+            "type": "FADE_IN_CHARACTER",
+            "args": { "characterId": "vicky" }
+          }, {
+            "type": "FADE_IN_CHARACTER",
+            "args": { "characterId": "professor" }
+          }]
+        },
+        "4A_4": {
+          "id": "4A_4",
+          "dialogue": "You're just great, dad!",
+          "nextFrame": "4A_5"
+        },
+        "4A_5": {
+          "id": "4A_5",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "hidden": true
+            },
+            {
+              "id": "mitnik",
+              "pose": "shrug"
+            }
+          ],
+          "speaker": "mitnik",
+          "dialogue": "You are forgetting one thing...",
+          "nextFrame": "4A_6"
+        },
+        "4A_6": {
+          "id": "4A_6",
+          "dialogue": "The virus source code is intact and safe. The network is not protected by your antivirus...",
+          "nextFrame": "4A_7",
+          "effects": [{
+            "type": "FADE_OUT_CHARACTER",
+            "args": { "characterId": "mitnik" }
+          }]
+        },
+        " 4A_7": {
+          "id": "4A_7",
+          "location": "badEndingFinal",
+          "dialogue": "And as long as I can improve the virus, I will rule the world!",
+          "nextFrame": "4A_8"
+        }
+      },
+      " ending_5A": {
+        "5A_start": {
+          "id": "5A_start",
+          "location": "goodEndingScreens",
+          "characters": [
+            {
+              "id": "anonymous",
+              "hidden": true
+            },
+            {
+              "id" : "professor",
+              "position": "left",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "position": "right",
+              "hidden": true
+            },
+            {
+              "id": "director",
+              "hidden": true
+            }
+          ],
+          "speaker ": "anonymous",
+          "dialogue": "...3 ...2 ...1... Are you sure you want to stop downloading `virus.pl`?",
+          "nextFrame": "5A_1"
+        } ,
+        "5A_1": {
+          "id": "5A_1",
+          "speaker": "professor",
+          "dialogue": "Yes.",
+          "nextFrame": "5A_2"
+        },
+        "5A_2": {
+          "id": " 5A_2",
+          "speaker": "anonymous",
+          "dialogue": "File download stopped.",
+          "nextFrame": "5A_3"
+        },
+        "5A_3": {
+          "location": "computerRoom",
+          "id": "5A_3",
+          "speaker": "vicky",
+          "dialogue": "Hurray! We did it!",
+          "nextFrame": "5A_4",
+          "effects": [{
+            "type": "FADE_IN_CHARACTER",
+            "args": { "characterId": "vicky" }
+          }, {
+            "type": "FADE_IN_CHARACTER",
+            "args": { "characterId": "professor" }
+          }]
+        },
+        "5A_4": {
+          "id": "5A_4",
+          "dialogue": "You're just great, dad!",
+          "nextFrame": "5A_5"
+        },
+        "5A_5": {
+          "id": "5A_5",
+          "characters": [
+            {
+              "id": "professor",
+              "hidden": true
+            },
+            {
+              "id": "vicky",
+              "hidden": true
+            },
+            {
+              "id": "director",
+              "pose": "phone"
+            }
+          ],
+          "speaker": "director",
+          "dialogue": "Professor... we just received a message about your antivirus launch!",
+          "nextFrame" : "5A_6"
+        },
+        "5A_6": {
+          "id": "5A_6",
+          "dialogue": "With its help, a specimen of the Mitnick virus was captured, neutralized, and sent to the lab for safe testing.",
+          "nextFrame": "5A_7 "
+        },
+        "5A_7": {
+          "id": "5A_7",
+          "speaker": "professor",
+          "dialogue": "Well, I hope the latest heuristic algorithms will quickly learn to recognize such threats.",
+          "nextFrame": " 5A_8"
+        },
+        "5A_8": {
+          "id": "5A_8",
+          "dialogue": "Where is Mitnik himself?",
+          "nextFrame": "5A_9"
+        },
+        "5A_9": {
+          "id": "5A_9",
+          "speaker": "director",
+          "dialogue": "He was caught and arrested by our best operative, Agent Steve.",
+          "nextFrame": "5A_10"
+        },
+        "5A_10": {
+          "id": "5A_10",
+          "dialogue": "This hacker is no longer a threat to society.",
+          "nextFrame": "5A_11",
+          "effects": [{
+            "type": "FADE_OUT_CHARACTER",
+            "args": { "characterId": "director" }
+          }]
+        },
+        "5A_11": {
+          "id": "5A_11",
+          "location": "goodEndingFinal",
+          "speaker": "professor",
+          "dialogue": "As the director said, Mitnick was arrested. The police soon and got to his accomplices.",
+          "nextFrame": "5A_12"
+        },
+        "5A_12": {
+          "id": "5A_12",
+          "dialogue": "Vicky was offered the position of the new security specialist. I don't know if she will accept.",
+          "nextFrame": "5A_13"
+        },
+        "5A_13": {
+          "id": "5A_13",
+          "dialogue": "And I... am starting work on my new treatise on logic programming.",
+          "nextFrame": "5A_14"
+        },
+        "5A_14": {
+          "id": "5A_14",
+          "dialogue": "",
+          "effects": [{
+            "type": "STOP",
+            "args": {}
+          }]
+        }
+      },
+      "ending_limbo": {
+        "limbo_start": {
+          "id": "limbo_start",
+          "location": "computerRoom",
+          "characters": [
+            {
+              "id": "mitnik",
+              "hidden": true
+            },
+            {
+              "id": "anonymous",
+              "hidden": true
+            }
+          ],
+          "speaker": "anonymous",
+          "dialogue": "...Well, you're awake, professor.",
+          "nextFrame": "limbo_1"
+        },
+        "limbo_1": {
+          "id": "limbo_1",
+          "speaker": "mitnik",
+          "dialogue": "Hello, this is Mitnik.",
+          "nextFrame": "limbo_2",
+          "effects": [
+            {
+              "type": "FADE_IN_CHARACTER",
+              "args": {
+                "characterId": "mitnik"
+              }
+            }
+          ]
+        },
+        "limbo_2": {
+          "id": "limbo_2",
+          "dialogue": "During your adventure, you somehow switched off.",
+          "nextFrame": "limbo_3"
+        },
+        "limbo_3": {
+          "id": "limbo_3",
+          "dialogue": "Alas, although this is not your fault...",
+          "nextFrame": "limbo_4",
+          "effects": [
+            {
+              "type": "CHANGE_POSE",
+              "args": {
+                "characterId": "mitnik",
+                "newPose": "shrug"
+              }
+            }
+          ]
+        },
+        "limbo_4": {
+          "id": "limbo_4",
+          "dialogue": "My virus has already been launched into the network and is currently infiltrating billions of devices.",
+          "nextFrame": "limbo_5",
+          "effects": [
+            {
+              "type": "FADE_OUT_CHARACTER",
+              "args": {
+                "characterId": "mitnik"
+              }
+            }
+          ]
+        },
+        "limbo_5": {
+          "id": "limbo_5",
+          "location": "badEndingSpaceExplosions",
+          "dialogue": "And in a matter of hours, chaos will swallow the entire Internet, all electronics!",
+          "nextFrame": "limbo_6"
+        },
+        "limbo_6": {
+          "id": "limbo_6",
+          "dialogue": "",
+          "effects": [
+            {
+              "type": "STOP",
+              "args": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  "tasks": {
+    "task0": {
+      "id": "task0",
+      "type": "SELECT_ONE",
+      "questionText": "How is the end of a sentence indicated in Prologue?",
+      "options": [
+        "`.` (dot)",
+        "`_` (underscore)",
+        "`-` (hyphen)",
+        "`X`"
+      ],
+      "correctAnswerIndex": 0,
+      "nextFrameOnSuccess": "inception2_27",
+      "nextFrameOnFailure": "inception2_failTask0_01",
+      "failureScorePenalty": 2
+    },
+    "task1": {
+      "id": "task1",
+      "type": "SELECT_ONE",
+      "questionText": "An anonymous variable is a variable whose value we don't care about, and we use it when we want to indicate that any information can be in its place in the predicate. What syntax does it have?",
+      "options": [
+        "`.` (dot)",
+        "`_` (underscore)",
+        "`-` (hyphen)",
+        "`X`"
+      ],
+      "correctAnswerIndex": 1,
+      "nextFrameOnSuccess": "inception3_21",
+      "nextFrameOnFailure": "inception3_failTask1_01",
+      "failureScorePenalty": 2
+    },
+    "task2": {
+      "id": "task2",
+      "type": "SELECT_ONE",
+      "questionText": "Is it possible to use variables (like `X`) in rules (see below)? ```develop(X) :- work(X, virus).```",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Remember what the variable `X` means",
+      "nextFrameOnSuccess": "inception4_15",
+      "nextFrameOnFailure": "inception4_failTask2_01",
+      "failureScorePenalty": 1
+    },
+    "task3": {
+      "id": "task3",
+      "type": "SELECT_ONE",
+      "questionText": "How do I check if the list `[1, 2, 3, 4]`?",
+      "options": [
+        "`contains(3, [1, 2, 3, 4])`",
+        "`exists(3, [1, 2, 3, 4])`",
+        "`in_list(3, [1, 2, 3, 4]`",
+        "`member(3, [1, 2, 3, 4])`"
+      ],
+      "correctAnswerIndex": 3,
+      "hint": "Remember about built-in constructs",
+      "nextFrameOnSuccess": "elaboration2_31",
+      "nextFrameOnFailure": "elaboration2_failTask3_01",
+      "failureScorePenalty": 1
+    },
+    "task4": {
+      "id": "task4",
+      "type": "SELECT_ONE",
+      "questionText": "These next facts:```character(professor).\ncharacter(vicky).\ncharacter(mitnik).```Which query will return all heroes?",
+      "options": [
+        "`character(X).`",
+        "`character(professor, vicky, mitnik).`",
+        "`character(_).`",
+        "None"
+      ],
+      "correctAnswerIndex": 0,
+      "hint": "Think about what a fact is.",
+      "nextFrameOnSuccess": "elaboration3_21",
+      "nextFrameOnFailure": "elaboration3_failTask4_01",
+      "failureScorePenalty": 1
+    },
+    "task5": {
+      "id": "task5",
+      "type": "COMPLETE_QUERY",
+      "knowledge": [
+        "steal(sarah, mitnik).",
+        "work(sarah, fbi).",
+        "develop(mitnik, virus).",
+        "find(Target) :- steal(sarah, mitnik), develop(mitnik, Target)."
+      ],
+      "questionText": "Complete the query so that the only answer is: `Х = virus`.```steal(sarah, mitnik).\nwork(sarah, fbi).\ndevelop(mitnik, virus).\nfind(Target) :-\n\tsteal(sarah, mitnik), develop(mitnik, Target).```",
+      "expectedResults": [
+        {
+          "variables": {
+            "X": "virus"
+          }
+        }
+      ],
+      "nextFrameOnSuccess": "elaboration4_23",
+      "nextFrameOnFailure": "elaboration4_failTask5_01",
+      "failureScorePenalty": 2
+    }
+  }
+}
