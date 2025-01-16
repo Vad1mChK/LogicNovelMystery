@@ -21,4 +21,18 @@ describe('DialogueBox Component', () => {
 		const speakerElement = screen.queryByTestId('dialogue-speaker');
 		expect(speakerElement).not.toBeInTheDocument();
 	});
+
+	it('adds "no-speaker" class to dialogue-text when speakerName is not provided', () => {
+		render(<DialogueBox text="Test dialogue" />);
+		const dialogueTextElement = screen.getByTestId('dialogue-text');
+		expect(dialogueTextElement).toHaveClass('dialogue-text');
+		expect(dialogueTextElement).toHaveClass('no-speaker');
+	});
+
+	it('should not add "no-speaker" class to dialogue-text when speakerName is provided', () => {
+		render(<DialogueBox speakerName="Phoenix Wright" text="Objection!" />);
+		const dialogueTextElement = screen.getByTestId('dialogue-text');
+		expect(dialogueTextElement).toHaveClass('dialogue-text');
+		expect(dialogueTextElement).not.toHaveClass('no-speaker');
+	});
 });
