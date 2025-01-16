@@ -21,6 +21,12 @@ jobs:
         working-directory: ./lnm-frontend
         run: npm install
 
+      - name: Print Server URL
+        run: |
+          echo "My secret is: $VITE_SERVER_URL"
+        env:
+          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+
       - name: Build project
         working-directory: ./lnm-frontend
         run: npm run build
