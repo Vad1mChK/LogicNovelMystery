@@ -25,7 +25,7 @@ jobs:
         working-directory: ./lnm-frontend
         run: npm run build
         env:
-          VITE_SERVER_URL: https://02f4d4f9-018f-4509-a5a8-ad5b01d7c7cb.tunnel4.com
+          VITE_SERVER_URL: https://5d8acc85-3034-4c3d-80f1-b5d58d781c46.tunnel4.com
 
       - name: Upload pages artifact
         uses: peaceiris/actions-gh-pages@v3
