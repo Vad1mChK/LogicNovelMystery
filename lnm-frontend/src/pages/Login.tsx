@@ -31,10 +31,10 @@ const Login: React.FC = () => {
 			if (username !== localStorage.getItem('username')) {
 				localStorage.removeItem('sessionToken');
 				dispatch(resetState());
-
-				// Сохраняем username в localStorage
-				localStorage.setItem('username', username);
 			}
+
+			// Сохраняем username в localStorage
+			localStorage.setItem('username', username);
 
 			// Перенаправляем пользователя на защищённую страницу (например, /dashboard)
 			navigate('/main');
