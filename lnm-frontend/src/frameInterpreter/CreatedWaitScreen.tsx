@@ -67,10 +67,7 @@ const CreatedWaitScreen: React.FC<CreatedWaitScreenProps> = ({
 					characterData={protagonistCharacterData}
 				/>
 			</div>
-			<button
-				className="game-button home-button"
-				onClick={onQuitToMain}
-			>
+			<button className="game-button home-button" onClick={onQuitToMain}>
 				{t('game.homeButton')}
 			</button>
 		</div>

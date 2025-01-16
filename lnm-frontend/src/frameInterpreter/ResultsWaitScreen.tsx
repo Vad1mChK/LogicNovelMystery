@@ -43,10 +43,7 @@ const ResultsWaitScreen: React.FC<ResultsWaitScreenProps> = ({
 						: t('game.resultWaitScreen.pageWillUpdate.single')}
 				</p>
 			</div>
-			<button
-				className="game-button home-button"
-				onClick={onQuitToMain}
-			>
+			<button className="game-button home-button" onClick={onQuitToMain}>
 				{t('game.homeButton')}
 			</button>
 		</div>
