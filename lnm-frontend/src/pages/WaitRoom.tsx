@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "../css/WaitRoom.scss"; // Connect styles
-import axios from "axios";
-import { VITE_SERVER_URL } from "../metaEnv";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { generateSessionToken } from "../util/generateSessionToken.ts";
-import { setPlayerState, setProtagonist } from "../state/gameStateSlice.ts";
-import { LnmHero, LnmPlayerState } from "../frameInterpreter/types.ts"; // Ensure this is correctly imported
+import React, { useEffect, useState } from 'react';
+import '../css/WaitRoom.scss'; // Connect styles
+import axios from 'axios';
+import { VITE_SERVER_URL } from '../metaEnv';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { generateSessionToken } from '../util/generateSessionToken.ts';
+import { setPlayerState, setProtagonist } from '../state/gameStateSlice.ts';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types.ts'; // Ensure this is correctly imported
 
 interface User {
 	id: number;
