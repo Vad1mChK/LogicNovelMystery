@@ -87,4 +87,22 @@
 			);
 		}
 	}
+
+	.game-button {
+		transition: color 0.3s ease-in-out;
+        border: 2px solid colors.$WHITE;
+        background: color.scale(colors.$BLACK, $alpha: -25%);
+        cursor: pointer;
+        font-size: inherit;
+
+        &:hover {
+            background-color: color.scale(colors.$DARK-GRAY, $alpha: -25%);
+        }
+
+		&.home-button {
+			position: absolute;
+			top: 5%;
+			left: 5%;
+		}
+	}
 }
