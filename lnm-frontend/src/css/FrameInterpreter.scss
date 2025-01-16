@@ -14,7 +14,7 @@
 	}
 
 	.game-dialogue-box {
-		font-size: 28px;
+		font-size: 24px;
 		font-family: JBRMono, monospace;
 		position: absolute;
 		bottom: 5%;
@@ -22,6 +22,16 @@
 		transform: translateX(-50%);
 		width: 70vw;
 		vertical-align: bottom;
+
+		@media (width <= 1440px) {
+			width: 75vw;
+			font-size: 22px;
+		}
+
+		@media (width <= 960px) {
+			width: 80vw;
+            font-size: 20px;
+        }
 
 		& .speaker-name {
 			margin-left: 0;
@@ -31,7 +41,6 @@
 			border-radius: 16px 16px 0 0;
 			border: 2px solid colors.$WHITE;
 			border-bottom: none;
-			font-size: smaller;
 		}
 
 		& .dialogue-text {
@@ -42,6 +51,18 @@
 			border-radius: 0 32px 32px;
 			overflow: hidden;
 			height: 6em;
+
+			@media (width <= 960px) {
+				height: 7em;
+			}
+
+			@media (width <= 960px) {
+				height: 8em;
+			}
+
+			&.no-speaker {
+				border-radius: 32px;
+			}
 		}
 	}
 
@@ -118,6 +139,10 @@
 		position: absolute;
 		right: 5%;
 		bottom: 5%;
+
+		@media (width <= 1440px) {
+			font-size: 24px;
+		}
 	}
 
 	.top-button-bar {
