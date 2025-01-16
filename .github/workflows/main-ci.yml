@@ -24,8 +24,8 @@ jobs:
         # Optional: Confirm that the environment variable is set (without exposing it)
       - name: Confirm VITE_SERVER_URL is set
         run: |
-          echo "$VITE_SERVER_URL"
-          if [ -z "$VITE_SERVER_URL" ]; then
+          echo "$env:VITE_SERVER_URL"
+          if [ -z "$env:VITE_SERVER_URL" ]; then
             echo "VITE_SERVER_URL is not set!"
             exit 1
           else
