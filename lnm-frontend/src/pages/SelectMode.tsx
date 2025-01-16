@@ -98,7 +98,7 @@ const GameSelection: React.FC = () => {
 			if (selectedCharacter === 'Game for one') {
 				await createSinglePlayerSession();
 				dispatch(setProtagonist(LnmHero.STEVE));
-				dispatch(setPlayerState(LnmPlayerState.PLAYING));
+				dispatch(setPlayerState(LnmPlayerState.CREATED));
 				navigate('/single-player');
 			} else if (selectedCharacter === 'Game for two') {
 				navigate('/waitRoom');
