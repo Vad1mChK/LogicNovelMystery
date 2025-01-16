@@ -16,9 +16,25 @@ const initialState: MusicState = {
 	panning: 0, // Center
 };
 
+const loadMusicState = (): MusicState => {
+	try {
+		const storedState = localStorage.getItem('musicState');
+		if (storedState) {
+			return {
+				...initialState,
+				...JSON.parse(storedState),
+			};
+		}
+		return initialState; // No state found in localStorage
+	} catch (error) {
+		console.error('Failed to load game state from localStorage:', error);
+		return initialState;
+	}
+};
+
 const musicSlice = createSlice({
 	name: 'music',
-	initialState,
+	initialState: loadMusicState() as MusicState,
 	reducers: {
 		setCurrentTrack(state, action: PayloadAction<string | null>) {
 			state.currentTrack = action.payload;

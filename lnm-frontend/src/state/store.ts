@@ -7,11 +7,25 @@ import gameFinalResultReducer, {
 } from './gameFinalResultSlice.ts';
 
 // Middleware to persist state changes to localStorage
-const saveStateToLocalStorage = (state: GameState) => {
+const saveGameStateToLocalStorage = (state: GameState) => {
 	try {
 		localStorage.setItem('gameState', JSON.stringify(state));
 	} catch (error) {
 		console.error('Failed to save game state to localStorage:', error);
+	}
+};
+
+const saveMusicStateToLocalStorage = (state: MusicState) => {
+	try {
+		localStorage.setItem(
+			'musicState',
+			JSON.stringify({
+				volume: state.volume,
+				panning: state.panning,
+			})
+		);
+	} catch (error) {
+		console.error('Failed to save music state to localStorage:', error);
 	}
 };
 
@@ -20,7 +34,8 @@ const persistenceMiddleware =
 	(storeAPI: any) => (next: any) => (action: any) => {
 		const result = next(action); // Pass the action to the reducer
 		const state = storeAPI.getState(); // Get the updated state
-		saveStateToLocalStorage(state.gameState); // Persist the gameState to localStorage
+		saveGameStateToLocalStorage(state.gameState); // Persist the gameState to localStorage
+		saveMusicStateToLocalStorage(state.musicState); // Persist the musicState to localStorage
 		return result;
 	};
 
