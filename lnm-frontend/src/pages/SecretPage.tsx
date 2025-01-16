@@ -2,9 +2,10 @@
 
 import React from 'react';
 import '../css/FrameInterpreter.scss';
+import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen';
 
 const SecretPage: React.FC = () => {
-	return <></>;
+	return <ResultsWaitScreen winner={false} multiplayer={true} />;
 };
 
 export default SecretPage;

@@ -6,11 +6,13 @@ import '../css/CreateOrResultsScreen.scss';
 interface ResultsWaitScreenProps {
 	winner: boolean;
 	multiplayer?: boolean;
+	onQuitToMain?: () => void; // Callback to navigate to home screen when home button is clicked.
 }
 
 const ResultsWaitScreen: React.FC<ResultsWaitScreenProps> = ({
 	winner,
 	multiplayer = false,
+	onQuitToMain = () => {},
 }) => {
 	return (
 		<div className="results-screen">
@@ -41,6 +43,9 @@ const ResultsWaitScreen: React.FC<ResultsWaitScreenProps> = ({
 						: t('game.resultWaitScreen.pageWillUpdate.single')}
 				</p>
 			</div>
+			<button className="game-button home-button" onClick={onQuitToMain}>
+				{t('game.homeButton')}
+			</button>
 		</div>
 	);
 };

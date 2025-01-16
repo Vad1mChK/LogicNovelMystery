@@ -16,6 +16,11 @@ import {
 import axios from 'axios';
 import { VITE_SERVER_URL } from '../metaEnv.ts';
 
+type QuitToMainParams = {
+	clearState?: boolean;
+	seenResults?: boolean;
+};
+
 const GamePage: React.FC = () => {
 	const { playerState, protagonist } = useSelector(
 		(state: RootState) => state.gameState
@@ -39,7 +44,12 @@ const GamePage: React.FC = () => {
 
 		if (sessionToken) {
 			console.log('Starting short polling...');
-			startShortPolling(sessionToken, playerState, dispatch);
+			startShortPolling(
+				sessionToken,
+				/* isMultiplayer: */ protagonist !== LnmHero.STEVE,
+				playerState,
+				dispatch
+			);
 
 			// Define the cleanup function
 			cleanup = () => {
@@ -55,13 +65,46 @@ const GamePage: React.FC = () => {
 		return cleanup;
 	}, [sessionToken, playerState, dispatch]);
 
-	useEffect(() => {
-		if (
-			[
-				LnmPlayerState.COMPLETED_WON,
-				LnmPlayerState.COMPLETED_LOST,
-			].includes(playerState)
-		) {
+	// useEffect(() => {
+	// 	if (
+	// 		[
+	// 			LnmPlayerState.COMPLETED_WON,
+	// 			LnmPlayerState.COMPLETED_LOST,
+	// 		].includes(playerState)
+	// 	) {
+	// 		axios
+	// 			.post(
+	// 				`${VITE_SERVER_URL}/game/seen-results`,
+	// 				{
+	// 					sessionToken: localStorage.getItem('sessionToken'),
+	// 					isMultiplayer: protagonist != LnmHero.STEVE,
+	// 				},
+	// 				{
+	// 					headers: {
+	// 						Authorization: localStorage.getItem('AuthToken'),
+	// 					},
+	// 				}
+	// 			)
+	// 			.then(() => {
+	// 				dispatch(setPlayerState(LnmPlayerState.SEEN_RESULTS));
+	// 			})
+	// 			.catch((err) => {
+	// 				console.error(
+	// 					'Error reporting that the player has seen results:',
+	// 					err
+	// 				);
+	// 			});
+	// 	}
+	// }, [playerState]);
+
+	const quitToMain = (params?: QuitToMainParams) => {
+		const { clearState = false, seenResults = false } = params || {};
+		if (clearState) {
+			dispatch(resetState());
+			localStorage.removeItem('SessionToken');
+		}
+
+		if (seenResults) {
 			axios
 				.post(
 					`${VITE_SERVER_URL}/game/seen-results`,
@@ -85,28 +128,31 @@ const GamePage: React.FC = () => {
 					);
 				});
 		}
-	}, [playerState]);
 
-	const quitToMain = (clearState: boolean = false) => {
-		if (clearState) {
-			dispatch(resetState());
-			// TODO Maybe some more complex logic to remove the state?
-		}
 		navigate('/main');
 	};
 
 	const stateToComponent: Map<LnmPlayerState, ReactElement> = new Map([
 		[
 			LnmPlayerState.CREATED,
-			<CreatedWaitScreen protagonist={protagonist} />,
+			<CreatedWaitScreen
+				protagonist={protagonist}
+				onQuitToMain={quitToMain}
+			/>,
 		],
 		[
 			LnmPlayerState.PLAYING,
 			<VisualNovelScreen protagonist={protagonist} />,
 			// Formerly, GamePage contained just what VisualNovelScreen now contains
 		],
-		[LnmPlayerState.WAITING_LOST, <ResultsWaitScreen winner={false} />],
-		[LnmPlayerState.WAITING_WON, <ResultsWaitScreen winner={true} />],
+		[
+			LnmPlayerState.WAITING_LOST,
+			<ResultsWaitScreen winner={false} onQuitToMain={quitToMain} />,
+		],
+		[
+			LnmPlayerState.WAITING_WON,
+			<ResultsWaitScreen winner={true} onQuitToMain={quitToMain} />,
+		],
 		[
 			LnmPlayerState.COMPLETED_LOST,
 			<ResultsScreen
@@ -114,7 +160,7 @@ const GamePage: React.FC = () => {
 				score={score || 0}
 				highScore={highScore ?? undefined}
 				partnerName={partnerName ?? undefined}
-				onQuitToMain={quitToMain}
+				onQuitToMain={() => quitToMain({ seenResults: true })}
 			/>,
 			// In reality, the server will return all this. Should I add these things to Redux instead?
 		],
@@ -125,7 +171,7 @@ const GamePage: React.FC = () => {
 				score={score || 0}
 				highScore={highScore ?? undefined}
 				partnerName={partnerName ?? undefined}
-				onQuitToMain={quitToMain}
+				onQuitToMain={() => quitToMain({ seenResults: true })}
 			/>,
 			// In reality, the server will return all this. Should I add these things to Redux?
 		],
@@ -136,7 +182,7 @@ const GamePage: React.FC = () => {
 				score={score || 0}
 				highScore={highScore ?? undefined}
 				partnerName={partnerName ?? undefined}
-				onQuitToMain={() => quitToMain(true)}
+				onQuitToMain={() => quitToMain({ clearState: true })}
 			/>,
 		],
 	]);

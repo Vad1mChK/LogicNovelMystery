@@ -96,7 +96,6 @@ const MainMenu: React.FC = () => {
 							if (acc[entry.sessionToken]) {
 								acc[entry.sessionToken].username +=
 									`, ${entry.username}`;
-								acc[entry.sessionToken].score += entry.score;
 							} else {
 								acc[entry.sessionToken] = { ...entry };
 							}
