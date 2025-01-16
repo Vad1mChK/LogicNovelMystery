@@ -24,6 +24,8 @@ jobs:
       - name: Build project
         working-directory: ./lnm-frontend
         run: npm run build
+        env:
+          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
 
       - name: Upload pages artifact
         uses: peaceiris/actions-gh-pages@v3
