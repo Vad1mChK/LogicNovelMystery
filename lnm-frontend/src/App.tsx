@@ -2,7 +2,6 @@ import React, { /*useContext, */ useEffect } from 'react';
 import { Routes, Route, Navigate /*, useLocation*/ } from 'react-router-dom';
 import './App.css';
 import './css/global.scss';
-
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MainPage from './pages/MainPage';
@@ -17,10 +16,14 @@ import { BrowserTracing } from '@sentry/tracing';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
+import WaitRoom from './pages/WaitRoom.tsx';
+import PrivateRoute from './util/PrivateRoute';
+import TabErrorPage from './pages/TabErrorPage';
 
 Sentry.init({
 	dsn: 'https://2a79b7cbcd0c952c1d8bb6dcf79cc459@o4508292474339328.ingest.de.sentry.io/4508292540530768',
 	integrations: [new BrowserTracing()],
+	// eslint-disable-next-line no-magic-numbers
 	tracesSampleRate: 0.3,
 });
 
@@ -39,15 +42,59 @@ const App: React.FC = () => {
 			i18n.changeLanguage(currentLanguage);
 		}
 	}, [currentLanguage, i18n]);
-
 	return (
 		<Routes>
 			<Route path="/auth/login" element={<Login />} />
 			<Route path="/auth/register" element={<Register />} />
-			<Route path="/main" element={<MainPage />} />
-			<Route path="/select" element={<SelectMode />} />
-			<Route path="/single-player" element={<GamePage />} />
-			<Route path="/secret" element={<SecretPage />} />
+			<Route path="/tab-error" element={<TabErrorPage />} />
+			<Route
+				path="/main"
+				element={
+					<PrivateRoute>
+						<MainPage />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/select"
+				element={
+					<PrivateRoute>
+						<SelectMode />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/waitRoom"
+				element={
+					<PrivateRoute>
+						<WaitRoom />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/single-player"
+				element={
+					<PrivateRoute>
+						<GamePage />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/multi-player"
+				element={
+					<PrivateRoute>
+						<GamePage />
+					</PrivateRoute>
+				}
+			/>
+			<Route
+				path="/secret"
+				element={
+					<PrivateRoute>
+						<SecretPage />
+					</PrivateRoute>
+				}
+			/>
 			<Route path="/" element={<Navigate to="/auth/login" />} />
 		</Routes>
 	);

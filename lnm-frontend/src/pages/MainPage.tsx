@@ -1,26 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/MainPage.scss';
 import { useNavigate } from 'react-router-dom';
-import { AudioContext } from './AudioContext';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 import defaultMusic from '../assets/music/fon.mp3';
 import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
+import { RootState } from '../state/store.ts';
+import {
+	playMusic,
+	setCurrentTrack,
+	setPanning,
+	setVolume,
+	togglePlayMusic,
+} from '../state/musicSlice.ts';
+import { VITE_SERVER_URL } from '../metaEnv';
+import leaderboardWorkerScript from '../workers/leaderboardWorker.tsx?worker';
 
 interface LeaderboardEntry {
+	username: string;
 	score: number;
-	name: string;
-	gameMode: string;
+	sessionToken: string;
 }
-
-//todo del cause it's just a mock data
-const fallbackLeaderboardData = [
-	{ name: 'Иванов', score: 100, gameMode: 'Single' },
-	{ name: 'Петров', score: 90, gameMode: 'Single' },
-	{ name: 'Сидоров', score: 80, gameMode: 'Single' },
-];
 
 const MainMenu: React.FC = () => {
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
@@ -29,72 +31,140 @@ const MainMenu: React.FC = () => {
 	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
+	const {
+		isPlaying: isMusicPlaying,
+		volume,
+		currentTrack,
+		panning,
+	} = useSelector((state: RootState) => state.musicState);
 
-	const { isMusicPlaying, toggleMusic, setMusicFile, volume, setVolume } =
-		useContext(AudioContext)!;
 	const { t, i18n } = useTranslation(); // Используем локализацию
-
-	//todo replace without mock
 	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
-		fallbackLeaderboardData
+		[]
 	);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-	const [isRefreshDisabled, setRefreshDisabled] = useState(false);
-	const [timer, setTimer] = useState(0);
+	const [isMultiplayer, setIsMultiplayer] = useState(false);
+	const [showQuestion, setShowQuestion] = useState(false); // Состояние для пасхалки
 
 	// Устанавливаем музыку при загрузке страницы
 	useEffect(() => {
-		setMusicFile(defaultMusic);
+		dispatch(setCurrentTrack(defaultMusic));
 		if (!isMusicPlaying) {
-			toggleMusic(); // Запускаем музыку, если она не играет
+			dispatch(playMusic()); // Запускаем музыку, если она не играет
 		}
-	}, []);
+	}, [isMusicPlaying, currentTrack, dispatch]);
 
 	useEffect(() => {
 		console.log('Mounted: MainMenu');
 		return () => console.log('Unmounted: MainMenu');
 	}, []);
 
+	useEffect(() => {
+		// Выполняем запрос к серверу только при открытии leaderboard
+		if (isLeaderboardOpen) {
+			fetchLeaderboardData(isMultiplayer);
+		}
+	}, [isLeaderboardOpen]); // Добавляем зависимости
 	// Запрос данных с сервера
-	const fetchLeaderboardData = async () => {
+	const fetchLeaderboardData = async (isMultiplayer: boolean) => {
 		try {
-			const response = await axios.get('/api/leaderboard'); // Замените на ваш URL
-			if (Array.isArray(response.data)) {
-				setLeaderboardData(response.data);
+			setErrorMessage(null); // Сбрасываем сообщение об ошибке перед запросом
+			const response = await axios.post<{
+				leaderBoardList: LeaderboardEntry[];
+			}>(
+				`${VITE_SERVER_URL}/api/leaderboard`,
+				{
+					isMultiplayer,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: localStorage.getItem('AuthToken'),
+					},
+				}
+			);
+			const leaderBoardList = response.data?.leaderBoardList;
+			if (Array.isArray(leaderBoardList)) {
+				if (isMultiplayer) {
+					// Группируем записи по sessionToken
+					const groupedData = leaderBoardList.reduce(
+						(
+							acc: Record<string, LeaderboardEntry>,
+							entry: LeaderboardEntry
+						) => {
+							if (acc[entry.sessionToken]) {
+								acc[entry.sessionToken].username +=
+									`, ${entry.username}`;
+								acc[entry.sessionToken].score += entry.score;
+							} else {
+								acc[entry.sessionToken] = { ...entry };
+							}
+							return acc;
+						},
+						{}
+					);
+
+					// Преобразуем обратно в массив, сортируем и берем топ-10
+					const sortedData = Object.values(groupedData)
+						.sort(
+							(a: LeaderboardEntry, b: LeaderboardEntry) =>
+								b.score - a.score
+						)
+						.slice(0, 10);
+
+					setLeaderboardData(sortedData);
+				} else {
+					// Для одиночного режима просто сортируем и берем топ-10
+					const sortedData = leaderBoardList
+						.sort(
+							(a: LeaderboardEntry, b: LeaderboardEntry) =>
+								b.score - a.score
+						)
+						.slice(0, 10);
+
+					setLeaderboardData(sortedData);
+				}
 			} else {
-				//todo replace mock and add locale
-				console.warn(
-					'Некорректный формат данных от сервера, используем заглушку.'
-				);
-				setLeaderboardData(fallbackLeaderboardData); // Используем заглушку
+				setErrorMessage(t('Invalid data format from server.'));
 			}
 		} catch (error) {
-			//todo replace mock and add locale
-			console.error('Ошибка при запросе данных:', error);
-			setLeaderboardData(fallbackLeaderboardData); // Используем заглушку
+			console.error('Error during getting data', error);
+			setErrorMessage(
+				t(
+					'Failed to load leaderboard data. Please check your connection or try again later.'
+				)
+			);
 		}
 	};
-	// Деактивация кнопки Refresh с таймером
-	const handleRefresh = () => {
-		setRefreshDisabled(true);
-		setTimer(90); // 1:30 = 90 секунд
-		fetchLeaderboardData();
+	// Открытие leaderboard с использованием воркера
+	const openLeaderboard = () => {
+		const worker = new leaderboardWorkerScript();
+		worker.postMessage(null);
 
-		const countdown = setInterval(() => {
-			setTimer((prev) => {
-				if (prev <= 1) {
-					clearInterval(countdown);
-					setRefreshDisabled(false);
-					return 0;
-				}
-				return prev - 1;
-			});
-		}, 1000);
+		worker.onmessage = (e) => {
+			const { type, message } = e.data;
+			if (type === 'question') {
+				// Пасхалка: показываем вопрос
+				console.log(message);
+				setShowQuestion(true);
+			} else if (type === 'fetch') {
+				// Выполняем запрос к серверу
+				fetchLeaderboardData(isMultiplayer);
+				setLeaderboardOpen(true);
+			}
+			worker.terminate();
+		};
 	};
 
-	useEffect(() => {
-		if (isLeaderboardOpen) fetchLeaderboardData();
-	}, [isLeaderboardOpen]);
+	const handleQuestionResponse = (answer: boolean) => {
+		if (answer) {
+			// Если "Да", загружаем таблицу лидеров
+			fetchLeaderboardData(isMultiplayer);
+			setLeaderboardOpen(true);
+		}
+		setShowQuestion(false); // Закрываем вопрос
+	};
 
 	const closeAllModals = () => {
 		setSettingsOpen(false);
@@ -103,12 +173,30 @@ const MainMenu: React.FC = () => {
 	};
 
 	const adjustVolume = (value: number) => {
-		setVolume(value);
+		dispatch(setVolume(value));
+	};
+
+	const adjustPanning = (value: number) => {
+		dispatch(setPanning(value));
 	};
 
 	const changeLanguage = (selectedLanguage: string) => {
 		i18n.changeLanguage(selectedLanguage); // Меняем язык
 		dispatch(setLanguage(selectedLanguage));
+	};
+
+	// Обработчик нажатия на кнопку "Начать игру" с воспроизведением музыки
+	const handleStartGame = () => {
+		dispatch(playMusic()); // Воспроизведение музыки
+		navigate('/select'); // Переход на другую страницу
+	};
+
+	const handleExitGame = () => {
+		if (isMusicPlaying) {
+			dispatch(togglePlayMusic());
+		}
+		localStorage.removeItem('AuthToken');
+		navigate('/'); // Переход на другую страницу
 	};
 
 	return (
@@ -119,36 +207,55 @@ const MainMenu: React.FC = () => {
 			}}
 		>
 			<div className="main-container">
-				{/* Кнопка "Начать игру" */}
-				<button className="button" onClick={() => navigate('/select')}>
+				{/* Кнопка "Начать игру" слева */}
+				<button
+					className="button left-button"
+					onClick={handleStartGame}
+					id="start-game-button"
+				>
 					{t('Start game')}
 				</button>
 
-				{/* Блок с дополнительными кнопками */}
-				<div className="side-buttons">
-					<button
-						className="button leaderboard-button"
-						onClick={() => setLeaderboardOpen(true)}
-					>
-						{t('Leaderboard')}
-					</button>
-					<button
-						className="button settings-button"
-						onClick={() => setSettingsOpen(true)}
-					>
-						{t('Settings')}
-					</button>
-					<button
-						className="button about-button"
-						onClick={() => setAboutOpen(true)}
-					>
-						{t('About')}
-					</button>
-				</div>
+				{/* Кнопка "Настройки" по центру сверху */}
+				<button
+					className="button top-button"
+					onClick={() => setSettingsOpen(true)}
+					id="settings-button"
+				>
+					{t('Settings')}
+				</button>
+
+				{/* Кнопка "Доска лидеров" справа */}
+				<button
+					className="button right-button"
+					onClick={openLeaderboard}
+					id="leaderboard-button"
+				>
+					{t('Leaderboard')}
+				</button>
+
+				{/* Кнопка "Об игре" справа */}
+				<button
+					className="button right-button"
+					onClick={() => setAboutOpen(true)}
+					id="about-button"
+				>
+					{t('About')}
+				</button>
+				{/* Кнопка "Выйти" справа */}
+				<button
+					className="button right-button"
+					onClick={handleExitGame}
+				>
+					{t('Exit')}
+				</button>
 			</div>
 
 			{/* Затенение фона для модальных окон */}
-			{isSettingsOpen || isAboutOpen || isLeaderboardOpen ? (
+			{isSettingsOpen ||
+			isAboutOpen ||
+			isLeaderboardOpen ||
+			showQuestion ? (
 				<div className="modal-overlay" onClick={closeAllModals}></div>
 			) : null}
 
@@ -167,6 +274,22 @@ const MainMenu: React.FC = () => {
 						onChange={(e) => adjustVolume(Number(e.target.value))}
 					/>
 					<span>{volume}%</span>
+					<br />
+					<label htmlFor="panning-range">
+						{t('panning.panning')}:
+					</label>
+					<input
+						type="range"
+						id="panning-range"
+						className="volume-control"
+						min={-1}
+						max={1}
+						step={0.01}
+						value={panning}
+						onChange={(e) => adjustPanning(Number(e.target.value))}
+					/>
+					<span>{panning}</span>
+
 					<div style={{ marginTop: '10px' }}>
 						<label htmlFor="language-select">
 							{t('Language')}:
@@ -197,42 +320,89 @@ const MainMenu: React.FC = () => {
 				</div>
 			)}
 
+			{/* Модальное окно с вопросом (пассхалка) */}
+			{showQuestion && (
+				<div id="question-modal">
+					<h2>{t('Question')}</h2>
+					<div className="modal-actions">
+						<button onClick={() => handleQuestionResponse(true)}>
+							{t('Yes')}
+						</button>
+						<button onClick={() => handleQuestionResponse(false)}>
+							{t('No')}
+						</button>
+					</div>
+				</div>
+			)}
+
 			{/* Модальное окно с таблицей лидеров */}
 			{isLeaderboardOpen && (
 				<div id="leaderboard-modal">
 					<h2>{t('Leaderboard')}</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>№</th>
-								<th>{t('Name')}</th>
-								<th>{t('Score')}</th>
-								<th>{t('GameMode')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{leaderboardData.map((leader, index) => (
-								<tr key={index}>
-									<td>{index + 1}</td>
-									<td>{leader.name}</td>
-									<td>{leader.gameMode}</td>
-									<td>{leader.score}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-					<button
-						className="modal-button"
-						onClick={handleRefresh}
-						disabled={isRefreshDisabled}
-					>
-						{isRefreshDisabled
-							? `${t('Refresh in')} ${timer} ${t('sec.')}`
-							: t('Refresh')}
-					</button>
-					<button className="modal-button" onClick={closeAllModals}>
-						{t('Close')}
-					</button>
+					{errorMessage ? (
+						<div className="error-message">
+							<p>{errorMessage}</p>
+							<button
+								className="modal-button"
+								onClick={() => setErrorMessage(null)}
+							>
+								{t('Close')}
+							</button>
+						</div>
+					) : (
+						<>
+							<div className="mode-selector">
+								<div
+									className={`mode-box ${
+										!isMultiplayer ? 'active' : ''
+									}`}
+									onClick={() => {
+										if (!isMultiplayer) return;
+										setIsMultiplayer(false);
+										fetchLeaderboardData(false);
+									}}
+								>
+									{t('Single')}
+								</div>
+								<div
+									className={`mode-box ${
+										isMultiplayer ? 'active' : ''
+									}`}
+									onClick={() => {
+										if (isMultiplayer) return;
+										setIsMultiplayer(true);
+										fetchLeaderboardData(true);
+									}}
+								>
+									{t('Multi')}
+								</div>
+							</div>
+							<table>
+								<thead>
+									<tr>
+										<th>№</th>
+										<th>{t('Name')}</th>
+										<th>{t('Score')}</th>
+									</tr>
+								</thead>
+								<tbody>
+									{leaderboardData.map((leader, index) => (
+										<tr key={index}>
+											<td>{index + 1}</td>
+											<td>{leader.username}</td>
+											<td>{leader.score}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+							<button
+								className="modal-button"
+								onClick={closeAllModals}
+							>
+								{t('Close')}
+							</button>
+						</>
+					)}
 				</div>
 			)}
 		</div>

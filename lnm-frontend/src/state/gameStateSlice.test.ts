@@ -1,29 +1,40 @@
 import gameStateReducer, {
-	increaseHealth,
+	setHealth,
 	decreaseHealth,
-	addKnowledge,
-	clearKnowledge,
-	setKnowledge,
+	increaseHealth,
+	resetState,
 	setCurrentChapter,
 	setCurrentFrame,
-	incrementErrorSum,
-	clearErrorSum,
-	incrementErrorCount,
-	clearErrorCount,
+	setPlayerState,
+	setProtagonist,
+	setIntermediateResult,
 } from './gameStateSlice';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 
 // Initial state for testing
 const initialState = {
 	health: 100,
-	knowledge: [],
 	currentChapterId: 'start',
 	currentFrameId: 'frame1',
-	errorSum: 0,
-	errorCount: 0,
+	protagonist: LnmHero.STEVE,
+	playerState: LnmPlayerState.CREATED,
+	intermediateResult: null,
 };
 
 describe('gameStateSlice', () => {
 	// Test increaseHealth
+
+	it('should set health and clamp it to (0..100) range', () => {
+		let state = gameStateReducer(initialState, setHealth(1));
+		expect(state.health).toBe(1);
+
+		state = gameStateReducer(initialState, setHealth(-50));
+		expect(state.health).toBe(0);
+
+		state = gameStateReducer(initialState, setHealth(150));
+		expect(state.health).toBe(100);
+	});
+
 	it('should set health to full when "full" is passed to increaseHealth', () => {
 		const state = gameStateReducer(
 			{ ...initialState, health: 50 },
@@ -70,30 +81,6 @@ describe('gameStateSlice', () => {
 		expect(state.health).toBe(30);
 	});
 
-	// Test addKnowledge
-	it('should add a new knowledge item to the state', () => {
-		const state = gameStateReducer(initialState, addKnowledge('fact1'));
-		expect(state.knowledge).toContain('fact1');
-	});
-
-	// Test clearKnowledge
-	it('should clear all knowledge items', () => {
-		const state = gameStateReducer(
-			{ ...initialState, knowledge: ['fact1', 'fact2'] },
-			clearKnowledge()
-		);
-		expect(state.knowledge).toEqual([]);
-	});
-
-	// Test setKnowledge
-	it('should set knowledge to a new array', () => {
-		const state = gameStateReducer(
-			initialState,
-			setKnowledge(['fact1', 'fact2'])
-		);
-		expect(state.knowledge).toEqual(['fact1', 'fact2']);
-	});
-
 	// Test setCurrentChapter
 	it('should update the current chapter ID', () => {
 		const state = gameStateReducer(
@@ -109,39 +96,40 @@ describe('gameStateSlice', () => {
 		expect(state.currentFrameId).toBe('frame2');
 	});
 
-	// Test incrementErrorSum
-	it('should increment error sum by a given value', () => {
+	it('should update the current protagonist', () => {
 		const state = gameStateReducer(
-			{ ...initialState, errorSum: 10 },
-			incrementErrorSum(5)
+			initialState,
+			setProtagonist(LnmHero.VICKY)
 		);
-		expect(state.errorSum).toBe(15);
+		expect(state.protagonist).toBe(LnmHero.VICKY);
 	});
 
-	// Test clearErrorSum
-	it('should reset error sum to 0', () => {
+	it('should update the current player state', () => {
 		const state = gameStateReducer(
-			{ ...initialState, errorSum: 10 },
-			clearErrorSum()
+			initialState,
+			setPlayerState(LnmPlayerState.PLAYING)
 		);
-		expect(state.errorSum).toBe(0);
+		expect(state.playerState).toBe(LnmPlayerState.PLAYING);
 	});
 
-	// Test incrementErrorCount
-	it('should increment error count by a given value', () => {
+	it('should update the intermediate result', () => {
 		const state = gameStateReducer(
-			{ ...initialState, errorCount: 2 },
-			incrementErrorCount(3)
+			initialState,
+			setIntermediateResult(true)
 		);
-		expect(state.errorCount).toBe(5);
+		expect(state.intermediateResult).toBe(true);
 	});
 
-	// Test clearErrorCount
-	it('should reset error count to 0', () => {
-		const state = gameStateReducer(
-			{ ...initialState, errorCount: 5 },
-			clearErrorCount()
-		);
-		expect(state.errorCount).toBe(0);
+	it('should reset all state properties to their initial values', () => {
+		const modifiedState = {
+			health: 50,
+			currentChapterId: 'chapter2',
+			currentFrameId: 'frame5',
+			protagonist: LnmHero.VICKY,
+			playerState: LnmPlayerState.PLAYING,
+			intermediateResult: false,
+		};
+		const state = gameStateReducer(modifiedState, resetState());
+		expect(state).toEqual(initialState);
 	});
 });

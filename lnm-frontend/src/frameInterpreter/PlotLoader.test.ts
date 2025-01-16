@@ -9,12 +9,7 @@ import {
 	_convertAndCreatePlot,
 	_convertAndCreateTask,
 } from './PlotLoader';
-import {
-	LnmEffectArgsMap,
-	LnmFrameEffectType,
-	LnmKnowledgeType,
-	LnmTaskType,
-} from './types';
+import { LnmEffectArgsMap, LnmFrameEffectType, LnmTaskType } from './types';
 
 describe('Test plot loading', () => {
 	test('condition object should be converted to condition correctly', () => {
@@ -186,12 +181,6 @@ describe('Test plot loading', () => {
 		expect(plot.chapters).toBeInstanceOf(Map);
 		expect(plot.tasks.size).not.toBe(0);
 		expect(plot.tasks.get('task1')?.type).toBe(LnmTaskType.SELECT_ONE);
-		expect(plot.knowledge.get('village_mystery')?.type).not.toBe(
-			LnmKnowledgeType.RULE
-		);
-		expect(plot.knowledge.get('village_mystery')?.content).toBe(
-			'holds(village, secrets).'
-		);
 	});
 	test('ending should be created correctly', () => {
 		const endingObject = {
@@ -308,7 +297,7 @@ describe('Test plot loading', () => {
 		expect(task.knowledge.length).toBe(2);
 		expect(task.testCases.length).toBe(3);
 		expect(task.testCases[0].expectedResults).toHaveLength(1);
-		expect(task.testCases[0].expectedResults[0].variables).toEqual({});
+		expect(task.testCases[0].expectedResults[0]).toEqual({});
 		expect(task.testCases[2].expectedResults).toHaveLength(0);
 	});
 	test('task of type `COMPLETE_QUERY` should be created correctly', () => {
@@ -345,9 +334,6 @@ describe('Test plot loading', () => {
 		expect(task.knowledge).toHaveLength(5);
 		expect(task.hint).not.toBeDefined();
 		expect(task.expectedResults).toHaveLength(1);
-		expect(Object.keys(task.expectedResults[0].variables)).toEqual([
-			'Who',
-			'Mid',
-		]);
+		expect(Object.keys(task.expectedResults[0])).toEqual(['Who', 'Mid']);
 	});
 });
