@@ -21,24 +21,11 @@ jobs:
         working-directory: ./lnm-frontend
         run: npm install
 
-        # Optional: Confirm that the environment variable is set (without exposing it)
-      - name: Confirm VITE_SERVER_URL is set
-        run: |
-          echo "$env:VITE_SERVER_URL"
-          if [ -z "$env:VITE_SERVER_URL" ]; then
-            echo "VITE_SERVER_URL is not set!"
-            exit 1
-          else
-            echo "VITE_SERVER_URL is set."
-          fi
-        env:
-          VITE_SERVER_URL: ${{ env.VITE_SERVER_URL }}
-
       - name: Build project
         working-directory: ./lnm-frontend
         run: npm run build
         env:
-          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          VITE_SERVER_URL: https://02f4d4f9-018f-4509-a5a8-ad5b01d7c7cb.tunnel4.com
 
       - name: Upload pages artifact
         uses: peaceiris/actions-gh-pages@v3
