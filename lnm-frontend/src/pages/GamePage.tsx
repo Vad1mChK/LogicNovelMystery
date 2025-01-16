@@ -90,7 +90,7 @@ const GamePage: React.FC = () => {
 	const quitToMain = (clearState: boolean = false) => {
 		if (clearState) {
 			dispatch(resetState());
-			// TODO Maybe some more complex logic to remove the state?
+			localStorage.removeItem('SessionToken');
 		}
 		navigate('/main');
 	};
@@ -98,7 +98,10 @@ const GamePage: React.FC = () => {
 	const stateToComponent: Map<LnmPlayerState, ReactElement> = new Map([
 		[
 			LnmPlayerState.CREATED,
-			<CreatedWaitScreen protagonist={protagonist} />,
+			<CreatedWaitScreen
+				protagonist={protagonist}
+				onNavigateHome={quitToMain}
+			/>,
 		],
 		[
 			LnmPlayerState.PLAYING,
