@@ -98,8 +98,9 @@ const GamePage: React.FC = () => {
 	const stateToComponent: Map<LnmPlayerState, ReactElement> = new Map([
 		[
 			LnmPlayerState.CREATED,
-			<CreatedWaitScreen protagonist={protagonist}
-			onNavigateHome={quitToMain}
+			<CreatedWaitScreen
+				protagonist={protagonist}
+				onNavigateHome={quitToMain}
 			/>,
 		],
 		[

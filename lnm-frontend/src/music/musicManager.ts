@@ -59,7 +59,9 @@ export class MusicManager {
 
 		// For advanced features like panning
 		this.audioContext = new AudioContext();
-		this.sourceNode = this.audioContext.createMediaElementSource(this.audioElement);
+		this.sourceNode = this.audioContext.createMediaElementSource(
+			this.audioElement
+		);
 		this.pannerNode = this.audioContext.createStereoPanner();
 		// Connect source -> panner -> destination
 		this.sourceNode.connect(this.pannerNode);
