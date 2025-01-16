@@ -64,9 +64,6 @@ const GameSelection: React.FC = () => {
 					token,
 					isMultiplayer: false,
 				},
-<!-- 			/*const result = */ await axios.post(
-				`${VITE_SERVER_URL}/session`, // Замените на ваш API-эндпоинт
-				{ sessionToken }, // Токен передается в теле запроса -->
 				{
 					headers: {
 						'Content-Type': 'application/json',
