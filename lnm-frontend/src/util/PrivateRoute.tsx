@@ -74,7 +74,8 @@ const PrivateRoute = ({ children }: { children: JSX.Element }) => {
 };
 
 // Простая проверка токена (например, истечение срока действия)
-const isTokenValid = (token: string): boolean => {
+export const isTokenValid = (token: string | null): boolean => {
+	if (!token) return false;
 	try {
 		// Убираем "Bearer" из начала строки
 		const jwt = token.replace('Bearer ', '');
