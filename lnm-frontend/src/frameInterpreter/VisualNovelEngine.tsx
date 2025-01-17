@@ -21,9 +21,9 @@ import {
 	setIntermediateResult,
 	setPlayerState,
 } from '../state/gameStateSlice.ts';
-import { reportCampaign } from './communication/reportCampaign';
-import { pauseMusic, playMusic, setCurrentTrack } from '../state/musicSlice';
-import { BASE_URL, VITE_SERVER_URL } from '../metaEnv';
+import { reportCampaign } from './communication/reportCampaign.ts';
+import { pauseMusic, playMusic, setCurrentTrack } from '../state/musicSlice.ts';
+import { BASE_URL, VITE_SERVER_URL } from '../metaEnv.ts';
 import axios from 'axios';
 
 interface VisualNovelEngineProps {

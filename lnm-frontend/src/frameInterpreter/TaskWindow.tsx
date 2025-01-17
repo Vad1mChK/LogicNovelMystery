@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import 'prismjs/themes/prism-twilight.css';
 import { LnmTask, LnmTaskType } from './types';
-import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput';
-import TextSyntaxHighlighter from '../markupElements/TextSyntaxHighlighter';
-import HintDisplay from '../markupElements/HintDisplay';
+import SyntaxHighlightInput from '../markupElements/SyntaxHighlightInput.tsx';
+import TextSyntaxHighlighter from '../markupElements/TextSyntaxHighlighter.tsx';
+import HintDisplay from '../markupElements/HintDisplay.tsx';
 import {
 	Checkbox,
 	FormControlLabel,
@@ -168,7 +168,6 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 				<input
 					type="submit"
 					value={t('game.taskWindow.submitButton')}
-					data-testid="submit-button"
 				/>
 			</div>
 			{error && <p className="task-window-error">{error}</p>}

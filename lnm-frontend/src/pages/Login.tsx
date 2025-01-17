@@ -5,7 +5,7 @@ import * as Sentry from '@sentry/react';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 import { VITE_SERVER_URL } from '../metaEnv';
 import { useDispatch } from 'react-redux';
-import { resetState } from '../state/gameStateSlice';
+import { resetState } from '../state/gameStateSlice.ts';
 
 const Login: React.FC = () => {
 	const [username, setUsername] = useState('');
