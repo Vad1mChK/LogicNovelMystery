@@ -200,6 +200,8 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 				return;
 			}
 
+			setCurrentTask(null);
+
 			if (currentEndingId && !isEnding) {
 				dispatch(setCurrentChapter(currentEndingId));
 				dispatch(
