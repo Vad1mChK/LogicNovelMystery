@@ -25,7 +25,7 @@ jobs:
         working-directory: ./lnm-frontend
         run: npm run build
         env:
-          VITE_SERVER_URL: https://62.233.43.134
+          VITE_SERVER_URL: http://localhost:8080 # https://62.233.43.134
 
       - name: Upload pages artifact
         uses: peaceiris/actions-gh-pages@v3
