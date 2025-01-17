@@ -60,6 +60,4 @@ describe('CreatedWaitScreen', () => {
 			'../assets/img/locations/MansionEntrance.webp'
 		);
 	});
-
-
 });
