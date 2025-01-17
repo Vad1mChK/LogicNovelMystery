@@ -101,7 +101,10 @@ i18n.use(initReactI18next).init({
 					},
 					createdWaitScreen: {
 						created: 'Game created',
-						wait: 'Waiting for the partner to join...',
+						wait: {
+							single: 'Waiting for the server to let you in...',
+							multiplayer: 'Waiting for the partner to join...',
+						},
 						willPlayAs: 'You will play as: {{protagonist}}',
 					},
 					resultWaitScreen: {
@@ -235,7 +238,10 @@ i18n.use(initReactI18next).init({
 					},
 					createdWaitScreen: {
 						created: 'Игра создана',
-						wait: 'Ждём, пока присоединится партнёр...',
+						wait: {
+							single: 'Ждём, пока сервер вас впустит...',
+							multiplayer: 'Ждём, пока присоединится партнёр...',
+						},
 						willPlayAs: 'Ваш персонаж: {{protagonist}}',
 					},
 					resultWaitScreen: {
