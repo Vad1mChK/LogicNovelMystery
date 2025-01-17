@@ -1,12 +1,9 @@
 # Используем базовый образ с JDK
-FROM openjdk:17-jdk-alpine
-
-# Указываем рабочую директорию внутри контейнера
-WORKDIR /app
-
-
-COPY build/libs/lnm-backend-0.0.1-SNAPSHOT.war lnm-backend.war
+FROM azul/zulu-openjdk:17-latest
+VOLUME /tmp
+COPY build/libs/*.jar app.jar
 # Указываем команду для запуска приложения
-ENTRYPOINT ["sh", "-c", "java -jar /app/lnm-backend.war"]
+#ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
 
 EXPOSE 8080
