@@ -4,7 +4,7 @@ import languageReducer, { LanguageState } from './languageSlice';
 import musicReducer, { MusicState } from './musicSlice';
 import gameFinalResultReducer, {
 	GameFinalResultState,
-} from './gameFinalResultSlice.ts';
+} from './gameFinalResultSlice';
 
 // Middleware to persist state changes to localStorage
 const saveGameStateToLocalStorage = (state: GameState) => {
