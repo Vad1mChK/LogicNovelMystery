@@ -7,7 +7,7 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
-import { RootState } from '../state/store.ts';
+import { RootState } from '../state/store';
 import {
 	playMusic,
 	setCurrentTrack,

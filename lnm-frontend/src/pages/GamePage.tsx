@@ -14,7 +14,7 @@ import {
 	stopShortPolling,
 } from '../frameInterpreter/communication/statePolling';
 import axios from 'axios';
-import { VITE_SERVER_URL } from '../metaEnv.ts';
+import { VITE_SERVER_URL } from '../metaEnv';
 
 type QuitToMainParams = {
 	clearState?: boolean;

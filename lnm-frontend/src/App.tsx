@@ -16,7 +16,7 @@ import { BrowserTracing } from '@sentry/tracing';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
-import WaitRoom from './pages/WaitRoom.tsx';
+import WaitRoom from './pages/WaitRoom';
 import PrivateRoute from './util/PrivateRoute';
 import TabErrorPage from './pages/TabErrorPage';
 
