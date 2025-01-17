@@ -142,7 +142,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 											localStorage.getItem(
 												'sessionToken'
 											),
-										chapterId: chapterId,
+										chapter: chapterId,
 									},
 									{
 										headers: {
@@ -199,6 +199,8 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 				console.log('No next frame.');
 				return;
 			}
+
+			setCurrentTask(null);
 
 			if (currentEndingId && !isEnding) {
 				dispatch(setCurrentChapter(currentEndingId));

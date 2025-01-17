@@ -7,15 +7,9 @@ import { LnmFrameCondition } from './types';
 
 let evaluateCondition = evaluateConditionWithDefaults;
 
-describe('test frame condition evaluation', () => {
+describe('conditionHandlers', () => {
 	beforeAll(() => {
-		evaluateCondition = createConditionEvaluator(
-			() => 50,
-			() => ['iAmSteve', 'okay', 'thisGuyIsSuchAToolbag'],
-			() => false,
-			() => false,
-			() => false
-		);
+		evaluateCondition = createConditionEvaluator(() => 50);
 	});
 
 	test('trivial conditions should evaluate correctly', () => {
@@ -25,7 +19,7 @@ describe('test frame condition evaluation', () => {
 		expect(evaluateCondition(trueCondition)).toBe(true);
 
 		const falseCondition: LnmFrameCondition = {
-			partnerCurrentlyOnChapter: 'impossibleToBeOn',
+			healthMore: 55,
 		};
 		expect(evaluateCondition(falseCondition)).toBe(false);
 	});
@@ -38,18 +32,18 @@ describe('test frame condition evaluation', () => {
 		expect(evaluateCondition(trueCondition)).toBe(true);
 
 		const falseCondition: LnmFrameCondition = {
-			healthMore: 49,
-			partnerDeadOnChapter: 'impossibleToDieOn',
+			healthMore: 51,
+			healthLess: 49,
 		};
 		expect(evaluateCondition(falseCondition)).toBe(false);
 	});
 
 	test('compound OR, AND, NOT conditions should evaluate correctly', () => {
 		const trueCondition: LnmFrameCondition = {
-			hasKnowledge: 'iAmSteve', // = true
+			healthEquals: 50,
 		};
 		const falseCondition: LnmFrameCondition = {
-			partnerPassedChapter: 'impossible', // = false
+			healthMore: 50, // = false
 		};
 		expect(evaluateCondition(trueCondition)).toBe(true);
 		expect(evaluateCondition(falseCondition)).toBe(false);

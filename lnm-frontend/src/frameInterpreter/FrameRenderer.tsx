@@ -12,7 +12,7 @@ import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import HealthBar from './HealthBar.tsx';
+import HealthBar from './HealthBar';
 import TaskWindow from './TaskWindow';
 import { t } from 'i18next';
 import { useNavigate } from 'react-router-dom';
