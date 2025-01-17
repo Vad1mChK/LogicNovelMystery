@@ -3,9 +3,9 @@ services:
     image: 'postgres:15'
     container_name: postgres
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_DB: mydatabase
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: myuser
     ports:
       - "5432:5432"
 
@@ -42,4 +42,3 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase
       DATABASE_USERNAME: myuser
       DATABASE_PASSWORD: secret
-
