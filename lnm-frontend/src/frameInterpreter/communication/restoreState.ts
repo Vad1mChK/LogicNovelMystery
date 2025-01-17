@@ -15,7 +15,7 @@ export const restoreState = async (
 ): Promise<boolean> => {
 	try {
 		const response = await axios.post(
-			`${VITE_SERVER_URL}/restore-state`,
+			`${VITE_SERVER_URL}/game/restore-state`,
 			{ sessionToken, isMultiplayer },
 			{ headers: { Authorization: localStorage.getItem('AuthToken') } }
 		);

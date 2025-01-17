@@ -51,7 +51,11 @@ const CreatedWaitScreen: React.FC<CreatedWaitScreenProps> = ({
 			</div>
 			<div className="results-bar">
 				<h1>{t('game.createdWaitScreen.created')}</h1>
-				<p>{t('game.createdWaitScreen.wait')}</p>
+				<p>
+					{protagonist === LnmHero.STEVE
+						? t('game.createdWaitScreen.wait.single')
+						: t('game.createdWaitScreen.wait.multiplayer')}
+				</p>
 				<p>
 					{t('game.createdWaitScreen.willPlayAs', {
 						protagonist: t(
