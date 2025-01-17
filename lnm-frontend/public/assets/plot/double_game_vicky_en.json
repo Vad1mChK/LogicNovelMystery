@@ -154,8 +154,8 @@
       "title": "Chapter 4",
       "startFrame": "inception4_start"
     },
-    "laboration2": {
-      "id": "laboration2",
+    "elaboration2": {
+      "id": "elaboration2",
       "title": "Continued, Chapter 1",
       "startFrame": "elaboration2_start"
     },
@@ -955,7 +955,6 @@
         "inception4_19": {
           "id": "inception4_19",
           "dialogue": "",
-          "nextFrame": "elaboration2",
           "effects": [
             {
               "type": "JUMP_CHAPTER",
@@ -1273,7 +1272,7 @@
           ]
         }
       },
-      "laboration4": {
+      "elaboration4": {
         "elaboration4_start": {
           "id": "elaboration4_start",
           "location": "studyRoom",
