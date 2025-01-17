@@ -96,10 +96,6 @@ export interface LnmFrameChoice {
 }
 
 export interface LnmFrameCondition {
-	hasKnowledge?: string;
-	partnerDeadOnChapter?: string;
-	partnerCurrentlyOnChapter?: string;
-	partnerPassedChapter?: string;
 	healthLess?: number;
 	healthEquals?: number;
 	healthMore?: number;
@@ -171,14 +167,6 @@ export interface LnmFrameEffect<
 	type: T;
 	if?: LnmFrameCondition;
 	args: T extends keyof LnmEffectArgsMap ? LnmEffectArgsMap[T] : never;
-}
-
-export interface LnmEnding {
-	id: string;
-	title: string;
-	condition?: LnmFrameCondition;
-	startFrame: string;
-	frames: Map<string, LnmFrame>;
 }
 
 export enum LnmTaskType {

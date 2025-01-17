@@ -6,7 +6,7 @@ import {
 } from './types';
 import { effectHandlers } from './effectHandlers';
 import mockPlotObject from '../assets/plot/test_plot_for_plot_loader_en-US.json';
-import { _convertAndCreatePlot } from './PlotLoader';
+import { convertAndCreatePlot } from './plotLoaderUtils';
 
 // Mock the reportCampaign function
 jest.mock('./communication/reportCampaign', () => ({
@@ -16,7 +16,7 @@ jest.mock('./communication/reportCampaign', () => ({
 import { reportCampaign } from './communication/reportCampaign';
 
 describe('effectHandlers', () => {
-	const mockPlot = _convertAndCreatePlot(mockPlotObject);
+	const mockPlot = convertAndCreatePlot(mockPlotObject);
 
 	const mockContext = {
 		setCurrentFrameId: jest.fn(),

@@ -142,7 +142,7 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 											localStorage.getItem(
 												'sessionToken'
 											),
-										chapterId: chapterId,
+										chapter: chapterId,
 									},
 									{
 										headers: {

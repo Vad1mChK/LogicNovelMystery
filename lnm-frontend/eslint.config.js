@@ -71,6 +71,7 @@ export default [
 			'jest/no-focused-tests': 'error',
 			'playwright/no-focused-test': 'error',
 		},
+
 	},
 	{
 		// TypeScript-specific rules, only applied to TS/TSX files
