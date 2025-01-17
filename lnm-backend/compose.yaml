@@ -1,3 +1,6 @@
+networks:
+  dev:
+
 services:
   postgres:
     image: 'postgres:15'
@@ -8,6 +11,8 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - "5432:5432"
+    networks:
+      - dev
 
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U myuser -d mydatabase" ]
@@ -35,11 +40,24 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
-
+    networks:
+      - dev
     volumes:
       - ./build/libs/lnm-backend-0.0.1-SNAPSHOT.war:/app/lnm-backend.war
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase
       DATABASE_USERNAME: myuser
       DATABASE_PASSWORD: secret
+
+  nginx:
+    image: 'nginx:stable-alpine'
+    ports:
+      - "80:80"
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+    depends_on:
+      - backend
+    networks:
+      - dev
+
 

@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 
-
+COPY build/libs/lnm-backend-0.0.1-SNAPSHOT.war lnm-backend.war
 # Указываем команду для запуска приложения
 ENTRYPOINT ["sh", "-c", "java -jar /app/lnm-backend.war"]
 
