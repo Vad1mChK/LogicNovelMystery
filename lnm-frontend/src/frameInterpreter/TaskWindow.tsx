@@ -167,6 +167,7 @@ const TaskWindow: React.FC<TaskWindowProps> = ({
 				{/*)}*/}
 				<input
 					type="submit"
+					data-testid="submit-button"
 					value={t('game.taskWindow.submitButton')}
 				/>
 			</div>
