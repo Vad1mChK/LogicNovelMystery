@@ -131,7 +131,38 @@
       "background":"assets/img/endings/GoodEndingFinal.webp"
     }
   },
-  "music": {},
+  "music": {
+    "city": {
+      "id": "city",
+      "name": "Shadows in the City",
+      "performer": "Suno AI",
+      "file": "assets/music/city.mp3"
+    },
+    "neon": {
+      "id": "neon",
+      "name": "Neon Sleuth",
+      "performer": "Udio AI",
+      "file": "assets/music/neon.mp3"
+    },
+    "whisper": {
+      "id": "whisper",
+      "name": "Whisper of the Shadows",
+      "performer": "Udio AI",
+      "file": "assets/music/whisper.mp3"
+    },
+    "flashMan": {
+      "id": "flashMan",
+      "name": "Flash Man",
+      "performer": "Suno AI && Mega Man the Wily Wars",
+      "file": "assets/music/flashman.mp3"
+    },
+    "veil": {
+      "id": "veil",
+      "name": "Veil of Shadows",
+      "performer": "Suno AI",
+      "file": "assets/music/veil.mp3"
+    }
+  },
   "startChapter": "inception1",
   "chapters": {
     "inception1": {
@@ -248,6 +279,12 @@
                 "characterId": "vicky" ,
                 "newPose": "think"
               }
+            },
+            {
+              "type": "PLAY_MUSIC",
+              "args": {
+                "musicId": "veil"
+              }
             }
           ]
         },
@@ -311,7 +348,13 @@
           "id": "inception1_13",
           "dialogue": "But first I need a taxi... Hello, hello! I urgently need a car at the address...",
           "speaker": "vicky",
-          "nextFrame": "inception1_14"
+          "nextFrame": "inception1_14",
+          "effects": [
+            {
+              "type": "STOP_MUSIC",
+              "args": {}
+            }
+          ]
         },
         "inception1_14": {
           "id": "inception1_14",
@@ -361,6 +404,12 @@
               "type": "FADE_IN_CHARACTER",
               "args": {
                 "characterId": "robot"
+              }
+            },
+            {
+              "type": "PLAY_MUSIC",
+              "args": {
+                "musicId": "neon"
               }
             }
           ]
@@ -561,6 +610,10 @@
               "args": {
                 "taskId": "task0"
               }
+            },
+            {
+              "type": "STOP_MUSIC",
+              "args": {}
             }
           ]
         },
@@ -652,6 +705,12 @@
               "args": {
                 "characterId": "vicky",
                 "newPose": "adjustGlasses"
+              }
+            },
+            {
+              "type": "PLAY_MUSIC",
+              "args": {
+                "musicId": "whisper"
               }
             }
           ]
@@ -961,6 +1020,10 @@
               "args": {
                 "chapterId": "elaboration2"
               }
+            },
+            {
+              "type": "STOP_MUSIC",
+              "args": {}
             }
           ]
         }
@@ -999,6 +1062,12 @@
               "args": {
                 "characterId": "vicky",
                 "newPose": "think"
+              }
+            },
+            {
+              "type": "PLAY_MUSIC",
+              "args": {
+                "musicId": "city"
               }
             }
           ]
@@ -1492,6 +1561,12 @@
               "args": {
                 "chapterId": "elaboration6"
               }
+            },
+            {
+              "type": "PLAY_MUSIC",
+              "args": {
+                "musicId": "neon"
+              }
             }
           ]
         }
@@ -1770,6 +1845,10 @@
               "args": {
                 "taskId": "task6"
               }
+            },
+            {
+              "type": "STOP_MUSIC",
+              "args": {}
             }
           ]
         },
@@ -2081,7 +2160,11 @@
           "id": "5A_1",
           "speaker": "professor",
           "dialogue": "Yes.",
-          "nextFrame": "5A_2"
+          "nextFrame": "5A_2",
+          "effects": [{
+            "type": "PLAY_MUSIC",
+            "args": { "musicId": "flashMan" }
+          }]
         },
         "5A_2": {
           "id": "5A_2",
