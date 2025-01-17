@@ -1,5 +1,11 @@
 import React, { /*useContext, */ useEffect } from 'react';
-import { Routes, Route, Navigate /*, useLocation*/ } from 'react-router-dom';
+import {
+	Routes,
+	Route,
+	Navigate,
+	useLocation,
+	useNavigate,
+} from 'react-router-dom';
 import './App.css';
 import './css/global.scss';
 import Login from './pages/Login';
@@ -17,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RootState } from './state/store';
 import WaitRoom from './pages/WaitRoom.tsx';
-import PrivateRoute from './util/PrivateRoute';
+import PrivateRoute, { isTokenValid } from './util/PrivateRoute';
 import TabErrorPage from './pages/TabErrorPage';
 
 Sentry.init({
@@ -28,6 +34,32 @@ Sentry.init({
 });
 
 const App: React.FC = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+	const authToken = localStorage.getItem('AuthToken');
+
+	// Перенаправляем на последнюю страницу только с `/auth/login`
+	useEffect(() => {
+		if (
+			(location.pathname === '/auth/login' ||
+				location.pathname === '/') &&
+			isTokenValid(authToken)
+		) {
+			const lastVisitedPage =
+				localStorage.getItem('lastVisitedPage') || '/main';
+			if (lastVisitedPage != location.pathname) {
+				navigate(lastVisitedPage, { replace: true });
+			}
+		}
+	}, [location.pathname]);
+
+	useEffect(() => {
+		// Сохраняем текущий маршрут в `localStorage`, если токен валиден
+		if (isTokenValid(authToken)) {
+			localStorage.setItem('lastVisitedPage', location.pathname);
+		}
+	}, [location.pathname, authToken]);
+
 	useEffect(() => {
 		TagManager.initialize({ gtmId: 'GTM-MJ5F957M' });
 	}, []);
