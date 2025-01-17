@@ -177,7 +177,9 @@ public class StateService {
                     LnmPlayerState partnerState = partnerSession.getPlayerState();
                     partnerScore = partnerSession.getCurrentScore();
                     int sumScore = score + partnerScore;
-                    if (playerState.equals(LnmPlayerState.COMPLETED_WON) && partnerState.equals(LnmPlayerState.COMPLETED_WON)) {
+                    if (playerState.equals(LnmPlayerState.COMPLETED_WON) &&
+                            partnerState.equals(LnmPlayerState.COMPLETED_WON) ||
+                            partnerState.equals(LnmPlayerState.SEEN_RESULTS)) {
                         result = LnmResult.DOUBLE_GOOD;
 
                         List<LeaderBoard> listLeaderBoard = leaderBoardRepository.findByUsersWithSameSessionToken(user, partnerSession.getUser());
