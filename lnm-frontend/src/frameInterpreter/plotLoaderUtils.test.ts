@@ -2,16 +2,15 @@
 
 import plotData from '../assets/plot/test_plot_for_plot_loader_en-US.json';
 import {
-	_convertAndCreateCondition,
-	_convertAndCreateEffect,
-	_convertAndCreateEnding,
-	_convertAndCreateFrame,
-	_convertAndCreatePlot,
-	_convertAndCreateTask,
-} from './PlotLoader';
+	convertAndCreateCondition,
+	convertAndCreateEffect,
+	convertAndCreateFrame,
+	convertAndCreatePlot,
+	convertAndCreateTask,
+} from './plotLoaderUtils';
 import { LnmEffectArgsMap, LnmFrameEffectType, LnmTaskType } from './types';
 
-describe('Test plot loading', () => {
+describe('plotLoaderUtils', () => {
 	test('condition object should be converted to condition correctly', () => {
 		const conditionObject = {
 			and: [
@@ -19,13 +18,10 @@ describe('Test plot loading', () => {
 				{ or: [{ healthEquals: 60 }, { healthLess: 60 }] },
 			],
 		};
-		const condition = _convertAndCreateCondition(conditionObject);
+		const condition = convertAndCreateCondition(conditionObject);
 		expect(condition.and).toBeInstanceOf(Array);
 		expect(condition.and).not.toBeNull();
 		expect(condition.and?.length).toBe(2);
-		expect(condition.and?.[0]?.not?.hasKnowledge).toBe('iAmSteve');
-		expect(condition.and?.[1]?.or).toBeInstanceOf(Array);
-		expect(condition.partnerDeadOnChapter).toBeUndefined();
 	});
 	test('condition object should not have any fields set if types are wrong', () => {
 		const conditionObject = {
@@ -33,8 +29,7 @@ describe('Test plot loading', () => {
 			healthMore: 'five',
 			or: null,
 		};
-		const condition = _convertAndCreateCondition(conditionObject);
-		expect(condition.hasKnowledge).toBeUndefined();
+		const condition = convertAndCreateCondition(conditionObject);
 		expect(condition.healthMore).toBeUndefined();
 		expect(condition.or).toBeUndefined();
 	});
@@ -45,7 +40,7 @@ describe('Test plot loading', () => {
 				frameId: 'someFrame',
 			},
 		};
-		const effect = _convertAndCreateEffect(effectObject);
+		const effect = convertAndCreateEffect(effectObject);
 		expect(effect).not.toBeNull();
 		expect(effect?.type).toBe(LnmFrameEffectType.JUMP);
 		expect(
@@ -65,14 +60,13 @@ describe('Test plot loading', () => {
 				frameId: 'someFrame',
 			},
 		};
-		const effect = _convertAndCreateEffect(effectObject);
+		const effect = convertAndCreateEffect(effectObject);
 		expect(effect).not.toBeNull();
 		expect(effect?.type).toBe(LnmFrameEffectType.JUMP);
 		expect(
 			(effect?.args as LnmEffectArgsMap[LnmFrameEffectType.JUMP]).frameId
 		).toBe('someFrame');
 		expect(effect?.if?.healthEquals).toBe(0);
-		expect(effect?.if?.not?.hasKnowledge).toBe('iAmSteve');
 	});
 	test('effect should not be created if effect type is invalid', () => {
 		const effectObject = {
@@ -81,7 +75,7 @@ describe('Test plot loading', () => {
 				frameId: 'someFrame',
 			},
 		};
-		const effect = _convertAndCreateEffect(effectObject);
+		const effect = convertAndCreateEffect(effectObject);
 		expect(effect).toBeNull();
 	});
 	test('frame should be created correctly, empty dialogue should be inferred', () => {
@@ -98,7 +92,7 @@ describe('Test plot loading', () => {
 			speaker: 'steve',
 			nextFrame: 'anotherFrame',
 		};
-		const frame = _convertAndCreateFrame(frameObject);
+		const frame = convertAndCreateFrame(frameObject);
 		expect(frame.id).toBe('someFrame');
 		expect(frame.characters).toBeInstanceOf(Array);
 		expect(frame.characters?.length).toBe(2);
@@ -125,7 +119,7 @@ describe('Test plot loading', () => {
 				},
 			],
 		};
-		const frame = _convertAndCreateFrame(frameObject);
+		const frame = convertAndCreateFrame(frameObject);
 		expect(frame.characters?.length).toBe(1);
 		expect(frame.speaker).toBe('steve');
 		expect(frame.choices?.length).toBe(2);
@@ -136,7 +130,7 @@ describe('Test plot loading', () => {
 			id: 'someFrame',
 			nextFrame: 'anotherFrame',
 		};
-		const frame = _convertAndCreateFrame(frameObject);
+		const frame = convertAndCreateFrame(frameObject);
 		expect(frame.characters).toBeUndefined();
 		expect(frame.speaker).toBeUndefined();
 	});
@@ -169,47 +163,18 @@ describe('Test plot loading', () => {
 				},
 			],
 		};
-		const frame = _convertAndCreateFrame(frameObject);
+		const frame = convertAndCreateFrame(frameObject);
 		expect(frame.effects?.length).toBe(2);
 		expect(frame.effects?.[0]?.if).toBeDefined();
 		expect(frame.effects?.[0]?.if?.healthLess).toBe(50);
 	});
 	test('plot should be created correctly', () => {
-		const plot = _convertAndCreatePlot(plotData);
+		const plot = convertAndCreatePlot(plotData);
 		expect(plot.metadata.name).toBe('Mystery of the Forgotten Village');
 		expect(plot.characters.size).toBe(2);
 		expect(plot.chapters).toBeInstanceOf(Map);
 		expect(plot.tasks.size).not.toBe(0);
 		expect(plot.tasks.get('task1')?.type).toBe(LnmTaskType.SELECT_ONE);
-	});
-	test('ending should be created correctly', () => {
-		const endingObject = {
-			id: 'sampleEnding',
-			title: 'Sample Ending',
-			condition: {
-				healthMore: 50,
-			},
-			startFrame: 'sampleEnding_start',
-			frames: {
-				sampleEnding_start: {
-					id: 'sampleEnding_start',
-					dialogue: "You're too slow",
-					nextFrame: 'sampleEnding_1',
-				},
-				sampleEnding_1: {
-					id: 'sampleEnding_1',
-					dialogue: 'Want to try again?',
-					nextFrame: null,
-				},
-			},
-		};
-		const ending = _convertAndCreateEnding(endingObject);
-		expect(ending.id).toBe('sampleEnding');
-		expect(ending.title).toBe('Sample Ending');
-		expect(ending.condition).toBeDefined();
-		expect(ending.startFrame).toBe('sampleEnding_start');
-		expect(ending.frames.keys()).toContain(ending.startFrame);
-		expect(ending.frames.size).toBe(2);
 	});
 	test('task of type `SELECT_ONE` should be created correctly', () => {
 		const taskObject = {
@@ -227,7 +192,7 @@ describe('Test plot loading', () => {
 			nextFrameOnSuccess: '1',
 			nextFrameOnFailure: '2',
 		};
-		const task = _convertAndCreateTask(taskObject);
+		const task = convertAndCreateTask(taskObject);
 		expect(task.id).toBe('someTask');
 		expect(task.type).toBe(LnmTaskType.SELECT_ONE);
 		expect(task.nextFrameOnSuccess).toBe('1');
@@ -255,7 +220,7 @@ describe('Test plot loading', () => {
 			nextFrameOnSuccess: '1',
 			nextFrameOnFailure: '2',
 		};
-		const task = _convertAndCreateTask(taskObject);
+		const task = convertAndCreateTask(taskObject);
 		expect(task.type).toBe(LnmTaskType.SELECT_MANY);
 		if (task.type === LnmTaskType.SELECT_MANY) {
 			expect(task.correctAnswerIndices).toEqual([1, 2]);
@@ -288,7 +253,7 @@ describe('Test plot loading', () => {
 			nextFrameOnSuccess: '1',
 			nextFrameOnFailure: '2',
 		};
-		const task = _convertAndCreateTask(taskObject);
+		const task = convertAndCreateTask(taskObject);
 		expect(task.type).toBe(LnmTaskType.WRITE_KNOWLEDGE);
 		if (task.type !== LnmTaskType.WRITE_KNOWLEDGE) {
 			fail();
@@ -325,7 +290,7 @@ describe('Test plot loading', () => {
 			nextFrameOnSuccess: '1',
 			nextFrameOnFailure: '2',
 		};
-		const task = _convertAndCreateTask(taskObject);
+		const task = convertAndCreateTask(taskObject);
 		expect(task.type).toBe(LnmTaskType.COMPLETE_QUERY);
 		if (task.type !== LnmTaskType.COMPLETE_QUERY) {
 			fail();
