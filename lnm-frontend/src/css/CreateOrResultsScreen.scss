@@ -1,31 +1,11 @@
 @use 'colors';
 @use 'sass:color';
 @use 'sass:math';
+@use 'LocationBackground';
 
 .results-screen {
 	.results-background {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
-		z-index: -2;
-
-		img {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: auto; /* Default: stretch width */
-			height: 100%;
-
-			@media (aspect-ratio >= 16/9) {
-				/* Wider aspect ratios */
-				height: auto;
-				width: 100%;
-			}
-		}
+		@include LocationBackground.location-background;
 	}
 
 	.results-bar {
