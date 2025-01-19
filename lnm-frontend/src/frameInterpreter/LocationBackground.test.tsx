@@ -7,7 +7,7 @@ jest.mock('../metaEnv', () => ({
 	BASE_URL: 'http://example.com/',
 }));
 
-describe('LocationBackground Component', () => {
+describe('LocationBackground', () => {
 	const location: LnmLocation = {
 		id: '1',
 		name: 'Courtroom Lobby',
@@ -18,14 +18,17 @@ describe('LocationBackground Component', () => {
 		render(<LocationBackground location={location} />);
 
 		// Verify the image
-		const image = screen.getByRole('img', { name: location.name });
-		expect(image).toBeInTheDocument();
-		expect(image).toHaveAttribute(
-			'src',
-			'http://example.com/assets/backgrounds/lobby.png'
-		);
-		expect(image).toHaveAttribute('alt', location.name);
-		expect(image).toHaveAttribute('title', location.name);
+		const images = screen.getAllByRole('img', { name: location.name });
+		expect(images).toHaveLength(2);
+		images.forEach((image) => {
+			expect(image).toBeInTheDocument();
+			expect(image).toHaveAttribute(
+				'src',
+				'http://example.com/assets/backgrounds/lobby.png'
+			);
+			expect(image).toHaveAttribute('alt', location.name);
+			expect(image).toHaveAttribute('title', location.name);
+		});
 	});
 
 	it('handles missing background gracefully', () => {
@@ -38,12 +41,20 @@ describe('LocationBackground Component', () => {
 		render(<LocationBackground location={locationWithoutBackground} />);
 
 		// Verify the image still renders, but with an empty src
-		const image = screen.getByRole('img', {
+		const images = screen.getAllByRole('img', {
 			name: locationWithoutBackground.name,
 		});
-		expect(image).toBeInTheDocument();
-		expect(image).toHaveAttribute('src', 'http://example.com/'); // BASE_URL only
-		expect(image).toHaveAttribute('alt', locationWithoutBackground.name);
-		expect(image).toHaveAttribute('title', locationWithoutBackground.name);
+		images.forEach((image) => {
+			expect(image).toBeInTheDocument();
+			expect(image).toHaveAttribute('src', 'http://example.com/'); // BASE_URL only
+			expect(image).toHaveAttribute(
+				'alt',
+				locationWithoutBackground.name
+			);
+			expect(image).toHaveAttribute(
+				'title',
+				locationWithoutBackground.name
+			);
+		});
 	});
 });

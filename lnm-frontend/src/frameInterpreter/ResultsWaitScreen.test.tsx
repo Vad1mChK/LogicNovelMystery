@@ -15,7 +15,7 @@ jest.mock('../metaEnv', () => ({
 
 jest.mock('../css/CreateOrResultsScreen.scss', () => ({}));
 
-describe('ResultsWaitScreen Component', () => {
+describe('ResultsWaitScreen', () => {
 	it('should display "You Win!" when winner prop is true', () => {
 		render(<ResultsWaitScreen winner={true} />);
 		expect(
@@ -39,8 +39,8 @@ describe('ResultsWaitScreen Component', () => {
 			screen.getByText('game.resultWaitScreen.pageWillUpdate.multiplayer')
 		).toBeInTheDocument();
 		expect(
-			screen.getByAltText('game.resultWaitScreen.wait.multiplayer')
-		).toBeInTheDocument();
+			screen.getAllByAltText('game.resultWaitScreen.wait.multiplayer')
+		).toHaveLength(2);
 	});
 
 	it('should show single player wait message when multiplayer prop is false', () => {
@@ -52,7 +52,7 @@ describe('ResultsWaitScreen Component', () => {
 			screen.getByText('game.resultWaitScreen.pageWillUpdate.single')
 		).toBeInTheDocument();
 		expect(
-			screen.getByAltText('game.resultWaitScreen.wait.single')
-		).toBeInTheDocument();
+			screen.getAllByAltText('game.resultWaitScreen.wait.single')
+		).toHaveLength(2);
 	});
 });

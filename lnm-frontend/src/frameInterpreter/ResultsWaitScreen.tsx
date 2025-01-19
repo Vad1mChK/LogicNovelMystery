@@ -18,7 +18,17 @@ const ResultsWaitScreen: React.FC<ResultsWaitScreenProps> = ({
 		<div className="results-screen">
 			<div className="results-background">
 				<img
+					className="real-image"
 					src={`${BASE_URL}assets/img/locations/ComputerRoom.webp`}
+					alt={
+						multiplayer
+							? t('game.resultWaitScreen.wait.multiplayer')
+							: t('game.resultWaitScreen.wait.single')
+					}
+				/>
+				<img
+					className="small-image"
+					src={`${BASE_URL}assets/img/locations/ComputerRoom_small.webp`}
 					alt={
 						multiplayer
 							? t('game.resultWaitScreen.wait.multiplayer')
