@@ -129,7 +129,7 @@ const App: React.FC = () => {
 					</PrivateRoute>
 				}
 			/>
-			<Route path="/" element={<Navigate to="/auth/login" />} />
+			<Route path="/" element={<Navigate to="/landing" />} />
 		</Routes>
 	);
 };
