@@ -31,7 +31,16 @@ const ResultsScreen: React.FC<ResultsScreenProps> = ({
 		<div className="results-screen">
 			<div className="results-background">
 				<img
+					className="real-image"
 					src={`${BASE_URL}${resultImages[result]}`}
+					alt={t(`game.resultScreen.result.${result}`)}
+				/>
+				<img
+					className="small-image"
+					src={`${BASE_URL}${resultImages[result]}`.replace(
+						/\.webp/g,
+						'_small.webp'
+					)}
 					alt={t(`game.resultScreen.result.${result}`)}
 				/>
 			</div>

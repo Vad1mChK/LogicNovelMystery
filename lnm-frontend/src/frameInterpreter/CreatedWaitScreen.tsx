@@ -1,6 +1,5 @@
 import React from 'react';
 import { t } from 'i18next';
-import mansionEntrance from '../assets/img/locations/MansionEntrance.webp';
 import '../css/CreateOrResultsScreen.scss';
 import { BASE_URL } from '../metaEnv';
 import CharacterSprite from './CharacterSprite';
@@ -42,10 +41,19 @@ const CreatedWaitScreen: React.FC<CreatedWaitScreenProps> = ({
 		<div className="results-screen">
 			<div className="results-background">
 				<img
+					className="real-image"
 					src={
 						protagonistToLocationImage.get(protagonist) ||
-						mansionEntrance
+						`${BASE_URL}assets/img/locations/MansionEntrance.webp`
 					}
+					alt={t('game.createdWaitScreen.wait')}
+				/>
+				<img
+					className="small-image"
+					src={(
+						protagonistToLocationImage.get(protagonist) ||
+						`${BASE_URL}assets/img/locations/MansionEntrance.webp`
+					).replace(/\.webp/, '_small.webp')}
 					alt={t('game.createdWaitScreen.wait')}
 				/>
 			</div>
