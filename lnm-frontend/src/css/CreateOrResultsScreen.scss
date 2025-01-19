@@ -6,6 +6,14 @@
 .results-screen {
 	.results-background {
 		@include LocationBackground.location-background;
+
+		& .real-image {
+			z-index: -100;
+		}
+
+		& .small-image {
+			z-index: -101;
+		}
 	}
 
 	.results-bar {
