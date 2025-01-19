@@ -23,3 +23,14 @@ export function shuffle<T>(array: T[]): T[] {
 
 	return newArray;
 }
+
+export function randomChoice<T>(array: T[], last?: T): T | null {
+	if (array.length === 0) return null;
+	if (array.length === 1) return array[0];
+
+	const index = Math.floor(Math.random() * array.length);
+	if (array[index] === last) {
+		return array[(index + 1) % array.length];
+	}
+	return array[index];
+}
