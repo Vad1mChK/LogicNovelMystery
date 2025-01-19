@@ -7,6 +7,64 @@ i18n.use(initReactI18next).init({
 	resources: {
 		en: {
 			translation: {
+				landing: {
+					welcome: {
+						tooltip: 'Welcome',
+						title: 'Welcome to',
+						about: 'LogicNovelMystery is a browser visual novel where you can learn Prolog basics.',
+						controls:
+							'To proceed, use control buttons below or directly click the progress bar.',
+					},
+					objective: {
+						tooltip: 'Objective',
+						whatIsProlog: {
+							title: 'What is Prolog?',
+							description:
+								'Prolog is a logic declarative programming language.\nIt is often used in AI, linguistics, and knowledge bases.\nHere is an example of Prolog code:',
+						},
+						yourObjective: {
+							title: 'Your Objective',
+							description:
+								'The world is in danger.\nIn 20 hours, a dangerous virus that can disrupt the global network will be launched.\nBut you have the power to not let this happen.\nLearn Prolog, solve riddles, and stop the virus before it is deployed!',
+						},
+					},
+					playableCharacters: {
+						title: 'Playable Characters',
+						poses: 'Click on them to see different poses!',
+						steve: {
+							name: 'Steve',
+							description: ', an expertised FBI agent.',
+						},
+						professor: {
+							name: 'Professor',
+							description:
+								' Langdon, information security expert.',
+						},
+						vicky: {
+							name: 'Vicky',
+							description:
+								", the Professor's daughter and a promising hacker.",
+						},
+					},
+					gamemode: {
+						locations: 'Click on mini screens to see different locations!',
+						single: {
+							title: 'Single Player',
+							description:
+								'Walk through a single campaign and solve easy tasks.\nThe fate of the world rests in your hands alone!',
+						},
+						multiplayer: {
+							title: 'Multiplayer',
+							description:
+								'Play two different campaigns with a friend.\nThe fate of humanity depends on both of you!',
+						},
+					},
+					ready: {
+						title: 'Ready?',
+            description: 'This button will redirect you to the login/register page.\nIf you\'re already logged in, you\'ll go straight to the main page.',
+						playButton: 'Play ->'
+					}
+				},
 				'Start game': 'Start game',
 				Settings: 'Settings',
 				Leaderboard: 'Leaderboard',
@@ -39,8 +97,10 @@ i18n.use(initReactI18next).init({
 				Exit: 'Exit',
 				Character1: 'Character 1',
 				Character2: 'Character 2',
-				'Invalid data format from server.': 'Invalid data format from server',
-				'Failed to load leaderboard data. Please check your connection or try again later.': 'Failed to load leaderboard data. Please check your connection or try again later.',
+				'Invalid data format from server.':
+					'Invalid data format from server',
+				'Failed to load leaderboard data. Please check your connection or try again later.':
+					'Failed to load leaderboard data. Please check your connection or try again later.',
 				Question: 'Are you really interested?',
 				Yes: 'Yes',
 				No: 'No',
@@ -136,13 +196,76 @@ i18n.use(initReactI18next).init({
 					},
 				},
 				TabErrorPage: {
-					'You have unclosed tabs with our website!': 'You have unclosed tabs with our website!',
-					'Please return to the tab that is already open or close it.': 'Please return to the tab that is already open or close it.',
+					'You have unclosed tabs with our website!':
+						'You have unclosed tabs with our website!',
+					'Please return to the tab that is already open or close it.':
+						'Please return to the tab that is already open or close it.',
 				},
 			},
 		},
 		ru: {
 			translation: {
+				landing: {
+					welcome: {
+						tooltip: 'Добро пожаловать',
+						title: 'Добро пожаловать в',
+						about: 'LogicNovelMystery — браузерная визуальная новелла, которая призвана научить вас основам Prolog.',
+						controls:
+							'Чтобы продолжить, нажимай на кнопки или шкалу прогресса внизу.',
+					},
+					objective: {
+						tooltip: 'Цель игры',
+						whatIsProlog: {
+							title: 'Что такое Prolog?',
+							description:
+								'Prolog — декларативный язык логического программирования.\nЕго часто используют в ИИ, лингвистике, базах знаний.\nВот пример кода на Prolog:',
+						},
+						yourObjective: {
+							title: 'Твоя цель',
+							description:
+								'Мир в опасности!\nЧерез 20 часов будет выпущен вирус, способный внести сбои во всемирную сеть.\nНо ты можешь не допустить этого!\nИзучай Prolog, решай задачи и останови вирус, пока он не запущен!',
+						},
+					},
+					playableCharacters: {
+						tooltip: 'Персонажи',
+						title: 'Играбельные персонажи',
+						poses: 'Нажмите на них, чтобы увидеть разные позы!',
+						steve: {
+							name: 'Стив',
+							description: ', опытный агент ФБР.',
+						},
+						professor: {
+							name: 'Профессор',
+							description:
+								' Лэнгдон, специалист по защите информации.',
+						},
+						vicky: {
+							name: 'Викки',
+							description:
+								", дочь Профессора, многообещающий хакер.",
+						},
+					},
+					gamemode: {
+						tooltip: 'Gamemodes',
+						locations: 'Нажми на мини-экраны, чтобы увидеть разные локации!',
+						single: {
+							title: '1 игрок',
+							description:
+								'Пройди одну кампанию, решая простые задачи.\nВся судьба мира — в твоих руках!',
+						},
+						multiplayer: {
+							title: 'Мультиплеер',
+							description:
+								'Пройди две кампании вместе с другом.\nСудьба мира зависит от обоих из вас!',
+						},
+					},
+					ready: {
+						tooltip: 'Готов?',
+						title: 'Готов?',
+						description: 'Эта кнопка перенаправит тебя на страницу логина/регистрации.\nЕсли ты уже вошёл, ты сразу окажешься на главной странице.',
+						playButton: 'Играть ->'
+					}
+				},
 				'Start game': 'Начать игру',
 				Settings: 'Настройки',
 				Leaderboard: 'Доска лидеров',
@@ -175,8 +298,10 @@ i18n.use(initReactI18next).init({
 				Character1: 'Персонаж 1',
 				Character2: 'Персонаж 2',
 				Exit: 'Выйти',
-				'Invalid data format from server': 'Ошибка получения данных с сервера.',
-				'Failed to load leaderboard data. Please check your connection or try again later.': 'Не удалось загрузить данные с сервера. Проверьте соединение или попробуйте позже.',
+				'Invalid data format from server':
+					'Ошибка получения данных с сервера.',
+				'Failed to load leaderboard data. Please check your connection or try again later.':
+					'Не удалось загрузить данные с сервера. Проверьте соединение или попробуйте позже.',
 				Question: 'Тебе действительно интересно?',
 				Yes: 'Да',
 				No: 'Нет',
@@ -273,8 +398,10 @@ i18n.use(initReactI18next).init({
 					},
 				},
 				TabErrorPage: {
-					'You have unclosed tabs with our website!': 'У Вас есть незакрытые вкладки с нашим сайтом!',
-					'Please return to the tab that is already open or close it.': 'Пожалуйста, вернитесь на уже открытую вкладку или закройте ее.',
+					'You have unclosed tabs with our website!':
+						'У Вас есть незакрытые вкладки с нашим сайтом!',
+					'Please return to the tab that is already open or close it.':
+						'Пожалуйста, вернитесь на уже открытую вкладку или закройте ее.',
 				},
 			},
 		},

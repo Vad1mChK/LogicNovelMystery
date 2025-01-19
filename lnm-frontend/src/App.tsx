@@ -14,7 +14,7 @@ import MainPage from './pages/MainPage';
 import SelectMode from './pages/SelectMode';
 import GamePage from './pages/GamePage';
 
-import SecretPage from './pages/SecretPage.tsx';
+import SecretPage from './pages/SecretPage';
 
 import TagManager from 'react-gtm-module';
 import * as Sentry from '@sentry/react';
@@ -25,6 +25,7 @@ import { RootState } from './state/store';
 import WaitRoom from './pages/WaitRoom.tsx';
 import PrivateRoute, { isTokenValid } from './util/PrivateRoute';
 import TabErrorPage from './pages/TabErrorPage';
+import LandingPage from './pages/LandingPage';
 
 Sentry.init({
 	dsn: 'https://2a79b7cbcd0c952c1d8bb6dcf79cc459@o4508292474339328.ingest.de.sentry.io/4508292540530768',
@@ -76,6 +77,7 @@ const App: React.FC = () => {
 	}, [currentLanguage, i18n]);
 	return (
 		<Routes>
+			<Route path="/landing" element={<LandingPage />} />
 			<Route path="/auth/login" element={<Login />} />
 			<Route path="/auth/register" element={<Register />} />
 			<Route path="/tab-error" element={<TabErrorPage />} />

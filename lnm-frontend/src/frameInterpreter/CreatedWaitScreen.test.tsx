@@ -52,14 +52,16 @@ describe('CreatedWaitScreen', () => {
 		const unknownProtagonist = 'UNKNOWN' as LnmHero;
 		render(<CreatedWaitScreen protagonist={unknownProtagonist} />);
 
-		const backgroundImage = screen.getByRole('img', {
+		const backgroundImages = screen.getAllByRole('img', {
 			name: /game.createdWaitScreen.wait/i,
 		});
-		expect(backgroundImage).toBeInTheDocument();
-		expect(backgroundImage).toHaveAttribute(
-			'src',
-			'../assets/img/locations/MansionEntrance.webp'
-		);
+		expect(backgroundImages).toHaveLength(2);
+		backgroundImages.forEach((image) => {
+			expect(image).toBeInTheDocument();
+			expect(image.getAttribute('src')).toMatch(
+				/\/assets\/img\/locations\/MansionEntrance(_small)?\.webp/
+			);
+		});
 	});
 
 	it('should use the correct wait message based on the gamemode, inferred from the protagonist', () => {
