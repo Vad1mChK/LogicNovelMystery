@@ -56,7 +56,8 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173", "https://vad1mchk.github.io")); // Разрешенный источник
+        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:4173",
+                "https://vad1mchk.github.io", "http://62.233.42.134")); // Разрешенный источник
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Разрешенные методы
         configuration.setAllowedHeaders(List.of("*")); // Разрешенные заголовки
         configuration.setAllowCredentials(true); // Поддержка кук и заголовков авторизации
@@ -65,6 +66,7 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(final AuthenticationConfiguration authenticationConfiguration) throws Exception {

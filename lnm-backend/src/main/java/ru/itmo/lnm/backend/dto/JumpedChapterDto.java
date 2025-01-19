@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class SessionDto {
+public class JumpedChapterDto {
     @NotNull
     private String sessionToken;
     @NotNull
-    private Boolean isMultiplayer;
+    private String chapter;
 }

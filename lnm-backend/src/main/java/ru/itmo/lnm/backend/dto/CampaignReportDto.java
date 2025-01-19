@@ -4,9 +4,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class SessionDto {
+public class CampaignReportDto {
     @NotNull
-    private String sessionToken;
+    private String sessionId;
+
     @NotNull
-    private Boolean isMultiplayer;
+    private Boolean winner;
 }

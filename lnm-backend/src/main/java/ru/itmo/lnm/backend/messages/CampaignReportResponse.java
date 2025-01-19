@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LnmTaskResponse {
-    private boolean isCorrect;
-
-    private int score;
+public class CampaignReportResponse {
+    private String endingId;
 }

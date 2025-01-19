@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LnmTaskResponse {
-    private boolean isCorrect;
+public class RestoreStateResponse {
 
-    private int score;
+    private int userHp;
+    private String chapter;
 }
