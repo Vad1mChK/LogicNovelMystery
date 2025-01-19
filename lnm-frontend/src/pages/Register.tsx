@@ -5,10 +5,6 @@ import * as Sentry from '@sentry/react';
 import { useTranslation } from 'react-i18next';
 import { VITE_SERVER_URL } from '../metaEnv';
 
-jest.mock('../metaEnv', () => ({
-	VITE_SERVER_URL: 'http://localhost:8081/',
-}));
-
 const Register: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');

@@ -17,10 +17,6 @@ import {
 import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 import { VITE_SERVER_URL } from '../metaEnv';
 
-jest.mock('../metaEnv', () => ({
-	VITE_SERVER_URL: 'http://localhost:8081',
-}));
-
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';
 

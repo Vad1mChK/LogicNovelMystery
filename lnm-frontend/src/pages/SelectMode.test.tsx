@@ -24,6 +24,10 @@ jest.mock('react-router-dom', () => ({
 	useNavigate: () => mockNavigate,
 }));
 
+jest.mock('../metaEnv', () => ({
+	VITE_SERVER_URL: 'http://localhost:8081',
+}));
+
 describe('GameSelection Component', () => {
 	beforeEach(() => {
 		// Очистим localStorage перед каждым тестом
