@@ -27,7 +27,7 @@ const LandingPreviewScreen: React.FC<LandingPreviewScreenProps> = ({
 					key={simpleHash(character)}
 					src={`${BASE_URL}assets/img/characters/${character.toLowerCase()}/idle.webp`}
 					style={{
-						left: `${((index + 0.5) / (characters.length)) * 100}%`,
+						left: `${((index + 0.5) / characters.length) * 100}%`,
 					}}
 					alt={character}
 				/>
