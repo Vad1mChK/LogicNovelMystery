@@ -1,11 +1,9 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'; // Для использования matchers like 'toBeInTheDocument'
 import TabErrorPage from './TabErrorPage';
-import { useTranslation } from 'react-i18next';
 
 // Мокаем useTranslation, чтобы не зависеть от реальных переводов
-jest.mock('react-i18next', () => ({
+jest.mock('i18next', () => ({
 	useTranslation: () => ({
 		t: (key: string) => key, // Возвращаем ключ как текст
 	}),

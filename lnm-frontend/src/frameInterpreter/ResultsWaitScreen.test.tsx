@@ -15,7 +15,7 @@ jest.mock('../metaEnv', () => ({
 
 jest.mock('../css/CreateOrResultsScreen.scss', () => ({}));
 
-describe('ResultsWaitScreen Component', () => {
+describe('ResultsWaitScreen', () => {
 	it('should display "You Win!" when winner prop is true', () => {
 		render(<ResultsWaitScreen winner={true} />);
 		expect(

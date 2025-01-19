@@ -1,10 +1,4 @@
-import {
-	render,
-	screen,
-	fireEvent,
-	waitFor,
-	act,
-} from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import GameSelection from './SelectMode';
 import '@testing-library/jest-dom';
@@ -12,6 +6,27 @@ import axios from 'axios';
 
 // Мокаем axios
 jest.mock('axios');
+
+// Create a mock for dispatch
+const mockDispatch = jest.fn();
+
+// Mock react-redux to return the mock dispatch
+jest.mock('react-redux', () => ({
+	...jest.requireActual('react-redux'), // Preserve other functionalities
+	useDispatch: () => mockDispatch,
+}));
+
+// Mock react-router-dom's useNavigate
+const mockNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useNavigate: () => mockNavigate,
+}));
+
+jest.mock('../metaEnv', () => ({
+	VITE_SERVER_URL: 'http://localhost:8081',
+}));
 
 describe('GameSelection Component', () => {
 	beforeEach(() => {
@@ -42,7 +57,7 @@ describe('GameSelection Component', () => {
 			fireEvent.click(startGameButton);
 		});
 
-		expect(window.location.pathname).toBe('/single-player');
+		expect(mockNavigate).toHaveBeenCalledWith('/single-player');
 	});
 
 	it('should render the start game button and navigate to wait room when "Game for two" is selected', async () => {
@@ -66,6 +81,6 @@ describe('GameSelection Component', () => {
 			fireEvent.click(startGameButton);
 		});
 
-		expect(window.location.pathname).toBe('/waitRoom');
+		expect(mockNavigate).toHaveBeenCalledWith('/waitRoom');
 	});
 });

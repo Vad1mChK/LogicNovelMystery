@@ -1,9 +1,7 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter as Router } from 'react-router-dom'; // Needed for routing
 import Register from './Register';
-import axios from 'axios'; // Import axios to mock
-import { useTranslation } from 'react-i18next';
 
 // Mock axios to simulate API calls
 jest.mock('axios');
@@ -15,9 +13,11 @@ jest.mock('react-i18next', () => ({
 	})),
 }));
 
-describe('Register Component', () => {
-	const navigateMock = jest.fn();
+jest.mock('../metaEnv', () => ({
+	VITE_SERVER_URL: 'http://localhost:8081/',
+}));
 
+describe('Register Component', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 	});

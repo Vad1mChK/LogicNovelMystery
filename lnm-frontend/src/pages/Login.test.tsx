@@ -1,23 +1,38 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter as Router } from 'react-router-dom'; // Needed for routing
 import Login from './Login';
-import axios from 'axios'; // Import axios to mock
-import { useTranslation } from 'react-i18next';
+
+jest.mock('../metaEnv', () => ({
+	VITE_SERVER_URL: 'http://localhost:8081/',
+}));
 
 // Mock axios to simulate API calls
 jest.mock('axios');
 
 // Mocking the i18n translation hook
-jest.mock('react-i18next', () => ({
-	useTranslation: jest.fn(() => ({
-		t: (key: string) => key, // Mock translation function
-	})),
+jest.mock('i18next', () => ({
+	t: (key: string) => key, // Mock translation function
+}));
+
+// Create a mock for dispatch
+const mockDispatch = jest.fn();
+
+// Mock react-redux to return the mock dispatch
+jest.mock('react-redux', () => ({
+	...jest.requireActual('react-redux'), // Preserve other functionalities
+	useDispatch: () => mockDispatch,
+}));
+
+// Mock react-router-dom's useNavigate
+const mockNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useNavigate: () => mockNavigate,
 }));
 
 describe('Login Component', () => {
-	const navigateMock = jest.fn();
-
 	beforeEach(() => {
 		jest.clearAllMocks();
 	});
