@@ -15,6 +15,7 @@ const LandingSlide: React.FC<LandingSlideProps> = ({
 	return (
 		<Box
 			className="landing-slide"
+			data-testid="landing-slide"
 			sx={{
 				position: 'relative',
 				width: '100vw',
@@ -30,7 +31,7 @@ const LandingSlide: React.FC<LandingSlideProps> = ({
 			}}
 			style={{
 				transform: `translateY(${
-					slideNumber !== null && currentSlide !== undefined
+					slideNumber !== undefined && currentSlide !== undefined
 						? (slideNumber - currentSlide) * 100
 						: 0
 				}%)`,

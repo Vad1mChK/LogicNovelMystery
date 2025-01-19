@@ -12,7 +12,7 @@ import {
 	WavingHand,
 } from '@mui/icons-material';
 
-const SLIDES_COUNT = 5;
+export const SLIDES_COUNT = 5;
 
 const StyledRating = styled(Rating)(({ theme }) => ({
 	'& .MuiRating-iconEmpty .MuiSvgIcon-root': {
@@ -79,7 +79,10 @@ const LandingControls: React.FC<LandingControlsProps> = ({
 	return (
 		<div className="landing-controls flex row">
 			<div className="landing-buttons">
-				<IconButton onClick={(ev) => onChange(ev, 1)}>
+				<IconButton
+					onClick={(ev) => onChange(ev, 1)}
+					data-testid="first-slide"
+				>
 					<FirstPage
 						sx={{
 							color: buttonColor,
@@ -88,6 +91,7 @@ const LandingControls: React.FC<LandingControlsProps> = ({
 				</IconButton>
 				<IconButton
 					onClick={(ev) => onChange(ev, Math.max(1, value - 1))}
+					data-testid="previous-slide"
 				>
 					<ArrowBackIos
 						sx={{
@@ -112,6 +116,7 @@ const LandingControls: React.FC<LandingControlsProps> = ({
 			/>
 			<div className="landing-buttons">
 				<IconButton
+					data-testid="next-slide"
 					onClick={(ev) =>
 						onChange(ev, Math.min(SLIDES_COUNT, value + 1))
 					}
@@ -122,7 +127,10 @@ const LandingControls: React.FC<LandingControlsProps> = ({
 						}}
 					/>
 				</IconButton>
-				<IconButton onClick={(ev) => onChange(ev, SLIDES_COUNT)}>
+				<IconButton
+					onClick={(ev) => onChange(ev, SLIDES_COUNT)}
+					data-testid="last-slide"
+				>
 					<LastPage
 						sx={{
 							color: buttonColor,

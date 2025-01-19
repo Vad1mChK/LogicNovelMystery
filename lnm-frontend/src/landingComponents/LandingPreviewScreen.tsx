@@ -1,14 +1,14 @@
 import React from 'react';
-import { BASE_URL } from '../metaEnv.ts';
-import { simpleHash } from '../util/hash.ts';
+import { BASE_URL } from '../metaEnv';
+import { simpleHash } from '../util/hash';
 
-interface LandingLocationProps {
+interface LandingPreviewScreenProps {
 	characters: string[];
 	location: string;
 	onClick?: () => void;
 }
 
-const LandingPreviewScreen: React.FC<LandingLocationProps> = ({
+const LandingPreviewScreen: React.FC<LandingPreviewScreenProps> = ({
 	characters,
 	location,
 	onClick = () => {},
@@ -17,6 +17,7 @@ const LandingPreviewScreen: React.FC<LandingLocationProps> = ({
 		<div className="landing-preview" onClick={onClick}>
 			<img
 				className="landing-preview-location"
+				data-testid="landing-preview-location"
 				src={`${BASE_URL}assets/img/locations/${location}_small.webp`}
 				alt="Location"
 			/>
@@ -26,7 +27,7 @@ const LandingPreviewScreen: React.FC<LandingLocationProps> = ({
 					key={simpleHash(character)}
 					src={`${BASE_URL}assets/img/characters/${character.toLowerCase()}/idle.webp`}
 					style={{
-						left: `${((index + 0.5) / (characters?.length || 1)) * 100}%`,
+						left: `${((index + 0.5) / (characters.length)) * 100}%`,
 					}}
 					alt={character}
 				/>
