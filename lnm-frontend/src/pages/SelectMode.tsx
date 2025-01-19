@@ -6,16 +6,20 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { restoreState } from '../frameInterpreter/communication/restoreState.ts';
-import { generateSessionToken } from '../util/generateSessionToken.ts';
+import { restoreState } from '../frameInterpreter/communication/restoreState';
+import { generateSessionToken } from '../util/generateSessionToken';
 import { useDispatch } from 'react-redux';
 import {
 	resetState,
 	setPlayerState,
 	setProtagonist,
-} from '../state/gameStateSlice.ts';
-import { LnmHero, LnmPlayerState } from '../frameInterpreter/types.ts';
+} from '../state/gameStateSlice';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 import { VITE_SERVER_URL } from '../metaEnv';
+
+jest.mock('../metaEnv', () => ({
+	VITE_SERVER_URL: 'http://localhost:8081',
+}));
 
 // Типизация для режима игры
 type GameMode = 'Game for one' | 'Game for two';

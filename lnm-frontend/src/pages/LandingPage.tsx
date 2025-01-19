@@ -1,17 +1,17 @@
 import '../css/LandingPage.scss';
-import { BASE_URL } from '../metaEnv.ts';
-import LandingControls from '../landingComponents/LandingControls.tsx';
+import { BASE_URL } from '../metaEnv';
+import LandingControls from '../landingComponents/LandingControls';
 import { useState } from 'react';
-import LandingSlide from '../landingComponents/LandingSlide.tsx';
+import LandingSlide from '../landingComponents/LandingSlide';
 import i18n, { t } from 'i18next';
-import { simpleHash } from '../util/hash.ts';
-import SyntaxHighlightDisplay from '../markupElements/SyntaxHighlightDisplay.tsx';
-import { randomChoice } from '../util/arrayUtils.ts';
-import LandingPreviewScreen from '../landingComponents/LandingPreviewScreen.tsx';
-import { setLanguage } from '../state/languageSlice.ts';
-import LanguageSelector from '../settingsComponents/LanguageSelector.tsx';
+import { simpleHash } from '../util/hash';
+import SyntaxHighlightDisplay from '../markupElements/SyntaxHighlightDisplay';
+import { randomChoice } from '../util/arrayUtils';
+import LandingPreviewScreen from '../landingComponents/LandingPreviewScreen';
+import { setLanguage } from '../state/languageSlice';
+import LanguageSelector from '../settingsComponents/LanguageSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../state/store.ts';
+import { RootState } from '../state/store';
 import { useNavigate } from 'react-router-dom';
 
 const SLIDES_COUNT = 5;

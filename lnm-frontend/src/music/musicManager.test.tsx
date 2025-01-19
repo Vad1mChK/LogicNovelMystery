@@ -11,6 +11,7 @@ global.AudioContext = jest.fn(() => ({
 		connect: jest.fn(),
 		pan: { value: 0 },
 	})),
+	close: jest.fn().mockResolvedValue(undefined), // Added mock for close
 })) as unknown as typeof AudioContext;
 
 describe('MusicManager', () => {

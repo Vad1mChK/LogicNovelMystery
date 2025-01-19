@@ -63,7 +63,7 @@ jest.mock('./LocationBackground', () => ({
 	),
 }));
 
-jest.mock('./HealthBar.tsx', () => ({
+jest.mock('./HealthBar', () => ({
 	__esModule: true,
 	default: ({
 		hidden,
