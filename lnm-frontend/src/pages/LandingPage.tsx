@@ -12,6 +12,7 @@ import { setLanguage } from '../state/languageSlice.ts';
 import LanguageSelector from '../settingsComponents/LanguageSelector.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
+import { useNavigate } from 'react-router-dom';
 
 const SLIDES_COUNT = 5;
 const DEFAULT_PROLOG_EXAMPLE = `protagonist(single, "Steve").
@@ -47,7 +48,6 @@ const locationsForGamemode: Record<string, string[]> = {
 
 const LandingPage = () => {
 	const [slide, setSlide] = useState(1);
-	const [dark, _setDark] = useState(true);
 
 	const [currentPoses, setCurrentPoses] = useState<Record<string, string>>({
 		steve: 'idle',
@@ -63,6 +63,7 @@ const LandingPage = () => {
 	const { currentLanguage } = useSelector(
 		(state: RootState) => state.languageState
 	);
+	const navigate = useNavigate();
 
 	const updatePose = (name: string) => {
 		const newPoses = { ...currentPoses };
@@ -88,7 +89,7 @@ const LandingPage = () => {
 	};
 
 	const handlePlay = () => {
-		// TODO qwq
+		navigate('/main');
 	};
 
 	const topForSlide = (slide: number) => {
@@ -162,6 +163,7 @@ const LandingPage = () => {
 							<div
 								className="landing-black-box flex"
 								onClick={() => updatePose(name)}
+								key={simpleHash(name)}
 							>
 								<img
 									className="character"
@@ -238,13 +240,13 @@ const LandingPage = () => {
 				</div>
 			</LandingSlide>
 			<LandingControls
-				dark={dark}
+				dark
 				value={slide}
 				onChange={(_ev, value) => value != null && setSlide(value)}
 			/>
 			<div className="landing-language">
 				<LanguageSelector
-					dark={dark}
+					dark
 					currentLanguage={currentLanguage}
 					languages={[
 						{ code: 'en', label: t('English') },

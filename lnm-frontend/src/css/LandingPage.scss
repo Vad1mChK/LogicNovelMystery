@@ -166,6 +166,7 @@
     &:has(.character) {
       width: 25vw;
       max-height: 100%;
+      cursor: pointer;
     }
 
     & * {
@@ -182,7 +183,6 @@
       margin: 0 auto;
       text-align: center;
       align-items: center;
-      cursor: pointer;
     }
   }
 
