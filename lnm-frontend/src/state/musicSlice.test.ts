@@ -104,5 +104,6 @@ describe('musicSlice', () => {
 		newPanning = -150;
 		nextState = musicReducer(initialState, setPanning(newPanning));
 		expect(nextState.panning).toBe(-100);
+
 	});
 });

@@ -280,7 +280,7 @@ const MainMenu: React.FC = () => {
 						panning={panning}
 						onChange={adjustPanning}
 					/>
-					<LanguageSelector
+					<LanguageSelector id="language-select"
 						dark={darkMode}
 						currentLanguage={currentLanguage}
 						languages={availableLanguages}
