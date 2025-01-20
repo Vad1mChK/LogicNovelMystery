@@ -47,7 +47,8 @@ i18n.use(initReactI18next).init({
 						},
 					},
 					gamemode: {
-						locations: 'Click on mini screens to see different locations!',
+						locations:
+							'Click on mini screens to see different locations!',
 						single: {
 							title: 'Single Player',
 							description:
@@ -61,9 +62,10 @@ i18n.use(initReactI18next).init({
 					},
 					ready: {
 						title: 'Ready?',
-            description: 'This button will redirect you to the login/register page.\nIf you\'re already logged in, you\'ll go straight to the main page.',
-						playButton: 'Play ->'
-					}
+						description:
+							"This button will redirect you to the login/register page.\nIf you're already logged in, you'll go straight to the main page.",
+						playButton: 'Play ->',
+					},
 				},
 				'Start game': 'Start game',
 				Settings: 'Settings',
@@ -242,12 +244,13 @@ i18n.use(initReactI18next).init({
 						vicky: {
 							name: 'Викки',
 							description:
-								", дочь Профессора, многообещающий хакер.",
+								', дочь Профессора, многообещающий хакер.',
 						},
 					},
 					gamemode: {
 						tooltip: 'Gamemodes',
-						locations: 'Нажми на мини-экраны, чтобы увидеть разные локации!',
+						locations:
+							'Нажми на мини-экраны, чтобы увидеть разные локации!',
 						single: {
 							title: '1 игрок',
 							description:
@@ -262,9 +265,10 @@ i18n.use(initReactI18next).init({
 					ready: {
 						tooltip: 'Готов?',
 						title: 'Готов?',
-						description: 'Эта кнопка перенаправит тебя на страницу логина/регистрации.\nЕсли ты уже вошёл, ты сразу окажешься на главной странице.',
-						playButton: 'Играть ->'
-					}
+						description:
+							'Эта кнопка перенаправит тебя на страницу логина/регистрации.\nЕсли ты уже вошёл, ты сразу окажешься на главной странице.',
+						playButton: 'Играть ->',
+					},
 				},
 				'Start game': 'Начать игру',
 				Settings: 'Настройки',

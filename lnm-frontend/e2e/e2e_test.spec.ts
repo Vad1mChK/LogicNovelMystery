@@ -34,7 +34,9 @@ test.describe('Tests requiring AuthToken', () => {
 		const buttonTextInRussian = await settingsButton.innerText();
 		expect(buttonTextInRussian).toBe('Настройки');
 	});
-	test('Selected language should persist across reloads', async ({ page }) => {
+	test('Selected language should persist across reloads', async ({
+		page,
+	}) => {
 		await page.goto('http://localhost:5173/LogicNovelMystery/main');
 
 		// Открыть настройки
@@ -58,7 +60,6 @@ test.describe('Tests requiring AuthToken', () => {
 		// Проверить, что кнопка настроек отображает текст на русском
 		await expect(page.locator('#settings-button')).toHaveText('Настройки');
 	});
-
 });
 
 test.describe('Tests without AuthToken', () => {
