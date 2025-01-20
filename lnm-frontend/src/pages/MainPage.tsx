@@ -8,6 +8,9 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
 import { RootState } from '../state/store.ts';
+import VolumeSlider from "../settingsComponents/VolumeSlider";
+import PanningSlider from "../settingsComponents/PanningSlider";
+import LanguageSelector from "../settingsComponents/LanguageSelector";
 import {
 	playMusic,
 	setCurrentTrack,
@@ -17,6 +20,7 @@ import {
 } from '../state/musicSlice.ts';
 import { VITE_SERVER_URL } from '../metaEnv';
 import leaderboardWorkerScript from '../workers/leaderboardWorker.tsx?worker';
+
 
 interface LeaderboardEntry {
 	username: string;
@@ -29,7 +33,8 @@ const MainMenu: React.FC = () => {
 	const [isAboutOpen, setAboutOpen] = useState(false);
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 	const navigate = useNavigate();
-
+	const [darkMode, setDarkMode] = useState(false); // Состояние для темной темы
+	const [currentLanguage, setCurrentLanguage] = useState('ru'); // Текущий язык
 	const dispatch = useDispatch();
 	const {
 		isPlaying: isMusicPlaying,
@@ -37,7 +42,10 @@ const MainMenu: React.FC = () => {
 		currentTrack,
 		panning,
 	} = useSelector((state: RootState) => state.musicState);
-
+	const availableLanguages = [
+		{ code: 'ru', label: 'Русский' },
+		{ code: 'en', label: 'English' },
+	];
 	const { t, i18n } = useTranslation(); // Используем локализацию
 	const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>(
 		[]
@@ -181,6 +189,7 @@ const MainMenu: React.FC = () => {
 
 	const changeLanguage = (selectedLanguage: string) => {
 		i18n.changeLanguage(selectedLanguage); // Меняем язык
+		setCurrentLanguage(selectedLanguage)
 		dispatch(setLanguage(selectedLanguage));
 	};
 
@@ -262,46 +271,9 @@ const MainMenu: React.FC = () => {
 			{isSettingsOpen && (
 				<div id="settings-modal">
 					<h2>{t('Settings')}</h2>
-					<label htmlFor="volume-range">{t('Volume')}:</label>
-					<input
-						type="range"
-						id="volume-range"
-						className="volume-control"
-						min="0"
-						max="100"
-						value={volume}
-						onChange={(e) => adjustVolume(Number(e.target.value))}
-					/>
-					<span>{volume}%</span>
-					<br />
-					<label htmlFor="panning-range">
-						{t('panning.panning')}:
-					</label>
-					<input
-						type="range"
-						id="panning-range"
-						className="volume-control"
-						min={-1}
-						max={1}
-						step={0.01}
-						value={panning}
-						onChange={(e) => adjustPanning(Number(e.target.value))}
-					/>
-					<span>{panning}</span>
-
-					<div style={{ marginTop: '10px' }}>
-						<label htmlFor="language-select">
-							{t('Language')}:
-						</label>
-						<select
-							id="language-select"
-							value={i18n.language} // Устанавливаем текущее значение языка
-							onChange={(e) => changeLanguage(e.target.value)} // Слушаем изменения
-						>
-							<option value="ru">{t('Russian')}</option>
-							<option value="en">{t('English')}</option>
-						</select>
-					</div>
+					<VolumeSlider dark={darkMode} volume={volume} onChange={adjustVolume}/>
+					<PanningSlider dark={darkMode} panning={panning} onChange={adjustPanning}/>
+					<LanguageSelector dark={darkMode} currentLanguage={currentLanguage} languages={availableLanguages} onChange={changeLanguage}/>
 					<button className="modal-button" onClick={closeAllModals}>
 						{t('Close')}
 					</button>
