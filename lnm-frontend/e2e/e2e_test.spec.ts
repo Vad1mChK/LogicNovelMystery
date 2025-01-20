@@ -22,32 +22,43 @@ test.describe('Tests requiring AuthToken', () => {
 
 		// Locate the language select dropdown
 		const languageSelect = settingsModal.locator('#language-select');
+		await expect(languageSelect).toBeVisible(); // Убедиться, что элемент доступен
 
 		// Select English and check the button text
 		await languageSelect.selectOption('en');
-		const buttonTextInEnglish = await settingsButton.innerText(); // Await the innerText() call
-		expect(buttonTextInEnglish).toBe('Settings'); // Compare the string
+		const buttonTextInEnglish = await settingsButton.innerText();
+		expect(buttonTextInEnglish).toBe('Settings');
 
 		// Select Russian and check the button text
 		await languageSelect.selectOption('ru');
-		const buttonTextInRussian = await settingsButton.innerText(); // Await the innerText() call
-		expect(buttonTextInRussian).toBe('Настройки'); // Compare the string
+		const buttonTextInRussian = await settingsButton.innerText();
+		expect(buttonTextInRussian).toBe('Настройки');
 	});
-	test('Selected language should persist across reloads', async ({
-		page,
-	}) => {
+	test('Selected language should persist across reloads', async ({ page }) => {
 		await page.goto('http://localhost:5173/LogicNovelMystery/main');
 
-		// Open settings and select Russian
+		// Открыть настройки
 		const settingsButton = page.locator('#settings-button');
 		await settingsButton.click();
+
+		// Убедиться, что модальное окно настроек отображается
+		const settingsModal = page.locator('#settings-modal');
+		await expect(settingsModal).toBeVisible();
+
+		// Убедиться, что выпадающий список языка доступен
 		const languageSelect = page.locator('#language-select');
+		await languageSelect.waitFor({ state: 'visible', timeout: 10000 });
+
+		// Выбрать русский язык
 		await languageSelect.selectOption('ru');
 
-		// Reload the page
+		// Перезагрузить страницу
 		await page.reload();
-		await expect(page.locator('#settings-button')).toHaveText('Настройки'); // Verify persistence
+
+		// Проверить, что кнопка настроек отображает текст на русском
+		await expect(page.locator('#settings-button')).toHaveText('Настройки');
 	});
+
 });
 
 test.describe('Tests without AuthToken', () => {
