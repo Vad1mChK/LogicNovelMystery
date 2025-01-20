@@ -52,7 +52,7 @@ const musicSlice = createSlice({
 			state.isPlaying = !state.isPlaying;
 		},
 		setPanning(state, action: PayloadAction<number>) {
-			state.panning = Math.min(1, Math.max(-1, action.payload));
+			state.panning = Math.min(100, Math.max(-100, action.payload));
 		},
 	},
 });

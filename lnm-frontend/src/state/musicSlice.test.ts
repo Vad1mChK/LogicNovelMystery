@@ -93,16 +93,16 @@ describe('musicSlice', () => {
 			isPlaying: false,
 			panning: 0,
 		};
-		let newPanning = 0.5;
+		let newPanning = 50;
 		let nextState = musicReducer(initialState, setPanning(newPanning));
 		expect(nextState.panning).toBe(newPanning);
 
-		newPanning = 1.5;
+		newPanning = 150;
 		nextState = musicReducer(initialState, setPanning(newPanning));
-		expect(nextState.panning).toBe(1);
+		expect(nextState.panning).toBe(100);
 
-		newPanning = -1.5;
+		newPanning = -150;
 		nextState = musicReducer(initialState, setPanning(newPanning));
-		expect(nextState.panning).toBe(-1);
+		expect(nextState.panning).toBe(-100);
 	});
 });
