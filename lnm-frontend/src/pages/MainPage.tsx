@@ -8,9 +8,9 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
 import { RootState } from '../state/store.ts';
-import VolumeSlider from "../settingsComponents/VolumeSlider";
-import PanningSlider from "../settingsComponents/PanningSlider";
-import LanguageSelector from "../settingsComponents/LanguageSelector";
+import VolumeSlider from '../settingsComponents/VolumeSlider';
+import PanningSlider from '../settingsComponents/PanningSlider';
+import LanguageSelector from '../settingsComponents/LanguageSelector';
 import {
 	playMusic,
 	setCurrentTrack,
@@ -20,7 +20,6 @@ import {
 } from '../state/musicSlice.ts';
 import { VITE_SERVER_URL } from '../metaEnv';
 import leaderboardWorkerScript from '../workers/leaderboardWorker.tsx?worker';
-
 
 interface LeaderboardEntry {
 	username: string;
@@ -189,7 +188,7 @@ const MainMenu: React.FC = () => {
 
 	const changeLanguage = (selectedLanguage: string) => {
 		i18n.changeLanguage(selectedLanguage); // Меняем язык
-		setCurrentLanguage(selectedLanguage)
+		setCurrentLanguage(selectedLanguage);
 		dispatch(setLanguage(selectedLanguage));
 	};
 
@@ -271,9 +270,22 @@ const MainMenu: React.FC = () => {
 			{isSettingsOpen && (
 				<div id="settings-modal">
 					<h2>{t('Settings')}</h2>
-					<VolumeSlider dark={darkMode} volume={volume} onChange={adjustVolume}/>
-					<PanningSlider dark={darkMode} panning={panning} onChange={adjustPanning}/>
-					<LanguageSelector dark={darkMode} currentLanguage={currentLanguage} languages={availableLanguages} onChange={changeLanguage}/>
+					<VolumeSlider
+						dark={darkMode}
+						volume={volume}
+						onChange={adjustVolume}
+					/>
+					<PanningSlider
+						dark={darkMode}
+						panning={panning}
+						onChange={adjustPanning}
+					/>
+					<LanguageSelector
+						dark={darkMode}
+						currentLanguage={currentLanguage}
+						languages={availableLanguages}
+						onChange={changeLanguage}
+					/>
 					<button className="modal-button" onClick={closeAllModals}>
 						{t('Close')}
 					</button>

@@ -1,5 +1,5 @@
 // FrameRenderer.tsx
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
 	LnmFrame,
 	LnmFrameCharacterData,
@@ -10,17 +10,17 @@ import {
 import DialogueBox from './DialogueBox';
 import CharacterSprite from './CharacterSprite';
 import LocationBackground from './LocationBackground';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import HealthBar from './HealthBar';
 import TaskWindow from './TaskWindow';
-import VolumeSlider from "../settingsComponents/VolumeSlider";
-import PanningSlider from "../settingsComponents/PanningSlider";
+import VolumeSlider from '../settingsComponents/VolumeSlider';
+import PanningSlider from '../settingsComponents/PanningSlider';
 import { t } from 'i18next';
-import '../css/Settings.scss'
+import '../css/Settings.scss';
 import { useNavigate } from 'react-router-dom';
-import {useTranslation} from "react-i18next";
-import {setPanning, setVolume} from "../state/musicSlice";
+import { useTranslation } from 'react-i18next';
+import { setPanning, setVolume } from '../state/musicSlice';
 
 interface FrameRendererProps {
 	isEnding: boolean;
@@ -56,7 +56,9 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
 	const [darkMode, setDarkMode] = useState(true); // Состояние для темной темы
 	const health = useSelector((state: RootState) => state.gameState.health);
-	const { volume, panning } = useSelector((state: RootState) => state.musicState);
+	const { volume, panning } = useSelector(
+		(state: RootState) => state.musicState
+	);
 	const adjustVolume = (value: number) => {
 		dispatch(setVolume(value));
 	};
@@ -143,9 +145,20 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 					{isSettingsOpen && (
 						<div id="settings-game">
 							<h2>{t('Settings')}</h2>
-							<VolumeSlider dark={darkMode} volume={volume} onChange={adjustVolume}/>
-							<PanningSlider dark={darkMode} panning={panning} onChange={adjustPanning}/>
-							<button className="close-button" onClick={closeAllModals}>
+							<VolumeSlider
+								dark={darkMode}
+								volume={volume}
+								onChange={adjustVolume}
+							/>
+							<PanningSlider
+								dark={darkMode}
+								panning={panning}
+								onChange={adjustPanning}
+							/>
+							<button
+								className="close-button"
+								onClick={closeAllModals}
+							>
 								{t('Close')}
 							</button>
 						</div>
