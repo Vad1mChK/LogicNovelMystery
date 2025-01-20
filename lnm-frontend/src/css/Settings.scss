@@ -46,7 +46,9 @@
 			transform 0.2s ease;
 
 		&:hover {
-			background: color.adjust(colors.$STONE-GRAY); /* Светлее при наведении */
+			background: color.adjust(
+				colors.$STONE-GRAY
+			); /* Светлее при наведении */
 			transform: scale(1.05); /* Легкий масштаб при наведении */
 		}
 
@@ -75,7 +77,9 @@
 			transition: background 0.3s;
 
 			&:hover {
-				background: color.adjust(colors.$YELLOWISH-ORANGE); /* Светлее при наведении */
+				background: color.adjust(
+					colors.$YELLOWISH-ORANGE
+				); /* Светлее при наведении */
 			}
 		}
 
