@@ -12,7 +12,17 @@ const LocationBackground: React.FC<LocationBackgroundProps> = ({
 }) => (
 	<div className="game-background">
 		<img
+			className="real-image"
 			src={`${BASE_URL}${location.background || ''}`}
+			alt={location.name}
+			title={location.name}
+		/>
+		<img
+			className="small-image"
+			src={`${BASE_URL}${location.background || ''}`.replace(
+				/\.webp/g,
+				'_small.webp'
+			)}
 			alt={location.name}
 			title={location.name}
 		/>

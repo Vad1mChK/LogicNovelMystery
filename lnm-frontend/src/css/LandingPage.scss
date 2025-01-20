@@ -1,0 +1,239 @@
+@use "colors";
+@use "sass:color";
+
+.landing {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  color: colors.$WHITE;
+  font-size: 16pt;
+
+  @media (width < 1280px) {
+    font-size: 14pt;
+  }
+
+  @media (width < 960px) {
+    font-size: 12pt;
+  }
+
+  .huge-title {
+    font-weight: 800;
+    margin-bottom: 16px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
+    color: inherit;
+  }
+
+  h1, h2 {
+    color: inherit;
+  }
+
+  h1.huge-title {
+    transition: font-size 0.3s ease-in-out;
+    font-size: 6em;
+
+    @media (width < 1440px) {
+      font-size: 4em;
+    }
+  }
+
+  h2.huge-title {
+    font-size: 3em;
+  }
+
+  .landing-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -100;
+
+    img {
+      transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
+      position: absolute;
+      left: 50%;
+      //top: 0%;
+      //transform: translate(-50%, 0%);
+
+      width: auto; /* Default: stretch width */
+      height: 100%;
+
+      @media (aspect-ratio >= 8/9) {
+        /* Wider aspect ratios */
+        height: auto;
+        width: 100%;
+      }
+
+      &.small-image {
+        z-index: -101;
+      }
+    }
+  }
+
+  .landing-slide {
+    padding: 0;
+    transition: transform 0.45s ease-in-out;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    text-align: justify;
+
+    & > .landing-slide-container {
+      width: 100%;
+      height: 100%;
+
+      @media(width >= 1280px) {
+        flex-direction: row;
+      }
+
+      @media(width < 1280px) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .landing-controls {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    z-index: 20;
+    gap: 1em;
+
+    .landing-buttons, .landing-progress-bar {
+      background: color.adjust(colors.$BLACK, $alpha: -0.25);
+      border-radius: 4em;
+      padding: 0.75em;
+    }
+
+    .landing-buttons {
+      flex-direction: row;
+    }
+  }
+
+  .landing-language {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &.flex-row {
+      flex-direction: row;
+    }
+
+    &.flex-column {
+      flex-direction: column;
+    }
+
+    &.flex-justify-center {
+      justify-content: center;
+    }
+
+    &.flex-gap {
+      gap: 5em;
+    }
+  }
+
+  .landing-black-box {
+    gap: 1em;
+    flex-direction: column;
+    align-items: start;
+    background: color.adjust(colors.$BLACK, $alpha: -0.25);
+    border-radius: 2em;
+    padding: 2em;
+    color: colors.$WHITE;
+    max-height: 100%;
+    max-width: 100%;
+
+    @media (width >= 1280px) {
+      max-width: 40%;
+    }
+
+    @media (width < 1280px) {
+      max-width: 80%;
+      gap: 0;
+    }
+
+    &:has(.character) {
+      width: 25vw;
+      max-height: 100%;
+      cursor: pointer;
+    }
+
+    & * {
+      width: 100%;
+    }
+
+    & h2 {
+      text-align: center;
+    }
+
+    & img.character {
+      height: 50vh;
+      width: auto;
+      margin: 0 auto;
+      text-align: center;
+      align-items: center;
+    }
+  }
+
+  .landing-preview {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 1em;
+    width: 25vw;
+    height: auto;
+    aspect-ratio: 16/9;
+    cursor: pointer;
+    text-align: center;
+    align-items: center;
+
+    img.landing-preview-location {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 20;
+    }
+
+    img.landing-preview-character {
+      position: absolute;
+      bottom: 0;
+      transform: translate(-50%);
+      z-index: 21;
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  .landing-ready {
+    margin: 0 15vw 0 auto;
+    max-width: 30vw;
+    align-items: center;
+
+    .landing-play-button {
+      transition: background-color 0.3s ease-in-out;
+      font: inherit;
+      display: inline;
+      width: 50%;
+      padding: 1em 2em;
+      border-radius: 4em;
+      background-color: colors.$DARK-ROYAL_BLUE;
+
+      &:hover {
+        background-color: colors.$ROYAL-BLUE;
+      }
+    }
+  }
+}

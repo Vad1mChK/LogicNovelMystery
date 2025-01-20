@@ -32,12 +32,14 @@ describe('ResultsScreen', () => {
 	test('should render result screen with correct image and text', () => {
 		render(<ResultsScreen {...defaultProps} />);
 
-		const image = screen.getByAltText(
+		const images = screen.queryAllByAltText(
 			'game.resultScreen.result.SINGLE_GOOD'
 		);
-		expect(image).toHaveAttribute(
-			'src',
-			expect.stringContaining('assets/img/endings/GoodEndingScreens.webp')
+		expect(images).toHaveLength(2);
+		const image = images[0];
+
+		expect(image.getAttribute('src')).toMatch(
+			/assets\/img\/endings\/GoodEndingScreens(_small)?.webp/
 		);
 
 		expect(

@@ -1,11 +1,10 @@
 // src/components/SecretPage.tsx
 
 import React from 'react';
-import '../css/FrameInterpreter.scss';
-import ResultsWaitScreen from '../frameInterpreter/ResultsWaitScreen';
+import LandingPage from './LandingPage';
 
 const SecretPage: React.FC = () => {
-	return <ResultsWaitScreen winner={false} multiplayer={true} />;
+	return <LandingPage />;
 };
 
 export default SecretPage;
