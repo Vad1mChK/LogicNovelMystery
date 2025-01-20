@@ -2,98 +2,104 @@
 @use 'sass:color';
 
 #settings-game {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: color.adjust(colors.$DARK-GRAY, $alpha: 0.4);
-  padding: 20px;
-  border-radius: 12px; /* Закругленные углы */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8); /* Тень */
-  z-index: 1000;
-  overflow-y: auto;
-  width: 80%; /* Адаптивная ширина */
-  max-width: 600px;
-  text-align: center;
-  border: 2px solid #444; /* Тонкая рамка */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: color.adjust(colors.$DARK-GRAY, $alpha: 0.4);
+	padding: 20px;
+	border-radius: 12px; /* Закругленные углы */
+	box-shadow: 0 8px 16px color.adjust(colors.$BLACK); /* Тень */
+	z-index: 1000;
+	overflow-y: auto;
+	width: 80%; /* Адаптивная ширина */
+	max-width: 600px;
+	text-align: center;
+	border: 2px solid color.adjust(colors.$DARK-GRAY); /* Тонкая рамка */
 
-  h2 {
-    color: #ffffff; /* Белый заголовок */
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
+	h2 {
+		color: color.adjust(colors.$WHITE); /* Белый заголовок */
+		font-size: 24px;
+		margin-bottom: 16px;
+	}
 
-  p, label, span, input, select, option {
-    color: #dcdcdc; /* Светлый текст */
-  }
+	p,
+	label,
+	span,
+	input,
+	select,
+	option {
+		color: #dcdcdc; /* Светлый текст */
+	}
 
-  .close-button {
-    background: #444; /* Темная кнопка */
-    color: #ffffff;
-    border: 1px solid #555;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease, transform 0.2s ease;
+	.close-button {
+		background: color.adjust(colors.$DARK-GRAY); /* Темная кнопка */
+		color: color.adjust(colors.$WHITE);
+		border: 1px solid color.adjust(colors.$STONE-GRAY);
+		padding: 10px 20px;
+		margin-top: 20px;
+		border-radius: 8px;
+		cursor: pointer;
+		font-size: 16px;
+		transition:
+			background 0.3s ease,
+			transform 0.2s ease;
 
-    &:hover {
-      background: #666; /* Светлее при наведении */
-      transform: scale(1.05); /* Легкий масштаб при наведении */
-    }
+		&:hover {
+			background: color.adjust(colors.$STONE-GRAY); /* Светлее при наведении */
+			transform: scale(1.05); /* Легкий масштаб при наведении */
+		}
 
-    &:active {
-      transform: scale(0.95); /* Эффект нажатия */
-    }
-  }
+		&:active {
+			transform: scale(0.95); /* Эффект нажатия */
+		}
+	}
 
-  input[type="range"] {
-    -webkit-appearance: none; /* Скрыть стандартный вид */
-    width: 100%; /* Ширина ползунка */
-    height: 8px;
-    background: #555; /* Темный трек */
-    border-radius: 5px;
-    outline: none;
-    margin: 15px 0;
-    transition: background 0.3s;
+	input[type='range'] {
+		appearance: none; /* Скрыть стандартный вид */
+		width: 100%; /* Ширина ползунка */
+		height: 8px;
+		background: color.adjust(colors.$DARK-GRAY); /* Темный трек */
+		border-radius: 5px;
+		outline: none;
+		margin: 15px 0;
+		transition: background 0.3s;
 
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      background: #ffa500; /* Оранжевый ползунок */
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.3s;
+		&::-webkit-slider-thumb {
+			appearance: none;
+			width: 20px;
+			height: 20px;
+			background: color.adjust(colors.$ORANGE); /* Оранжевый ползунок */
+			border-radius: 50%;
+			cursor: pointer;
+			transition: background 0.3s;
 
-      &:hover {
-        background: #ffcc66; /* Светлее при наведении */
-      }
-    }
+			&:hover {
+				background: color.adjust(colors.$YELLOWISH-ORANGE); /* Светлее при наведении */
+			}
+		}
 
-    &::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      background: #ffa500;
-      border-radius: 50%;
-      cursor: pointer;
+		&::-moz-range-thumb {
+			width: 20px;
+			height: 20px;
+			background: color.adjust(colors.$YELLOWISH-ORANGE);
+			border-radius: 50%;
+			cursor: pointer;
 
-      &:hover {
-        background: #ffcc66;
-      }
-    }
-  }
+			&:hover {
+				background: color.adjust(colors.$YELLOW);
+			}
+		}
+	}
 }
 
 #modal-overlay {
-  //display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: color.adjust(colors.$BLACK, $alpha: -0.5);
-  z-index: 500;
+	//display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: color.adjust(colors.$BLACK, $alpha: -0.5);
+	z-index: 500;
 }
