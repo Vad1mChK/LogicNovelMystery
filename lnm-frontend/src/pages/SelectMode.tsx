@@ -61,6 +61,7 @@ const GameSelection: React.FC = () => {
 
 	const createSinglePlayerSession = async () => {
 		try {
+			dispatch(resetState());
 			const token = generateSessionToken();
 			localStorage.setItem('sessionToken', token);
 			await axios.post(
@@ -93,8 +94,6 @@ const GameSelection: React.FC = () => {
 		setError(null);
 
 		try {
-			await sendRequest(); // Отправляем запрос на сервер
-			// Redirect based on selected character
 			if (selectedCharacter === 'Game for one') {
 				await createSinglePlayerSession();
 				dispatch(setProtagonist(LnmHero.STEVE));
@@ -117,7 +116,7 @@ const GameSelection: React.FC = () => {
 
 	// Go back to the previous page or perform another action
 	const goBack = () => {
-		window.history.back();
+		navigate('/main');
 	};
 
 	return (

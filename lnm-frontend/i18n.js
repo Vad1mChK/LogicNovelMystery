@@ -73,6 +73,15 @@ i18n.use(initReactI18next).init({
 				About: 'About',
 				Close: 'Close',
 				Volume: 'Volume',
+				waitRoom: {
+					userList: 'User List',
+					username: 'Username',
+					notFound: 'Users not found',
+					loading: 'loading users...',
+					join: 'Join',
+					create: 'Create',
+					error: 'Error',
+				},
 				panning: {
 					panning: 'Panning',
 					format: '{{panningValue}} ({{panningConstant}})',
@@ -106,6 +115,10 @@ i18n.use(initReactI18next).init({
 				Question: 'Are you really interested?',
 				Yes: 'Yes',
 				No: 'No',
+				continue: {
+					game: 'Continue',
+					error: 'Game has not found. You can start a new game.',
+				},
 				login: {
 					title: 'Login',
 					usernamePlaceholder: 'Enter your username',
@@ -276,6 +289,15 @@ i18n.use(initReactI18next).init({
 				About: 'Об игре',
 				Close: 'Закрыть',
 				Volume: 'Громкость звука',
+				waitRoom: {
+					userList: 'Список пользователей',
+					username: 'Имя пользователя',
+					notFound: 'Пользователи не найдены',
+					loading: 'Загрузка пользователей...',
+					join: 'Присоединиться',
+					create: 'Создать',
+					error: 'Ошибка',
+				},
 				panning: {
 					panning: 'Панорамирование',
 					format: '{{panningValue}} ({{panningConstant}})',
@@ -309,6 +331,10 @@ i18n.use(initReactI18next).init({
 				Question: 'Тебе действительно интересно?',
 				Yes: 'Да',
 				No: 'Нет',
+				continue: {
+					game: 'Продолжить',
+					error: 'Игра не найдена. Начните новую игру',
+				},
 				login: {
 					title: 'Вход',
 					usernamePlaceholder: 'Введите имя пользователя',
