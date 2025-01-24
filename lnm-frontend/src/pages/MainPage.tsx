@@ -7,6 +7,7 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
+import { LanguageState } from '../state/languageSlice'
 import { RootState } from '../state/store.ts';
 import VolumeSlider from '../settingsComponents/VolumeSlider';
 import PanningSlider from '../settingsComponents/PanningSlider';
@@ -20,7 +21,14 @@ import {
 } from '../state/musicSlice.ts';
 import { VITE_SERVER_URL } from '../metaEnv';
 import leaderboardWorkerScript from '../workers/leaderboardWorker.tsx?worker';
-
+import {
+	resetState,
+	setPlayerState,
+	setProtagonist,
+} from '../state/gameStateSlice';
+import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
+import { restoreState } from '../frameInterpreter/communication/restoreState';
+type GameMode = 'Game for one' | 'Game for two';
 interface LeaderboardEntry {
 	username: string;
 	score: number;
@@ -32,8 +40,12 @@ const MainMenu: React.FC = () => {
 	const [isAboutOpen, setAboutOpen] = useState(false);
 	const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 	const navigate = useNavigate();
+	const [selectedCharacter, setSelectedCharacter] = useState<GameMode | null>(
+		null
+	);
+	const [error, setError] = useState<string | null>(null);
 	const [darkMode, setDarkMode] = useState(false); // Состояние для темной темы
-	const [currentLanguage, setCurrentLanguage] = useState('ru'); // Текущий язык
+	const [disable, setDisable] = useState(true);
 	const dispatch = useDispatch();
 	const {
 		isPlaying: isMusicPlaying,
@@ -73,6 +85,18 @@ const MainMenu: React.FC = () => {
 			fetchLeaderboardData(isMultiplayer);
 		}
 	}, [isLeaderboardOpen]); // Добавляем зависимости
+	useEffect(() => {
+		const savedCharacter = localStorage.getItem(
+			'selectedCharacter'
+		) as GameMode | null;
+		setSelectedCharacter(savedCharacter);
+	}, []);
+	useEffect(() => {
+		const savedSessionToken = localStorage.getItem('sessionToken') as
+			| string
+			| null;
+		setDisable(savedSessionToken === null);
+	}, []);
 	// Запрос данных с сервера
 	const fetchLeaderboardData = async (isMultiplayer: boolean) => {
 		try {
@@ -176,6 +200,7 @@ const MainMenu: React.FC = () => {
 		setSettingsOpen(false);
 		setAboutOpen(false);
 		setLeaderboardOpen(false);
+		setErrorMessage(null);
 	};
 
 	const adjustVolume = (value: number) => {
@@ -188,10 +213,46 @@ const MainMenu: React.FC = () => {
 
 	const changeLanguage = (selectedLanguage: string) => {
 		i18n.changeLanguage(selectedLanguage); // Меняем язык
-		setCurrentLanguage(selectedLanguage);
 		dispatch(setLanguage(selectedLanguage));
 	};
 
+	const continueGame = async () => {
+		setDisable(true);
+		setError(null);
+
+		try {
+			if (await sendRequest()) {
+				// Отправляем запрос на сервер
+				if (selectedCharacter === 'Game for one') {
+					dispatch(setProtagonist(LnmHero.STEVE));
+					dispatch(setPlayerState(LnmPlayerState.PLAYING));
+					navigate('/single-player');
+				} else if (selectedCharacter === 'Game for two') {
+					navigate('/waitRoom');
+				}
+				setDisable(false);
+			} else {
+				setErrorMessage(t('continue.error'));
+			}
+		} catch (err) {
+			// Показываем сообщение об ошибке
+			setErrorMessage(t('continue.error'));
+		} finally {
+		}
+	};
+	const sendRequest = async (): Promise<boolean> => {
+		const token = localStorage.getItem('sessionToken');
+		const isMultiplayer = selectedCharacter === 'Game for two';
+		if (token) {
+			if (await restoreState(token, isMultiplayer, dispatch)) {
+				return true;
+			}
+			localStorage.removeItem('sessionToken');
+			dispatch(resetState());
+			return false;
+		}
+		return false;
+	};
 	// Обработчик нажатия на кнопку "Начать игру" с воспроизведением музыки
 	const handleStartGame = () => {
 		dispatch(playMusic()); // Воспроизведение музыки
@@ -214,46 +275,55 @@ const MainMenu: React.FC = () => {
 			}}
 		>
 			<div className="main-container">
-				{/* Кнопка "Начать игру" слева */}
+				{/* Кнопка "Продолжить" */}
 				<button
-					className="button left-button"
+					className="button"
+					onClick={continueGame}
+					disabled={disable}
+					id="continue-game-button"
+				>
+					{t('continue.game')}
+				</button>
+				{errorMessage && (
+					<p className="error-message">{errorMessage}</p>
+				)}
+				{/* Кнопка "Начать игру" */}
+				<button
+					className="button"
 					onClick={handleStartGame}
 					id="start-game-button"
 				>
 					{t('Start game')}
 				</button>
 
-				{/* Кнопка "Настройки" по центру сверху */}
+				{/* Кнопка "Настройки" */}
 				<button
-					className="button top-button"
+					className="button"
 					onClick={() => setSettingsOpen(true)}
 					id="settings-button"
 				>
 					{t('Settings')}
 				</button>
 
-				{/* Кнопка "Доска лидеров" справа */}
+				{/* Кнопка "Доска лидеров" */}
 				<button
-					className="button right-button"
+					className="button"
 					onClick={openLeaderboard}
 					id="leaderboard-button"
 				>
 					{t('Leaderboard')}
 				</button>
 
-				{/* Кнопка "Об игре" справа */}
+				{/* Кнопка "Об игре" */}
 				<button
-					className="button right-button"
+					className="button"
 					onClick={() => setAboutOpen(true)}
 					id="about-button"
 				>
 					{t('About')}
 				</button>
-				{/* Кнопка "Выйти" справа */}
-				<button
-					className="button right-button"
-					onClick={handleExitGame}
-				>
+				{/* Кнопка "Выйти" */}
+				<button className="button" onClick={handleExitGame}>
 					{t('Exit')}
 				</button>
 			</div>
@@ -283,7 +353,7 @@ const MainMenu: React.FC = () => {
 					<LanguageSelector
 						id="language-select"
 						dark={darkMode}
-						currentLanguage={currentLanguage}
+						currentLanguage={i18n.language}
 						languages={availableLanguages}
 						onChange={changeLanguage}
 					/>

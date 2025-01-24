@@ -63,6 +63,13 @@ body {
 	}
 }
 
+/* Кнопка продолжения игры */
+#continue-game-button {
+	&:disabled {
+		visibility: hidden; /* Кнопка становится невидимой */
+	}
+}
+
 /* Группировка кнопок */
 .side-buttons {
 	display: flex;
