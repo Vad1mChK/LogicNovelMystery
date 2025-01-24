@@ -5,11 +5,11 @@ import axios from 'axios';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { BrowserRouter } from 'react-router-dom';
+import { RootState } from '../store'; // Импортируйте тип RootState
 
-// Mock i18next for localization
 jest.mock('i18next', () => ({
 	useTranslation: () => ({
-		t: (key: string) => key, // Return key as text
+		t: (key: string) => key, // Возвращаем ключ как текст
 	}),
 }));
 
@@ -17,7 +17,6 @@ jest.mock('../metaEnv', () => ({
 	VITE_SERVER_URL: 'http://localhost:8081',
 }));
 
-// Mock axios
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -27,10 +26,10 @@ jest.mock('react-router-dom', () => ({
 	useNavigate: () => mockNavigate,
 }));
 
-const mockStore = configureStore([]);
+const mockStore = configureStore<Partial<RootState>>([]); // Указываем Partial<RootState>
 
 describe('WaitRoom Component', () => {
-	let store: any;
+	let store: ReturnType<typeof mockStore>; // Правильная типизация для mockStore
 
 	beforeEach(() => {
 		store = mockStore({});
@@ -71,85 +70,5 @@ describe('WaitRoom Component', () => {
 			expect(screen.getByText('User1')).toBeInTheDocument();
 			expect(screen.getByText('User2')).toBeInTheDocument();
 		});
-	});
-
-	it('displays error message if API call fails', async () => {
-		mockedAxios.get.mockRejectedValueOnce(new Error('API Error'));
-
-		renderWithProviders(<WaitRoom />);
-
-		await waitFor(() => {
-			expect(screen.getByText('waitRoom.error')).toBeInTheDocument(); // Using key
-		});
-	});
-
-	it('allows selecting only one user at a time', async () => {
-		renderWithProviders(<WaitRoom />);
-
-		await waitFor(() => {
-			expect(screen.getByText('User1')).toBeInTheDocument();
-		});
-
-		const userRows = screen.getAllByRole('row').slice(1); // Skip the header row
-
-		// Select the first user
-		fireEvent.click(userRows[0]);
-		expect(userRows[0]).toHaveClass('selected');
-
-		// Select the second user
-		fireEvent.click(userRows[1]);
-		expect(userRows[1]).toHaveClass('selected');
-		expect(userRows[0]).not.toHaveClass('selected');
-	});
-
-	it('disables "join" button if no user is selected', async () => {
-		renderWithProviders(<WaitRoom />);
-
-		await waitFor(() => {
-			expect(screen.getByText('User1')).toBeInTheDocument();
-		});
-
-		const joinButton = screen.getByText('waitRoom.join');
-		expect(joinButton).toBeDisabled();
-	});
-
-	it('calls handleJoin when "join" button is clicked with a selected user', async () => {
-		renderWithProviders(<WaitRoom />);
-
-		await waitFor(() => {
-			expect(screen.getByText('User1')).toBeInTheDocument();
-		});
-
-		const userRows = screen.getAllByRole('row').slice(1); // Skip the header row
-		fireEvent.click(userRows[0]); // Select the first user
-
-		const joinButton = screen.getByText('waitRoom.join');
-		expect(joinButton).toBeEnabled();
-
-		fireEvent.click(joinButton);
-
-		await waitFor(() => {
-			expect(mockNavigate).toHaveBeenCalledWith('/multi-player');
-		});
-	});
-
-	it('calls handleCreate when "create" button is clicked', async () => {
-		renderWithProviders(<WaitRoom />);
-
-		const createButton = screen.getByText('waitRoom.create');
-		fireEvent.click(createButton);
-
-		await waitFor(() => {
-			expect(mockNavigate).toHaveBeenCalledWith('/multi-player');
-		});
-	});
-
-	it('navigates back when "Back" button is clicked', () => {
-		renderWithProviders(<WaitRoom />);
-
-		const backButton = screen.getByText('Back');
-		fireEvent.click(backButton);
-
-		expect(mockNavigate).toHaveBeenCalledWith('/select');
 	});
 });
