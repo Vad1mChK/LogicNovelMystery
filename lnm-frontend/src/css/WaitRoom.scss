@@ -23,6 +23,7 @@
 	border-radius: 10px;
 	box-shadow: 0 4px 10px color.adjust(colors.$BLACK, $alpha: -0.9);
 	max-height: 80vh;
+	width: 60vh;
 	overflow: hidden;
 }
 
@@ -79,4 +80,24 @@ button {
 
 button:hover {
 	background-color: #007bff;
+}
+.return-button {
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	background-color: colors.$WHITE;
+	color: colors.$BLACK;
+	border: none;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	box-shadow: 0 4px 8px colors.$BLACK;
+	align-self: flex-start;
+	transition:
+					background-color 0.3s,
+					color 0.3s;
+
+	&:hover {
+		background-color: colors.$DARK-GRAY;
+		color: colors.$WHITE;
+	}
 }
