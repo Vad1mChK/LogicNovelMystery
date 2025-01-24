@@ -5,11 +5,11 @@ import axios from 'axios';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { BrowserRouter } from 'react-router-dom';
-import { RootState } from '../store'; // Импортируйте тип RootState
+import { RootState } from '../state/store';
 
 jest.mock('i18next', () => ({
 	useTranslation: () => ({
-		t: (key: string) => key, // Возвращаем ключ как текст
+		t: (key: string) => key,
 	}),
 }));
 
