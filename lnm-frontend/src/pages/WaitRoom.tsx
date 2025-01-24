@@ -5,7 +5,11 @@ import { VITE_SERVER_URL } from '../metaEnv';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { generateSessionToken } from '../util/generateSessionToken';
-import {resetState, setPlayerState, setProtagonist} from '../state/gameStateSlice';
+import {
+	resetState,
+	setPlayerState,
+	setProtagonist,
+} from '../state/gameStateSlice';
 import { LnmHero, LnmPlayerState } from '../frameInterpreter/types';
 import { useTranslation } from 'react-i18next'; // Импортируем хук локализации
 
@@ -91,7 +95,7 @@ const WaitRoom: React.FC = () => {
 				}
 			)
 			.then(() => {
-				dispatch(resetState())
+				dispatch(resetState());
 				dispatch(setProtagonist(LnmHero.VICKY));
 				dispatch(setPlayerState(LnmPlayerState.PLAYING));
 				localStorage.setItem('sessionToken', user.sessionToken);
@@ -120,7 +124,7 @@ const WaitRoom: React.FC = () => {
 			}
 		);
 		if (response.status == 200 || response.status == 201) {
-			dispatch(resetState())
+			dispatch(resetState());
 			dispatch(setProtagonist(LnmHero.PROFESSOR));
 			dispatch(setPlayerState(LnmPlayerState.CREATED));
 			navigate('/multi-player');
@@ -188,7 +192,9 @@ const WaitRoom: React.FC = () => {
 					>
 						{t('waitRoom.join')}
 					</button>
-					<button onClick={handleCreate}>{t('waitRoom.create')}</button>
+					<button onClick={handleCreate}>
+						{t('waitRoom.create')}
+					</button>
 				</div>
 			</div>
 		</div>

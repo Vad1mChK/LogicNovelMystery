@@ -61,7 +61,7 @@ const GameSelection: React.FC = () => {
 
 	const createSinglePlayerSession = async () => {
 		try {
-			dispatch(resetState())
+			dispatch(resetState());
 			const token = generateSessionToken();
 			localStorage.setItem('sessionToken', token);
 			await axios.post(
