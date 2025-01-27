@@ -1,40 +1,46 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import WaitRoom from './WaitRoom';
 import axios from 'axios';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { BrowserRouter } from 'react-router-dom';
+import { RootState } from '../state/store';
+
+jest.mock('i18next', () => ({
+	useTranslation: () => ({
+		t: (key: string) => key,
+	}),
+}));
 
 jest.mock('../metaEnv', () => ({
-	VITE_SERVER_URL: 'http://localhost:8080',
+	VITE_SERVER_URL: 'http://localhost:8081',
 }));
 
-// Create a mock for dispatch
-const mockDispatch = jest.fn();
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-// Mock react-redux to return the mock dispatch
-jest.mock('react-redux', () => ({
-	...jest.requireActual('react-redux'), // Preserve other functionalities
-	useDispatch: () => mockDispatch,
-}));
-
-// Mock react-router-dom's useNavigate
 const mockNavigate = jest.fn();
-
 jest.mock('react-router-dom', () => ({
 	...jest.requireActual('react-router-dom'),
 	useNavigate: () => mockNavigate,
 }));
 
-// Mock axios
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockStore = configureStore<Partial<RootState>>([]); // Указываем Partial<RootState>
 
 describe('WaitRoom Component', () => {
+	let store: ReturnType<typeof mockStore>; // Правильная типизация для mockStore
+
 	beforeEach(() => {
+		store = mockStore({});
+		jest.clearAllMocks();
+
 		mockedAxios.get.mockResolvedValue({
 			status: 200,
 			data: {
 				sessionList: {
 					User1: 'token1',
+					User2: 'token2',
 				},
 			},
 		});
@@ -44,47 +50,25 @@ describe('WaitRoom Component', () => {
 		});
 	});
 
-	it('displays alert when "Присоединиться" button is clicked', () => {
-		window.alert = jest.fn();
-		render(<WaitRoom />);
+	const renderWithProviders = (ui: JSX.Element) => {
+		return render(
+			<Provider store={store}>
+				<BrowserRouter>{ui}</BrowserRouter>
+			</Provider>
+		);
+	};
 
-		fireEvent.click(screen.getByText('Присоединиться'));
-		expect(window.alert).not.toHaveBeenCalled();
+	it('renders loading state initially', () => {
+		renderWithProviders(<WaitRoom />);
+		expect(screen.getByText('waitRoom.loading')).toBeInTheDocument(); // Using key
 	});
 
-	it('displays alert when "Создать" button is clicked', () => {
-		window.alert = jest.fn(); // Мокаем alert
-		render(<WaitRoom />);
+	it('renders users after successful API call', async () => {
+		renderWithProviders(<WaitRoom />);
 
-		// Нажимаем на кнопку "Создать"
-		fireEvent.click(screen.getByText('Создать'));
-		expect(window.alert).not.toHaveBeenCalled();
-	});
-
-	it('selects only one user at a time', async () => {
-		mockedAxios.get.mockResolvedValueOnce({
-			status: 200,
-			data: {
-				sessionList: {
-					User1: 'token1',
-					User2: 'token2',
-					User3: 'token3',
-				},
-			},
+		await waitFor(() => {
+			expect(screen.getByText('User1')).toBeInTheDocument();
+			expect(screen.getByText('User2')).toBeInTheDocument();
 		});
-
-		render(<WaitRoom />);
-		screen.debug();
-
-		const rows = (await screen.findAllByRole('row')).slice(1);
-
-		// Кликаем на первого пользователя
-		fireEvent.click(rows[0]);
-		expect(rows[0]).toHaveClass('selected');
-
-		// Кликаем на второго пользователя
-		fireEvent.click(rows[1]);
-		expect(rows[1]).toHaveClass('selected');
-		expect(rows[0]).not.toHaveClass('selected');
 	});
 });

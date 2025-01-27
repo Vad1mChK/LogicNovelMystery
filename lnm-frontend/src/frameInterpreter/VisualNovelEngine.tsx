@@ -69,7 +69,65 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 		dispatch(setCurrentChapter(initialChapterId));
 		const initialFrameId =
 			plot.chapters.get(initialChapterId)?.startFrame || '';
-		dispatch(setCurrentFrame(initialFrameId));
+
+		const persistedFrameId = localStorage.getItem('currentFrameId');
+
+		if (
+			persistedFrameId !== null &&
+			plot.chapters.get(initialChapterId) &&
+			plot.frames.main.get(initialChapterId)?.has(persistedFrameId)
+		) {
+			const _chapter = plot.chapters.get(initialChapterId)!;
+			const _chapterFrames = plot.frames.main.get(initialChapterId)!;
+			let _frame: LnmFrame = _chapterFrames.get(_chapter.startFrame)!;
+			let _frameEffects: LnmFrameEffect[] | undefined = _frame.effects;
+			let _frameLocation: string | undefined = _frame.location;
+			let _frameSpeaker: string | undefined = _frame.speaker;
+			let _frameCharacters: LnmFrameCharacterData[] | undefined =
+				_frame.characters;
+			while (
+				_frame.id !== persistedFrameId &&
+				_frame.nextFrame !== undefined &&
+				_frame.nextFrame !== _frame.id
+			) {
+				console.log(`Fast-forwarding, now on frame ${_frame.id}`);
+				if (_frameEffects) {
+					console.log(
+						`Fast-forwarding, processing ${_frameEffects.length} effects for frame ${_frame.id}`
+					);
+					handleEffects(_frameEffects);
+				}
+				_frame = _chapterFrames.get(_frame.nextFrame)!;
+				_frameEffects = _frame.effects;
+				if (_frame.location) _frameLocation = _frame.location;
+				if (_frame.speaker) _frameSpeaker = _frame.speaker;
+				if (_frame.characters) _frameCharacters = _frame.characters;
+			}
+
+			_frame = _chapterFrames.get(persistedFrameId)!;
+			_frameEffects = _frame.effects;
+			if (_frame.location) _frameLocation = _frame.location;
+			if (_frame.speaker) _frameSpeaker = _frame.speaker;
+			if (_frame.characters) _frameCharacters = _frame.characters;
+			if (_frameEffects) handleEffects(_frameEffects);
+
+			if (_frameLocation && plot.locations.has(_frameLocation)) {
+				setCurrentLocation(plot.locations.get(_frameLocation)!);
+			}
+			if (_frameSpeaker) setCurrentSpeaker(_frameSpeaker);
+			if (_frameCharacters) setCurrentCharacters(_frameCharacters);
+		}
+
+		dispatch(
+			setCurrentFrame(
+				persistedFrameId &&
+					plot.frames.main
+						.get(initialChapterId)
+						?.has(persistedFrameId)
+					? persistedFrameId
+					: initialFrameId
+			)
+		);
 	}, [initialChapterId, plot, dispatch]);
 
 	// Utility to get the current frame
@@ -135,24 +193,30 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 							setCurrentChapterId: (chapterId: string) =>
 								dispatch(setCurrentChapter(chapterId)),
 							onJumpChapter: (chapterId: string) => {
-								axios.post(
-									`${VITE_SERVER_URL}/game/jumped-chapter`,
-									{
-										sessionToken:
-											localStorage.getItem(
-												'sessionToken'
-											),
-										chapter: chapterId,
-									},
-									{
-										headers: {
-											Authorization:
+								axios
+									.post(
+										`${VITE_SERVER_URL}/game/jumped-chapter`,
+										{
+											sessionToken:
 												localStorage.getItem(
-													'AuthToken'
+													'sessionToken'
 												),
+											chapter: chapterId,
 										},
-									}
-								);
+										{
+											headers: {
+												Authorization:
+													localStorage.getItem(
+														'AuthToken'
+													),
+											},
+										}
+									)
+									.then(() => {
+										localStorage.removeItem(
+											'currentFrameId'
+										);
+									});
 							},
 							setCurrentEndingId,
 							setIsEnding,
@@ -218,12 +282,17 @@ const VisualNovelEngine: React.FC<VisualNovelEngineProps> = ({
 
 			if (chapterFrames?.has(nextFrameId)) {
 				dispatch(setCurrentFrame(nextFrameId));
+				localStorage.setItem('currentFrameId', nextFrameId); // Persist locally separately from the state
 			} else {
 				// Possibly a chapter transition
 				const nextChapter = plot.chapters.get(nextFrameId);
 				if (nextChapter) {
 					dispatch(setCurrentChapter(nextFrameId));
 					dispatch(setCurrentFrame(nextChapter.startFrame));
+					localStorage.setItem(
+						'currentFrameId',
+						nextChapter.startFrame
+					);
 				} else {
 					console.warn(
 						`Frame or chapter not found for ID: ${nextFrameId}`

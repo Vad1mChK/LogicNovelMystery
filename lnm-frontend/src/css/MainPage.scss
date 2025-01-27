@@ -63,6 +63,13 @@ body {
 	}
 }
 
+/* Кнопка продолжения игры */
+#continue-game-button {
+	&:disabled {
+		visibility: hidden; /* Кнопка становится невидимой */
+	}
+}
+
 /* Группировка кнопок */
 .side-buttons {
 	display: flex;
@@ -305,9 +312,9 @@ table {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: linear-gradient(
-									135deg,
-									color.adjust(colors.$BLUE, $lightness: -10%) 0%,
-									color.adjust(colors.$DARK-AZUR, $lightness: 10%) 100%
+		135deg,
+		color.adjust(colors.$BLUE, $lightness: -10%) 0%,
+		color.adjust(colors.$DARK-AZUR, $lightness: 10%) 100%
 	);
 	padding: 30px;
 	border-radius: 15px;

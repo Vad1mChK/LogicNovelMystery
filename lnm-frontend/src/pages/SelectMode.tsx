@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useEffect, useState } from 'react';
 import steveImage from '../assets/img/steve.webp';
 import professorAndVicky from '../assets/img/prof_and_vicky.webp';
@@ -45,6 +47,8 @@ const GameSelection: React.FC = () => {
 	};
 
 	// Send session token request to the server
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	const sendRequest = async () => {
 		const token = localStorage.getItem('sessionToken');
 		const isMultiplayer = selectedCharacter === 'Game for two';
@@ -54,6 +58,7 @@ const GameSelection: React.FC = () => {
 			}
 			localStorage.removeItem('sessionToken');
 			dispatch(resetState());
+			localStorage.removeItem('currentFrameId');
 			return false;
 		}
 		return false;
@@ -61,6 +66,8 @@ const GameSelection: React.FC = () => {
 
 	const createSinglePlayerSession = async () => {
 		try {
+			dispatch(resetState());
+			localStorage.removeItem('currentFrameId');
 			const token = generateSessionToken();
 			localStorage.setItem('sessionToken', token);
 			await axios.post(
@@ -93,8 +100,6 @@ const GameSelection: React.FC = () => {
 		setError(null);
 
 		try {
-			await sendRequest(); // Отправляем запрос на сервер
-			// Redirect based on selected character
 			if (selectedCharacter === 'Game for one') {
 				await createSinglePlayerSession();
 				dispatch(setProtagonist(LnmHero.STEVE));
@@ -117,7 +122,7 @@ const GameSelection: React.FC = () => {
 
 	// Go back to the previous page or perform another action
 	const goBack = () => {
-		window.history.back();
+		navigate('/main');
 	};
 
 	return (
