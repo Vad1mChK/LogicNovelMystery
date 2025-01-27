@@ -101,7 +101,8 @@ const GamePage: React.FC = () => {
 		const { clearState = false, seenResults = false } = params || {};
 		if (clearState) {
 			dispatch(resetState());
-			localStorage.removeItem('SessionToken');
+			localStorage.removeItem('currentFrameId');
+			localStorage.removeItem('sessionToken');
 		}
 
 		if (seenResults) {

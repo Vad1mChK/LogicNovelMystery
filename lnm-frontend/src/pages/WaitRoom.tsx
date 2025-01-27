@@ -23,7 +23,7 @@ const WaitRoom: React.FC = () => {
 	const [users, setUsers] = useState<User[]>([]);
 	const [selectedUserId, setSelectedUserId] = useState<number | null>(null); // State for selected user
 	const [loading, setLoading] = useState<boolean>(true); // Loading state
-	const { t, i18n } = useTranslation(); // Используем локализацию
+	const { t } = useTranslation(); // Используем локализацию
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -96,6 +96,7 @@ const WaitRoom: React.FC = () => {
 			)
 			.then(() => {
 				dispatch(resetState());
+				localStorage.removeItem('currentFrameId');
 				dispatch(setProtagonist(LnmHero.VICKY));
 				dispatch(setPlayerState(LnmPlayerState.PLAYING));
 				localStorage.setItem('sessionToken', user.sessionToken);
@@ -125,6 +126,7 @@ const WaitRoom: React.FC = () => {
 		);
 		if (response.status == 200 || response.status == 201) {
 			dispatch(resetState());
+			localStorage.removeItem('currentFrameId');
 			dispatch(setProtagonist(LnmHero.PROFESSOR));
 			dispatch(setPlayerState(LnmPlayerState.CREATED));
 			navigate('/multi-player');

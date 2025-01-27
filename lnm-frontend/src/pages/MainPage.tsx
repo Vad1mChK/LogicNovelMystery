@@ -7,7 +7,6 @@ import mainPageBackground from '../assets/img/locations/MansionEntrance.webp';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLanguage } from '../state/languageSlice';
-import { LanguageState } from '../state/languageSlice';
 import { RootState } from '../state/store.ts';
 import VolumeSlider from '../settingsComponents/VolumeSlider';
 import PanningSlider from '../settingsComponents/PanningSlider';
@@ -43,8 +42,8 @@ const MainMenu: React.FC = () => {
 	const [selectedCharacter, setSelectedCharacter] = useState<GameMode | null>(
 		null
 	);
-	const [error, setError] = useState<string | null>(null);
-	const [darkMode, setDarkMode] = useState(false); // Состояние для темной темы
+	const [_error, setError] = useState<string | null>(null);
+	const [darkMode, _setDarkMode] = useState(false); // Состояние для темной темы
 	const [disable, setDisable] = useState(true);
 	const dispatch = useDispatch();
 	const {
@@ -249,6 +248,7 @@ const MainMenu: React.FC = () => {
 			}
 			localStorage.removeItem('sessionToken');
 			dispatch(resetState());
+			localStorage.removeItem('currentFrameId');
 			return false;
 		}
 		return false;
@@ -347,11 +347,11 @@ const MainMenu: React.FC = () => {
 					/>
 					<PanningSlider
 						dark={darkMode}
-						panning={panning}
+						panning={panning || 0}
 						onChange={adjustPanning}
 					/>
 					<LanguageSelector
-						id="language-select"
+						// id="language-select"
 						dark={darkMode}
 						currentLanguage={i18n.language}
 						languages={availableLanguages}
