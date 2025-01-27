@@ -30,6 +30,7 @@ const Login: React.FC = () => {
 
 			if (username !== localStorage.getItem('username')) {
 				localStorage.removeItem('sessionToken');
+				localStorage.removeItem('currentFrameId');
 				dispatch(resetState());
 			}
 
