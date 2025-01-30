@@ -11,7 +11,7 @@ export interface MusicState {
 
 const initialState: MusicState = {
 	currentTrack: null,
-	volume: 100,
+	volume: 30,
 	isPlaying: false,
 	panning: 0, // Center
 };
