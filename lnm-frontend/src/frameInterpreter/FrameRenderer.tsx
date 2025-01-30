@@ -16,7 +16,6 @@ import HealthBar from './HealthBar';
 import TaskWindow from './TaskWindow';
 import VolumeSlider from '../settingsComponents/VolumeSlider';
 import PanningSlider from '../settingsComponents/PanningSlider';
-import { t } from 'i18next';
 import '../css/Settings.scss';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -54,7 +53,8 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 		onNextFrame(nextFrameId);
 	};
 	const [isSettingsOpen, setSettingsOpen] = useState(false);
-	const [darkMode, setDarkMode] = useState(true); // Состояние для темной темы
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [darkMode, _setDarkMode] = useState(true); // Состояние для темной темы
 	const health = useSelector((state: RootState) => state.gameState.health);
 	const { volume, panning } = useSelector(
 		(state: RootState) => state.musicState
@@ -152,7 +152,7 @@ const FrameRenderer: React.FC<FrameRendererProps> = ({
 							/>
 							<PanningSlider
 								dark={darkMode}
-								panning={panning}
+								panning={panning || 0}
 								onChange={adjustPanning}
 							/>
 							<button
